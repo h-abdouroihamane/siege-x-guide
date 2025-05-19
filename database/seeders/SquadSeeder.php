@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
 use App\Models\Operator;
 use App\Models\Squad;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
 class SquadSeeder extends Seeder
@@ -16,83 +16,81 @@ class SquadSeeder extends Seeder
     public function run(): void
     {
         $data = [
-    "Wolfguard" => [
-        "Doc",
-        "Twitch",
-        "Montagne",
-        "Lion",
-        "Bandit",
-        "Castle",
-        "Ying",
-        "Clash",
-        "Nomad",
-        "Melusi",
-        "Frost",
-        "Thunderbird",
-        "Sens",
-        "Tubarão",
-        "Skopós",
-    ],
+            'Wolfguard' => [
+                'Doc',
+                'Twitch',
+                'Montagne',
+                'Lion',
+                'Bandit',
+                'Castle',
+                'Ying',
+                'Clash',
+                'Nomad',
+                'Melusi',
+                'Frost',
+                'Thunderbird',
+                'Sens',
+                'Tubarão',
+                'Skopós',
+            ],
+            'Ghosteyes' => [
+                'Caveira',
+                'Zero',
+                'Glaz',
+                'Valkyrie',
+                'Vigil',
+                'Zofia',
+                'Lesion',
+                'Nøkk',
+                'Warden',
+                'Maverick',
+                'Mozzie',
+                'Iana',
+                'Flores',
+                'Solis',
+            ],
+            'Redhammer' => [
+                'Thermite',
+                'Ash',
+                'Tachanka',
+                'Fuze',
+                'Kapkan',
+                'Sledge',
+                'Buck',
+                'Blackbeard',
+                'Kaid',
+                'Amaru',
+                'Goyo',
+                'Gridlock',
+                'Oryx',
+                'Thorn',
+                'Fenrir',
+                'Ram',
+            ],
+            'Viperstrike' => [
+                'Hibana',
+                'Thatcher',
+                'Mute',
+                'Rook',
+                'Blitz',
+                'Jäger',
+                'Capitão',
+                'Echo',
+                'Jackal',
+                'Mira',
+                'Dokkaebi',
+                'Maestro',
+                'Alibi',
+                'Azami',
+                'Brava',
+                'Rauora',
+            ],
+        ];
 
-    "Ghosteyes" => [
-        "Caveira",
-        "Zero",
-        "Glaz",
-        "Valkyrie",
-        "Vigil",
-        "Zofia",
-        "Lesion",
-        "Nøkk",
-        "Warden",
-        "Maverick",
-        "Mozzie",
-        "Iana",
-        "Flores",
-        "Solis",
-    ],
+        foreach ($data as $squad_name => $operators) {
+            $squad = Squad::create(['id' => Str::ulid()->toBase32(), 'name' => $squad_name]);
 
-    "Redhammer" => [
-        "Thermite",
-        "Ash",
-        "Tachanka",
-        "Fuze",
-        "Kapkan",
-        "Sledge",
-        "Buck",
-        "Blackbeard",
-        "Kaid",
-        "Amaru",
-        "Goyo",
-        "Gridlock",
-        "Oryx",
-        "Thorn",
-        "Fenrir",
-        "Ram",
-    ],
-
-    "Viperstrike" => [
-        "Hibana",
-        "Thatcher",
-        "Mute",
-        "Rook",
-        "Blitz",
-        "Jäger",
-        "Capitão",
-        "Echo",
-        "Jackal",
-        "Mira",
-        "Dokkaebi",
-        "Maestro",
-        "Alibi",
-        "Azami",
-        "Brava",
-        "Rauora",
-    ],];
-
-    foreach ($data as $squad_name => $operators) {
-            $squad = Squad::create(["id" => Str::ulid()->toBase32(), "name" => $squad_name]);
-
-            foreach($operators as $op_name) {
+            foreach ($operators as $op_name) {
                 $operator = Operator::firstWhere('name', $op_name);
 
                 if (!$operator) {
@@ -100,6 +98,7 @@ class SquadSeeder extends Seeder
                 }
 
                 $operator->squad()->attach($squad->id);
+            }
         }
     }
-    }}
+}
