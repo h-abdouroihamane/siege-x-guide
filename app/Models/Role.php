@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Role extends Model
 {
     use HasUlids;
+    protected $hidden = ['id', 'pivot'];
 
     public $timestamps = false;
 }

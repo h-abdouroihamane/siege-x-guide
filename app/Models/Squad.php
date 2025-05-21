@@ -12,6 +12,8 @@ class Squad extends Model
     use HasUlids;
 
     public $timestamps = false;
+    protected $hidden = ['id', 'pivot'];
+
 
     public function operators(): BelongsToMany
     {
