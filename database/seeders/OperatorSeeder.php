@@ -620,6 +620,8 @@ class OperatorSeeder extends Seeder
                 'name' => $op['name'],
                 'description' => $op['description'],
                 'side' => $op['side'],
+                'year' => $op['year'],
+                'season' => $op['season'],
                 'operation_id' =>
                     $op['year'] > 0 ? "Y{$op['year']}S{$op['season']}" : 'Y1S0',
             ];
