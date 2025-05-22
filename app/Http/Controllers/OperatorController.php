@@ -10,7 +10,7 @@ use Inertia\Inertia;
 class OperatorController extends Controller
 {
     public function getAll() {
-        return OperatorResource::collection(Operator::all());
+        return OperatorResource::collection(Operator::with('roles:id,name', 'squad:id,name', 'operation:id,name')->get());
     }
 
     public function showAll() {

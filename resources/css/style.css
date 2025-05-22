@@ -1,0 +1,41 @@
+@import ('fonts.css');
+
+html {
+    font-family: 'Simplon Mono';
+    font-size: 18px;
+}
+
+body {
+    margin: 0;
+}
+#app {
+    background-color: rgba(1, 1, 1, 0.5);
+    min-height: 100vh;
+}
+
+#background-image {
+    background-color: #000;
+    background-image: url('background.jpg');
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: -1;
+}
+
+#container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+#logo {
+    max-width: 380px;
+    max-height: 110px;
+    width: auto;
+    height: auto;
+}

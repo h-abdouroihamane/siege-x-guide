@@ -14,15 +14,24 @@ class OperatorResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $roles = [];
+
+        foreach ($this->roles as $r) {
+            $roles[] = $r->name;
+        }
+
+        $squadModel = $this->squad->first();
+        $squad = $squadModel ? $squadModel->name : "Unaffiliated";
+
         return [
             'name' => $this->name,
             'description' => $this->description,
             'side' => $this->side,
             'year' => $this->year,
             'season' => $this->season,
-            'operation_name' => $this->operation()->first()->name,
-            'roles' => $this->getRoles(),
-            'squad' => $this->getSquad()
+            'operation_name' => $this->operation->name,
+            'roles' => $roles,
+            'squad' => $squad
         ];
     }
 }
