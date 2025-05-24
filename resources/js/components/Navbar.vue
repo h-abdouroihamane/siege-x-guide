@@ -1,4 +1,13 @@
-<script setup></script>
+<script setup>
+import { useRoute } from 'vue-router';
+const route = useRoute();
+
+const activeRoute = {
+    operators: route.name === 'operators' || route.path === '/',
+    squads: route.name === 'squads',
+    admin: route.name === 'admin',
+};
+</script>
 
 <template>
     <nav>
@@ -7,12 +16,12 @@
         </div>
         <ul>
             <li>
-                <a href="#">Operators</a>
+                <RouterLink to="/operators" :class="{ active: activeRoute.operators }">Operators</RouterLink>
             </li>
             <li>
-                <a href="#">Squads</a>
+                <RouterLink to="/squads" :class="{ active: activeRoute.squads }">Squads</RouterLink>
             </li>
-            <li><a href="#">Admin panel</a></li>
+            <li><RouterLink to="/admin" :class="{ active: activeRoute.admin }">Admin panel</RouterLink></li>
         </ul>
         <div class="hamburger">
             <span class="line"></span>
@@ -23,12 +32,12 @@
     <div class="menubar">
         <ul>
             <li>
-                <a href="#">Operators</a>
+                <RouterLink to="/operators" :class="{ active: activeRoute.operators }">Operators</RouterLink>
             </li>
             <li>
-                <a href="#">Squads</a>
+                <RouterLink to="/squads" :class="{ active: activeRoute.squads }">Squads</RouterLink>
             </li>
-            <li><a href="#">Admin panel</a></li>
+            <li><RouterLink to="/admin" :class="{ active: activeRoute.admin }">Admin panel</RouterLink></li>
         </ul>
     </div>
 </template>
@@ -96,7 +105,7 @@ nav ul li a.active {
 .hamburger .line {
     width: 25px;
     height: 1px;
-    background-color: #1f1f1f;
+    background-color: #fe3d2c;
     display: block;
     margin: 7px auto;
     transition: all 0.3s ease-in-out;

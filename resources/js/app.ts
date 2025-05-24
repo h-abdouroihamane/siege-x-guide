@@ -8,6 +8,7 @@ import '../css/fonts.css';
 import '../css/operator-card.css';
 import '../css/style.css';
 import { initializeTheme } from './composables/useAppearance';
+import { router } from './router';
 
 // Extend ImportMeta interface for Vite...
 declare module 'vite/client' {
@@ -31,6 +32,7 @@ createInertiaApp({
         createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(ZiggyVue)
+            .use(router)
             .mount(el);
     },
     progress: {

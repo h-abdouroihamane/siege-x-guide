@@ -9,11 +9,12 @@ const normalize = (str: string): string => {
 
 export class Operator {
     name: string;
+    cleanName: string;
     description: string;
     side: string;
     year: number;
     season: number;
-    operationName: number;
+    operationName: string;
     roles: string[];
     squad: string;
     portrait: string;
@@ -25,9 +26,9 @@ export class Operator {
         side: string,
         year: number,
         season: number,
-        operationName: number,
+        operationName: string,
         roles: string[],
-        squad: string
+        squad: string,
     ) {
         this.name = name;
         this.description = description;
@@ -73,13 +74,5 @@ export class Operator {
         }
 
         return this.compareNames(otherOperator);
-    }
-
-    getCleanName(): string {
-        return this.name
-            .normalize('NFD')
-            .replace(/[\u0300-\u036f]/g, '')
-            .replace('ø', 'o')
-            .toLowerCase();
     }
 }

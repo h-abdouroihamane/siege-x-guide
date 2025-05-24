@@ -34,15 +34,22 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    max-width: 95vw;
-    width: 95vw;
-    justify-content: space-around;
+    max-width: 55vw;
+    width: 55vw;
     margin: 10px 0px 0px 0px;
+
+    justify-content: center;
+    align-items: center;
+}
+
+#grid-container {
+    display: flex;
+    flex-direction: row;
 }
 
 .card {
-    margin: 10px 5px;
-    width: 191px;
+    /*width: 191px */
+    width: 90px;
     height: -moz-max-content;
     height: max-content;
     position: relative;
@@ -55,6 +62,7 @@
     border-radius: 2px;
     display: flex;
     align-items: center;
+    margin: 20px 10px;
 }
 
 .card,
@@ -74,10 +82,8 @@
     justify-content: center;
     align-items: center;
     text-transform: uppercase;
-    font-size: 25px;
-    font-weight: bold;
-    font-style: italic;
-    height: 37px;
+    font-size: 20px;
+    height: 20px;
     padding: 7px 0 10px;
     color: #fff;
     background-color: rgba(17, 17, 17, 0.15);
@@ -125,15 +131,15 @@
 }
 .card:hover:not(.queer).attacker,
 .card.selected:not(.queer).attacker {
-    background-image: url(card-bg-att.webp);
+    background-image: url(card-bg-att.png);
 }
 .card:hover:not(.queer).defender,
 .card.selected:not(.queer).defender {
-    background-image: url(card-bg-def.webp);
+    background-image: url(card-bg-def.png);
 }
 .card:hover.queer,
 .card.selected.queer {
-    background-image: url(card-bg-pride.webp);
+    background-image: url(card-bg-pride.png);
 }
 .card:hover.queer .operator-year,
 .card.selected.queer .operator-year {
