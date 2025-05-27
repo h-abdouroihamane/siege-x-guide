@@ -1,4 +1,5 @@
 <script setup>
+import { ref } from 'vue';
 import { useRoute } from 'vue-router';
 const route = useRoute();
 
@@ -6,6 +7,14 @@ const activeRoute = {
     operators: route.name === 'operators' || route.path === '/',
     squads: route.name === 'squads',
     admin: route.name === 'admin',
+};
+
+let hamburgerActive = ref(false);
+let menubarActive = ref(false);
+
+const toggleNav = () => {
+    hamburgerActive.value = !hamburgerActive.value;
+    menubarActive.value = !menubarActive.value;
 };
 </script>
 
@@ -23,13 +32,13 @@ const activeRoute = {
             </li>
             <li><RouterLink to="/admin" :class="{ active: activeRoute.admin }">Admin panel</RouterLink></li>
         </ul>
-        <div class="hamburger">
+        <div class="hamburger" :class="{ 'hamburger-active': hamburgerActive }" @click="toggleNav">
             <span class="line"></span>
             <span class="line"></span>
             <span class="line"></span>
         </div>
     </nav>
-    <div class="menubar">
+    <div class="menubar" :class="{ 'menubar-active': menubarActive }">
         <ul>
             <li>
                 <RouterLink to="/operators" :class="{ active: activeRoute.operators }">Operators</RouterLink>
@@ -79,21 +88,25 @@ nav ul {
 nav ul li {
     margin-left: 1.5rem;
 }
-nav ul li a {
+nav a,
+.menubar a {
     text-decoration: none;
     color: #b0bac6;
     font-size: 95%;
     font-weight: 400;
     padding: 4px 8px;
     border-radius: 5px;
+    transition: all 0.3s ease-in-out;
 }
 
-nav ul li a:hover {
+nav a:not(.active):hover,
+.menubar a:not(.active):hover {
     background-color: #fe3d2c;
     color: #0c0f16;
 }
 
-nav ul li a.active {
+nav a.active,
+.menubar a.active {
     color: #fe3d2c;
 }
 
@@ -143,13 +156,15 @@ nav ul li a.active {
     width: 60%;
     height: 100vh;
     padding: 20% 0;
-    background: rgba(255, 255, 255);
+    background: rgba(17, 17, 17, 1);
     transition: all 0.5s ease-in;
     z-index: 2;
 }
-.active {
+.menubar-active {
     left: 0;
+
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    z-index: 10;
 }
 
 .menubar ul {
@@ -162,16 +177,12 @@ nav ul li a.active {
 
 .menubar ul li a {
     text-decoration: none;
-    color: #000;
     font-size: 95%;
     font-weight: 400;
     padding: 5px 10px;
     border-radius: 5px;
 }
 
-.menubar ul li a:hover {
-    background-color: #f5f5f5;
-}
 @media screen and (max-width: 790px) {
     .hamburger {
         display: block;

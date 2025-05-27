@@ -20,7 +20,7 @@ const placeholderOperator = new Operator(
     -1,
     'opPlaceHolder',
     [],
-    'placeholderSquad',
+    'placeholderSquad'
 );
 const selectedOperator = ref(placeholderOperator);
 
@@ -34,20 +34,21 @@ const setSelectedOperator = (op: Operator) => {
         <Navbar />
         <div id="container">
             <img id="logo" src="Siege_X_Guide_Logo.png" alt="Rainbow Six Siege X Operator Guide" />
-            <div id="grid-container">
-                <div id="card-container">
-                    <OperatorCard
-                        v-for="op in operators"
-                        :key="op.name"
-                        :operator="op"
-                        :selected="selectedOperator.name === op.name"
-                        @click="setSelectedOperator(op)"
-                    >
-                    </OperatorCard>
-                </div>
-                <Description v-if="selectedOperator.year >= 0" v-bind="selectedOperator" />
-                <div id="description" v-else>
-                    <p id="description-text">Select an operator to see its description</p>
+            <div id="card-container">
+                <OperatorCard
+                    v-for="op in operators"
+                    :key="op.name"
+                    :operator="op"
+                    :selected="selectedOperator.name === op.name"
+                    @click="setSelectedOperator(op)"
+                >
+                </OperatorCard>
+            </div>
+            <Description v-if="selectedOperator.year >= 0" v-bind="selectedOperator" />
+            <div id="description" v-else>
+                <span id="invisible-span"></span>
+                <div id="description-text">
+                    <span id="ability">Select an operator to see its description</span>
                 </div>
             </div>
         </div>
@@ -57,10 +58,5 @@ const setSelectedOperator = (op: Operator) => {
 <style lang="css">
 body {
     overflow: hidden;
-}
-
-#card-container {
-    overflow: scroll;
-    height: 80vh;
 }
 </style>
