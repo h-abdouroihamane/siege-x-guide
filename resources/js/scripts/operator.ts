@@ -28,7 +28,7 @@ export class Operator {
         season: number,
         operationName: string,
         roles: string[],
-        squad: string,
+        squad: string
     ) {
         this.name = name;
         this.description = description;
@@ -52,7 +52,7 @@ export class Operator {
         return this.side === 'Defense';
     }
 
-    compareNames(otherOperator: Operator): number {
+    compareName(otherOperator: Operator): number {
         if (this.name === otherOperator.name) {
             return 0;
         }
@@ -73,6 +73,6 @@ export class Operator {
             return this.isAttacker() ? -1 : 1;
         }
 
-        return this.compareNames(otherOperator);
+        return this.compareName(otherOperator);
     }
 }

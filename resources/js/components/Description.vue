@@ -1,4 +1,7 @@
 <script setup>
+import AttackerLogo from '../components/AttackerLogo.vue';
+import DefenderLogo from '../components/DefenderLogo.vue';
+
 const props = defineProps(['name', 'description', 'side', 'year', 'season', 'portrait', 'icon', 'operationName', 'squad', 'roles']);
 
 const getRoleStr = () => {
@@ -27,7 +30,8 @@ const getSide = () => {
             <span class="name">{{ props.name }}</span>
 
             <div id="side-container">
-                <span id="side-icon" :class="{ attacker: side === 'Attack', defender: side === 'Defense' }"></span>
+                <AttackerLogo class="side-icon" v-if="side === 'Attack'" />
+                <DefenderLogo class="side-icon" v-else-if="side === 'Defense'" />
                 <span id="side-name">{{ getSide() }}</span>
             </div>
         </div>
@@ -45,21 +49,20 @@ const getSide = () => {
     flex-direction: row;
     align-items: center;
 }
-#side-icon {
-    background-position: 50%;
-    background-repeat: no-repeat;
-    background-size: 80%;
+
+.side-icon {
     width: 30px;
     height: 30px;
 }
 
-#side-icon.attacker {
-    background-image: url('attacker-logo.svg');
+.side-icon.attacker-logo path {
+    fill: #d9610f;
 }
 
-#side-icon.defender {
-    background-image: url('defender-logo.svg');
+.side-icon.defender-logo path {
+    fill: #0e87c8;
 }
+
 #description {
     font-family: 'Simplon Mono';
     position: fixed;
