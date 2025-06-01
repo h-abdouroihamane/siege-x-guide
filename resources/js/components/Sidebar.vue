@@ -57,9 +57,17 @@ const emitSortingSide = () => {
                     d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160zm352-160l-160 160c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L301.3 256 438.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0z"
                 />
             </svg>
+            Filters
         </button>
 
         <div id="btn-grid">
+            <p class="filter-label">Side</p>
+            <button id="attackers" class="radio-button left attackers" :class="{ active: activeAttackers }" @click="toggleAttackers">
+                <AttackerLogo /> Attackers
+            </button>
+            <button id="defenders" class="radio-button right defenders" :class="{ active: activeDefenders }" @click="toggleDefenders">
+                <DefenderLogo /> Defenders
+            </button>
             <p class="sort-label">Sort by</p>
             <button
                 id="sort-date"
@@ -89,14 +97,6 @@ const emitSortingSide = () => {
                     /></svg
                 >Name
             </button>
-
-            <p class="filter-label">Side</p>
-            <button id="attackers" class="radio-button left attackers" :class="{ active: activeAttackers }" @click="toggleAttackers">
-                <AttackerLogo /> Attackers
-            </button>
-            <button id="defenders" class="radio-button right defenders" :class="{ active: activeDefenders }" @click="toggleDefenders">
-                <DefenderLogo /> Defenders
-            </button>
         </div>
     </div>
 </template>
@@ -104,7 +104,7 @@ const emitSortingSide = () => {
 <style>
 .sidebar {
     width: max-content;
-    height: 100%;
+    height: max-content;
     transition: 0.1s all ease;
     display: flex;
     flex-direction: column;
@@ -113,7 +113,7 @@ const emitSortingSide = () => {
     left: 0;
     color: #fefefe;
     border-right: 1px solid #fe3d2c;
-    padding: 0px 10px;
+    padding: 20px 10px;
     z-index: 99;
     background-color: rgba(1, 1, 1, 0.95);
 }
@@ -130,22 +130,34 @@ const emitSortingSide = () => {
     width: 90%;
 }
 
-.sidebar .small {
-    width: 10%;
-}
-
 .sidebar #close-button {
     background-color: transparent;
     border: none;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
     height: 40px;
-    width: 40px;
-    border-radius: 50%;
+    width: 80%;
     box-shadow: 0px 1px 4px 1px rgba(0, 0, 0, 0.3);
     cursor: pointer;
+    font-family: 'Simplon Mono', sans-serif;
+    font-size: 18px;
+    color: #fefefe;
 }
 
+#close-button svg {
+    width: 30px;
+    height: 30px;
+    margin: 10px;
+}
 #close-button path {
     fill: #fe3d2c;
+}
+
+.sidebar.small #close-button {
+    flex-direction: column;
+    font-size: 15px;
+    height: max-content;
 }
 
 #btn-grid .sort-label {
@@ -172,10 +184,10 @@ const emitSortingSide = () => {
     grid-template-columns: repeat(2, 150px);
     grid-template-rows: repeat(4, 30px);
     grid-template-areas:
-        'sort sort'
-        'date name'
         'filter filter'
-        'attackers defenders';
+        'attackers defenders'
+        'sort sort'
+        'date name';
 
     grid-row-gap: 10px;
     grid-column-gap: 0;

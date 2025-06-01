@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Description from '@/components/Description.vue';
+import Logo from '@/components/Logo.vue';
 import OperatorCard from '@/components/OperatorCard.vue';
 import Sidebar from '@/components/Sidebar.vue';
 import { usePage } from '@inertiajs/vue3';
@@ -81,7 +82,7 @@ filterAndSort();
         <div id="background-image" />
         <Navbar />
         <div id="container">
-            <img id="logo" src="Siege_X_Guide_Logo.png" alt="Rainbow Six Siege X Operator Guide" />
+            <Logo />
             <div id="main-content">
                 <Sidebar @sort-by="sortOperators" @filter-side="filterOperators" />
 

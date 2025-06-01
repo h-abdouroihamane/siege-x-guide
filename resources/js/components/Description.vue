@@ -69,7 +69,7 @@ const getSide = () => {
     bottom: 0;
     left: 0;
     width: 100vw;
-    z-index: 100;
+    z-index: 2;
     background-color: rgba(1, 1, 1, 0.95);
     color: #fefefe;
     min-height: 140px;
@@ -108,25 +108,30 @@ const getSide = () => {
 
 @media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px) {
     #description {
-        max-height: 50vh;
-        height: auto;
+        max-height: 30vh;
+        height: 30vh;
+        display: flex;
+        flex-direction: column;
         -webkit-box-pack: center;
         -ms-flex-pack: center;
         justify-content: center;
-        font-size: 20px;
+        font-size: 15px;
     }
     #description > img {
-        max-height: 10vh;
+        max-height: 50px;
     }
     #description-icon {
-        width: 20vw;
+        width: 100%;
         -webkit-box-orient: vertical;
         -webkit-box-direction: normal;
         -ms-flex-direction: column;
-        flex-direction: column;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
     }
     #description-text {
-        max-width: 80vw;
+        width: 100%;
     }
 }
 </style>
