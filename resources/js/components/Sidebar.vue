@@ -114,7 +114,7 @@ const emitSortingSide = () => {
     color: #fefefe;
     border-right: 1px solid #fe3d2c;
     padding: 20px 10px;
-    z-index: 99;
+    z-index: 5;
     background-color: rgba(1, 1, 1, 0.95);
 }
 

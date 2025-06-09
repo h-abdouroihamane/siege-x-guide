@@ -1,5 +1,5 @@
 // Removes accents from the operator's name to access their portrait/icon files
-const normalize = (str: string): string => {
+export const normalize = (str: string): string => {
     return str
         .normalize('NFD')
         .replace(/[\u0300-\u036f]/g, '')

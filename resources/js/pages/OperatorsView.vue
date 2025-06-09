@@ -80,9 +80,9 @@ filterAndSort();
 <template>
     <div>
         <div id="background-image" />
-        <Navbar />
+        <Navbar path="operators" />
         <div id="container">
-            <Logo />
+            <Logo :text="'Operator Guide'" />
             <div id="main-content">
                 <Sidebar @sort-by="sortOperators" @filter-side="filterOperators" />
 
@@ -108,7 +108,7 @@ filterAndSort();
     </div>
 </template>
 
-<style lang="css">
+<style>
 body {
     overflow: hidden;
 }
@@ -117,6 +117,62 @@ body {
     display: flex;
     flex-direction: row;
     width: 100%;
+    juoody {
+        overflow: hidden;
+    }
+
+    #main-content {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: center;
+    }
+    ody {
+        overflow: hidden;
+    }
+
+    #main-content {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: center;
+    }
+    stify-content: center;
+}
+
+#card-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-width: 70vw;
+    width: 70vw;
+    margin: 10px 0px 0px 0px;
     justify-content: center;
+    align-items: center;
+    height: 70vh;
+    overflow-y: scroll;
+    --sb-track-color: #232e33;
+    --sb-thumb-color: #fe3d2c;
+    --sb-size: 14px;
+}
+
+#card-container::-webkit-scrollbar {
+    width: var(--sb-size);
+}
+
+#card-container::-webkit-scrollbar-track {
+    background: var(--sb-track-color);
+    border-radius: 3px;
+}
+
+#card-container::-webkit-scrollbar-thumb {
+    background: var(--sb-thumb-color);
+    border-radius: 3px;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+    #card-container {
+        scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+    }
 }
 </style>

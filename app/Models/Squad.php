@@ -17,6 +17,10 @@ class Squad extends Model
 
     public function operators(): BelongsToMany
     {
-        return $this->belongsToMany(Operator::class, 'operator_squad', 'squad_id', 'operator_id');
+        return $this->belongsToMany(Operator::class,
+            'operator_squad',
+            'squad_id',
+            'operator_id')
+            ->orderBy('rank', 'asc');
     }
 }

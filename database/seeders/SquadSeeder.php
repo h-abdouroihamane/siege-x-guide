@@ -106,6 +106,7 @@ class SquadSeeder extends Seeder
 
         foreach ($data as $squad_name => $operators) {
             $squad = Squad::create(['id' => Str::ulid()->toBase32(), 'name' => $squad_name]);
+            $rank = 1;
 
             foreach ($operators as $op_name) {
                 $operator = Operator::firstWhere('name', $op_name);
@@ -114,7 +115,7 @@ class SquadSeeder extends Seeder
                     throw new \RuntimeException("Migration stopped - can't find '$op_name'");
                 }
 
-                $operator->squad()->attach($squad->id);
+                $operator->squad()->attach($squad->id, ['rank' => $rank++]);
             }
         }
     }

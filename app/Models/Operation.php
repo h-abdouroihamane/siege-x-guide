@@ -14,5 +14,4 @@ class Operation extends Model
     public function operators(): BelongsToMany {
         return $this->belongsToMany(Operator::class, 'operators', 'id', 'operation_id');
     }
-
 }

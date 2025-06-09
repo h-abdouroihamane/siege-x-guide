@@ -1,12 +1,11 @@
 <script setup>
 import { ref } from 'vue';
-import { useRoute } from 'vue-router';
-const route = useRoute();
+const props = defineProps(['path']);
 
 const activeRoute = {
-    operators: route.name === 'operators' || route.path === '/',
-    squads: route.name === 'squads',
-    admin: route.name === 'admin',
+    operators: props.path === 'operators',
+    squads: props.path === 'squads',
+    admin: props.path === 'admin',
 };
 
 let hamburgerActive = ref(false);
@@ -25,12 +24,12 @@ const toggleNav = () => {
         </div>
         <ul>
             <li>
-                <RouterLink to="/operators" :class="{ active: activeRoute.operators }">Operators</RouterLink>
+                <a href="/operators" :class="{ active: activeRoute.operators }">Operators</a>
             </li>
             <li>
-                <RouterLink to="/squads" :class="{ active: activeRoute.squads }">Squads</RouterLink>
+                <a href="/squads" :class="{ active: activeRoute.squads }">Squads</a>
             </li>
-            <li><RouterLink to="/admin" :class="{ active: activeRoute.admin }">Admin panel</RouterLink></li>
+            <li><a href="/admin" :class="{ active: activeRoute.admin }">Admin panel</a></li>
         </ul>
         <div class="hamburger" :class="{ 'hamburger-active': hamburgerActive }" @click="toggleNav">
             <span class="line"></span>
@@ -41,12 +40,12 @@ const toggleNav = () => {
     <div class="menubar" :class="{ 'menubar-active': menubarActive }">
         <ul>
             <li>
-                <RouterLink to="/operators" :class="{ active: activeRoute.operators }">Operators</RouterLink>
+                <a href="/operators" :class="{ active: activeRoute.operators }">Operators</a>
             </li>
             <li>
-                <RouterLink to="/squads" :class="{ active: activeRoute.squads }">Squads</RouterLink>
+                <a href="/squads" :class="{ active: activeRoute.squads }">Squads</a>
             </li>
-            <li><RouterLink to="/admin" :class="{ active: activeRoute.admin }">Admin panel</RouterLink></li>
+            <li><a href="/admin" :class="{ active: activeRoute.admin }">Admin panel</a></li>
         </ul>
     </div>
 </template>
@@ -150,7 +149,7 @@ nav a.active,
     position: absolute;
     top: 0;
     left: -60%;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: flex-start;
     width: 60%;
@@ -186,6 +185,10 @@ nav a.active,
 @media screen and (max-width: 790px) {
     .hamburger {
         display: block;
+    }
+
+    .menubar {
+        display: flex;
     }
     nav ul {
         display: none;

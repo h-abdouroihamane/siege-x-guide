@@ -17,3 +17,6 @@ const props = defineProps(['operator', 'selected']);
         <span class="operator-name">{{ props.operator.name }}</span>
     </div>
 </template>
+<style scoped lang="scss">
+@use '../../css/operator-card.css';
+</style>

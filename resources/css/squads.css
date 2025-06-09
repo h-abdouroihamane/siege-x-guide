@@ -1,0 +1,127 @@
+#main-content {
+    color: #fefefe;
+}
+
+#squad-table {
+    width: 100%;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0px;
+}
+.header img {
+    width: 300px;
+    height: auto;
+}
+.header p {
+    margin: 0;
+    font-size: 24px;
+}
+
+.squad {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.squad-logo {
+    height: 120px;
+    width: auto;
+    margin: 10px;
+}
+
+.operator-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.operator {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.operator-icon {
+    width: 100px;
+    height: auto;
+}
+
+.operator-name,
+.squad-name {
+    font-family: 'ScoutCond-RegularItalic', sans-serif;
+    text-transform: uppercase;
+    font-style: italic;
+    font-size: 24px;
+    margin: 5px;
+}
+
+.wolfguard {
+    background-color: rgba(6, 140, 178, 0.2);
+}
+
+.ghosteyes {
+    background-color: rgba(4, 88, 34, 0.25);
+}
+
+.redhammer {
+    background-color: rgba(129, 18, 9, 0.2);
+}
+
+.viperstrike {
+    background-color: rgba(223, 187, 2, 0.2);
+}
+
+.nighthaven {
+    background-color: rgba(231, 235, 238, 0.2);
+}
+
+.unaffiliated {
+    background-color: rgba(57, 43, 88, 0.2);
+}
+
+#credit {
+    margin: 10px 0px;
+}
+
+.button-1 {
+    font-family: 'Simplon Mono', sans-serif;
+    margin-top: 20px;
+    background-color: #fe3d2c;
+    border-radius: 8px;
+    border-style: none;
+    box-sizing: border-box;
+    color: #ffffff;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: bold;
+    height: 40px;
+    line-height: 20px;
+    list-style: none;
+    margin: 0;
+    outline: none;
+    padding: 10px 16px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    transition: all ease 50ms;
+    vertical-align: baseline;
+    -moz-user-select: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    margin: 5px 0px 10px 0px;
+}
+
+.button-1:hover,
+.button-1:focus {
+    background-color: #2c84fe;
+}
