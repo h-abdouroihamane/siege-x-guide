@@ -1,56 +1,23 @@
 @font-face {
-    font-family: 'Simplon Mono';
-    src: url('fonts/SimplonMono-Medium.woff') format('woff');
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Simplon Mono';
-    src: url('fonts/SimplonMono-Regular.woff') format('woff');
+    font-family: 'FK Grotesk';
+    src: url('fonts/FKGrotesk-Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
 }
 
 @font-face {
-    font-family: 'Simplon Mono';
-    src: url('fonts/SimplonMono-Bold.woff') format('woff');
+    font-family: 'GT America';
+    src: url('fonts/GTAmerica-CompressedBold.woff2') format('woff2');
     font-weight: bold;
     font-style: normal;
     font-display: swap;
 }
 
 @font-face {
-    font-family: 'ScoutCond';
-    src: url('fonts/ScoutCond-BoldItalic.woff') format('woff');
-    font-weight: bold;
-    font-style: italic;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'ScoutCond';
-    src: url('fonts/ScoutCond-Bold.woff') format('woff');
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'ScoutCond';
-    src: url('fonts/ScoutCond-Regular.woff') format('woff');
+    font-family: 'GT America';
+    src: url('fonts/GTAmerica-CompressedRegular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
 }
-
-@font-face {
-    font-family: 'ScoutCond-RegularItalic';
-    src: url('fonts/ScoutCond-RegularItalic.woff') format('woff');
-    font-weight: normal;
-    font-style: italic;
-    font-display: swap;
-}
-

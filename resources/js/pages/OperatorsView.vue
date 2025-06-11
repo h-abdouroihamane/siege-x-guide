@@ -11,7 +11,7 @@ import { Operator } from '../scripts/operator.ts';
 const page = usePage();
 
 const allOperators: Operator[] = page.props.operators.data.map(
-    (op) => new Operator(op.name, op.description, op.side, op.year, op.season, op.operation_name, op.roles, op.squad)
+    (op) => new Operator(op.name, op.description, op.side, op.year, op.season, op.operation_name, op.roles, op.squad),
 );
 
 let operators = ref([...allOperators]);
@@ -26,7 +26,7 @@ const placeholderOperator = new Operator(
     -1,
     'opPlaceHolder',
     [],
-    'placeholderSquad'
+    'placeholderSquad',
 );
 const selectedOperator = ref(placeholderOperator);
 
@@ -117,27 +117,7 @@ body {
     display: flex;
     flex-direction: row;
     width: 100%;
-    juoody {
-        overflow: hidden;
-    }
-
-    #main-content {
-        display: flex;
-        flex-direction: row;
-        width: 100%;
-        justify-content: center;
-    }
-    ody {
-        overflow: hidden;
-    }
-
-    #main-content {
-        display: flex;
-        flex-direction: row;
-        width: 100%;
-        justify-content: center;
-    }
-    stify-content: center;
+    justify-content: center;
 }
 
 #card-container {
@@ -152,7 +132,7 @@ body {
     height: 70vh;
     overflow-y: scroll;
     --sb-track-color: #232e33;
-    --sb-thumb-color: #fe3d2c;
+    --sb-thumb-color: #ff3d2c;
     --sb-size: 14px;
 }
 

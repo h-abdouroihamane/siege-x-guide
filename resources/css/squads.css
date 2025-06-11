@@ -30,7 +30,7 @@
 }
 
 .squad-logo {
-    height: 120px;
+    height: 100px;
     width: auto;
     margin: 10px;
 }
@@ -50,63 +50,67 @@
 }
 
 .operator-icon {
-    width: 100px;
+    width: 80px;
     height: auto;
 }
 
 .operator-name,
 .squad-name {
-    font-family: 'ScoutCond-RegularItalic', sans-serif;
+    font-family: 'GT America', sans-serif;
     text-transform: uppercase;
-    font-style: italic;
-    font-size: 24px;
     margin: 5px;
 }
 
+.operator-name {
+    font-size: 20px;
+}
+
+.squad-name {
+    font-size: 24px;
+}
+
 .wolfguard {
-    background-color: rgba(6, 140, 178, 0.2);
+    background-color: rgba(6, 140, 178, 0.3);
 }
 
 .ghosteyes {
-    background-color: rgba(4, 88, 34, 0.25);
+    background-color: rgba(4, 88, 34, 0.3);
 }
 
 .redhammer {
-    background-color: rgba(129, 18, 9, 0.2);
+    background-color: rgba(129, 18, 9, 0.3);
 }
 
 .viperstrike {
-    background-color: rgba(223, 187, 2, 0.2);
+    background-color: rgba(223, 187, 2, 0.3);
 }
 
 .nighthaven {
-    background-color: rgba(231, 235, 238, 0.2);
+    background-color: rgba(231, 235, 238, 0.3);
 }
 
 .unaffiliated {
-    background-color: rgba(57, 43, 88, 0.2);
+    background-color: rgba(57, 43, 88, 0.3);
 }
 
 #credit {
-    margin: 10px 0px;
+    margin: 10px 0 0 0;
 }
 
 .button-1 {
-    font-family: 'Simplon Mono', sans-serif;
-    margin-top: 20px;
-    background-color: #fe3d2c;
+    font-family: 'GT America', sans-serif;
+    color: #010101;
+    text-transform: uppercase;
     border-radius: 8px;
     border-style: none;
     box-sizing: border-box;
-    color: #ffffff;
     cursor: pointer;
     display: inline-block;
-    font-size: 14px;
+    font-size: 17px;
     font-weight: bold;
     height: 40px;
     line-height: 20px;
     list-style: none;
-    margin: 0;
     outline: none;
     padding: 10px 16px;
     position: relative;
@@ -118,10 +122,28 @@
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
-    margin: 5px 0px 10px 0px;
+    margin: 20px 10px 5px 10px;
 }
 
 .button-1:hover,
 .button-1:focus {
     background-color: #2c84fe;
+}
+
+.button-1 svg {
+    height: 15px;
+    width: 15px;
+    margin: 0px 5px 0 0;
+}
+
+#screenshot {
+    background-color: #ff3d2c;
+}
+
+.button-1 path {
+    fill: #010101;
+}
+
+#alt {
+    background-color: #b0bac6;
 }

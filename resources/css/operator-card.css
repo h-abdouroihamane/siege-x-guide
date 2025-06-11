@@ -40,7 +40,7 @@
     background-color: rgba(17, 17, 17, 0.15);
     -webkit-backdrop-filter: blur(2px);
     backdrop-filter: blur(2px);
-    font-family: 'ScoutCond-RegularItalic';
+    font-family: 'GT America', sans-serif;
 }
 
 .operator-icon {
@@ -82,15 +82,15 @@
 }
 .card:hover:not(.queer).attacker,
 .card.selected:not(.queer).attacker {
-    background-image: url(card-bg-att.png);
+    background-image: url(siege-x-card-att.png);
 }
 .card:hover:not(.queer).defender,
 .card.selected:not(.queer).defender {
-    background-image: url(card-bg-def.png);
+    background-image: url(siege-x-card-def.png);
 }
 .card:hover.queer,
 .card.selected.queer {
-    background-image: url(card-bg-pride.png);
+    background-image: url(siege-x-card-pride.png);
 }
 .card:hover.queer .operator-year,
 .card.selected.queer .operator-year {

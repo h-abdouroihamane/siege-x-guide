@@ -63,10 +63,10 @@ const emitSortingSide = () => {
         <div id="btn-grid">
             <p class="filter-label">Side</p>
             <button id="attackers" class="radio-button left attackers" :class="{ active: activeAttackers }" @click="toggleAttackers">
-                <AttackerLogo /> Attackers
+                <AttackerLogo /> ATTACKERS
             </button>
             <button id="defenders" class="radio-button right defenders" :class="{ active: activeDefenders }" @click="toggleDefenders">
-                <DefenderLogo /> Defenders
+                <DefenderLogo /> DEFENDERS
             </button>
             <p class="sort-label">Sort by</p>
             <button
@@ -112,7 +112,7 @@ const emitSortingSide = () => {
     position: absolute;
     left: 0;
     color: #fefefe;
-    border-right: 1px solid #fe3d2c;
+    border-right: 1px solid #ff3d2c;
     padding: 20px 10px;
     z-index: 5;
     background-color: rgba(1, 1, 1, 0.95);
@@ -140,7 +140,7 @@ const emitSortingSide = () => {
     width: 80%;
     box-shadow: 0px 1px 4px 1px rgba(0, 0, 0, 0.3);
     cursor: pointer;
-    font-family: 'Simplon Mono', sans-serif;
+    font-family: 'FK Grotesk', sans-serif;
     font-size: 18px;
     color: #fefefe;
 }
@@ -151,7 +151,7 @@ const emitSortingSide = () => {
     margin: 10px;
 }
 #close-button path {
-    fill: #fe3d2c;
+    fill: #ff3d2c;
 }
 
 .sidebar.small #close-button {
@@ -195,7 +195,7 @@ const emitSortingSide = () => {
 }
 
 .radio-button {
-    font-family: 'Simplon Mono';
+    font-family: 'GT America', sans-serif;
     font-weight: bold;
     min-width: 132px;
     height: 100%;
@@ -209,7 +209,6 @@ const emitSortingSide = () => {
     cursor: pointer;
     display: flex;
     justify-content: center;
-    line-height: 20px;
     padding: 6px 16px;
     position: relative;
     text-align: center;
@@ -220,6 +219,7 @@ const emitSortingSide = () => {
     vertical-align: middle;
     white-space: nowrap;
     transition: 0.3s all ease;
+    font-size: 15px;
 }
 
 .radio-button.left {
@@ -244,7 +244,7 @@ const emitSortingSide = () => {
 
 .radio-button.active.sort,
 .radio-button:not(.active):hover.sort {
-    background-color: #fe3d2c;
+    background-color: #ff3d2c;
     box-shadow: rgba(254, 61, 44, 0.2) 0 1px 0 inset;
 }
 

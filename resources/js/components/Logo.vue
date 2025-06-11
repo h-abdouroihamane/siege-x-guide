@@ -11,14 +11,14 @@ const text = props.text ?? '';
 
 <style>
 #logo {
-    max-width: 380px;
-    max-height: 110px;
+    max-height: 70px;
     width: auto;
     height: auto;
+    margin: 10px 0 0 0;
 }
 
 #logo-text {
-    font-family: 'Simplon Mono', sans-serif;
+    font-family: 'FK Grotesk', sans-serif;
     font-weight: bold;
     font-size: 24px;
     margin: 5px;

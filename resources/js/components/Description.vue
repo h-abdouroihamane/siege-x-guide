@@ -64,7 +64,7 @@ const getSide = () => {
 }
 
 #description {
-    font-family: 'Simplon Mono';
+    font-family: 'FK Grotesk', sans-serif;
     position: fixed;
     bottom: 0;
     left: 0;
@@ -76,7 +76,7 @@ const getSide = () => {
     height: 14vh;
     display: grid;
     grid-template-columns: 10vw 90vw;
-    border-top: 1px solid #fe3d2c;
+    border-top: 1px solid #ff3d2c;
 }
 
 #description img {
@@ -93,8 +93,9 @@ const getSide = () => {
 }
 
 #description .name {
-    font-weight: bold;
     text-transform: uppercase;
+    font-family: 'GT America', sans-serif;
+    font-size: 22px;
 }
 
 #description-text {
