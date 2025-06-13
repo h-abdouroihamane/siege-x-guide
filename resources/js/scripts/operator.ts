@@ -1,3 +1,5 @@
+const publicPath = import.meta.env.BASE_URL;
+
 // Removes accents from the operator's name to access their portrait/icon files
 export const normalize = (str: string): string => {
     return str
@@ -28,7 +30,7 @@ export class Operator {
         season: number,
         operationName: string,
         roles: string[],
-        squad: string
+        squad: string,
     ) {
         this.name = name;
         this.description = description;
@@ -40,8 +42,8 @@ export class Operator {
         this.squad = squad;
 
         this.cleanName = normalize(this.name);
-        this.portrait = `/operatorPortraits/${this.cleanName}.png`;
-        this.icon = `/operatorIcons/${this.cleanName}.png`;
+        this.portrait = `${publicPath}operatorPortraits/${this.cleanName}.png`;
+        this.icon = `${publicPath}operatorIcons/${this.cleanName}.png`;
     }
 
     isAttacker(): boolean {

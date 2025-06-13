@@ -112,7 +112,7 @@ const emitSortingSide = () => {
     position: absolute;
     left: 0;
     color: #fefefe;
-    border-right: 1px solid #ff3d2c;
+    border-right: 1px solid #ff4b3c;
     padding: 20px 10px;
     z-index: 5;
     background-color: rgba(1, 1, 1, 0.95);
@@ -151,7 +151,7 @@ const emitSortingSide = () => {
     margin: 10px;
 }
 #close-button path {
-    fill: #ff3d2c;
+    fill: #ff4b3c;
 }
 
 .sidebar.small #close-button {
@@ -244,7 +244,7 @@ const emitSortingSide = () => {
 
 .radio-button.active.sort,
 .radio-button:not(.active):hover.sort {
-    background-color: #ff3d2c;
+    background-color: #ff4b3c;
     box-shadow: rgba(254, 61, 44, 0.2) 0 1px 0 inset;
 }
 

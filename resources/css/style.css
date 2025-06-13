@@ -6,7 +6,31 @@ html {
 
 body {
     margin: 0;
+    --sb-track-color: #232e33;
+    --sb-thumb-color: #ff4b3c;
+    --sb-size: 14px;
 }
+
+body::-webkit-scrollbar {
+    width: var(--sb-size);
+}
+
+body::-webkit-scrollbar-track {
+    background: var(--sb-track-color);
+    border-radius: 3px;
+}
+
+body::-webkit-scrollbar-thumb {
+    background: var(--sb-thumb-color);
+    border-radius: 3px;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+    body {
+        scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+    }
+}
+
 #app {
     background-color: rgba(1, 1, 1, 0.5);
     min-height: 100vh;
@@ -14,7 +38,7 @@ body {
 
 #background-image {
     background-color: #000;
-    background-image: url('background.jpg');
+    background-image: url('./menu_background.JPG');
     background-position: 50%;
     background-repeat: no-repeat;
     background-size: cover;

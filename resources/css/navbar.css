@@ -7,7 +7,7 @@ nav {
         rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
         rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
     z-index: 1;
-    border-bottom: 1px solid #ff3d2c;
+    border-bottom: 1px solid #ff4b3c;
     background-color: rgba(17, 17, 17, 0.7);
 }
 nav .logo {
@@ -47,13 +47,13 @@ nav a,
 
 nav a:not(.active):hover,
 .menubar a:not(.active):hover {
-    background-color: #ff3d2c;
+    background-color: #ff4b3c;
     color: #0c0f16;
 }
 
 nav a.active,
 .menubar a.active {
-    color: #ff3d2c;
+    color: #ff4b3c;
 }
 
 .hamburger {
@@ -64,7 +64,7 @@ nav a.active,
 .hamburger .line {
     width: 25px;
     height: 1px;
-    background-color: #ff3d2c;
+    background-color: #ff4b3c;
     display: block;
     margin: 7px auto;
     transition: all 0.3s ease-in-out;

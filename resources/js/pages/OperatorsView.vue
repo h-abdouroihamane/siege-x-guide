@@ -132,7 +132,7 @@ body {
     height: 70vh;
     overflow-y: scroll;
     --sb-track-color: #232e33;
-    --sb-thumb-color: #ff3d2c;
+    --sb-thumb-color: #ff4b3c;
     --sb-size: 14px;
 }
 

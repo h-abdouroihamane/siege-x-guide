@@ -7,9 +7,10 @@ import { normalize } from '../scripts/operator.ts';
 const page = usePage();
 const squads = Object.entries(page.props.squads);
 const squadHeader = `Squads (up to Year ${page.props.year}, Season ${page.props.season} - ${page.props.operationName})`;
+const publicPath = import.meta.env.BASE_URL;
 
-const getSquadLogo = (squadName) => `squadLogos/${normalize(squadName)}.png`;
-const getOperatorIcon = (operatorName) => `operatorIcons/${normalize(operatorName)}.png`;
+const getSquadLogo = (squadName) => `${publicPath}squadLogos/${normalize(squadName)}.png`;
+const getOperatorIcon = (operatorName) => `${publicPath}operatorIcons/${normalize(operatorName)}.png`;
 
 const getAltText = () => {
     let text = `Table showing every squad composition according to Rainbow Six Siege X's lore (up to Year ${page.props.year}, Season ${page.props.season} - ${page.props.operationName})\n\n`;
@@ -77,7 +78,7 @@ const toggleScreenshotMode = () => {
                     Crediting myself so my friends don't yell at me for not doing so: made by alsagone.bsky.social :)
                 </div>
 
-                <button id="screenshot" v-if="screenshotMode" class="button-1" role="button" @click="toggleScreenshotMode()">
+                <button v-if="screenshotMode" class="button-1" role="button" @click="toggleScreenshotMode()">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                         <!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
                         <path
@@ -87,7 +88,7 @@ const toggleScreenshotMode = () => {
                     Return to normal view
                 </button>
 
-                <button id="screenshot" v-else class="button-1" role="button" @click="toggleScreenshotMode()">
+                <button v-else class="button-1" role="button" @click="toggleScreenshotMode()">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                         <!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
                         <path
@@ -97,7 +98,7 @@ const toggleScreenshotMode = () => {
                     Toggle screenshot mode
                 </button>
 
-                <button id="alt" v-if="screenshotMode" class="button-1" role="button" @click="copyAltText()">
+                <button v-if="screenshotMode" class="button-1 grey" role="button" @click="copyAltText()">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
                         <!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
                         <path
@@ -114,6 +115,7 @@ const toggleScreenshotMode = () => {
 
 <style lang="scss" scoped>
 @use '../../css/squads.css';
+@use '../../css/button.css';
 #main-content {
     max-width: 80vw;
     flex-direction: column;

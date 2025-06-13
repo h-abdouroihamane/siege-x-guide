@@ -1,11 +1,11 @@
 <script setup>
-import LogoImg from '../../../public/Logo_blank.png';
+const publicPath = import.meta.env.BASE_URL;
 const props = defineProps(['text']);
 const text = props.text ?? '';
 </script>
 
 <template>
-    <img id="logo" :src="LogoImg" alt="Rainbow Six Siege X Logo" />
+    <img id="logo" :src="`${publicPath}Logo_blank.png`" alt="Rainbow Six Siege X Logo" />
     <p id="logo-text" v-if="text">{{ text }}</p>
 </template>
 

@@ -15,12 +15,14 @@ const toggleNav = () => {
     hamburgerActive.value = !hamburgerActive.value;
     menubarActive.value = !menubarActive.value;
 };
+
+const publicPath = import.meta.env.BASE_URL;
 </script>
 
 <template>
     <nav>
         <div class="logo">
-            <img src="siege-x-icon.png" alt="logo" />
+            <img :src="`${publicPath}siege-x-icon.png`" alt="logo" />
         </div>
         <ul>
             <li>

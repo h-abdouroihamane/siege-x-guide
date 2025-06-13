@@ -76,7 +76,7 @@ const getSide = () => {
     height: 14vh;
     display: grid;
     grid-template-columns: 10vw 90vw;
-    border-top: 1px solid #ff3d2c;
+    border-top: 1px solid #ff4b3c;
 }
 
 #description img {
