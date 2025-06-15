@@ -16,6 +16,16 @@ Route::prefix('operators')
         Route::get('/all', 'getAll');
     });
 
+Route::prefix('operators')
+    ->controller(OperatorController::class)
+    ->name('operator.')
+    ->middleware('auth')
+    ->group(function() {
+        Route::get('/select', 'selectForEditing')->name('selectForEditing');
+        Route::post('/select', 'selectPost')->name('selectPost');
+        Route::get('/edit/{operatorName}', 'edit');
+    });
+
 Route::prefix('squads')
     ->controller(SquadController::class)
     ->group(function () {
@@ -24,9 +34,19 @@ Route::prefix('squads')
     });
 
 Route::prefix('admin')
+    ->name('admin.')
     ->controller(AdminController::class)
     ->group(function () {
-        Route::get('/login', 'index');
+        Route::get('/login', 'index')->name('login');
+        Route::post('/login', 'authenticate');
+    });
+
+Route::middleware('auth')
+    ->name('admin.')
+    ->prefix('admin')
+    ->controller(AdminController::class)
+    ->group(function () {
+        Route::get('/dashboard', 'dashboard')->name('dashboard');
     });
 
 require __DIR__ . '/settings.php';

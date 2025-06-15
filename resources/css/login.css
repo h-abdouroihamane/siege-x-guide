@@ -18,3 +18,18 @@
     height: 200px;
     width: auto;
 }
+
+#login-form,
+.form-element {
+    display: grid;
+    justify-items: center;
+}
+
+.form-element {
+    max-width: 90%;
+    row-gap: 2px;
+}
+
+#login-form {
+    row-gap: 20px;
+}

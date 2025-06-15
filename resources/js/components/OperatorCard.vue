@@ -1,5 +1,6 @@
 <script setup>
-const props = defineProps(['operator', 'selected']);
+const props = defineProps(['operator', 'selected', 'slim']);
+const slim = props.slim ?? false;
 </script>
 
 <template>
@@ -12,7 +13,7 @@ const props = defineProps(['operator', 'selected']);
         }"
         :id="props.operator.cleanName"
     >
-        <img class="operator-portrait" :src="props.operator.portrait" :alt="props.operator.name" />
+        <img v-if="!slim" class="operator-portrait" :src="props.operator.portrait" :alt="props.operator.name" />
         <img class="operator-icon" :src="props.operator.icon" :alt="`${props.operator.name} icon`" />
         <span class="operator-name">{{ props.operator.name }}</span>
     </div>

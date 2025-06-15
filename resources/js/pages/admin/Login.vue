@@ -4,15 +4,20 @@
     <div id="container">
         <Logo :text="'Admin login'" />
         <div id="main-content">
-            <img id="osa" :src="`${publicPath}osa_login.jpg`" alt="Osa" />
+            <form id="login-form" @submit.prevent="form.post('/login')">
+                <img id="osa" :src="`${publicPath}osa_login.jpg`" alt="Osa" />
 
-            <form @submit.prevent="form.post('/login')">
                 <!-- email -->
-                <label for="email">Email</label>
-                <input id="email" type="text" v-model="form.email" />
+                <div class="form-element">
+                    <label for="email">Email</label>
+                    <input id="email" type="text" v-model="form.email" />
+                </div>
                 <!-- password -->
-                <label for="pwd">Password</label>
-                <input id="pwd" type="password" v-model="form.password" />
+                <div class="form-element">
+                    <label for="pwd">Password</label>
+                    <input id="pwd" type="password" v-model="form.password" />
+                </div>
+
                 <div v-if="form.errors.password">{{ form.errors.password }}</div>
 
                 <!-- submit -->
@@ -39,10 +44,6 @@ import { useForm } from '@inertiajs/vue3';
 const form = useForm({
     email: null,
     password: null,
-});
-
-form.setError({
-    password: 'Incorrect email/password combination',
 });
 </script>
 

@@ -4,6 +4,7 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import type { DefineComponent } from 'vue';
 import { createApp, h } from 'vue';
 import { ZiggyVue } from 'ziggy-js';
+import '../css/button.css';
 import '../css/fonts.css';
 import '../css/style.css';
 import { initializeTheme } from './composables/useAppearance';
