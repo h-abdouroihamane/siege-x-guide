@@ -11,7 +11,7 @@ import { Operator } from '../scripts/operator.ts';
 const page = usePage();
 
 const allOperators: Operator[] = page.props.operators.data.map(
-    (op) => new Operator(op.name, op.description, op.side, op.year, op.season, op.operation_name, op.roles, op.squad),
+    (op) => new Operator(op.name, op.description, op.side, op.year, op.season, op.operation.name, op.operation.release_date, op.roles, op.squad)
 );
 
 let operators = ref([...allOperators]);
@@ -26,7 +26,7 @@ const placeholderOperator = new Operator(
     -1,
     'opPlaceHolder',
     [],
-    'placeholderSquad',
+    'placeholderSquad'
 );
 const selectedOperator = ref(placeholderOperator);
 

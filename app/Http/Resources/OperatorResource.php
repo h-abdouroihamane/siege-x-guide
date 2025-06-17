@@ -29,7 +29,10 @@ class OperatorResource extends JsonResource
             'side' => $this->side,
             'year' => $this->year,
             'season' => $this->season,
-            'operation_name' => $this->operation->name,
+            'operation' => [
+                'name' => $this->operation->name,
+                'release_date' => $this->operation->release_date
+            ],
             'roles' => $roles,
             'squad' => $squad
         ];

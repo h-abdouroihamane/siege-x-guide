@@ -2,7 +2,19 @@
 import AttackerLogo from '../components/AttackerLogo.vue';
 import DefenderLogo from '../components/DefenderLogo.vue';
 
-const props = defineProps(['name', 'description', 'side', 'year', 'season', 'portrait', 'icon', 'operationName', 'squad', 'roles']);
+const props = defineProps([
+    'name',
+    'description',
+    'side',
+    'year',
+    'season',
+    'portrait',
+    'icon',
+    'operationReleaseDate',
+    'operationName',
+    'squad',
+    'roles',
+]);
 
 const getRoleStr = () => {
     if (!props.roles) {
@@ -14,8 +26,20 @@ const getRoleStr = () => {
     return roleString;
 };
 
+const formatReleaseDate = (d) => {
+    const options = {
+        year: 'numeric',
+        month: 'long',
+    };
+
+    return d.toLocaleDateString('en-US', options);
+};
+
 const getOperationStr = () => {
-    return props.year > 0 ? `Released on Year ${props.year}, Season ${props.season} - ${props.operationName}` : 'Part of the base operators';
+    const releaseDate = formatReleaseDate(props.operationReleaseDate);
+    return props.year > 0
+        ? `Released on Year ${props.year}, Season ${props.season} - ${props.operationName} (${releaseDate})`
+        : 'Part of the base operators';
 };
 
 const getSide = () => {

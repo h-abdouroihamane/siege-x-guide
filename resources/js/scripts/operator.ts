@@ -17,6 +17,7 @@ export class Operator {
     year: number;
     season: number;
     operationName: string;
+    operationReleaseDate: string;
     roles: string[];
     squad: string;
     portrait: string;
@@ -29,8 +30,9 @@ export class Operator {
         year: number,
         season: number,
         operationName: string,
+        operationReleaseDate: string,
         roles: string[],
-        squad: string,
+        squad: string
     ) {
         this.name = name;
         this.description = description;
@@ -38,6 +40,7 @@ export class Operator {
         this.year = year;
         this.season = season;
         this.operationName = operationName;
+        this.operationReleaseDate = new Date(operationReleaseDate);
         this.roles = [...roles];
         this.squad = squad;
 
