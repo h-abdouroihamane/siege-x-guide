@@ -1,11 +1,11 @@
 <script setup>
 import { useForm, usePage } from '@inertiajs/vue3';
-import { ref } from 'vue';
 
 const page = usePage();
 const operator = page.props.operator.data;
 const squads = page.props.squads;
-console.log(operator);
+const operations = page.props.operations.data;
+
 const form = useForm({
     name: operator.name,
     description: operator.description,
@@ -13,12 +13,8 @@ const form = useForm({
     side: operator.side,
     icon: null,
     portrait: null,
-    year: operator.year,
-    season: operator.season,
-    operationName: operator.operation_name,
+    operation_id: operator.operation_id ?? operations[0].id,
 });
-
-const newSeason = ref(false);
 </script>
 
 <template>
@@ -28,7 +24,7 @@ const newSeason = ref(false);
             <input id="name" type="text" v-model="form.name" />
         </div>
         <div class="form-element">
-            <label for="description">Descriptiopn</label>
+            <label for="description">Description</label>
             <input id="description" type="text" v-model="form.description" />
         </div>
 
@@ -47,18 +43,10 @@ const newSeason = ref(false);
         </div>
 
         <div class="form-element">
-            <label for="year">Year</label>
-            <input type="number" id="year" min="0" max="99" v-model="form.year" />
-        </div>
-
-        <div class="form-element">
-            <label for="season">Season</label>
-            <input type="number" id="season" min="0" max="4" v-model="form.season" />
-        </div>
-
-        <div class="form-element">
-            <label for="operation-name">Operation name</label>
-            <input id="operation-name" type="text" v-model="form.operationName" />
+            <label for="operation">Operation</label>
+            <select id="operation" v-model="form.operation_id">
+                <option v-for="op in operations" :value="op.id">{{ op.name }}</option>
+            </select>
         </div>
     </form>
 </template>

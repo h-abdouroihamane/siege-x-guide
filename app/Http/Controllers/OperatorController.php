@@ -2,8 +2,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\OperatorResource;
+use App\Http\Resources\OperationResource;
 use Illuminate\Http\Request;
 use App\Models\Operator;
+use App\Models\Operation;
 use App\Models\Squad;
 use Inertia\Inertia;
 
@@ -30,6 +32,7 @@ class OperatorController extends Controller
         $operatorName = $request->input('operatorName');
         $operator = new OperatorResource(Operator::where('name', $operatorName)->with('roles:id,name', 'squad:id,name', 'operation:id,name,release_date')->first());
         $squads = Squad::pluck('name')->sort();
+        $operations = OperationResource::collection(Operation::orderByDesc('release_date')->get());
 
         if (is_null($operator)) {
             return to_route('operator.selectForEditing');
@@ -37,7 +40,8 @@ class OperatorController extends Controller
 
         return Inertia::render('OperatorForm',
             ['operator'=> $operator,
-                'squads' => $squads,
+            'squads' => $squads,
+            'operations' => $operations,
             'mode' => 'edit']);
     }
 }
