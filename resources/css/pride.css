@@ -13,6 +13,22 @@
     display: block;
     margin: 0 0 2px 0;
 }
+
+.queer-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.queer-row .pride-flag {
+    margin-right: 10px;
+}
+
+.queer-row p {
+    margin: 0;
+}
+
 .transgender {
     background: linear-gradient(
         to bottom,

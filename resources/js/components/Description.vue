@@ -14,6 +14,7 @@ const props = defineProps([
     'operationName',
     'squad',
     'roles',
+    'queerIdentities',
 ]);
 
 const getRoleStr = () => {
@@ -58,7 +59,14 @@ const getSide = () => {
                 <DefenderLogo class="side-icon" v-else-if="side === 'Defense'" />
                 <span id="side-name">{{ getSide() }}</span>
             </div>
+            <div class="pride-description" v-if="props.queerIdentities">
+                <div class="queer-row" v-for="qId in props.queerIdentities">
+                    <span :class="`pride-flag ${qId.toLowerCase()}`" />
+                    <p>{{ qId.toUpperCase() }}</p>
+                </div>
+            </div>
         </div>
+
         <div id="description-text">
             <span id="ability">{{ props.description }}</span>
             <span id="roles">{{ getRoleStr() }}</span>
@@ -96,8 +104,7 @@ const getSide = () => {
     z-index: 2;
     background-color: rgba(1, 1, 1, 0.95);
     color: #fefefe;
-    min-height: 140px;
-    height: 14vh;
+    min-height: 210px;
     display: grid;
     grid-template-columns: 10vw 90vw;
     border-top: 1px solid #ff4b3c;
@@ -142,9 +149,18 @@ const getSide = () => {
         justify-content: center;
         font-size: 15px;
     }
-    #description > img {
+    #description .icon {
         max-height: 50px;
     }
+
+    #description .side-icon {
+        max-height: 20px;
+    }
+
+    #description .pride-flag {
+        width: 20px;
+    }
+
     #description-icon {
         width: 100%;
         -webkit-box-orient: vertical;
