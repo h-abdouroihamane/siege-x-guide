@@ -6,6 +6,7 @@ import { createApp, h } from 'vue';
 import { ZiggyVue } from 'ziggy-js';
 import '../css/button.css';
 import '../css/fonts.css';
+import '../css/form.css';
 import '../css/style.css';
 import { initializeTheme } from './composables/useAppearance';
 

@@ -1,31 +1,31 @@
 <script setup>
 import { useForm, usePage } from '@inertiajs/vue3';
-
+const props = defineProps(['operator', 'squads', 'operations']);
 const page = usePage();
-const operator = page.props.operator.data;
-const squads = page.props.squads;
-const operations = page.props.operations.data;
+const operator = props.operator;
+const squads = props.squads;
+const operations = props.operations;
 
 const form = useForm({
     name: operator.name,
     description: operator.description,
-    squad: operator.squad,
+    squad: operator.squad ?? '',
     side: operator.side,
     icon: null,
     portrait: null,
-    operation_id: operator.operation_id ?? operations[0].id,
+    operation_id: operator.operation.id ?? operations[0].id,
 });
 </script>
 
 <template>
-    <form>
+    <form id="operator-form">
         <div class="form-element">
             <label for="name">Name</label>
             <input id="name" type="text" v-model="form.name" />
         </div>
         <div class="form-element">
             <label for="description">Description</label>
-            <input id="description" type="text" v-model="form.description" />
+            <textarea id="description" name="story" rows="5" cols="44" v-model="form.description" />
         </div>
 
         <div class="form-element">
@@ -38,6 +38,7 @@ const form = useForm({
         <div class="form-element">
             <label for="squad">Squad</label>
             <select id="squad" v-model="form.squad">
+                <option value="">None</option>
                 <option v-for="squad in squads" :value="squad">{{ squad }}</option>
             </select>
         </div>
