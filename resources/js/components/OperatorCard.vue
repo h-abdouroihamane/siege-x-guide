@@ -1,6 +1,14 @@
 <script setup>
-const props = defineProps(['operator', 'selected', 'slim']);
-const slim = props.slim ?? false;
+const props = defineProps(['operator', 'selected']);
+
+const getPrideFlagClass = () => {
+    if (!props.operator.queerIdentities) {
+        return '';
+    }
+
+    const queerIdentities = props.operator.queerIdentities.map((q) => q.toLowerCase()).join(' ');
+    return 'pride-flag ' + queerIdentities;
+};
 </script>
 
 <template>
@@ -13,8 +21,11 @@ const slim = props.slim ?? false;
         }"
         :id="props.operator.cleanName"
     >
-        <img v-if="!slim" class="operator-portrait" :src="props.operator.portrait" :alt="props.operator.name" />
+        <img class="operator-portrait" :src="props.operator.portrait" :alt="props.operator.name" />
         <img class="operator-icon" :src="props.operator.icon" :alt="`${props.operator.name} icon`" />
+        <div class="pride-flag-container" v-if="props.operator.queerIdentities.length > 0">
+            <span v-for="qIdentity in props.operator.queerIdentities" :class="`pride-flag ${qIdentity.toLowerCase()}`"></span>
+        </div>
         <span class="operator-name">{{ props.operator.name }}</span>
     </div>
 </template>

@@ -7,6 +7,7 @@ import { ZiggyVue } from 'ziggy-js';
 import '../css/button.css';
 import '../css/fonts.css';
 import '../css/form.css';
+import '../css/pride.css';
 import '../css/style.css';
 import { initializeTheme } from './composables/useAppearance';
 

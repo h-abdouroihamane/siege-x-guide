@@ -13,7 +13,7 @@ class OperatorController extends Controller
 {
     public function getAll()
  {
-        return OperatorResource::collection(Operator::with('roles:id,name', 'squad:id,name', 'operation:id,name,release_date')->get());
+        return OperatorResource::collection(Operator::with('roles:id,name', 'squad:id,name', 'operation:id,name,release_date', 'queerIdentities:id,name')->get());
     }
 
     public function showAll()
@@ -30,7 +30,11 @@ class OperatorController extends Controller
 
     public function selectPost(Request $request) {
         $operatorName = $request->input('operatorName');
-        $operator = new OperatorResource(Operator::where('name', $operatorName)->with('roles:id,name', 'squad:id,name', 'operation:id,name,release_date')->first());
+        $operator = new OperatorResource(
+            Operator::where('name', $operatorName)
+                ->with('roles:id,name', 'squad:id,name', 'operation:id,name,release_date', 'queerIdentities:id,name')
+                ->first()
+        );
         $squads = Squad::pluck('name')->sort();
         $operations = OperationResource::collection(Operation::orderByDesc('release_date')->get());
 
@@ -38,7 +42,7 @@ class OperatorController extends Controller
             return to_route('operator.selectForEditing');
         }
 
-        return Inertia::render('OperatorForm',
+        return Inertia::render('EditOperator',
             ['operator'=> $operator,
             'squads' => $squads,
             'operations' => $operations,

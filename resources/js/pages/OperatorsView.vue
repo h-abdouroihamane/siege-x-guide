@@ -11,12 +11,25 @@ import { Operator } from '../scripts/operator.ts';
 const page = usePage();
 
 const allOperators: Operator[] = page.props.operators.data.map(
-    (op) => new Operator(op.name, op.description, op.side, op.year, op.season, op.operation.name, op.operation.release_date, op.roles, op.squad)
+    (op) =>
+        new Operator(
+            op.name,
+            op.description,
+            op.side,
+            op.year,
+            op.season,
+            op.operation.name,
+            op.operation.release_date,
+            op.roles,
+            op.squad,
+            op.queerIdentities
+        )
 );
 
 let operators = ref([...allOperators]);
 let sortingMethod = ref('date');
 let activeSides = ref('attackersdefenders');
+let showQueerIdentities = ref(false);
 
 const placeholderOperator = new Operator(
     'placeholder',
@@ -42,6 +55,11 @@ const sortOperators = (method) => {
 const filterOperators = (sides) => {
     activeSides.value = sides;
     filterAndSort();
+};
+
+const toggleQueer = (b) => {
+    showQueerIdentities.value = b;
+    console.log('Queer from main:' + showQueerIdentities.value);
 };
 
 const filterAndSort = () => {
@@ -84,7 +102,7 @@ filterAndSort();
         <div id="container">
             <Logo :text="'Operator Guide'" />
             <div id="main-content">
-                <Sidebar @sort-by="sortOperators" @filter-side="filterOperators" />
+                <Sidebar @sort-by="sortOperators" @filter-side="filterOperators" @toggle-queer="toggleQueer" />
 
                 <div id="card-container">
                     <OperatorCard
@@ -92,6 +110,7 @@ filterAndSort();
                         :key="index"
                         :operator="op"
                         :selected="selectedOperator.name === op.name"
+                        :show-queer="showQueerIdentities"
                         @click="setSelectedOperator(op)"
                     >
                     </OperatorCard>

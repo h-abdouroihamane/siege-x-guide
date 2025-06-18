@@ -20,6 +20,12 @@ class OperatorResource extends JsonResource
             $roles[] = $r->name;
         }
 
+        $queerIdentities = [];
+
+        foreach ($this->queerIdentities as $q) {
+            $queerIdentities[] = $q->name;
+        }
+
         $squadModel = $this->squad->first();
         $squad = $squadModel ? $squadModel->name : "Unaffiliated";
 
@@ -30,11 +36,13 @@ class OperatorResource extends JsonResource
             'year' => $this->year,
             'season' => $this->season,
             'operation' => [
+                'id' => $this->operation->id,
                 'name' => $this->operation->name,
                 'release_date' => $this->operation->release_date
             ],
             'roles' => $roles,
-            'squad' => $squad
+            'squad' => $squad,
+            'queerIdentities' => $queerIdentities
         ];
     }
 }

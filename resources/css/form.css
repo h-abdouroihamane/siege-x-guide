@@ -1,0 +1,38 @@
+form,
+.form-element {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+form {
+    column-gap: 10px;
+}
+
+label {
+    color: #b0bac6;
+}
+
+textarea {
+    font-family: inherit;
+    font-size: 13px;
+}
+
+#operator-form {
+    height: 400px;
+}
+
+input,
+textarea,
+select {
+    background-color: rgba(17, 17, 17, 0.7);
+    color: #fefefe;
+    border: thin solid rgba(254, 254, 254, 0.4);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border: #fe3d2c thin solid;
+}

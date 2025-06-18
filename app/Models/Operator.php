@@ -45,4 +45,8 @@ class Operator extends Model
     public function getOperation() {
         return $this->operation()->first();
     }
+
+    public function queerIdentities() {
+        return $this->belongsToMany(QueerIdentity::class, 'operator_queer_identity', 'operator_id', 'queer_identity_id');
+    }
 }

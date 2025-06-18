@@ -20,6 +20,7 @@ export class Operator {
     operationReleaseDate: string;
     roles: string[];
     squad: string;
+    queerIdentites: string[] | null;
     portrait: string;
     icon: string;
 
@@ -32,7 +33,8 @@ export class Operator {
         operationName: string,
         operationReleaseDate: string,
         roles: string[],
-        squad: string
+        squad: string,
+        queerIdentities: string[] | null
     ) {
         this.name = name;
         this.description = description;
@@ -43,6 +45,7 @@ export class Operator {
         this.operationReleaseDate = new Date(operationReleaseDate);
         this.roles = [...roles];
         this.squad = squad;
+        this.queerIdentities = queerIdentities;
 
         this.cleanName = normalize(this.name);
         this.portrait = `${publicPath}operatorPortraits/${this.cleanName}.png`;

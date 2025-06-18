@@ -1,0 +1,106 @@
+.pride-flag-container {
+    position: absolute;
+    top: 2px;
+    left: 32px;
+    bottom: auto;
+    margin: 2px -25% 0px -25%;
+    z-index: 2;
+}
+
+.pride-flag {
+    width: 24px;
+    aspect-ratio: 14 / 9;
+    display: block;
+    margin: 0 0 2px 0;
+}
+.transgender {
+    background: linear-gradient(
+        to bottom,
+        #5ccefa,
+        #5ccefa 20%,
+        #f6a8b7 20%,
+        #f6a8b7 40%,
+        #fff 40%,
+        #fff 60%,
+        #f6a8b7 60%,
+        #f6a8b7 80%,
+        #5ccefa 80%,
+        #5ccefa
+    );
+}
+
+.non-binary {
+    background: linear-gradient(to bottom, #fdf52f, #fdf52f 25%, #fff 25%, #fff 50%, #9d5ad2 50%, #9d5ad2 75%, #000 75%, #000);
+}
+
+.lesbian {
+    background: linear-gradient(
+        to bottom,
+        #d12601,
+        #d12601 20%,
+        #ff8f45 20%,
+        #ff8f45 40%,
+        #fff 40%,
+        #fff 60%,
+        #cf559b 60%,
+        #cf559b 80%,
+        #9b1a58 80%,
+        #9b1a58
+    );
+}
+
+.gay {
+    background: linear-gradient(
+        to bottom,
+        #078d70,
+        #078d70 14.2857142857%,
+        #26ceaa 14.2857142857%,
+        #26ceaa 28.5714285714%,
+        #98e8c1 28.5714285714%,
+        #98e8c1 42.8571428571%,
+        #fff 42.8571428571%,
+        #fff 57.1428571429%,
+        #7bade2 57.1428571429%,
+        #7bade2 71.4285714286%,
+        #5049cc 71.4285714286%,
+        #5049cc 85.7142857143%,
+        #3d1a78 85.7142857143%,
+        #3d1a78
+    );
+}
+
+.bisexual {
+    background: linear-gradient(to bottom, #d60270, #d60270 40%, #9a4f96 40%, #9a4f96 60%, #0039a9 60%, #0039a9);
+}
+
+.intersex {
+    background: radial-gradient(circle, gold 24.5%, darkviolet 25% 34%, gold 34.5%);
+}
+
+.aromantic {
+    background: linear-gradient(#0a2 20%, #7d6 0 40%, white 0 60%, darkgray 0 80%, black 0);
+}
+
+.asexual {
+    background: linear-gradient(black 25%, darkgray 0 50%, white 0 75%, #a50089 0);
+}
+
+.pansexual {
+    background: linear-gradient(#f09 33.33%, gold 0 66.66%, deepskyblue 0);
+}
+
+.aroace {
+    background: linear-gradient(#e28c00 0 20%, #eccd00 0 40%, #fff 0 60%, #62aedc 0 80%, #203856 0);
+}
+
+.progress {
+    background:
+        radial-gradient(circle at 9.75% 50%, #0000 6.66%, darkviolet 6.7% 8.33%, #0000 8.4%),
+        conic-gradient(at 26.66% 50%, #0000 222.75deg, gold 0 317.25deg, #0000 0),
+        conic-gradient(at 33% 50%, #0000 222.75deg, white 0 317.25deg, #0000 0),
+        conic-gradient(at 39% 50%, #0000 222.75deg, #ffa6b9 0 317.25deg, #0000 0),
+        conic-gradient(at 45.66% 50%, #0000 222.75deg, #00d2ff 0 317.25deg, #0000 0),
+        conic-gradient(at 52% 50%, #0000 222.75deg, #753000 0 317.25deg, #0000 0),
+        conic-gradient(at 58.33% 50%, #0000 222.75deg, #000 0 317.25deg, #0000 0),
+        linear-gradient(red 0 16.66%, orange 0 33.33%, yellow 0 50%, green 0 66.66%, blue 0 83.33%, indigo 0);
+}

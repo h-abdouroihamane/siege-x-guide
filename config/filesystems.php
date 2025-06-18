@@ -53,7 +53,18 @@ return [
             'throw' => false,
             'report' => false,
         ],
-    ],
+
+
+        'operatorPortraits' => [
+            'driver' => 'local',
+            'root'   => public_path() . '/operatorPortraits',
+        ],
+
+        'operatorIcons' => [
+            'driver' => 'local',
+            'root'   => public_path() . '/operatorIcons',
+            ],
+            ],
 
     /*
      * |--------------------------------------------------------------------------
