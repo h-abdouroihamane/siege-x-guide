@@ -36,3 +36,9 @@ select:focus {
     outline: none;
     border: #fe3d2c thin solid;
 }
+
+option:checked {
+    background-color: #fe3d2c;
+    color: #010101;
+    font-weight: bold;
+}

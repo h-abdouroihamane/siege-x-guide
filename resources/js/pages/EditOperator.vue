@@ -7,6 +7,8 @@ const page = usePage();
 const operator = page.props.operator.data;
 const squads = page.props.squads;
 const operations = page.props.operations.data;
+const queerIdentities = page.props.queerIdentities;
+const submitRoute = page.props.submitRoute;
 </script>
 
 <template>
@@ -15,7 +17,13 @@ const operations = page.props.operations.data;
         <Navbar path="admin" />
         <div id="container">
             <Logo text="Edit operator" />
-            <OperatorForm :operator="operator" :squads="squads" :operations="operations" />
+            <OperatorForm
+                :operator="operator"
+                :squads="squads"
+                :operations="operations"
+                :queer-identities="queerIdentities"
+                :submit-route="submitRoute"
+            />
         </div>
     </div>
 </template>

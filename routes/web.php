@@ -10,10 +10,11 @@ Route::get('/', function () {
 });
 
 Route::prefix('operators')
+    ->name('operator.')
     ->controller(OperatorController::class)
     ->group(function () {
-        Route::get('/', 'showAll');
-        Route::get('/all', 'getAll');
+        Route::get('/', 'showAll')->name('show');
+        Route::get('/all', 'getAll')->name('get');
     });
 
 Route::prefix('operators')
@@ -23,7 +24,8 @@ Route::prefix('operators')
     ->group(function() {
         Route::get('/select', 'selectForEditing')->name('selectForEditing');
         Route::post('/select', 'selectPost')->name('selectPost');
-        Route::get('/edit/{operatorName}', 'edit');
+        Route::get('/edit/{operator}', 'edit')->name('edit');
+        Route::post('/update/{operatorId}', 'update')->name('update');
     });
 
 Route::prefix('squads')
