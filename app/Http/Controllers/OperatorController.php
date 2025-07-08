@@ -9,7 +9,8 @@ use App\Models\Operation;
 use App\Models\QueerIdentity;
 use App\Models\Squad;
 use Inertia\Inertia;
-use App\Http\Requests\OperatorRequest;
+use App\Http\Requests\EditOperatorRequest;
+use App\Http\Requests\CreateOperatorRequest;
 
 class OperatorController extends Controller
 {
@@ -65,7 +66,7 @@ class OperatorController extends Controller
             'submitRoute' => route('operator.update', ['operatorId' => $operator->id])
         ]);
     }
-    public function update(OperatorRequest $request, string $operatorId) {
+    public function update(EditOperatorRequest $request, string $operatorId) {
         $operator = Operator::findOrFail($operatorId);
 
         //Basic updates
@@ -100,4 +101,68 @@ class OperatorController extends Controller
 
         return;
     }
+
+    public function create() {
+        $squads = Squad::pluck('name')->sort();
+        $queerIdentities = QueerIdentity::pluck('name')->sort();
+
+        return Inertia::render('CreateOperator',
+            [
+            'squads' => $squads,
+            'queerIdentities' => $queerIdentities,
+            'submitRoute' => route('operator.store')
+        ]);
+    }
+
+    public function store(CreateOperatorRequest $request) {
+        //Creating the Operation to get its ID
+        $year = $request->input('year');
+        $season = $request->input('season');
+        $operation_id =  'Y' . $year . 'S' . $season;
+
+        $operation = new Operation([
+            'id' => $operation_id,
+            'name' => $request->input('operationName'),
+            'year' => $year,
+            'season' => $season,
+            'release_date' => $request->input('releaseDate')
+        ]);
+
+        $operation->save();
+
+
+        $operator = new Operator([
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'side' => $request->input('side'),
+            'year' => $year,
+            'season' => $season,
+            'operation_id' => $operation_id
+        ]);
+
+        $operator->save();
+
+        $operator->addToSquad($request->input('squad'));
+
+        $queerIdentities = $request->array('queerIdentities') ?? [];
+
+        $queerIds = count($queerIdentities) > 0
+            ? QueerIdentity::whereIn('name', $request->array('queerIdentities'))->pluck('id')
+            : [];
+
+        $operator->queerIdentities()->sync($queerIds);
+
+        $filename = $operator->getCleanName() . '.png';
+
+        if ($request->hasFile('icon')) {
+            $request->file('icon')->storeAs('operatorIcons', $filename, 'public');
+        }
+
+        if ($request->hasFile('portrait')) {
+            $request->file('portrait')->storeAs('operatorPortraits', $filename, 'public');
+        }
+
+        return;
+    }
+
 }

@@ -6,7 +6,7 @@ form,
 }
 
 form {
-    column-gap: 10px;
+    row-gap: 10px;
 }
 
 label {
@@ -41,4 +41,15 @@ option:checked {
     background-color: #fe3d2c;
     color: #010101;
     font-weight: bold;
+}
+
+#errors {
+    background-color: #f2a097;
+    color: #000;
+    border-radius: 5px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
 }

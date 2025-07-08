@@ -1,19 +1,52 @@
 <template>
     <div>
+        <div id="background-image" />
         <Navbar path="admin" />
-        <ul>
-            <li><a href="/admin/new">New operator</a></li>
-            <li><a :href="editRoute">Edit operator</a></li>
-        </ul>
+        <div id="container">
+            <Logo text="Admin dashboard" />
+
+            <span id="message">Operator OperatorName successfully edited</span>
+            <div id="options">
+                <a v-for="p in paths" :href="p.url">
+                    <div class="card option">
+                        <img class="operator-portrait" :src="p.image" :alt="p.label" />
+                        <span class="operator-name">{{ p.label }}</span>
+                    </div>
+                </a>
+            </div>
+        </div>
     </div>
 </template>
 
 <script setup>
 import { usePage } from '@inertiajs/vue3';
+import Logo from '../../components/Logo.vue';
 import Navbar from '../../components/Navbar.vue';
-
 const page = usePage();
-const editRoute = page.props.editRoute;
+const message = page.props.message ?? null;
+
+const paths = [
+    { label: 'New operator', url: page.props.createRoute, image: '/flores.jpg' },
+    { label: 'Edit operator', url: page.props.editRoute, image: '/sens.jpg' },
+];
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+@use '../../../css/operator-card.css';
+#message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #2fd072;
+    color: #000;
+    height: 50px;
+    width: 500px;
+    text-align: center;
+    border-radius: 5px;
+    margin: 10px;
+}
+
+#options a {
+    all: unset;
+}
+</style>

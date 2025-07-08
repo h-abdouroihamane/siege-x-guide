@@ -6,13 +6,15 @@ use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Operator extends Model
 {
     use HasUlids;
 
     protected $hidden = ['id', 'pivot'];
-    protected $fillable = ['*'];
+    protected $guarded = ['id'];
+    public $timestamps = false;
 
     public function roles()
     {
@@ -77,7 +79,7 @@ class Operator extends Model
                 ->where('rank', '>', $currentRank)
                 ->decrement('rank', 1);
 
-            $this->squad->detach();
+            $this->squad()->detach();
         }
 
         if ($validNewSquad) {
@@ -88,7 +90,7 @@ class Operator extends Model
                 : 0;
 
             //Insert with the latest rank
-            $this->squad()->attach($squadId, ['rank' => $newSquadMaxRank + 1]);
+            $this->squad()->attach($newSquad->id, ['rank' => $newSquadMaxRank + 1]);
         }
 
         return;

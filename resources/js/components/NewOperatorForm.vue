@@ -7,36 +7,57 @@ const squads = props.squads;
 const operations = props.operations;
 
 const form = useForm({
-    id: operator.id,
-    name: operator.name,
-    description: operator.description,
-    squad: operator.squad ?? '',
-    side: operator.side,
-    icon: null,
-    portrait: null,
-    operation_id: operator.operation.id ?? operations[0].id,
-    queerIdentities: operator.queerIdentities ?? [],
+    operationName: 'Operation Placeholder',
+    year: 10,
+    season: 3,
+    releaseDate: '2025-07-09',
+    name: 'Placeholder',
+    description: 'This is the placeholder operator for testing purposes',
+    squad: '',
+    side: 'Attack',
+    icon: undefined,
+    portrait: undefined,
+    queerIdentities: ['Aroace'],
 });
 
 function submit() {
     form.post(props.submitRoute);
 }
-
-console.log(`Submit Route = "${props.submitRoute}"`);
 </script>
 
 <template>
     <form id="operator-form" @submit.prevent="submit">
-        <input type="hidden" name="id" :value="operator.id" />
+        <div class="form-element">
+            <label for="operationName">Operation name</label>
+            <input type="text" id="operationName" v-model="form.operationName" />
+        </div>
+
+        <div class="row">
+            <div class="form-element">
+                <label for="year">Year</label>
+                <input id="year" type="number" v-model="form.year" />
+                <span class="error" v-if="form.errors.year">{{ form.errors.year }}</span>
+            </div>
+
+            <div class="form-element">
+                <label for="season">Season</label>
+                <select id="season" name="season" v-model="form.season">
+                    <option v-for="seasonCount in [1, 2, 3, 4]" :value="seasonCount">{{ seasonCount }}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-element">
+            <label for="releaseDate">Release date</label>
+            <input type="date" id="releaseDate" name="releaseDate" v-model="form.releaseDate" />
+        </div>
         <div class="form-element">
             <label for="name">Name</label>
             <input id="name" type="text" v-model="form.name" />
-            <div v-if="form.errors.name">{{ form.errors.name }}</div>
         </div>
         <div class="form-element">
             <label for="description">Description</label>
             <textarea id="description" name="description" rows="5" cols="44" v-model="form.description" />
-            <div v-if="form.errors.description">{{ form.errors.description }}</div>
         </div>
 
         <div class="form-element">
@@ -44,7 +65,6 @@ console.log(`Submit Route = "${props.submitRoute}"`);
             <select id="side" v-model="form.side">
                 <option v-for="side in ['Attack', 'Defense']" :value="side">{{ side }}</option>
             </select>
-            <div v-if="form.errors.side">{{ form.errors.side }}</div>
         </div>
 
         <div class="form-element">
@@ -53,15 +73,6 @@ console.log(`Submit Route = "${props.submitRoute}"`);
                 <option value="">None</option>
                 <option v-for="squad in squads" :value="squad">{{ squad }}</option>
             </select>
-            <div v-if="form.errors.squad">{{ form.errors.squad }}</div>
-        </div>
-
-        <div class="form-element">
-            <label for="operation_id">Operation</label>
-            <select id="operation_id" v-model="form.operation_id">
-                <option v-for="op in operations" :value="op.id">{{ op.name }}</option>
-            </select>
-            <div v-if="form.errors.operation_id">{{ form.errors.operation_id }}</div>
         </div>
 
         <div class="form-element">
@@ -69,7 +80,6 @@ console.log(`Submit Route = "${props.submitRoute}"`);
             <select id="queer-identities" multiple v-model="form.queerIdentities">
                 <option v-for="q in props.queerIdentities" :value="q">{{ q }}</option>
             </select>
-            <div v-if="form.errors.queerIdentities">{{ form.errors.queerIdentities }}</div>
         </div>
 
         <div class="form-element">

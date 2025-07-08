@@ -26,6 +26,8 @@ Route::prefix('operators')
         Route::post('/select', 'selectPost')->name('selectPost');
         Route::get('/edit/{operator}', 'edit')->name('edit');
         Route::post('/update/{operatorId}', 'update')->name('update');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/store', 'store')->name('store');
     });
 
 Route::prefix('squads')
@@ -51,5 +53,5 @@ Route::middleware('auth')
         Route::get('/dashboard', 'dashboard')->name('dashboard');
     });
 
-require __DIR__ . '/settings.php';
+// require __DIR__ . '/settings.php';
 require __DIR__ . '/auth.php';

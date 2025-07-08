@@ -19,7 +19,10 @@ class AdminController extends Controller
         }
 
         return Inertia::render('admin/Dashboard',
-            ['editRoute' => route('operator.selectForEditing')]
+            [
+                'editRoute' => route('operator.selectForEditing'),
+                'createRoute' => route('operator.create')
+            ]
         );
     }
 
