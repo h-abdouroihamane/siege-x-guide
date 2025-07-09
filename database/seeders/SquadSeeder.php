@@ -102,10 +102,16 @@ class SquadSeeder extends Seeder
         "Pulse",
         "Grim",
     ],
+    "Unaffiliated" => [
+        'Deimos',
+        'Striker',
+        'Sentry'
+    ]
 ];
 
+        $squad_count = 1;
         foreach ($data as $squad_name => $operators) {
-            $squad = Squad::create(['id' => Str::ulid()->toBase32(), 'name' => $squad_name]);
+            $squad = Squad::create(['id' => Str::ulid()->toBase32(), 'name' => $squad_name, 'rank' => $squad_count++]);
             $rank = 1;
 
             foreach ($operators as $op_name) {

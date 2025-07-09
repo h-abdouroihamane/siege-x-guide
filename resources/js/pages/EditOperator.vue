@@ -4,11 +4,6 @@ import Navbar from '@/components/Navbar.vue';
 import OperatorForm from '@/components/OperatorForm.vue';
 import { usePage } from '@inertiajs/vue3';
 const page = usePage();
-const operator = page.props.operator.data;
-const squads = page.props.squads;
-const operations = page.props.operations.data;
-const queerIdentities = page.props.queerIdentities;
-const submitRoute = page.props.submitRoute;
 </script>
 
 <template>
@@ -18,11 +13,12 @@ const submitRoute = page.props.submitRoute;
         <div id="container">
             <Logo text="Edit operator" />
             <OperatorForm
-                :operator="operator"
-                :squads="squads"
-                :operations="operations"
-                :queer-identities="queerIdentities"
-                :submit-route="submitRoute"
+                :operator="page.props.operator.data"
+                :squads="page.props.squads"
+                :operations="page.props.operations"
+                :queer-identities="page.props.queerIdentities"
+                :submit-route="page.props.submitRoute"
+                :roles="page.props.roles"
             />
         </div>
     </div>

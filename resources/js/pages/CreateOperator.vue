@@ -4,9 +4,6 @@ import Navbar from '@/components/Navbar.vue';
 import NewOperatorForm from '@/components/NewOperatorForm.vue';
 import { usePage } from '@inertiajs/vue3';
 const page = usePage();
-const squads = page.props.squads;
-const queerIdentities = page.props.queerIdentities;
-const submitRoute = page.props.submitRoute;
 </script>
 
 <template>
@@ -15,7 +12,12 @@ const submitRoute = page.props.submitRoute;
         <Navbar path="admin" />
         <div id="container">
             <Logo text="Add operator" />
-            <NewOperatorForm :squads="squads" :queer-identities="queerIdentities" :submit-route="submitRoute" />
+            <NewOperatorForm
+                :squads="page.props.squads"
+                :queer-identities="page.props.queerIdentities"
+                :submit-route="page.props.submitRoute"
+                :roles="page.props.roles"
+            />
         </div>
     </div>
 </template>

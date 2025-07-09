@@ -1,23 +1,22 @@
 <script setup>
 import { useForm, usePage } from '@inertiajs/vue3';
-const props = defineProps(['operator', 'squads', 'submitRoute', 'operations', 'queerIdentities']);
+const props = defineProps(['operator', 'squads', 'submitRoute', 'queerIdentities', 'roles']);
 const page = usePage();
 const operator = props.operator;
-const squads = props.squads;
-const operations = props.operations;
 
 const form = useForm({
-    operationName: 'Operation Placeholder',
-    year: 10,
-    season: 3,
-    releaseDate: '2025-07-09',
-    name: 'Placeholder',
-    description: 'This is the placeholder operator for testing purposes',
-    squad: '',
+    operationName: undefined,
+    year: undefined,
+    season: undefined,
+    releaseDate: undefined,
+    name: undefined,
+    description: undefined,
+    squad: 'Unaffiliated',
     side: 'Attack',
     icon: undefined,
     portrait: undefined,
-    queerIdentities: ['Aroace'],
+    queerIdentities: [],
+    roles: [],
 });
 
 function submit() {
@@ -36,7 +35,6 @@ function submit() {
             <div class="form-element">
                 <label for="year">Year</label>
                 <input id="year" type="number" v-model="form.year" />
-                <span class="error" v-if="form.errors.year">{{ form.errors.year }}</span>
             </div>
 
             <div class="form-element">
@@ -68,10 +66,16 @@ function submit() {
         </div>
 
         <div class="form-element">
+            <label for="roles">Role(s)</label>
+            <select id="roles" multiple v-model="form.roles">
+                <option v-for="r in props.roles" :value="r">{{ r }}</option>
+            </select>
+        </div>
+
+        <div class="form-element">
             <label for="squad">Squad</label>
             <select id="squad" v-model="form.squad">
-                <option value="">None</option>
-                <option v-for="squad in squads" :value="squad">{{ squad }}</option>
+                <option v-for="squad in props.squads" :value="squad">{{ squad }}</option>
             </select>
         </div>
 
@@ -94,10 +98,8 @@ function submit() {
 
         <button class="button-1" type="submit">Submit</button>
 
-        <div id="errors" v-if="form.errors">
-            <ul>
-                <li v-for="message in Object.values(form.errors)">{{ message }}</li>
-            </ul>
-        </div>
+        <ul id="errors" v-if="Object.values(form.errors).length > 0">
+            <li v-for="message in Object.values(form.errors)">{{ message }}</li>
+        </ul>
     </form>
 </template>

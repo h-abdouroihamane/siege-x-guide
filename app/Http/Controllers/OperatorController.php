@@ -6,6 +6,7 @@ use App\Http\Resources\OperationResource;
 use Illuminate\Http\Request;
 use App\Models\Operator;
 use App\Models\Operation;
+use App\Models\Role;
 use App\Models\QueerIdentity;
 use App\Models\Squad;
 use Inertia\Inertia;
@@ -57,11 +58,13 @@ class OperatorController extends Controller
         $squads = Squad::pluck('name')->sort();
         $operations = OperationResource::collection(Operation::orderByDesc('release_date')->get());
         $queerIdentities = QueerIdentity::pluck('name')->sort();
+        $roles = Role::pluck('name')->sort();
 
         return Inertia::render('EditOperator',
             ['operator'=> $operatorResource,
             'squads' => $squads,
             'operations' => $operations,
+            'roles' => $roles,
             'queerIdentities' => $queerIdentities,
             'submitRoute' => route('operator.update', ['operatorId' => $operator->id])
         ]);
@@ -89,6 +92,13 @@ class OperatorController extends Controller
 
         $operator->queerIdentities()->sync($queerIds);
 
+        $roles = $request->array('roles') ?? [];
+        $roleIds = count($roles) > 0
+            ? Role::whereIn('name', $roles)->pluck('id')
+            : [];
+
+        $operator->roles()->sync($roleIds);
+
         $filename = $operator->getCleanName() . '.png';
 
         if ($request->hasFile('icon')) {
@@ -99,17 +109,18 @@ class OperatorController extends Controller
             $request->file('portrait')->storeAs('operatorPortraits', $filename, 'public');
         }
 
-        return;
+        return to_route('admin.dashboard')->with('message', "Operator $operator->name successfully edited !");
     }
 
     public function create() {
         $squads = Squad::pluck('name')->sort();
         $queerIdentities = QueerIdentity::pluck('name')->sort();
-
+        $roles = Role::pluck('name')->sort();
         return Inertia::render('CreateOperator',
             [
             'squads' => $squads,
             'queerIdentities' => $queerIdentities,
+            'roles' => $roles,
             'submitRoute' => route('operator.store')
         ]);
     }
@@ -152,6 +163,13 @@ class OperatorController extends Controller
 
         $operator->queerIdentities()->sync($queerIds);
 
+        $roles = $request->array('roles') ?? [];
+        $roleIds = count($roles) > 0
+            ? Role::whereIn('name', $roles)->pluck('id')
+            : [];
+
+        $operator->roles()->sync($roleIds);
+
         $filename = $operator->getCleanName() . '.png';
 
         if ($request->hasFile('icon')) {
@@ -162,7 +180,7 @@ class OperatorController extends Controller
             $request->file('portrait')->storeAs('operatorPortraits', $filename, 'public');
         }
 
-        return;
+        return to_route('admin.dashboard')->with('message', "Operator $operator->name successfully created !");
     }
 
 }

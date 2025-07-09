@@ -10,20 +10,10 @@ use Inertia\Inertia;
 
 class SquadController extends Controller
 {
-    public function getUnaffiliatedOperators() {
-        $unaffil = [];
-
-        foreach(Operator::doesntHave('squad')->orderBy('id', 'asc')->get() as $op) {
-            $unaffil[] = $op->name;
-        }
-
-        return $unaffil;
-    }
-
     public function getAll()  {
         $squads = [];
 
-        foreach (Squad::with('operators:id,name')->get() as $sq) {
+        foreach (Squad::with('operators:id,name')->orderBy('rank')->get() as $sq) {
             $operators = [];
 
             foreach($sq->operators as $op) {
@@ -32,8 +22,6 @@ class SquadController extends Controller
 
             $squads[$sq->name] = $operators;
         }
-
-        $squads['Unaffiliated'] = $this->getUnaffiliatedOperators();
 
         return $squads;
     }

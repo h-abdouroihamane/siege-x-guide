@@ -29,9 +29,11 @@ class CreateOperatorRequest extends FormRequest
             'name' => 'required|string|unique:operators,name',
             'description' => 'required|string',
             'side' => 'required|string|in:Attack,Defense',
-            'squad' => 'required|string',
+            'squad' => 'required|string|exists:squads,name',
             'queerIdentities' => 'sometimes|array',
             'queerIdentities.*' => 'string|exists:queer_identities,name',
+            'roles' => 'sometimes|array',
+            'roles.*' => 'string|exists:roles,name',
             'portrait' => 'required|image|mimes:png|dimensions:max_width=300,max_height=500',
             'icon' => 'required|image|mimes:png|dimensions:max_width=250,max_height=250'
         ];

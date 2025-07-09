@@ -5,7 +5,7 @@
         <div id="container">
             <Logo text="Admin dashboard" />
 
-            <span id="message">Operator OperatorName successfully edited</span>
+            <span id="message" v-if="page.props.message">{{ page.props.message }}</span>
             <div id="options">
                 <a v-for="p in paths" :href="p.url">
                     <div class="card option">
@@ -23,7 +23,6 @@ import { usePage } from '@inertiajs/vue3';
 import Logo from '../../components/Logo.vue';
 import Navbar from '../../components/Navbar.vue';
 const page = usePage();
-const message = page.props.message ?? null;
 
 const paths = [
     { label: 'New operator', url: page.props.createRoute, image: '/flores.jpg' },
@@ -48,5 +47,11 @@ const paths = [
 
 #options a {
     all: unset;
+}
+
+#options {
+    display: flex;
+    justify-content: space-evenly;
+    width: 500px;
 }
 </style>
