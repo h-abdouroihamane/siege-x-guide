@@ -2,12 +2,15 @@
 import Logo from '@/components/Logo.vue';
 import Navbar from '@/components/Navbar.vue';
 import OperatorForm from '@/components/OperatorForm.vue';
-import { usePage } from '@inertiajs/vue3';
+import { Head, usePage } from '@inertiajs/vue3';
 const page = usePage();
 </script>
 
 <template>
     <div>
+        <Head>
+            <title>Edit Operator</title>
+        </Head>
         <div id="background-image" />
         <Navbar path="admin" />
         <div id="container">

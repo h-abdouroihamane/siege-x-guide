@@ -1,4 +1,7 @@
 <template>
+    <Head>
+        <title>Admin login</title>
+    </Head>
     <div id="background-image" />
     <Navbar path="admin" />
     <div id="container">
@@ -39,7 +42,7 @@
 import Navbar from '../../components/Navbar.vue';
 const publicPath = import.meta.env.BASE_URL;
 
-import { useForm } from '@inertiajs/vue3';
+import { Head, useForm } from '@inertiajs/vue3';
 
 const form = useForm({
     email: null,

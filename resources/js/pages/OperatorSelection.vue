@@ -4,7 +4,7 @@ import { usePage } from '@inertiajs/vue3';
 const page = usePage();
 const operators = page.props.operators;
 
-import { useForm } from '@inertiajs/vue3';
+import { Head, useForm } from '@inertiajs/vue3';
 
 const form = useForm({
     operatorName: operators[0],
@@ -13,6 +13,9 @@ const form = useForm({
 
 <template>
     <div>
+        <Head>
+            <title>Select Operator</title>
+        </Head>
         <div id="background-image" />
         <Navbar path="admin" />
         <div id="container">

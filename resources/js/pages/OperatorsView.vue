@@ -3,7 +3,7 @@ import Description from '@/components/Description.vue';
 import Logo from '@/components/Logo.vue';
 import OperatorCard from '@/components/OperatorCard.vue';
 import Sidebar from '@/components/Sidebar.vue';
-import { usePage } from '@inertiajs/vue3';
+import { Head, usePage } from '@inertiajs/vue3';
 import { ref } from 'vue';
 import Navbar from '../components/Navbar.vue';
 import { Operator } from '../scripts/operator.ts';
@@ -22,8 +22,8 @@ const allOperators: Operator[] = page.props.operators.data.map(
             op.operation.release_date,
             op.roles,
             op.squad,
-            op.queerIdentities
-        )
+            op.queerIdentities,
+        ),
 );
 
 let operators = ref([...allOperators]);
@@ -39,7 +39,7 @@ const placeholderOperator = new Operator(
     -1,
     'opPlaceHolder',
     [],
-    'placeholderSquad'
+    'placeholderSquad',
 );
 const selectedOperator = ref(placeholderOperator);
 
@@ -97,6 +97,13 @@ filterAndSort();
 </script>
 <template>
     <div>
+        <Head>
+            <title>Operators</title>
+            <meta
+                name="description"
+                content="Page listing every operator from Rainbow Six Siege X and describing what their ability and/or gadget does"
+            />
+        </Head>
         <div id="background-image" />
         <Navbar path="operators" />
         <div id="container">

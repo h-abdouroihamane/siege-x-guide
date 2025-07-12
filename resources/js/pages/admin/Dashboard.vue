@@ -1,5 +1,8 @@
 <template>
     <div>
+        <Head>
+            <title>Admin dashboard</title>
+        </Head>
         <div id="background-image" />
         <Navbar path="admin" />
         <div id="container">
@@ -19,7 +22,7 @@
 </template>
 
 <script setup>
-import { usePage } from '@inertiajs/vue3';
+import { Head, usePage } from '@inertiajs/vue3';
 import Logo from '../../components/Logo.vue';
 import Navbar from '../../components/Navbar.vue';
 const page = usePage();
