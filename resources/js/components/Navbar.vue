@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 const props = defineProps(['path']);
+const inLocalEnv = process.env.NODE_ENV === 'development';
 
 const activeRoute = {
     operators: props.path === 'operators',
@@ -31,7 +32,7 @@ const publicPath = import.meta.env.BASE_URL;
             <li>
                 <a href="/squads" :class="{ active: activeRoute.squads }">Squads</a>
             </li>
-            <li><a href="/admin/dashboard" :class="{ active: activeRoute.admin }">Admin panel</a></li>
+            <li v-if="inLocalEnv"><a href="/admin/dashboard" :class="{ active: activeRoute.admin }">Admin panel</a></li>
         </ul>
         <div class="hamburger" :class="{ 'hamburger-active': hamburgerActive }" @click="toggleNav">
             <span class="line"></span>
@@ -47,7 +48,7 @@ const publicPath = import.meta.env.BASE_URL;
             <li>
                 <a href="/squads" :class="{ active: activeRoute.squads }">Squads</a>
             </li>
-            <li><a href="/admin/dashboard" :class="{ active: activeRoute.admin }">Admin panel</a></li>
+            <li v-if="inLocalEnv"><a href="/admin/dashboard" :class="{ active: activeRoute.admin }">Admin panel</a></li>
         </ul>
     </div>
 </template>
