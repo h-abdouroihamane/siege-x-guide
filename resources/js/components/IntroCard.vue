@@ -10,14 +10,15 @@ const mains = {
     defense: ['Kaid', 'Mute', 'Wamai'],
 };
 
-const getIcon = (name) => `operatorIcons/${name.toLowerCase()}.png`;
+const getImage = (path) => ((process.env.NODE_ENV || 'development') === 'development' ? path : `/build/${path}`);
+const getIcon = (name) => getImage(`operatorIcons/${name.toLowerCase()}.png`);
 const getAlt = (name) => `${name}'s logo`;
 </script>
 
 <template>
     <div id="intro-card">
         <div id="header">
-            <img id="profile-picture" src="/profilePicture.png" alt="Me wearing a cosplay of Marcus Holloway from Watch_Dogs 2" />
+            <img id="profile-picture" :src="getImage('profilePicture.png')" alt="Me wearing a cosplay of Marcus Holloway from Watch_Dogs 2" />
             <p class="title">
                 Hakim <span class="italic">(aka <span id="username">alsagone</span>)</span>
             </p>
