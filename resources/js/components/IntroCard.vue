@@ -17,7 +17,7 @@ const getAlt = (name) => `${name}'s logo`;
 <template>
     <div id="intro-card">
         <div id="header">
-            <img id="profile-picture" :src="getImage('profilePicture.png')" alt="Me wearing a cosplay of Marcus Holloway from Watch_Dogs 2" />
+            <img id="profile-picture" src="/build/profilePicture.png" alt="Me wearing a cosplay of Marcus Holloway from Watch_Dogs 2" />
             <p class="title">
                 Hakim <span class="italic">(aka <span id="username">alsagone</span>)</span>
             </p>
