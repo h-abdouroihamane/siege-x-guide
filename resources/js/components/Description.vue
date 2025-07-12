@@ -104,7 +104,7 @@ const getSide = () => {
     z-index: 2;
     background-color: rgba(1, 1, 1, 0.95);
     color: #fefefe;
-    min-height: 210px;
+    min-height: 190px;
     display: grid;
     grid-template-columns: 10vw 90vw;
     border-top: 1px solid #ff4b3c;
