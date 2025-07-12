@@ -1,8 +1,8 @@
 <script setup>
 const socials = [
-    { name: 'Bluesky', url: 'https://bsky.app/profile/alsagone.bsky.social', img: 'bluesky.svg', id: 'bluesky' },
-    { name: 'Twitch', url: 'https://twitch.tv/alsagone', img: 'twitch.svg', id: 'twitch' },
-    { name: 'Ko-Fi', url: 'https://ko-fi.com/alsagone', img: 'kofi.png', id: 'kofi' },
+    { name: 'Bluesky', url: 'https://bsky.app/profile/alsagone.bsky.social', img: '/build/bluesky.svg', id: 'bluesky' },
+    { name: 'Twitch', url: 'https://twitch.tv/alsagone', img: '/build/twitch.svg', id: 'twitch' },
+    { name: 'Ko-Fi', url: 'https://ko-fi.com/alsagone', img: '/build/kofi.png', id: 'kofi' },
 ];
 
 const mains = {
@@ -10,8 +10,7 @@ const mains = {
     defense: ['Kaid', 'Mute', 'Wamai'],
 };
 
-const getImage = (path) => ((process.env.NODE_ENV || 'development') === 'development' ? path : `/build/${path}`);
-const getIcon = (name) => getImage(`operatorIcons/${name.toLowerCase()}.png`);
+const getIcon = (name) => `/build/operatorIcons/${name.toLowerCase()}.png`;
 const getAlt = (name) => `${name}'s logo`;
 </script>
 
