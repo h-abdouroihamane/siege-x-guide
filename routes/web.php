@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\OperatorController;
 use App\Http\Controllers\SquadController;
@@ -53,5 +54,11 @@ Route::middleware('auth')
         Route::get('/dashboard', 'dashboard')->name('dashboard');
     });
 
+Route::controller(AboutController::class)
+    ->name('about.')
+    ->prefix('about')
+    ->group(function() {
+        Route::get('/', 'index')->name('index');
+});
 // require __DIR__ . '/settings.php';
  require __DIR__ . '/auth.php';

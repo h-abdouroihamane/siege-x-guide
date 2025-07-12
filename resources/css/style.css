@@ -56,22 +56,3 @@ body::-webkit-scrollbar-thumb {
     text-align: center;
     align-items: center;
 }
-
-a {
-    text-decoration: none;
-    color: #b0bac6;
-    font-size: 95%;
-    font-weight: 400;
-    padding: 4px 8px;
-    border-radius: 5px;
-    transition: all 0.3s ease-in-out;
-}
-
-a:not(.active):hover {
-    background-color: #ff4b3c;
-    color: #0c0f16;
-}
-
-a.active {
-    color: #ff4b3c;
-}
