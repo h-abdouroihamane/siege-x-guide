@@ -1,0 +1,41 @@
+.operator-logos {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.small-icon img {
+    width: 50px;
+    height: auto;
+}
+
+.role .name {
+    font-family: 'GT America', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #ff4b3c;
+    font-size: 23px;
+}
+
+.role {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.name,
+.definition {
+    margin: 0 0 10px 0;
+}
+
+hr {
+    width: 50%;
+    min-width: 300px;
+    color: rgba(254, 254, 254, 0.3);
+}
+
+#note {
+    font-size: 15px;
+}
