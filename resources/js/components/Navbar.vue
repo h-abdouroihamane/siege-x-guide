@@ -8,6 +8,7 @@ const activeRoute = {
     squads: props.path === 'squads',
     admin: props.path === 'admin',
     about: props.path === 'about',
+    vocabulary: props.path === 'vocabulary',
 };
 
 let hamburgerActive = ref(false);
@@ -33,6 +34,7 @@ const publicPath = import.meta.env.BASE_URL;
             <li>
                 <a href="/squads" :class="{ active: activeRoute.squads }">Squads</a>
             </li>
+            <li><a href="/vocabulary" :class="{ active: activeRoute.vocabulary }">Vocabulary</a></li>
             <li><a href="/about" :class="{ active: activeRoute.about }">About me</a></li>
             <li v-if="inLocalEnv"><a href="/admin/dashboard" :class="{ active: activeRoute.admin }">Admin panel</a></li>
         </ul>
@@ -50,6 +52,7 @@ const publicPath = import.meta.env.BASE_URL;
             <li>
                 <a href="/squads" :class="{ active: activeRoute.squads }">Squads</a>
             </li>
+            <li><a href="/vocabulary" :class="{ active: activeRoute.vocabulary }">Vocabulary</a></li>
             <li><a href="/about" :class="{ active: activeRoute.about }">About me</a></li>
             <li v-if="inLocalEnv"><a href="/admin/dashboard" :class="{ active: activeRoute.admin }">Admin panel</a></li>
         </ul>
