@@ -181,9 +181,9 @@ class RoleSeeder extends Seeder
 
         $definitions = [
             "Anti-Entry" => "Defenders whose primary task is to delay the attackers' push with their gadget",
-            "Anti-Gadget" => "Operators who can destroy the other team's gadgets",
-            "Breach" => "Attackers whose main focus is to create holes in reinforced or soft surfaces",
-            "Crowd control" => "Defenders whose sole existence requires the attacking team to focus them, making them extremely efficient at controlling where the attackers push will come from",
+            "Anti-Gadget" => "Operators who can destroy/disable/deny the other team's gadgets",
+            "Breach" => "Attackers whose main focus is to create holes in reinforced or soft surfaces for more lines of sight on the objective",
+            "Crowd control" => "Defenders whose gadget/ability directly or indirectly influences where the attackers can push",
             "Front line" => "Attackers that will lead the push and engage defenders first",
             "Intel" => "Operators specialized in getting the position of the enemy's team operators and relaying that intel to their teammates",
             "Map control" => "Attackers whose job is to take over a key part of the map and prevent defenders from taking it back",
