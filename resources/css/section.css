@@ -1,0 +1,31 @@
+#section-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.section {
+    width: 90%;
+    height: max-content;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow:
+        0 3px 6px rgba(0, 0, 0, 0.16),
+        0 3px 6px rgba(0, 0, 0, 0.23);
+    background-color: rgba(1, 1, 1, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    color: #fefefe;
+}
+
+.section .title {
+    color: #ff4b3c;
+    text-transform: uppercase;
+    letter-spacing: 0.2ch;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}

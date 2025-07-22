@@ -20,25 +20,22 @@ const data = page.props.roles.sort((a, b) => a.name > b.name);
         <Navbar path="vocabulary" />
         <div id="container">
             <Logo text="Vocabulary" />
-
-            <div class="section">
-                <span class="title">Roles</span>
-                <div id="role-container">
-                    <div class="role" v-for="(role, index) in data">
-                        <span class="name">{{ role.name }}</span>
-                        <span class="definition">{{ role.definition }}</span>
-                        <div class="operator-logos">
-                            <div v-for="(operatorName, index) in role.operators" :key="index" class="small-icon">
-                                <img :src="getOperatorIcon(operatorName)" :alt="operatorName" />
-                                <p class="operator-name">{{ operatorName }}</p>
+            <div id="section-container" class="vocabulary">
+                <div class="section">
+                    <span class="title">Roles</span>
+                    <div id="role-container">
+                        <div class="role" v-for="(role, index) in data">
+                            <span class="name">{{ role.name }}</span>
+                            <span class="definition">{{ role.definition }}</span>
+                            <div class="operator-logos">
+                                <div v-for="(operatorName, index) in role.operators" :key="index" class="small-icon">
+                                    <img :src="getOperatorIcon(operatorName)" :alt="operatorName" />
+                                    <p class="operator-name">{{ operatorName }}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <p id="note">
-                    Small note: Even though this classification comes from the game itself, it's not set in stone and some operators actually overlap
-                    with several roles in specific situations.
-                </p>
             </div>
         </div>
     </div>
@@ -46,6 +43,6 @@ const data = page.props.roles.sort((a, b) => a.name > b.name);
 
 <style lang="scss">
 @use '../../css/squads.css';
-@use '../../css/about.css';
+@use '../../css/section.css';
 @use '../../css/vocabulary.css';
 </style>

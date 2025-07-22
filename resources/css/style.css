@@ -56,3 +56,11 @@ body::-webkit-scrollbar-thumb {
     text-align: center;
     align-items: center;
 }
+
+a {
+    color: #ff4b3c;
+}
+
+a:hover {
+    color: #3cf0ff;
+}

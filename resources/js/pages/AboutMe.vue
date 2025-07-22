@@ -93,4 +93,5 @@ const urls = {
 
 <style lang="scss">
 @use '../../css/about.css';
+@use '../../css/section.css';
 </style>

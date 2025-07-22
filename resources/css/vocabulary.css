@@ -60,6 +60,14 @@ hr {
     column-gap: 10px;
 }
 
+#section-container.vocabulary {
+    margin: 0 0 30px 0;
+}
+#section-container.vocabulary .section {
+    width: unset;
+    padding: 0 20px;
+}
+
 @media screen and (max-width: 790px) {
     #role-container {
         display: flex;
