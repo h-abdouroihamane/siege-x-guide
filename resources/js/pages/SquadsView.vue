@@ -20,7 +20,9 @@ const getAltText = () => {
         text += operators.join(', ') + '\n\n';
     }
 
-    return text.trimEnd();
+    text += 'Source: https://siege-x-guide.alsagone.ovh/squads';
+
+    return text;
 };
 
 const copyAltText = () => {
@@ -30,7 +32,7 @@ const copyAltText = () => {
         },
         () => {
             alert('Failed to copy :(');
-        },
+        }
     );
 };
 
@@ -79,7 +81,7 @@ const toggleScreenshotMode = () => {
                     </tbody>
                 </table>
                 <div id="credit" :class="{ screenshot: !screenshotMode }">
-                    Crediting myself so my friends don't yell at me for not doing so: made by alsagone.bsky.social :)
+                    <a href="#" title="Siege X Guide - Squads section">https://siege-x-guide.alsagone.ovh/squads</a>
                 </div>
 
                 <button v-if="screenshotMode" class="button-1" role="button" @click="toggleScreenshotMode()">
