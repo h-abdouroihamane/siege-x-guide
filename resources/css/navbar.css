@@ -17,7 +17,7 @@ nav .logo {
 nav .logo img {
     height: 25px;
     width: auto;
-    margin-right: 10px;
+    margin: 5px;
 }
 nav .logo h1 {
     font-size: 1.1rem;
@@ -127,6 +127,13 @@ nav a:not(.active):hover,
 nav a.active,
 .menubar a.active {
     color: #ff4b3c;
+}
+
+#home-link {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
 }
 
 @media screen and (max-width: 790px) {

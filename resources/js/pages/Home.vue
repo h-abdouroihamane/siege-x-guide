@@ -1,0 +1,65 @@
+<script setup>
+import Logo from '@/components/Logo.vue';
+import Navbar from '@/components/Navbar.vue';
+import { Head, usePage } from '@inertiajs/vue3';
+
+const page = usePage();
+
+const paths = [
+    {
+        url: '/operators',
+        className: 'operators',
+        title: 'Operators',
+        description: "Learn what every operator's gadget/ability does",
+    },
+    {
+        url: '/squads',
+        className: 'squads',
+        title: 'Squads',
+        description: 'R6 lore enthusiast? Check the squads composition according to the latest version of the lore',
+    },
+    {
+        url: '/vocabulary',
+        className: 'vocabulary',
+        title: 'Vocabulary',
+        description: 'Familiarize yourself with the terms commonly used in the game',
+    },
+    {
+        url: '/about',
+        className: 'about',
+        title: 'About me',
+        description: 'In case you are curious and want to check out my other projects',
+    },
+];
+</script>
+
+<template>
+    <div>
+        <Head>
+            <title>Home</title>
+        </Head>
+        <div id="background-image" />
+        <Navbar path="home" />
+        <div id="container">
+            <Logo text="Home" />
+
+            <div id="home-card-container">
+                <a class="card-link" v-for="p in paths" :href="p.url">
+                    <div :class="['home-card', p.className]">
+                        <div class="overlay" />
+                        <span class="title">{{ p.title }}</span>
+
+                        <div class="card-bottom">
+                            <span class="gradient"></span>
+                            <span class="description">{{ p.description }}</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</template>
+
+<style lang="scss">
+@use '../../css/home-card.css';
+</style>

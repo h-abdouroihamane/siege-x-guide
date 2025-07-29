@@ -25,7 +25,9 @@ const publicPath = import.meta.env.BASE_URL;
 <template>
     <nav>
         <div class="logo">
-            <img :src="`${publicPath}siege-x-icon.png`" alt="logo" />
+            <a href="/" id="home-link" title="Home">
+                <img :src="`${publicPath}siege-x-icon.png`" alt="logo" />
+            </a>
         </div>
         <ul>
             <li>
