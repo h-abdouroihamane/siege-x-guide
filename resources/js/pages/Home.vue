@@ -16,7 +16,7 @@ const paths = [
         url: '/squads',
         className: 'squads',
         title: 'Squads',
-        description: 'R6 lore enthusiast? Check the squads composition according to the latest version of the lore',
+        description: 'Check the squads composition according to the latest update of the lore',
     },
     {
         url: '/vocabulary',
@@ -28,7 +28,7 @@ const paths = [
         url: '/about',
         className: 'about',
         title: 'About me',
-        description: 'In case you are curious and want to check out my other projects',
+        description: 'Learn about me and check out my other projects! :)',
     },
 ];
 </script>
