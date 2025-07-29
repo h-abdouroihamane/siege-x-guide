@@ -4,6 +4,7 @@ const props = defineProps(['path']);
 const inLocalEnv = process.env.NODE_ENV === 'development';
 
 const activeRoute = {
+    home: props.path === 'home',
     operators: props.path === 'operators',
     squads: props.path === 'squads',
     admin: props.path === 'admin',
@@ -25,11 +26,13 @@ const publicPath = import.meta.env.BASE_URL;
 <template>
     <nav>
         <div class="logo">
-            <a href="/" id="home-link" title="Home">
-                <img :src="`${publicPath}siege-x-icon.png`" alt="logo" />
-            </a>
+            <img :src="`${publicPath}siege-x-icon.png`" alt="logo" />
         </div>
         <ul>
+            <li>
+                <a href="/" :class="{ active: activeRoute.home }">Home</a>
+            </li>
+
             <li>
                 <a href="/operators" :class="{ active: activeRoute.operators }">Operators</a>
             </li>
@@ -48,6 +51,10 @@ const publicPath = import.meta.env.BASE_URL;
     </nav>
     <div class="menubar" :class="{ 'menubar-active': menubarActive }">
         <ul>
+            <li>
+                <a href="/" :class="{ active: activeRoute.home }">Home</a>
+            </li>
+
             <li>
                 <a href="/operators" :class="{ active: activeRoute.operators }">Operators</a>
             </li>
