@@ -124,7 +124,8 @@
     align-items: center;
     width: 60vw;
     max-width: 1400px;
-    height: 60vh;
+    height: max-content;
+    margin: 40px 0;
 }
 
 .overlay {
