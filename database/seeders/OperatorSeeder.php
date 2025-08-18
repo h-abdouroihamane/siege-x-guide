@@ -685,6 +685,14 @@ class OperatorSeeder extends Seeder
                 "side" => "Attack",
                 "operation_id" => "Y2S3",
             ],
+            [
+                "name" => "Denari",
+                "description" => "His gadget lets him setup a trip laser network that damages and slows down enemies passing through it",
+                "year" => 10,
+                "season" => 3,
+                "side" => "Defense",
+                "operation_id" => "Y10S3"
+            ]
         ];
         $operators = [];
 

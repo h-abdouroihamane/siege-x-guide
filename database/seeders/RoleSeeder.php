@@ -128,6 +128,7 @@ class RoleSeeder extends Seeder
                 'Azami',
                 'Bandit',
                 'Castle',
+                'Denari',
                 'Frost',
                 'Goyo',
                 'Kaid',
@@ -169,6 +170,7 @@ class RoleSeeder extends Seeder
             'Crowd control' => [
                 'Caveira',
                 'Clash',
+                'Denari',
                 'Echo',
                 'Ela',
                 'Fenrir',

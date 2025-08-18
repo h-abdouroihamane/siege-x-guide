@@ -101,6 +101,7 @@ class SquadSeeder extends Seeder
         "IQ",
         "Pulse",
         "Grim",
+        "Denari",
     ],
     "Unaffiliated" => [
         'Deimos',

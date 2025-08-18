@@ -50,6 +50,7 @@ class OperationSeeder extends Seeder
             'Operation Collision Point',
             'Operation Prep Phase',
             'Operation Daybreak',
+            'Operation High Stakes'
         ];
 
         // Special season for game launch
@@ -101,7 +102,8 @@ class OperationSeeder extends Seeder
             "2024-09-01",
             "2024-12-01",
             "2025-03-01",
-            "2025-06-01"
+            "2025-06-01",
+            "2025-09-02"
         ];
 
         $year = 1;
