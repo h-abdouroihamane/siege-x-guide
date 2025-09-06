@@ -58,7 +58,7 @@ class SecondaryGadgetSeeder extends Seeder
                 "Rauora",
                 "Striker"
             ],
-            "Flash Grenade" => [
+            "Stun Grenade" => [
                 "Sledge",
                 "Thermite",
                 "Buck",
@@ -124,7 +124,7 @@ class SecondaryGadgetSeeder extends Seeder
                 "Deimos",
                 "Striker"
             ],
-            "Impact EMP" => [
+            "Impact EMP Grenade" => [
                 "Sledge",
                 "Montagne",
                 "Capitão",
