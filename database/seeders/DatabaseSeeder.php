@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
             OperatorSeeder::class,
             RoleSeeder::class,
             SquadSeeder::class,
-            QueerIdentitySeeder::class
+            QueerIdentitySeeder::class,
+            SecondaryGadgetSeeder::class
         ]);
     }
 }

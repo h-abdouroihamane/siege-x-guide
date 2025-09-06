@@ -54,6 +54,10 @@ class Operator extends Model
         return $this->belongsToMany(QueerIdentity::class, 'operator_queer_identity', 'operator_id', 'queer_identity_id');
     }
 
+    public function secondaryGadgets() {
+        return $this->belongsToMany(SecondaryGadget::class, 'operator_secondary_gadget', 'operator_id', 'secondary_gadget_id');
+    }
+
     public function getCleanName() {
         return iconv("UTF-8", "ASCII//TRANSLIT", strtolower($this->name));
     }
