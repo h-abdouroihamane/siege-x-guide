@@ -62,6 +62,28 @@ class Operator extends Model
         return iconv("UTF-8", "ASCII//TRANSLIT", strtolower($this->name));
     }
 
+    public function compareReleaseDate(Operator $otherOperator, bool $reverse = false) {
+        $r = $reverse ? -1 : 1;
+
+        if ($this->year !== $otherOperator->year) {
+            return $r * ($this->year < $otherOperator->year ? -1 : 1);
+        }
+
+        if ($this->season !== $otherOperator->season) {
+            return $r * ($this->season < $otherOperator->season ? -1 : 1);
+        }
+
+        if ($this->side !== $otherOperator->side) {
+            return $this->side === 'Attack' ? -1 : 1;
+        }
+
+        if ($this->name === $otherOperator->name) {
+            return 0;
+        }
+
+        return $this->name < $otherOperator->name ? -1 : 1;
+    }
+
     public function addToSquad(string $squadName) {
         $newSquad = Squad::firstWhere('name', $squadName);
 

@@ -120,7 +120,7 @@ const toggleScreenshotMode = () => {
 </template>
 
 <style lang="scss" scoped>
-@use '../../css/squads.css';
+@use '../../css/table.css';
 @use '../../css/button.css';
 #main-content {
     max-width: 80vw;

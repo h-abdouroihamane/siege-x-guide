@@ -96,3 +96,20 @@
 #credit {
     margin: 10px 0 0 0;
 }
+
+.gadget-row:nth-child(even) {
+    background-color: rgba(255, 75, 60, 0.3);
+}
+
+.gadget-logo {
+    width: auto;
+    max-height: 50px;
+}
+
+#gadget-table .operator-container {
+    justify-content: left;
+}
+
+#gadget-table .operator-icon {
+    width: 50px;
+}
