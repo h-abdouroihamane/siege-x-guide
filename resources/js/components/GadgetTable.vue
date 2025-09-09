@@ -6,7 +6,7 @@ const publicPath = import.meta.env.BASE_URL;
 
 const getGadgetLogo = (gadgetName) => {
     const name = gadgetName.toLowerCase().replace(/ +/g, '-');
-    return `${publicPath}build/secondaryGadgets/${name}.png`;
+    return `${publicPath}secondaryGadgets/${name}.png`;
 };
 
 const getOperatorIcon = (operatorName) => `${publicPath}operatorIcons/${normalize(operatorName)}.png`;
