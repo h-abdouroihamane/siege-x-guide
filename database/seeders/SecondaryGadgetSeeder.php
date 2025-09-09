@@ -245,7 +245,13 @@ class SecondaryGadgetSeeder extends Seeder
         ];
 
         foreach ($gadgets as $gadget_name => $operators) {
-            $g = SecondaryGadget::create(['id' => Str::ulid()->toBase32(), 'name' => $gadget_name]);
+            $firstOperator = Operator::firstWhere('name', $operators[0]);
+
+            $g = SecondaryGadget::create([
+                'id' => Str::ulid()->toBase32(),
+                'name' => $gadget_name,
+                'side' => $firstOperator->side
+            ]);
 
             foreach ($operators as $op_name) {
                 $operator = Operator::firstWhere('name', $op_name);

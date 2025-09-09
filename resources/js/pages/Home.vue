@@ -13,6 +13,12 @@ const paths = [
         description: "Learn what every operator's gadget/ability does",
     },
     {
+        url: '/secondary-gadgets',
+        className: 'secondary-gadgets',
+        title: 'Secondary gadgets',
+        description: 'Check which secondary gadgets are available to operators',
+    },
+    {
         url: '/squads',
         className: 'squads',
         title: 'Squads',

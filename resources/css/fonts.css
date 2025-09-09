@@ -21,3 +21,27 @@
     font-style: normal;
     font-display: swap;
 }
+
+@font-face {
+    font-family: 'Simplon Mono';
+    src: url('fonts/SimplonMono-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Simplon Mono';
+    src: url('fonts/SimplonMono-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Simplon Mono';
+    src: url('fonts/SimplonMono-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}

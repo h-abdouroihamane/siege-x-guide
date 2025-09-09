@@ -45,3 +45,111 @@
 .button-1 path {
     fill: #010101;
 }
+
+.radio-button {
+    font-family: 'GT America', sans-serif;
+    font-weight: bold;
+    min-width: 132px;
+    height: 100%;
+    width: 100%;
+    appearance: none;
+    border: 1px solid rgba(27, 31, 35, 0.15);
+    border-radius: 6px;
+    box-shadow: rgba(27, 31, 35, 0.1) 0 1px 0;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    padding: 6px 16px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+    white-space: nowrap;
+    transition: 0.3s all ease;
+    font-size: 15px;
+}
+
+.radio-button.left {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.radio-button.right {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.radio-button.active.attackers,
+.radio-button:not(.active):hover.attackers {
+    background-color: #d9610f;
+    box-shadow: rgba(217, 97, 15, 0.2) 0 1px 0 inset;
+}
+.radio-button.active.defenders,
+.radio-button:not(.active):hover.defenders {
+    background-color: #0e87c8;
+    box-shadow: rgba(14, 135, 200, 0.2) 0 1px 0 inset;
+}
+
+.radio-button.active.sort,
+.radio-button:not(.active):hover.sort {
+    background-color: #ff4b3c;
+    box-shadow: rgba(254, 61, 44, 0.2) 0 1px 0 inset;
+}
+
+.radio-button:not(.active) {
+    color: rgba(254, 254, 254, 0.4);
+}
+
+.radio-button:not(.active) path {
+    fill: rgba(254, 254, 254, 0.4);
+}
+
+.radio-button:not(.active).attackers {
+    border-color: rgba(217, 97, 15, 0.1);
+    background-color: rgba(217, 97, 15, 0.3);
+}
+.radio-button:not(.active).defenders {
+    border-color: rgba(14, 135, 200, 0.1);
+    background-color: rgba(14, 135, 200, 0.3);
+}
+
+.radio-button:not(.active).sort {
+    border-color: rgba(254, 61, 44, 0.1);
+    background-color: rgba(254, 61, 44, 0.3);
+}
+
+.radio-button:focus:not(:focus-visible):not(.focus-visible) {
+    box-shadow: none;
+    outline: none;
+}
+
+.radio-button:not(.active):hover.attackers {
+    background-color: #d9610f;
+}
+.radio-button:not(.active):hover.defenders {
+    background-color: #0e87c8;
+}
+
+.radio-button:focus {
+    outline: none;
+}
+.radio-button:focus.attackers {
+    box-shadow: rgba(217, 97, 15, 0.4) 0 0 0 3px;
+}
+.radio-button:focus.defenders {
+    box-shadow: rgba(14, 135, 200, 0.4) 0 0 0 3px;
+}
+
+.radio-button svg {
+    height: 20px;
+    width: 20px;
+    margin: 0px 6px 0 0;
+}
+
+.radio-button path {
+    fill: #fefefe;
+}

@@ -66,6 +66,10 @@
     background-image: url('recruits.jpg');
 }
 
+.home-card.secondary-gadgets {
+    background-image: url('zoto.jpg');
+}
+
 .home-card.squads {
     background-image: url('board.jpg');
 }
@@ -120,10 +124,11 @@
 #home-card-container {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
-    width: 60vw;
+    width: 90vw;
     max-width: 1400px;
+    flex-wrap: wrap;
     height: max-content;
     margin: 40px 0;
 }

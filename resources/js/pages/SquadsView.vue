@@ -126,8 +126,4 @@ const toggleScreenshotMode = () => {
     max-width: 80vw;
     flex-direction: column;
 }
-
-.screenshot {
-    display: none;
-}
 </style>
