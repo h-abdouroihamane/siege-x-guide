@@ -42,7 +42,7 @@ const data = page.props.roles.sort((a, b) => a.name > b.name);
 </template>
 
 <style lang="scss">
-@use '../../css/squads.css';
+@use '../../css/table.css';
 @use '../../css/section.css';
 @use '../../css/vocabulary.css';
 </style>
