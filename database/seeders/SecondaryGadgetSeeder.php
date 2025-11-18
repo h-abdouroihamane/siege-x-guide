@@ -34,7 +34,6 @@ class SecondaryGadgetSeeder extends Seeder
                 "Hibana",
                 "Nomad",
                 "Kali",
-                "Ace",
                 "Rauora",
                 "Striker"
             ],
@@ -71,7 +70,8 @@ class SecondaryGadgetSeeder extends Seeder
                 "Amaru",
                 "Flores",
                 "Ram",
-                "Striker"
+                "Striker",
+                "Ace"
             ],
             "Frag Grenade" => [
                 "Sledge",
@@ -85,7 +85,8 @@ class SecondaryGadgetSeeder extends Seeder
                 "Osa",
                 "Sens",
                 "Deimos",
-                "Striker"
+                "Striker",
+                "Maverick"
             ],
             "Claymore" => [
                 "Thatcher",
@@ -108,7 +109,8 @@ class SecondaryGadgetSeeder extends Seeder
                 "Sens",
                 "Grim",
                 "Brava",
-                "Striker"
+                "Striker",
+                "Hibana"
             ],
             "Hard Breach Charge" => [
                 "Montagne",
