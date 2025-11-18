@@ -23,7 +23,8 @@ const allOperators: Operator[] = page.props.operators.data.map(
             op.roles,
             op.squad,
             op.queerIdentities,
-        ),
+            op.reworked
+        )
 );
 
 let operators = ref([...allOperators]);
@@ -39,7 +40,7 @@ const placeholderOperator = new Operator(
     -1,
     'opPlaceHolder',
     [],
-    'placeholderSquad',
+    'placeholderSquad'
 );
 const selectedOperator = ref(placeholderOperator);
 

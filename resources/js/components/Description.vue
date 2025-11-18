@@ -15,6 +15,7 @@ const props = defineProps([
     'squad',
     'roles',
     'queerIdentities',
+    'reworked',
 ]);
 
 const getRoleStr = () => {
@@ -38,8 +39,9 @@ const formatReleaseDate = (d) => {
 
 const getOperationStr = () => {
     const releaseDate = formatReleaseDate(props.operationReleaseDate);
+    const verb = props.reworked ? 'Reworked' : 'Released';
     return props.year > 0
-        ? `Released on Year ${props.year}, Season ${props.season} - ${props.operationName} (${releaseDate})`
+        ? `${verb} on Year ${props.year}, Season ${props.season} - ${props.operationName} (${releaseDate})`
         : 'Part of the base operators';
 };
 

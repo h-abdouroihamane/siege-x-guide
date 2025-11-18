@@ -18,6 +18,7 @@ export class Operator {
     season: number;
     operationName: string;
     operationReleaseDate: string;
+    reworked: boolean;
     roles: string[];
     squad: string;
     queerIdentites: string[] | null;
@@ -34,7 +35,8 @@ export class Operator {
         operationReleaseDate: string,
         roles: string[],
         squad: string,
-        queerIdentities: string[] | null
+        queerIdentities: string[] | null,
+        reworked: boolean = false
     ) {
         this.name = name;
         this.description = description;
@@ -43,6 +45,7 @@ export class Operator {
         this.season = season;
         this.operationName = operationName;
         this.operationReleaseDate = new Date(operationReleaseDate);
+        this.reworked = reworked;
         this.roles = [...roles];
         this.squad = squad;
         this.queerIdentities = queerIdentities;

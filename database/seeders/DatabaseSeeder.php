@@ -17,10 +17,11 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             OperationSeeder::class,
             OperatorSeeder::class,
+            OperatorReworkSeeder::class,
             RoleSeeder::class,
             SquadSeeder::class,
             QueerIdentitySeeder::class,
-            SecondaryGadgetSeeder::class
+            SecondaryGadgetSeeder::class,
         ]);
     }
 }

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
@@ -46,9 +47,7 @@ class Operator extends Model
         return $this->belongsTo(Operation::class, 'operation_id', 'id');
     }
 
-    public function getOperation() {
-        return $this->operation()->first();
-    }
+
 
     public function queerIdentities() {
         return $this->belongsToMany(QueerIdentity::class, 'operator_queer_identity', 'operator_id', 'queer_identity_id');
@@ -56,6 +55,15 @@ class Operator extends Model
 
     public function secondaryGadgets() {
         return $this->belongsToMany(SecondaryGadget::class, 'operator_secondary_gadget', 'operator_id', 'secondary_gadget_id');
+    }
+
+    public function rework() {
+        return $this->hasOne(Rework::class, 'operator_id', 'id');
+    }
+
+    public function getOperation() {
+        $rework = $this->rework()->first();
+        return $rework ? $rework->operation : $this->operation()->first();
     }
 
     public function getCleanName() {

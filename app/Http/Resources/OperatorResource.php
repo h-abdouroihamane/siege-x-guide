@@ -29,16 +29,20 @@ class OperatorResource extends JsonResource
         $squadModel = $this->squad->first();
         $squad = $squadModel ? $squadModel->name : "Unaffiliated";
 
+        $hasRework = !is_null($this->rework);
+        $operation = $this->getOperation();
+
         return [
             'name' => $this->name,
             'description' => $this->description,
             'side' => $this->side,
-            'year' => $this->year,
-            'season' => $this->season,
+            'year' => $operation->year,
+            'season' => $operation->season,
+            'reworked' => $hasRework,
             'operation' => [
-                'id' => $this->operation->id,
-                'name' => $this->operation->name,
-                'release_date' => $this->operation->release_date
+                'id' => $operation->id,
+                'name' => $operation->name,
+                'release_date' => $operation->release_date
             ],
             'roles' => $roles,
             'squad' => $squad,
