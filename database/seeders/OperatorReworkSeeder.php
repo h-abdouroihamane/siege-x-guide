@@ -21,6 +21,14 @@ class OperatorReworkSeeder extends Seeder
                 "operation_id" => "Y5S3"
             ],
             [
+                "name" => "Striker",
+                "operation_id" => "Y9S2"
+            ],
+            [
+                "name" => "Sentry",
+                "operation_id" => "Y9S2"
+            ],
+            [
                 "name" => "Blackbeard",
                 "operation_id" => "Y9S4"
             ],
