@@ -571,7 +571,7 @@ class OperatorSeeder extends Seeder
             [
                 "name" => "Thatcher",
                 "description" =>
-                    "Has 3 EMP grenades which disable all electronics that are within its area of effect",
+                    "His gadget allows him to detect enemy electronic devices through walls and deactivate them with an EMP blast",
                 "year" => 0,
                 "season" => 2,
                 "side" => "Attack",
