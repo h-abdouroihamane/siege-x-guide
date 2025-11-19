@@ -73,12 +73,15 @@ class Operator extends Model
     public function compareReleaseDate(Operator $otherOperator, bool $reverse = false) {
         $r = $reverse ? -1 : 1;
 
-        if ($this->year !== $otherOperator->year) {
-            return $r * ($this->year < $otherOperator->year ? -1 : 1);
+        $operation = $this->getOperation();
+        $otherOperation = $otherOperator->getOperation();
+
+        if ($operation->year !== $otherOperation->year) {
+            return $r * ($operation->year < $otherOperation->year ? -1 : 1);
         }
 
-        if ($this->season !== $otherOperator->season) {
-            return $r * ($this->season < $otherOperator->season ? -1 : 1);
+        if ($operation->season !== $otherOperation->season) {
+            return $r * ($operation->season < $otherOperation->season ? -1 : 1);
         }
 
         if ($this->side !== $otherOperator->side) {
