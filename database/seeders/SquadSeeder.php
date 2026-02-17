@@ -103,7 +103,7 @@ class SquadSeeder extends Seeder
                 'Grim',
                 'Denari',
             ],
-            'Unaffiliated' => ['Deimos', 'Striker', 'Sentry'],
+            'Unaffiliated' => ['Deimos', 'Striker', 'Sentry', 'Solid Snake'],
         ];
 
         $squad_count = 1;

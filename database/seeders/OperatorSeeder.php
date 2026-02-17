@@ -694,6 +694,15 @@ class OperatorSeeder extends Seeder
                 'side' => 'Defense',
                 'operation_id' => 'Y10S3',
             ],
+            [
+                'name' => 'Solid Snake',
+                'description' =>
+                    'His radar alerts him of nearby enemies, active default cameras, as well as enemies\' vision cone when Precision Mode is enabled. He can also scavenge secondary gadgets from fallen players.',
+                'year' => 11,
+                'season' => 1,
+                'side' => 'Attack',
+                'operation_id' => 'Y11S1',
+            ],
         ];
         $operators = [];
 

@@ -52,6 +52,7 @@ class OperationSeeder extends Seeder
             'Operation Daybreak',
             'Operation High Stakes',
             'Operation Tenfold Pursuit',
+            'Operation Silent Hunt',
         ];
 
         // Special season for game launch
@@ -106,6 +107,7 @@ class OperationSeeder extends Seeder
             '2025-06-01',
             '2025-09-02',
             '2025-12-02',
+            '2026-03-03',
         ];
 
         $year = 1;

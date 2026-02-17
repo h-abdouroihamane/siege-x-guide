@@ -36,6 +36,7 @@ class SecondaryGadgetSeeder extends Seeder
                 'Kali',
                 'Rauora',
                 'Striker',
+                'Solid Snake',
             ],
             'Smoke Grenade' => [
                 'Thermite',
@@ -56,6 +57,7 @@ class SecondaryGadgetSeeder extends Seeder
                 'Ram',
                 'Rauora',
                 'Striker',
+                'Solid Snake',
             ],
             'Stun Grenade' => [
                 'Sledge',
@@ -72,6 +74,7 @@ class SecondaryGadgetSeeder extends Seeder
                 'Ram',
                 'Striker',
                 'Ace',
+                'Solid Snake',
             ],
             'Frag Grenade' => [
                 'Sledge',
@@ -87,6 +90,7 @@ class SecondaryGadgetSeeder extends Seeder
                 'Deimos',
                 'Striker',
                 'Maverick',
+                'Solid Snake',
             ],
             'Claymore' => [
                 'Thatcher',
@@ -137,6 +141,7 @@ class SecondaryGadgetSeeder extends Seeder
                 'Osa',
                 'Grim',
                 'Striker',
+                'Solid Snake',
             ],
             'Deployable Shield' => [
                 'Pulse',

@@ -74,6 +74,7 @@ class RoleSeeder extends Seeder
                 'Osa',
                 'Pulse',
                 'Skopós',
+                'Solid Snake',
                 'Solis',
                 'Twitch',
                 'Valkyrie',
@@ -105,6 +106,7 @@ class RoleSeeder extends Seeder
                 'Maverick',
                 'Nøkk',
                 'Nomad',
+                'Solid Snake',
                 'Ying',
             ],
             'Map control' => [
