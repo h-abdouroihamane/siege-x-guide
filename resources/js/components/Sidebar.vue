@@ -208,7 +208,7 @@ const emitSortingSide = () => {
         'filter filter'
         'attackers defenders'
         'sort sort'
-        'date name';
+        'name date';
 
     grid-row-gap: 10px;
     grid-column-gap: 0;
