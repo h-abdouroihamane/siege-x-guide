@@ -8,5 +8,3 @@ Route::prefix('secondary-gadgets')
         Route::get('/', 'showAll');
         Route::get('/all', 'getAll');
     });
-
-

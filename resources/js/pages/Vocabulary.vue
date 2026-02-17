@@ -7,7 +7,8 @@ import { normalize } from '../scripts/operator.ts';
 const page = usePage();
 
 const publicPath = import.meta.env.BASE_URL;
-const getOperatorIcon = (operatorName) => `${publicPath}operatorIcons/${normalize(operatorName)}.png`;
+const getOperatorIcon = (operatorName) =>
+    `${publicPath}operatorIcons/${normalize(operatorName)}.png`;
 const data = page.props.roles.sort((a, b) => a.name > b.name);
 </script>
 
@@ -26,11 +27,24 @@ const data = page.props.roles.sort((a, b) => a.name > b.name);
                     <div id="role-container">
                         <div class="role" v-for="(role, index) in data">
                             <span class="name">{{ role.name }}</span>
-                            <span class="definition">{{ role.definition }}</span>
+                            <span class="definition">{{
+                                role.definition
+                            }}</span>
                             <div class="operator-logos">
-                                <div v-for="(operatorName, index) in role.operators" :key="index" class="small-icon">
-                                    <img :src="getOperatorIcon(operatorName)" :alt="operatorName" />
-                                    <p class="operator-name">{{ operatorName }}</p>
+                                <div
+                                    v-for="(
+                                        operatorName, index
+                                    ) in role.operators"
+                                    :key="index"
+                                    class="small-icon"
+                                >
+                                    <img
+                                        :src="getOperatorIcon(operatorName)"
+                                        :alt="operatorName"
+                                    />
+                                    <p class="operator-name">
+                                        {{ operatorName }}
+                                    </p>
                                 </div>
                             </div>
                         </div>

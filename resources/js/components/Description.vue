@@ -58,7 +58,10 @@ const getSide = () => {
 
             <div id="side-container">
                 <AttackerLogo class="side-icon" v-if="side === 'Attack'" />
-                <DefenderLogo class="side-icon" v-else-if="side === 'Defense'" />
+                <DefenderLogo
+                    class="side-icon"
+                    v-else-if="side === 'Defense'"
+                />
                 <span id="side-name">{{ getSide() }}</span>
             </div>
             <div class="pride-description" v-if="props.queerIdentities">
@@ -140,7 +143,8 @@ const getSide = () => {
     justify-content: space-evenly;
 }
 
-@media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px) {
+@media only screen and (max-width: 760px),
+    (min-device-width: 768px) and (max-device-width: 1024px) {
     #description {
         max-height: 30vh;
         height: 30vh;

@@ -17,7 +17,7 @@ class OperationResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => "$this->id - $this->name",
-            'release_date' => $this->release_date
+            'release_date' => $this->release_date,
         ];
     }
 }

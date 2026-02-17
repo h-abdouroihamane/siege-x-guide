@@ -20,8 +20,10 @@ class RoleResource extends JsonResource
             $operators[] = $op->name;
         }
 
-        return ['name' => $this->name,
+        return [
+            'name' => $this->name,
             'definition' => $this->definition,
-            'operators'=> $operators];
+            'operators' => $operators,
+        ];
     }
 }

@@ -17,7 +17,8 @@ const getGadgetLogo = (gadgetName) => {
     return `${publicPath}secondaryGadgets/${name}.png`;
 };
 
-const getOperatorIcon = (operatorName) => `${publicPath}operatorIcons/${normalize(operatorName)}.png`;
+const getOperatorIcon = (operatorName) =>
+    `${publicPath}operatorIcons/${normalize(operatorName)}.png`;
 
 let selectedSide = ref('Attack');
 const setSide = (side) => (selectedSide.value = side);

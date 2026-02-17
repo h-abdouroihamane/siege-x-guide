@@ -19,19 +19,17 @@ class AdminController extends Controller
             return redirect()->route('admin.login');
         }
 
-        return Inertia::render('admin/Dashboard',
-            [
-                'editRoute' => route('operator.selectForEditing'),
-                'createRoute' => route('operator.create'),
-                'message' => $request->session()->get('message')
-            ]
-        );
+        return Inertia::render('admin/Dashboard', [
+            'editRoute' => route('operator.selectForEditing'),
+            'createRoute' => route('operator.create'),
+            'message' => $request->session()->get('message'),
+        ]);
     }
 
     public function authenticate(Request $request): RedirectResponse
     {
         $credentials = $request->validate([
-            'email'    => ['required', 'email'],
+            'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
 
@@ -40,9 +38,10 @@ class AdminController extends Controller
             return redirect()->intended('admin.dashboard');
         }
 
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ])->onlyInput('email');
+        return back()
+            ->withErrors([
+                'email' => 'The provided credentials do not match our records.',
+            ])
+            ->onlyInput('email');
     }
-
-  }
+}

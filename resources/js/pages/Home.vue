@@ -22,13 +22,15 @@ const paths = [
         url: '/squads',
         className: 'squads',
         title: 'Squads',
-        description: 'Check the squads composition according to the latest update of the lore',
+        description:
+            'Check the squads composition according to the latest update of the lore',
     },
     {
         url: '/vocabulary',
         className: 'vocabulary',
         title: 'Vocabulary',
-        description: 'Familiarize yourself with the terms commonly used in the game',
+        description:
+            'Familiarize yourself with the terms commonly used in the game',
     },
     {
         url: '/about',

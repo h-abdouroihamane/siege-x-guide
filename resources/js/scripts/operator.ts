@@ -36,7 +36,7 @@ export class Operator {
         roles: string[],
         squad: string,
         queerIdentities: string[] | null,
-        reworked: boolean = false
+        reworked: boolean = false,
     ) {
         this.name = name;
         this.description = description;

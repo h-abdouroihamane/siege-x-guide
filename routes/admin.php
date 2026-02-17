@@ -17,5 +17,3 @@ Route::middleware('auth')
     ->group(function () {
         Route::get('/dashboard', 'dashboard')->name('dashboard');
     });
-
-

@@ -24,10 +24,7 @@ return new class extends Migration {
              * composite foreign keys
              */
             $table->string('operation_id')->default('Y1S0');
-            $table
-                ->foreign('operation_id')
-                ->references('id')
-                ->on('operations');
+            $table->foreign('operation_id')->references('id')->on('operations');
         });
     }
 

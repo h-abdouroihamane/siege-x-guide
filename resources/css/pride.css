@@ -46,7 +46,17 @@
 }
 
 .non-binary {
-    background: linear-gradient(to bottom, #fdf52f, #fdf52f 25%, #fff 25%, #fff 50%, #9d5ad2 50%, #9d5ad2 75%, #000 75%, #000);
+    background: linear-gradient(
+        to bottom,
+        #fdf52f,
+        #fdf52f 25%,
+        #fff 25%,
+        #fff 50%,
+        #9d5ad2 50%,
+        #9d5ad2 75%,
+        #000 75%,
+        #000
+    );
 }
 
 .lesbian {
@@ -86,19 +96,43 @@
 }
 
 .bisexual {
-    background: linear-gradient(to bottom, #d60270, #d60270 40%, #9a4f96 40%, #9a4f96 60%, #0039a9 60%, #0039a9);
+    background: linear-gradient(
+        to bottom,
+        #d60270,
+        #d60270 40%,
+        #9a4f96 40%,
+        #9a4f96 60%,
+        #0039a9 60%,
+        #0039a9
+    );
 }
 
 .intersex {
-    background: radial-gradient(circle, gold 24.5%, darkviolet 25% 34%, gold 34.5%);
+    background: radial-gradient(
+        circle,
+        gold 24.5%,
+        darkviolet 25% 34%,
+        gold 34.5%
+    );
 }
 
 .aromantic {
-    background: linear-gradient(#0a2 20%, #7d6 0 40%, white 0 60%, darkgray 0 80%, black 0);
+    background: linear-gradient(
+        #0a2 20%,
+        #7d6 0 40%,
+        white 0 60%,
+        darkgray 0 80%,
+        black 0
+    );
 }
 
 .asexual {
-    background: linear-gradient(black 25%, darkgray 0 50%, white 0 75%, #a50089 0);
+    background: linear-gradient(
+        black 25%,
+        darkgray 0 50%,
+        white 0 75%,
+        #a50089 0
+    );
 }
 
 .pansexual {
@@ -106,17 +140,60 @@
 }
 
 .aroace {
-    background: linear-gradient(#e28c00 0 20%, #eccd00 0 40%, #fff 0 60%, #62aedc 0 80%, #203856 0);
+    background: linear-gradient(
+        #e28c00 0 20%,
+        #eccd00 0 40%,
+        #fff 0 60%,
+        #62aedc 0 80%,
+        #203856 0
+    );
 }
 
 .progress {
     background:
-        radial-gradient(circle at 9.75% 50%, #0000 6.66%, darkviolet 6.7% 8.33%, #0000 8.4%),
-        conic-gradient(at 26.66% 50%, #0000 222.75deg, gold 0 317.25deg, #0000 0),
+        radial-gradient(
+            circle at 9.75% 50%,
+            #0000 6.66%,
+            darkviolet 6.7% 8.33%,
+            #0000 8.4%
+        ),
+        conic-gradient(
+            at 26.66% 50%,
+            #0000 222.75deg,
+            gold 0 317.25deg,
+            #0000 0
+        ),
         conic-gradient(at 33% 50%, #0000 222.75deg, white 0 317.25deg, #0000 0),
-        conic-gradient(at 39% 50%, #0000 222.75deg, #ffa6b9 0 317.25deg, #0000 0),
-        conic-gradient(at 45.66% 50%, #0000 222.75deg, #00d2ff 0 317.25deg, #0000 0),
-        conic-gradient(at 52% 50%, #0000 222.75deg, #753000 0 317.25deg, #0000 0),
-        conic-gradient(at 58.33% 50%, #0000 222.75deg, #000 0 317.25deg, #0000 0),
-        linear-gradient(red 0 16.66%, orange 0 33.33%, yellow 0 50%, green 0 66.66%, blue 0 83.33%, indigo 0);
+        conic-gradient(
+            at 39% 50%,
+            #0000 222.75deg,
+            #ffa6b9 0 317.25deg,
+            #0000 0
+        ),
+        conic-gradient(
+            at 45.66% 50%,
+            #0000 222.75deg,
+            #00d2ff 0 317.25deg,
+            #0000 0
+        ),
+        conic-gradient(
+            at 52% 50%,
+            #0000 222.75deg,
+            #753000 0 317.25deg,
+            #0000 0
+        ),
+        conic-gradient(
+            at 58.33% 50%,
+            #0000 222.75deg,
+            #000 0 317.25deg,
+            #0000 0
+        ),
+        linear-gradient(
+            red 0 16.66%,
+            orange 0 33.33%,
+            yellow 0 50%,
+            green 0 66.66%,
+            blue 0 83.33%,
+            indigo 0
+        );
 }

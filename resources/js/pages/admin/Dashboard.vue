@@ -8,11 +8,17 @@
         <div id="container">
             <Logo text="Admin dashboard" />
 
-            <span id="message" v-if="page.props.message">{{ page.props.message }}</span>
+            <span id="message" v-if="page.props.message">{{
+                page.props.message
+            }}</span>
             <div id="options">
                 <a v-for="p in paths" :href="p.url">
                     <div class="card option">
-                        <img class="operator-portrait" :src="p.image" :alt="p.label" />
+                        <img
+                            class="operator-portrait"
+                            :src="p.image"
+                            :alt="p.label"
+                        />
                         <span class="operator-name">{{ p.label }}</span>
                     </div>
                 </a>
@@ -28,7 +34,11 @@ import Navbar from '../../components/Navbar.vue';
 const page = usePage();
 
 const paths = [
-    { label: 'New operator', url: page.props.createRoute, image: '/flores.jpg' },
+    {
+        label: 'New operator',
+        url: page.props.createRoute,
+        image: '/flores.jpg',
+    },
     { label: 'Edit operator', url: page.props.editRoute, image: '/sens.jpg' },
 ];
 </script>

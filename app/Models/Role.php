@@ -15,10 +15,11 @@ class Role extends Model
 
     public function operators(): BelongsToMany
     {
-        return $this->belongsToMany(Operator::class,
+        return $this->belongsToMany(
+            Operator::class,
             'operator_role',
             'role_id',
-            'operator_id');
+            'operator_id',
+        );
     }
-
 }

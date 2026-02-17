@@ -35,21 +35,49 @@ const publicPath = import.meta.env.BASE_URL;
             </li>
 
             <li>
-                <a href="/operators" :class="{ active: activeRoute.operators }">Operators</a>
+                <a href="/operators" :class="{ active: activeRoute.operators }"
+                    >Operators</a
+                >
             </li>
             <li>
-                <a href="/secondary-gadgets" :class="{ active: activeRoute.secondaryGadgets }">Secondary gadgets</a>
+                <a
+                    href="/secondary-gadgets"
+                    :class="{ active: activeRoute.secondaryGadgets }"
+                    >Secondary gadgets</a
+                >
             </li>
 
             <li>
-                <a href="/squads" :class="{ active: activeRoute.squads }">Squads</a>
+                <a href="/squads" :class="{ active: activeRoute.squads }"
+                    >Squads</a
+                >
             </li>
 
-            <li><a href="/vocabulary" :class="{ active: activeRoute.vocabulary }">Vocabulary</a></li>
-            <li><a href="/about" :class="{ active: activeRoute.about }">About me</a></li>
-            <li v-if="inLocalEnv"><a href="/admin/dashboard" :class="{ active: activeRoute.admin }">Admin panel</a></li>
+            <li>
+                <a
+                    href="/vocabulary"
+                    :class="{ active: activeRoute.vocabulary }"
+                    >Vocabulary</a
+                >
+            </li>
+            <li>
+                <a href="/about" :class="{ active: activeRoute.about }"
+                    >About me</a
+                >
+            </li>
+            <li v-if="inLocalEnv">
+                <a
+                    href="/admin/dashboard"
+                    :class="{ active: activeRoute.admin }"
+                    >Admin panel</a
+                >
+            </li>
         </ul>
-        <div class="hamburger" :class="{ 'hamburger-active': hamburgerActive }" @click="toggleNav">
+        <div
+            class="hamburger"
+            :class="{ 'hamburger-active': hamburgerActive }"
+            @click="toggleNav"
+        >
             <span class="line"></span>
             <span class="line"></span>
             <span class="line"></span>
@@ -62,18 +90,42 @@ const publicPath = import.meta.env.BASE_URL;
             </li>
 
             <li>
-                <a href="/operators" :class="{ active: activeRoute.operators }">Operators</a>
+                <a href="/operators" :class="{ active: activeRoute.operators }"
+                    >Operators</a
+                >
             </li>
             <li>
-                <a href="/secondary-gadgets" :class="{ active: activeRoute.secondaryGadgets }">Secondary gadgets</a>
+                <a
+                    href="/secondary-gadgets"
+                    :class="{ active: activeRoute.secondaryGadgets }"
+                    >Secondary gadgets</a
+                >
             </li>
 
             <li>
-                <a href="/squads" :class="{ active: activeRoute.squads }">Squads</a>
+                <a href="/squads" :class="{ active: activeRoute.squads }"
+                    >Squads</a
+                >
             </li>
-            <li><a href="/vocabulary" :class="{ active: activeRoute.vocabulary }">Vocabulary</a></li>
-            <li><a href="/about" :class="{ active: activeRoute.about }">About me</a></li>
-            <li v-if="inLocalEnv"><a href="/admin/dashboard" :class="{ active: activeRoute.admin }">Admin panel</a></li>
+            <li>
+                <a
+                    href="/vocabulary"
+                    :class="{ active: activeRoute.vocabulary }"
+                    >Vocabulary</a
+                >
+            </li>
+            <li>
+                <a href="/about" :class="{ active: activeRoute.about }"
+                    >About me</a
+                >
+            </li>
+            <li v-if="inLocalEnv">
+                <a
+                    href="/admin/dashboard"
+                    :class="{ active: activeRoute.admin }"
+                    >Admin panel</a
+                >
+            </li>
         </ul>
     </div>
 </template>

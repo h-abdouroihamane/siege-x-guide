@@ -15,10 +15,10 @@ class SecondaryGadgetResource extends JsonResource
     public function toArray(Request $request): array
     {
         $operators = $this->operators
-                          ->sort(
-                              function($a, $b) {return $a->compareReleaseDate($b);}
-                            )
-                            ->pluck('name');
+            ->sort(function ($a, $b) {
+                return $a->compareReleaseDate($b);
+            })
+            ->pluck('name');
 
         return ['name' => $this->name, 'operators' => $operators];
     }

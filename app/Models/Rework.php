@@ -11,11 +11,13 @@ class Rework extends Model
     protected $table = 'operator_rework';
     public $timestamps = false;
 
-    public function operation(): BelongsTo {
+    public function operation(): BelongsTo
+    {
         return $this->belongsTo(Operation::class);
     }
 
-    public function operator(): BelongsTo {
+    public function operator(): BelongsTo
+    {
         return $this->belongsTo(Operator::class);
     }
 }

@@ -13,7 +13,13 @@ class Operation extends Model
     protected $guarded = [];
     public $timestamps = false;
 
-    public function operators(): BelongsToMany {
-        return $this->belongsToMany(Operator::class, 'operators', 'id', 'operation_id');
+    public function operators(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            Operator::class,
+            'operators',
+            'id',
+            'operation_id',
+        );
     }
 }

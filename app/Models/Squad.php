@@ -14,13 +14,13 @@ class Squad extends Model
     public $timestamps = false;
     protected $hidden = ['id', 'pivot'];
 
-
     public function operators(): BelongsToMany
     {
-        return $this->belongsToMany(Operator::class,
+        return $this->belongsToMany(
+            Operator::class,
             'operator_squad',
             'squad_id',
-            'operator_id')
-            ->orderBy('rank', 'asc');
+            'operator_id',
+        )->orderBy('rank', 'asc');
     }
 }

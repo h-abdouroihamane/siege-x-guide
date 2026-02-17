@@ -5,7 +5,11 @@ const text = props.text ?? '';
 </script>
 
 <template>
-    <img id="logo" :src="`${publicPath}Logo_blank.png`" alt="Rainbow Six Siege X Logo" />
+    <img
+        id="logo"
+        :src="`${publicPath}Logo_blank.png`"
+        alt="Rainbow Six Siege X Logo"
+    />
     <p id="logo-text" v-if="text">{{ text }}</p>
 </template>
 
@@ -24,7 +28,8 @@ const text = props.text ?? '';
     margin: 5px;
     color: #b0bac6;
 }
-@media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px) {
+@media only screen and (max-width: 760px),
+    (min-device-width: 768px) and (max-device-width: 1024px) {
     #logo {
         max-width: 50vw;
     }

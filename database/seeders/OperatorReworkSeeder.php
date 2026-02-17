@@ -17,29 +17,29 @@ class OperatorReworkSeeder extends Seeder
     {
         $reworkedOperators = [
             [
-                "name" => "Tachanka",
-                "operation_id" => "Y5S3"
+                'name' => 'Tachanka',
+                'operation_id' => 'Y5S3',
             ],
             [
-                "name" => "Striker",
-                "operation_id" => "Y9S2"
+                'name' => 'Striker',
+                'operation_id' => 'Y9S2',
             ],
             [
-                "name" => "Sentry",
-                "operation_id" => "Y9S2"
+                'name' => 'Sentry',
+                'operation_id' => 'Y9S2',
             ],
             [
-                "name" => "Blackbeard",
-                "operation_id" => "Y9S4"
+                'name' => 'Blackbeard',
+                'operation_id' => 'Y9S4',
             ],
             [
-                "name" => "Clash",
-                "operation_id" => "Y10S2"
+                'name' => 'Clash',
+                'operation_id' => 'Y10S2',
             ],
             [
-                "name" => "Thatcher",
-                "operation_id" => "Y10S4"
-            ]
+                'name' => 'Thatcher',
+                'operation_id' => 'Y10S4',
+            ],
         ];
 
         foreach ($reworkedOperators as $rop) {
@@ -49,6 +49,5 @@ class OperatorReworkSeeder extends Seeder
             $r->operation_id = $rop['operation_id'];
             $r->save();
         }
-
     }
 }

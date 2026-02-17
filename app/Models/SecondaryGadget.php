@@ -15,9 +15,11 @@ class SecondaryGadget extends Model
 
     public function operators(): BelongsToMany
     {
-        return $this->belongsToMany(Operator::class,
+        return $this->belongsToMany(
+            Operator::class,
             'operator_secondary_gadget',
             'secondary_gadget_id',
-            'operator_id');
+            'operator_id',
+        );
     }
 }

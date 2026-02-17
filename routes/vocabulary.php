@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Route;
 Route::controller(VocabularyController::class)
     ->name('vocabulary.')
     ->prefix('vocabulary')
-    ->group(function() {
+    ->group(function () {
         Route::get('/', 'index')->name('index');
-});
-
+    });

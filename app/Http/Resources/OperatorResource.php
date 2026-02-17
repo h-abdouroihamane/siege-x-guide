@@ -27,7 +27,7 @@ class OperatorResource extends JsonResource
         }
 
         $squadModel = $this->squad->first();
-        $squad = $squadModel ? $squadModel->name : "Unaffiliated";
+        $squad = $squadModel ? $squadModel->name : 'Unaffiliated';
 
         $hasRework = !is_null($this->rework);
         $operation = $this->getOperation();
@@ -42,11 +42,11 @@ class OperatorResource extends JsonResource
             'operation' => [
                 'id' => $operation->id,
                 'name' => $operation->name,
-                'release_date' => $operation->release_date
+                'release_date' => $operation->release_date,
             ],
             'roles' => $roles,
             'squad' => $squad,
-            'queerIdentities' => $queerIdentities
+            'queerIdentities' => $queerIdentities,
         ];
     }
 }

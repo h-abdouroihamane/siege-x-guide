@@ -17,16 +17,16 @@ class QueerIdentitySeeder extends Seeder
     public function run(): void
     {
         $queerIdentities = [
-            "Aroace",
-            "Aromantic",
-            "Asexual",
-            "Bisexual",
-            "Gay",
-            "Intersex",
-            "Lesbian",
-            "Non-binary",
-            "Pansexual",
-            "Transgender"
+            'Aroace',
+            'Aromantic',
+            'Asexual',
+            'Bisexual',
+            'Gay',
+            'Intersex',
+            'Lesbian',
+            'Non-binary',
+            'Pansexual',
+            'Transgender',
         ];
 
         $data = [];
@@ -37,32 +37,31 @@ class QueerIdentitySeeder extends Seeder
 
         QueerIdentity::insert($data);
 
-
         //Linking operators to their queer identity
         $queerOps = [
             [
-                "name" => "Caveira",
-                "queerIdentity" => "Lesbian",
+                'name' => 'Caveira',
+                'queerIdentity' => 'Lesbian',
             ],
             [
-                "name" => "Flores",
-                "queerIdentity" => "Gay",
+                'name' => 'Flores',
+                'queerIdentity' => 'Gay',
             ],
             [
-                "name" => "Osa",
-                "queerIdentity" => "Transgender",
+                'name' => 'Osa',
+                'queerIdentity' => 'Transgender',
             ],
             [
-                "name" => "Pulse",
-                "queerIdentity" => "Bisexual",
+                'name' => 'Pulse',
+                'queerIdentity' => 'Bisexual',
             ],
             [
-                "name" => "Sens",
-                "queerIdentity" => "Non-Binary",
+                'name' => 'Sens',
+                'queerIdentity' => 'Non-Binary',
             ],
             [
-                "name" => "Tubarão",
-                "queerIdentity" => "Transgender",
+                'name' => 'Tubarão',
+                'queerIdentity' => 'Transgender',
             ],
         ];
 

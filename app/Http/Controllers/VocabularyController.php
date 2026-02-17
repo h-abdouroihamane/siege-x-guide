@@ -8,11 +8,10 @@ use App\Models\Role;
 
 class VocabularyController extends Controller
 {
-       public function index() {
-           return Inertia::render('Vocabulary',
-           ['roles' => Role::all()->toResourceCollection()->resolve()]
-           );
- }
+    public function index()
+    {
+        return Inertia::render('Vocabulary', [
+            'roles' => Role::all()->toResourceCollection()->resolve(),
+        ]);
+    }
 }
-
-

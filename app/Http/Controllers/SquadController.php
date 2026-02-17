@@ -10,13 +10,17 @@ use Inertia\Inertia;
 
 class SquadController extends Controller
 {
-    public function getAll()  {
+    public function getAll()
+    {
         $squads = [];
 
-        foreach (Squad::with('operators:id,name')->orderBy('rank')->get() as $sq) {
+        foreach (
+            Squad::with('operators:id,name')->orderBy('rank')->get()
+            as $sq
+        ) {
             $operators = [];
 
-            foreach($sq->operators as $op) {
+            foreach ($sq->operators as $op) {
                 $operators[] = $op->name;
             }
 
@@ -26,7 +30,8 @@ class SquadController extends Controller
         return $squads;
     }
 
-    public function getMostRecentOperation() {
+    public function getMostRecentOperation()
+    {
         return Operation::orderBy('year', 'desc')
             ->orderBy('season', 'desc')
             ->first();
@@ -39,7 +44,7 @@ class SquadController extends Controller
             'squads' => $this->getAll(),
             'operationName' => $operation->name,
             'year' => $operation->year,
-            'season' => $operation->season
+            'season' => $operation->season,
         ]);
     }
 }

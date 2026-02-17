@@ -22,7 +22,8 @@ class Operator extends Model
         return $this->belongsToMany(Role::class, 'operator_role');
     }
 
-    public function getRoles() {
+    public function getRoles()
+    {
         $roles = [];
 
         foreach ($this->roles()->get() as $r) {
@@ -34,43 +35,65 @@ class Operator extends Model
 
     public function squad(): BelongsToMany
     {
-        return $this->belongsToMany(Squad::class, 'operator_squad', 'operator_id', 'squad_id')
-                    ->withPivot('rank');
+        return $this->belongsToMany(
+            Squad::class,
+            'operator_squad',
+            'operator_id',
+            'squad_id',
+        )->withPivot('rank');
     }
 
-        public function getSquad(): string {
+    public function getSquad(): string
+    {
         $squad = $this->squad()->first();
-        return $squad ? $squad->name : "Unaffiliated";
+        return $squad ? $squad->name : 'Unaffiliated';
     }
 
-    public function operation(): BelongsTo {
+    public function operation(): BelongsTo
+    {
         return $this->belongsTo(Operation::class, 'operation_id', 'id');
     }
 
-
-
-    public function queerIdentities() {
-        return $this->belongsToMany(QueerIdentity::class, 'operator_queer_identity', 'operator_id', 'queer_identity_id');
+    public function queerIdentities()
+    {
+        return $this->belongsToMany(
+            QueerIdentity::class,
+            'operator_queer_identity',
+            'operator_id',
+            'queer_identity_id',
+        );
     }
 
-    public function secondaryGadgets() {
-        return $this->belongsToMany(SecondaryGadget::class, 'operator_secondary_gadget', 'operator_id', 'secondary_gadget_id');
+    public function secondaryGadgets()
+    {
+        return $this->belongsToMany(
+            SecondaryGadget::class,
+            'operator_secondary_gadget',
+            'operator_id',
+            'secondary_gadget_id',
+        );
     }
 
-    public function rework() {
+    public function rework()
+    {
         return $this->hasOne(Rework::class, 'operator_id', 'id');
     }
 
-    public function getOperation() {
+    public function getOperation()
+    {
         $rework = $this->rework()->first();
         return $rework ? $rework->operation : $this->operation()->first();
     }
 
-    public function getCleanName() {
-        return iconv("UTF-8", "ASCII//TRANSLIT", strtolower($this->name));
+    public function getCleanName()
+    {
+        return iconv('UTF-8', 'ASCII//TRANSLIT', strtolower($this->name));
     }
 
-    public function compareReleaseDate(Operator $otherOperator, bool $reverse = false) {
+    public function compareReleaseDate(
+        Operator $otherOperator,
+        bool $reverse = false,
+    ) {
         $r = $reverse ? -1 : 1;
 
         $operation = $this->getOperation();
@@ -95,14 +118,19 @@ class Operator extends Model
         return $this->name < $otherOperator->name ? -1 : 1;
     }
 
-    public function addToSquad(string $squadName) {
+    public function addToSquad(string $squadName)
+    {
         $newSquad = Squad::firstWhere('name', $squadName);
 
         $currentSquad = $this->squad->first();
         $hasSquad = !is_null($currentSquad);
         $validNewSquad = !is_null($newSquad);
 
-        if ($hasSquad && $validNewSquad && $currentSquad->id === $newSquad->id) {
+        if (
+            $hasSquad &&
+            $validNewSquad &&
+            $currentSquad->id === $newSquad->id
+        ) {
             return;
         }
 
@@ -122,12 +150,14 @@ class Operator extends Model
         if ($validNewSquad) {
             $newSquadMaxRank = $hasSquad
                 ? DB::table('operator_squad')
-                ->where('squad_id', $newSquad->id)
-                ->max('rank')
+                    ->where('squad_id', $newSquad->id)
+                    ->max('rank')
                 : 0;
 
             //Insert with the latest rank
-            $this->squad()->attach($newSquad->id, ['rank' => $newSquadMaxRank + 1]);
+            $this->squad()->attach($newSquad->id, [
+                'rank' => $newSquadMaxRank + 1,
+            ]);
         }
 
         return;

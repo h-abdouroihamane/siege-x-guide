@@ -14,7 +14,7 @@ Route::prefix('operators')
     ->controller(OperatorController::class)
     ->name('operator.')
     ->middleware('auth')
-    ->group(function() {
+    ->group(function () {
         Route::get('/select', 'selectForEditing')->name('selectForEditing');
         Route::post('/select', 'selectPost')->name('selectPost');
         Route::get('/edit/{operator}', 'edit')->name('edit');
@@ -22,5 +22,3 @@ Route::prefix('operators')
         Route::get('/create', 'create')->name('create');
         Route::post('/store', 'store')->name('store');
     });
-
-

@@ -1,6 +1,13 @@
 <script setup>
 import { useForm, usePage } from '@inertiajs/vue3';
-const props = defineProps(['operator', 'squads', 'submitRoute', 'operations', 'queerIdentities', 'roles']);
+const props = defineProps([
+    'operator',
+    'squads',
+    'submitRoute',
+    'operations',
+    'queerIdentities',
+    'roles',
+]);
 const page = usePage();
 const operator = props.operator;
 
@@ -31,13 +38,21 @@ function submit() {
         </div>
         <div class="form-element">
             <label for="description">Description</label>
-            <textarea id="description" name="description" rows="5" cols="44" v-model="form.description" />
+            <textarea
+                id="description"
+                name="description"
+                rows="5"
+                cols="44"
+                v-model="form.description"
+            />
         </div>
 
         <div class="form-element">
             <label for="side">Side</label>
             <select id="side" v-model="form.side">
-                <option v-for="side in ['Attack', 'Defense']" :value="side">{{ side }}</option>
+                <option v-for="side in ['Attack', 'Defense']" :value="side">
+                    {{ side }}
+                </option>
             </select>
         </div>
 
@@ -52,32 +67,54 @@ function submit() {
             <label for="squad">Squad</label>
             <select id="squad" v-model="form.squad">
                 <option value="None">None</option>
-                <option v-for="squad in props.squads" :value="squad">{{ squad }}</option>
+                <option v-for="squad in props.squads" :value="squad">
+                    {{ squad }}
+                </option>
             </select>
         </div>
 
         <div class="form-element">
             <label for="operation_id">Operation</label>
             <select id="operation_id" v-model="form.operation_id">
-                <option v-for="op in page.props.operations.data" :value="op.id">{{ op.name }}</option>
+                <option v-for="op in page.props.operations.data" :value="op.id">
+                    {{ op.name }}
+                </option>
             </select>
         </div>
 
         <div class="form-element">
             <label for="queer-identities">Queer identities</label>
-            <select id="queer-identities" multiple v-model="form.queerIdentities">
-                <option v-for="q in props.queerIdentities" :value="q">{{ q }}</option>
+            <select
+                id="queer-identities"
+                multiple
+                v-model="form.queerIdentities"
+            >
+                <option v-for="q in props.queerIdentities" :value="q">
+                    {{ q }}
+                </option>
             </select>
         </div>
 
         <div class="form-element">
             <label for="portrait">Portrait</label>
-            <input type="file" @input="form.portrait = $event.target.files[0]" id="portrait" name="portrait" accept="image/png" />
+            <input
+                type="file"
+                @input="form.portrait = $event.target.files[0]"
+                id="portrait"
+                name="portrait"
+                accept="image/png"
+            />
         </div>
 
         <div class="form-element">
             <label for="icon">Icon</label>
-            <input type="file" @input="form.icon = $event.target.files[0]" id="icon" name="icon" accept="image/png" />
+            <input
+                type="file"
+                @input="form.icon = $event.target.files[0]"
+                id="icon"
+                name="icon"
+                accept="image/png"
+            />
         </div>
 
         <button class="button-1" type="submit">Submit</button>

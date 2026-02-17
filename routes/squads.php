@@ -8,5 +8,3 @@ Route::prefix('squads')
         Route::get('/', 'showAll');
         Route::get('/all', 'getAll');
     });
-
-

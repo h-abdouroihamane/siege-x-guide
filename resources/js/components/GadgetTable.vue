@@ -1,7 +1,14 @@
 <script setup>
 import { ref } from 'vue';
 import { normalize } from '../scripts/operator.ts';
-const props = defineProps(['gadgets', 'operators', 'side', 'operationName', 'year', 'season']);
+const props = defineProps([
+    'gadgets',
+    'operators',
+    'side',
+    'operationName',
+    'year',
+    'season',
+]);
 const publicPath = import.meta.env.BASE_URL;
 
 const getGadgetLogo = (gadgetName) => {
@@ -9,7 +16,8 @@ const getGadgetLogo = (gadgetName) => {
     return `${publicPath}secondaryGadgets/${name}.png`;
 };
 
-const getOperatorIcon = (operatorName) => `${publicPath}operatorIcons/${normalize(operatorName)}.png`;
+const getOperatorIcon = (operatorName) =>
+    `${publicPath}operatorIcons/${normalize(operatorName)}.png`;
 let selectedOperator = ref('');
 const setSelectedOperator = (name) => (selectedOperator.value = name);
 
@@ -46,7 +54,7 @@ const copyAltText = () => {
         },
         () => {
             alert('Failed to copy :(');
-        }
+        },
     );
 };
 </script>
@@ -57,7 +65,11 @@ const copyAltText = () => {
             <label for="operator-filter">Highlight operator</label>
             <select id="operator-filter" v-model="selectedOperator">
                 <option value="">None</option>
-                <option v-for="(name, index) in props.operators" :key="index" :value="name">
+                <option
+                    v-for="(name, index) in props.operators"
+                    :key="index"
+                    :value="name"
+                >
                     {{ name }}
                 </option>
             </select>
@@ -71,23 +83,51 @@ const copyAltText = () => {
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="gadget in props.gadgets" :key="gadget.name" class="gadget-row">
+                <tr
+                    v-for="gadget in props.gadgets"
+                    :key="gadget.name"
+                    class="gadget-row"
+                >
                     <td>
                         <div class="gadget">
-                            <img class="gadget-logo" :src="getGadgetLogo(gadget.name)" :alt="gadget.name" />
+                            <img
+                                class="gadget-logo"
+                                :src="getGadgetLogo(gadget.name)"
+                                :alt="gadget.name"
+                            />
                             <p class="gadget-name">{{ gadget.name }}</p>
                         </div>
                     </td>
                     <td>
                         <div class="operator-container">
-                            <div class="operator" v-for="(operatorName, index) in gadget.operators" :key="index">
+                            <div
+                                class="operator"
+                                v-for="(
+                                    operatorName, index
+                                ) in gadget.operators"
+                                :key="index"
+                            >
                                 <img
-                                    :class="['operator-icon', 'hvr-grow', { faded: selectedOperator !== '' && selectedOperator !== operatorName }]"
+                                    :class="[
+                                        'operator-icon',
+                                        'hvr-grow',
+                                        {
+                                            faded:
+                                                selectedOperator !== '' &&
+                                                selectedOperator !==
+                                                    operatorName,
+                                        },
+                                    ]"
                                     :src="getOperatorIcon(operatorName)"
                                     :alt="operatorName"
                                     @click="setSelectedOperator(operatorName)"
                                 />
-                                <p v-if="selectedOperator === operatorName" class="operator-name">{{ operatorName }}</p>
+                                <p
+                                    v-if="selectedOperator === operatorName"
+                                    class="operator-name"
+                                >
+                                    {{ operatorName }}
+                                </p>
                             </div>
                         </div>
                     </td>
@@ -96,10 +136,17 @@ const copyAltText = () => {
         </table>
 
         <div id="credit" :class="{ screenshot: !screenshotMode }">
-            <a href="#" title="Siege X Guide - Secondary gadgets section">https://siege-x-guide.alsagone.ovh/secondary-gadgets</a>
+            <a href="#" title="Siege X Guide - Secondary gadgets section"
+                >https://siege-x-guide.alsagone.ovh/secondary-gadgets</a
+            >
         </div>
 
-        <button v-if="screenshotMode" class="button-1" role="button" @click="toggleScreenshotMode()">
+        <button
+            v-if="screenshotMode"
+            class="button-1"
+            role="button"
+            @click="toggleScreenshotMode()"
+        >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                 <!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
                 <path
@@ -109,7 +156,12 @@ const copyAltText = () => {
             Return to normal view
         </button>
 
-        <button v-else class="button-1" role="button" @click="toggleScreenshotMode()">
+        <button
+            v-else
+            class="button-1"
+            role="button"
+            @click="toggleScreenshotMode()"
+        >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                 <!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
                 <path
@@ -119,7 +171,12 @@ const copyAltText = () => {
             Toggle screenshot mode
         </button>
 
-        <button v-if="screenshotMode" class="button-1 grey" role="button" @click="copyAltText()">
+        <button
+            v-if="screenshotMode"
+            class="button-1 grey"
+            role="button"
+            @click="copyAltText()"
+        >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
                 <!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
                 <path

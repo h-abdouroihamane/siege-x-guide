@@ -54,7 +54,11 @@
 }
 .gradient {
     background: #000000;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(255, 75, 60, 1) 100%);
+    background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(255, 75, 60, 1) 100%
+    );
     position: relative;
     top: 5px;
     height: 77px;

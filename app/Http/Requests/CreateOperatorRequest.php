@@ -34,20 +34,23 @@ class CreateOperatorRequest extends FormRequest
             'queerIdentities.*' => 'string|exists:queer_identities,name',
             'roles' => 'sometimes|array',
             'roles.*' => 'string|exists:roles,name',
-            'portrait' => 'required|image|mimes:png|dimensions:max_width=300,max_height=500',
-            'icon' => 'required|image|mimes:png|dimensions:max_width=250,max_height=250'
+            'portrait' =>
+                'required|image|mimes:png|dimensions:max_width=300,max_height=500',
+            'icon' =>
+                'required|image|mimes:png|dimensions:max_width=250,max_height=250',
         ];
-
     }
 
-    public function messages(): array {
+    public function messages(): array
+    {
         return [
             'required' => ':attribute is required',
             'string' => ':attribute should be a string',
             'numeric' => ':attribute should be a number',
             'side.in' => 'Side should be either "Attack" or "Defense"',
-            'portrait.dimensions' => 'Portraits should be 300x500px (Width x Height) max',
-            'icon.dimensions' => 'Icons should be 250x250px max'
+            'portrait.dimensions' =>
+                'Portraits should be 300x500px (Width x Height) max',
+            'icon.dimensions' => 'Icons should be 250x250px max',
         ];
     }
 }

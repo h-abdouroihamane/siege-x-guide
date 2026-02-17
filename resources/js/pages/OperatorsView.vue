@@ -23,8 +23,8 @@ const allOperators: Operator[] = page.props.operators.data.map(
             op.roles,
             op.squad,
             op.queerIdentities,
-            op.reworked
-        )
+            op.reworked,
+        ),
 );
 
 let operators = ref([...allOperators]);
@@ -40,7 +40,7 @@ const placeholderOperator = new Operator(
     -1,
     'opPlaceHolder',
     [],
-    'placeholderSquad'
+    'placeholderSquad',
 );
 const selectedOperator = ref(placeholderOperator);
 
@@ -110,7 +110,11 @@ filterAndSort();
         <div id="container">
             <Logo :text="'Operator Guide'" />
             <div id="main-content">
-                <Sidebar @sort-by="sortOperators" @filter-side="filterOperators" @toggle-queer="toggleQueer" />
+                <Sidebar
+                    @sort-by="sortOperators"
+                    @filter-side="filterOperators"
+                    @toggle-queer="toggleQueer"
+                />
 
                 <div id="card-container">
                     <OperatorCard
@@ -124,11 +128,16 @@ filterAndSort();
                     </OperatorCard>
                 </div>
             </div>
-            <Description v-if="selectedOperator.year >= 0" v-bind="selectedOperator" />
+            <Description
+                v-if="selectedOperator.year >= 0"
+                v-bind="selectedOperator"
+            />
             <div id="description" v-else>
                 <span id="invisible-span"></span>
                 <div id="description-text">
-                    <span id="ability">Select an operator to see its description</span>
+                    <span id="ability"
+                        >Select an operator to see its description</span
+                    >
                 </div>
             </div>
         </div>
