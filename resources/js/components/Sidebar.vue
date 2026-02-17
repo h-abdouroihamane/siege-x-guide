@@ -87,7 +87,7 @@ const emitSortingSide = () => {
             <p class="sort-label">Sort by</p>
             <button
                 id="sort-name"
-                class="radio-button right sort name-btn"
+                class="radio-button left sort name-btn"
                 :class="{ active: sortMode === 'name' }"
                 name="sortName"
                 @click="toggleSort('name')"
@@ -101,7 +101,7 @@ const emitSortingSide = () => {
             </button>
             <button
                 id="sort-date"
-                class="radio-button left sort date-btn"
+                class="radio-button right sort date-btn"
                 :class="{ active: sortMode === 'date' }"
                 name="sortDate"
                 @click="toggleSort('date')"
