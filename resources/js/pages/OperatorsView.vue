@@ -28,7 +28,7 @@ const allOperators: Operator[] = page.props.operators.data.map(
 );
 
 let operators = ref([...allOperators]);
-let sortingMethod = ref('date');
+let sortingMethod = ref('name');
 let activeSides = ref('attackersdefenders');
 let showQueerIdentities = ref(false);
 

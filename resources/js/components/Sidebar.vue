@@ -7,7 +7,7 @@ const emit = defineEmits(['sortBy', 'filterSide']);
 const isSmall = ref(true);
 const toggleSidebar = () => (isSmall.value = !isSmall.value);
 
-const sortMode = ref('date');
+const sortMode = ref('name');
 
 const toggleSort = (sortingMethod) => {
     sortMode.value = sortingMethod;
@@ -42,7 +42,6 @@ const emitSortingSide = () => {
     emit('filterSide', sides);
 };
 </script>
-
 <template>
     <div class="sidebar" :class="{ small: isSmall }">
         <button id="close-button" @click="toggleSidebar">
@@ -67,7 +66,6 @@ const emitSortingSide = () => {
             </svg>
             Filters
         </button>
-
         <div id="btn-grid">
             <p class="filter-label">Side</p>
             <button
@@ -88,20 +86,6 @@ const emitSortingSide = () => {
             </button>
             <p class="sort-label">Sort by</p>
             <button
-                id="sort-date"
-                class="radio-button left sort date-btn"
-                :class="{ active: sortMode === 'date' }"
-                name="sortDate"
-                @click="toggleSort('date')"
-            >
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                    <!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
-                    <path
-                        d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 40L64 64C28.7 64 0 92.7 0 128l0 16 0 48L0 448c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-256 0-48 0-16c0-35.3-28.7-64-64-64l-40 0 0-40c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 40L152 64l0-40zM48 192l352 0 0 256c0 8.8-7.2 16-16 16L64 464c-8.8 0-16-7.2-16-16l0-256z"
-                    /></svg
-                >Most recent
-            </button>
-            <button
                 id="sort-name"
                 class="radio-button right sort name-btn"
                 :class="{ active: sortMode === 'name' }"
@@ -115,10 +99,23 @@ const emitSortingSide = () => {
                     /></svg
                 >Name
             </button>
+            <button
+                id="sort-date"
+                class="radio-button left sort date-btn"
+                :class="{ active: sortMode === 'date' }"
+                name="sortDate"
+                @click="toggleSort('date')"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                    <!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                    <path
+                        d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 40L64 64C28.7 64 0 92.7 0 128l0 16 0 48L0 448c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-256 0-48 0-16c0-35.3-28.7-64-64-64l-40 0 0-40c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 40L152 64l0-40zM48 192l352 0 0 256c0 8.8-7.2 16-16 16L64 464c-8.8 0-16-7.2-16-16l0-256z"
+                    /></svg
+                >Most recent
+            </button>
         </div>
     </div>
 </template>
-
 <style>
 .sidebar {
     width: max-content;
@@ -168,6 +165,7 @@ const emitSortingSide = () => {
     height: 30px;
     margin: 10px;
 }
+
 #close-button path {
     fill: #ff4b3c;
 }
@@ -181,18 +179,23 @@ const emitSortingSide = () => {
 #btn-grid .sort-label {
     grid-area: sort;
 }
+
 #btn-grid #sort-date {
     grid-area: date;
 }
+
 #btn-grid #sort-name {
     grid-area: name;
 }
+
 #btn-grid .filter-label {
     grid-area: filter;
 }
+
 #btn-grid #attackers {
     grid-area: attackers;
 }
+
 #btn-grid #defenders {
     grid-area: defenders;
 }
@@ -249,11 +252,13 @@ const emitSortingSide = () => {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
 }
+
 .radio-button.active.attackers,
 .radio-button:not(.active):hover.attackers {
     background-color: #d9610f;
     box-shadow: rgba(217, 97, 15, 0.2) 0 1px 0 inset;
 }
+
 .radio-button.active.defenders,
 .radio-button:not(.active):hover.defenders {
     background-color: #0e87c8;
@@ -278,6 +283,7 @@ const emitSortingSide = () => {
     border-color: rgba(217, 97, 15, 0.1);
     background-color: rgba(217, 97, 15, 0.3);
 }
+
 .radio-button:not(.active).defenders {
     border-color: rgba(14, 135, 200, 0.1);
     background-color: rgba(14, 135, 200, 0.3);
@@ -296,6 +302,7 @@ const emitSortingSide = () => {
 .radio-button:not(.active):hover.attackers {
     background-color: #d9610f;
 }
+
 .radio-button:not(.active):hover.defenders {
     background-color: #0e87c8;
 }
@@ -303,9 +310,11 @@ const emitSortingSide = () => {
 .radio-button:focus {
     outline: none;
 }
+
 .radio-button:focus.attackers {
     box-shadow: rgba(217, 97, 15, 0.4) 0 0 0 3px;
 }
+
 .radio-button:focus.defenders {
     box-shadow: rgba(14, 135, 200, 0.4) 0 0 0 3px;
 }
