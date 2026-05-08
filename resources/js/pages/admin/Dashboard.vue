@@ -97,34 +97,36 @@ const paths = [
 
 .title,
 .body {
-    position: relative;
+    position: absolute;
+    left: 20px;
+    right: 20px;
     z-index: 1;
-    margin-left: 20px;
     transition: 0.3s;
     text-shadow: 1px 1px 2px #000;
 }
 
 .title {
+    bottom: 16px;
     font-family: var(--font-display);
     text-transform: uppercase;
     font-size: 2.4em;
     line-height: 1;
-    margin-top: auto;
-    margin-bottom: 18px;
 }
 
 .section-card:hover .title {
-    margin-bottom: 36px;
+    bottom: 64px;
 }
 
 .body {
-    position: absolute;
-    bottom: 12px;
-    left: 0;
-    right: 20px;
-    font-size: 0.95em;
+    bottom: 16px;
+    font-size: 0.9em;
     font-weight: 600;
+    line-height: 1.25;
     opacity: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .section-card:hover .body {
