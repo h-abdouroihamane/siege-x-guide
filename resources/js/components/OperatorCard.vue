@@ -35,6 +35,8 @@ const props = defineProps<{
                 v-for="qIdentity in props.operator.queerIdentities"
                 :key="qIdentity"
                 :class="`pride-flag ${qIdentity.toLowerCase()}`"
+                :aria-label="qIdentity"
+                :title="qIdentity"
             ></span>
         </div>
         <span class="operator-name">{{ props.operator.name }}</span>

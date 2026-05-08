@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { normalize } from '../scripts/operator.ts';
+import { SITE_URL } from '../scripts/site.ts';
 import type { SecondaryGadgetData } from '../types/domain.ts';
 
 const props = defineProps<{
@@ -44,7 +45,7 @@ const getAltText = () => {
         text += gadget.operators.join(', ') + '\n\n';
     }
 
-    text += 'Source: https://siege-x-guide.alsagone.ovh/secondary-gadgets';
+    text += `Source: ${SITE_URL}/secondary-gadgets`;
 
     return text;
 };
@@ -139,7 +140,7 @@ const copyAltText = () => {
 
         <div id="credit" :class="{ screenshot: !screenshotMode }">
             <a href="#" title="Siege X Guide - Secondary gadgets section"
-                >https://siege-x-guide.alsagone.ovh/secondary-gadgets</a
+                >{{ SITE_URL }}/secondary-gadgets</a
             >
         </div>
 

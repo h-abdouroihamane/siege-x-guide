@@ -13,7 +13,6 @@
     height: 40px;
     line-height: 20px;
     list-style: none;
-    outline: none;
     padding: 10px 16px;
     position: relative;
     text-align: center;
@@ -34,6 +33,11 @@
 .button-1:hover,
 .button-1:focus {
     background-color: #f8d002;
+}
+
+.button-1:focus-visible {
+    outline: 2px solid #ff4b3c;
+    outline-offset: 2px;
 }
 
 .button-1 svg {
@@ -134,8 +138,9 @@
     background-color: #0e87c8;
 }
 
-.radio-button:focus {
-    outline: none;
+.radio-button:focus-visible {
+    outline: 2px solid #ff4b3c;
+    outline-offset: 2px;
 }
 .radio-button:focus.attackers {
     box-shadow: rgba(217, 97, 15, 0.4) 0 0 0 3px;

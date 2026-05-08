@@ -34,15 +34,22 @@ const publicPath = import.meta.env.BASE_URL;
         </div>
         <ul>
             <li>
-                <a href="/" :class="{ active: activeRoute.home }">Home</a>
+                <a
+                    :href="route('home.index')"
+                    :class="{ active: activeRoute.home }"
+                    >Home</a
+                >
             </li>
 
             <li>
-                <a href="/operators" :class="{ active: activeRoute.operators }"
+                <a
+                    :href="route('operator.show')"
+                    :class="{ active: activeRoute.operators }"
                     >Operators</a
                 >
             </li>
             <li>
+                <!-- secondary-gadgets route has no name; flagged for backend-dev -->
                 <a
                     href="/secondary-gadgets"
                     :class="{ active: activeRoute.secondaryGadgets }"
@@ -51,6 +58,7 @@ const publicPath = import.meta.env.BASE_URL;
             </li>
 
             <li>
+                <!-- squads route has no name; flagged for backend-dev -->
                 <a href="/squads" :class="{ active: activeRoute.squads }"
                     >Squads</a
                 >
@@ -58,19 +66,21 @@ const publicPath = import.meta.env.BASE_URL;
 
             <li>
                 <a
-                    href="/vocabulary"
+                    :href="route('vocabulary.index')"
                     :class="{ active: activeRoute.vocabulary }"
                     >Vocabulary</a
                 >
             </li>
             <li>
-                <a href="/about" :class="{ active: activeRoute.about }"
+                <a
+                    :href="route('about.index')"
+                    :class="{ active: activeRoute.about }"
                     >About me</a
                 >
             </li>
             <li v-if="inLocalEnv">
                 <a
-                    href="/admin/dashboard"
+                    :href="route('admin.dashboard')"
                     :class="{ active: activeRoute.admin }"
                     >Admin panel</a
                 >
@@ -89,15 +99,22 @@ const publicPath = import.meta.env.BASE_URL;
     <div class="menubar" :class="{ 'menubar-active': menubarActive }">
         <ul>
             <li>
-                <a href="/" :class="{ active: activeRoute.home }">Home</a>
+                <a
+                    :href="route('home.index')"
+                    :class="{ active: activeRoute.home }"
+                    >Home</a
+                >
             </li>
 
             <li>
-                <a href="/operators" :class="{ active: activeRoute.operators }"
+                <a
+                    :href="route('operator.show')"
+                    :class="{ active: activeRoute.operators }"
                     >Operators</a
                 >
             </li>
             <li>
+                <!-- secondary-gadgets route has no name; flagged for backend-dev -->
                 <a
                     href="/secondary-gadgets"
                     :class="{ active: activeRoute.secondaryGadgets }"
@@ -106,25 +123,28 @@ const publicPath = import.meta.env.BASE_URL;
             </li>
 
             <li>
+                <!-- squads route has no name; flagged for backend-dev -->
                 <a href="/squads" :class="{ active: activeRoute.squads }"
                     >Squads</a
                 >
             </li>
             <li>
                 <a
-                    href="/vocabulary"
+                    :href="route('vocabulary.index')"
                     :class="{ active: activeRoute.vocabulary }"
                     >Vocabulary</a
                 >
             </li>
             <li>
-                <a href="/about" :class="{ active: activeRoute.about }"
+                <a
+                    :href="route('about.index')"
+                    :class="{ active: activeRoute.about }"
                     >About me</a
                 >
             </li>
             <li v-if="inLocalEnv">
                 <a
-                    href="/admin/dashboard"
+                    :href="route('admin.dashboard')"
                     :class="{ active: activeRoute.admin }"
                     >Admin panel</a
                 >

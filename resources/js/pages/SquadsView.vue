@@ -4,6 +4,7 @@ import Navbar from '@/components/Navbar.vue';
 import { Head, usePage } from '@inertiajs/vue3';
 import { ref } from 'vue';
 import { normalize } from '../scripts/operator.ts';
+import { SITE_URL } from '../scripts/site.ts';
 
 const page = usePage();
 const squads = Object.entries(page.props.squads as Record<string, string[]>);
@@ -26,7 +27,7 @@ const getAltText = () => {
         text += operators.join(', ') + '\n\n';
     }
 
-    text += 'Source: https://siege-x-guide.alsagone.ovh/squads';
+    text += `Source: ${SITE_URL}/squads`;
 
     return text;
 };
@@ -113,7 +114,7 @@ const toggleScreenshotMode = () => {
                 </table>
                 <div id="credit" :class="{ screenshot: !screenshotMode }">
                     <a href="#" title="Siege X Guide - Squads section"
-                        >https://siege-x-guide.alsagone.ovh/squads</a
+                        >{{ SITE_URL }}/squads</a
                     >
                 </div>
 

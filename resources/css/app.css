@@ -1,3 +1,10 @@
+/*
+ * Aesthetic: tactical dossier (R6 Siege).
+ * Ref: ubisoft.com/en-us/game/rainbow-six/siege/game-info/operators
+ * Body: FK Grotesk. Display: GT America Compressed Bold.
+ * Palette: near-black ground (#010101), signal-red accent (#ff4b3c).
+ * Dark only — no light variant.
+ */
 @import 'tailwindcss';
 
 @import 'tw-animate-css';
@@ -9,9 +16,10 @@
 
 @theme inline {
     --font-sans:
-        Instrument Sans, ui-sans-serif, system-ui, sans-serif,
-        'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
-        'Noto Color Emoji';
+        'FK Grotesk', ui-sans-serif, sans-serif, 'Apple Color Emoji',
+        'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+    --font-display: 'GT America Compressed Bold', ui-sans-serif, sans-serif;
 
     --radius-lg: var(--radius);
     --radius-md: calc(var(--radius) - 2px);
@@ -76,16 +84,6 @@
     ::backdrop,
     ::file-selector-button {
         border-color: var(--color-gray-200, currentColor);
-    }
-}
-
-@layer utilities {
-    body,
-    html {
-        --font-sans:
-            'Instrument Sans', ui-sans-serif, system-ui, sans-serif,
-            'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
-            'Noto Color Emoji';
     }
 }
 
