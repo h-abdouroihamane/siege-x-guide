@@ -12,6 +12,7 @@ class Operation extends Model
     use HasFactory;
     protected $table = 'operations';
     protected $keyType = 'string';
+    public $incrementing = false;
     protected $hidden = ['id', 'pivot'];
     protected $guarded = [];
     public $timestamps = false;

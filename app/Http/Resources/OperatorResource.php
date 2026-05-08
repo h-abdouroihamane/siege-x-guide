@@ -33,6 +33,7 @@ class OperatorResource extends JsonResource
         $operation = $this->getOperation();
 
         return [
+            'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
             'side' => $this->side,

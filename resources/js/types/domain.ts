@@ -16,6 +16,7 @@ export interface OperationData {
  * operator for editing).
  */
 export interface OperatorData {
+    id: string;
     name: string;
     description: string;
     side: string;
