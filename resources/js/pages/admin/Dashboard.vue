@@ -23,7 +23,7 @@
                 >
                     <img class="h-full w-full" :src="p.image" :alt="p.label" />
                     <span
-                        class="dashboard-card-name my-[5px] flex h-[20px] items-center justify-center bg-[rgba(17,17,17,0.15)] px-0 pt-[7px] pb-[10px] text-[20px] text-white uppercase backdrop-blur-[2px]"
+                        class="font-gt-america my-[5px] flex h-[20px] items-center justify-center bg-[rgba(17,17,17,0.15)] px-0 pt-[7px] pb-[10px] text-[20px] text-white uppercase backdrop-blur-[2px]"
                         >{{ p.label }}</span
                     >
                 </div>
@@ -48,11 +48,3 @@ const paths = [
     { label: 'Edit operator', url: page.props.editRoute, image: '/sens.jpg' },
 ];
 </script>
-
-<style scoped>
-/* Regular 'GT America' (not the display compressed variant).
-   Will promote to a --font-gt-america @theme token in batch 3. */
-.dashboard-card-name {
-    font-family: 'GT America', sans-serif;
-}
-</style>

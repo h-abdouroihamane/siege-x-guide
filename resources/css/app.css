@@ -20,6 +20,8 @@
 
     --font-display: 'GT America Compressed Bold', ui-sans-serif, sans-serif;
 
+    --font-gt-america: 'GT America', ui-sans-serif, sans-serif;
+
     --font-mono: 'Simplon Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 
     --radius-lg: var(--radius);

@@ -64,7 +64,9 @@ const getSide = () => {
                 :src="props.icon"
                 :alt="`${props.name} icon`"
             />
-            <span class="name text-[22px] uppercase">{{ props.name }}</span>
+            <span class="name font-gt-america text-[22px] uppercase">{{
+                props.name
+            }}</span>
 
             <div id="side-container" class="flex flex-row items-center">
                 <AttackerLogo
@@ -104,18 +106,10 @@ const getSide = () => {
 
 <style scoped>
 /*
- * The .name uses regular 'GT America' (not the display compressed
- * variant). Promotable to a --font-gt-america @theme token in
- * batch 3 once more components migrate.
- *
  * The side-icon path fills sit on SVG paths rendered by child
  * components (AttackerLogo / DefenderLogo); :deep() pierces
  * scope so the descendant selector reaches them.
  */
-.name {
-    font-family: 'GT America', sans-serif;
-}
-
 :deep(.side-icon.attacker-logo path) {
     fill: #d9610f;
 }
