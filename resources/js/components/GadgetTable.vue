@@ -63,7 +63,7 @@ const copyAltText = () => {
 </script>
 
 <template>
-    <div class="col flex">
+    <div class="flex flex-col">
         <div id="filter-container" :class="{ screenshot: screenshotMode }">
             <label for="operator-filter">Highlight operator</label>
             <select id="operator-filter" v-model="selectedOperator">
