@@ -43,7 +43,7 @@ const props = defineProps<{
             ></span>
         </div>
         <span
-            class="operator-name flex h-[20px] items-center justify-center bg-[rgba(17,17,17,0.15)] px-0 pt-[7px] pb-[10px] text-[20px] text-white uppercase backdrop-blur-[2px]"
+            class="operator-name my-[5px] flex h-[20px] items-center justify-center bg-[rgba(17,17,17,0.15)] px-0 pt-[7px] pb-[10px] text-[20px] text-white uppercase backdrop-blur-[2px]"
             >{{ props.operator.name }}</span
         >
     </div>
