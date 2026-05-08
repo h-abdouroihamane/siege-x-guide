@@ -1,14 +1,16 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { normalize } from '../scripts/operator.ts';
-const props = defineProps([
-    'gadgets',
-    'operators',
-    'side',
-    'operationName',
-    'year',
-    'season',
-]);
+import type { SecondaryGadgetData } from '../types/domain.ts';
+
+const props = defineProps<{
+    gadgets: SecondaryGadgetData[];
+    operators: string[];
+    side: string;
+    operationName: string;
+    year: number;
+    season: number;
+}>();
 const publicPath = import.meta.env.BASE_URL;
 
 const getGadgetLogo = (gadgetName) => {

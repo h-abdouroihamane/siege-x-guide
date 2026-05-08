@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-const props = defineProps(['path']);
+
+const props = defineProps<{
+    path: string;
+}>();
 const inLocalEnv = process.env.NODE_ENV === 'development';
 
 const activeRoute = {
