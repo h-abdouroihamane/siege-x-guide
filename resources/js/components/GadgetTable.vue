@@ -64,7 +64,10 @@ const copyAltText = () => {
 
 <template>
     <div class="flex flex-col items-center">
-        <div id="filter-container" :class="{ screenshot: screenshotMode }">
+        <div
+            v-show="!screenshotMode"
+            class="my-2.5 flex flex-col items-center justify-center"
+        >
             <label for="operator-filter">Highlight operator</label>
             <select id="operator-filter" v-model="selectedOperator">
                 <option value="">None</option>
@@ -138,7 +141,7 @@ const copyAltText = () => {
             </tbody>
         </table>
 
-        <div id="credit" :class="{ screenshot: !screenshotMode }">
+        <div v-show="screenshotMode" id="credit" class="mt-2.5">
             <a href="#" title="Siege X Guide - Secondary gadgets section"
                 >{{ SITE_URL }}/secondary-gadgets</a
             >
@@ -191,13 +194,3 @@ const copyAltText = () => {
         </button>
     </div>
 </template>
-
-<style>
-#filter-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 10px 0;
-}
-</style>
