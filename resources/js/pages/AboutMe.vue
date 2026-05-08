@@ -1,10 +1,8 @@
-<script setup>
+<script setup lang="ts">
 import IntroCard from '@/components/IntroCard.vue';
 import Logo from '@/components/Logo.vue';
 import Navbar from '@/components/Navbar.vue';
-import { Head, usePage } from '@inertiajs/vue3';
-
-const page = usePage();
+import { Head } from '@inertiajs/vue3';
 
 const urls = {
     mentorCard: 'https://alsagone.gitlab.io/mentor-card/',

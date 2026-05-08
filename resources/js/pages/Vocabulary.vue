@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import Logo from '@/components/Logo.vue';
 import Navbar from '@/components/Navbar.vue';
 import { Head, usePage } from '@inertiajs/vue3';
@@ -25,7 +25,7 @@ const data = page.props.roles.sort((a, b) => a.name > b.name);
                 <div class="section">
                     <span class="title">Roles</span>
                     <div id="role-container">
-                        <div class="role" v-for="(role, index) in data">
+                        <div class="role" v-for="role in data" :key="role.name">
                             <span class="name">{{ role.name }}</span>
                             <span class="definition">{{
                                 role.definition

@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const publicPath = import.meta.env.BASE_URL;
 const props = defineProps(['text']);
 const text = props.text ?? '';

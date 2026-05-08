@@ -1,5 +1,5 @@
-<script setup>
-import { useForm, usePage } from '@inertiajs/vue3';
+<script setup lang="ts">
+import { useForm } from '@inertiajs/vue3';
 const props = defineProps([
     'operator',
     'squads',
@@ -7,8 +7,6 @@ const props = defineProps([
     'queerIdentities',
     'roles',
 ]);
-const page = usePage();
-const operator = props.operator;
 
 const form = useForm({
     operationName: undefined,
@@ -52,6 +50,7 @@ function submit() {
                 <select id="season" name="season" v-model="form.season">
                     <option
                         v-for="seasonCount in [1, 2, 3, 4]"
+                        :key="seasonCount"
                         :value="seasonCount"
                     >
                         {{ seasonCount }}
@@ -87,7 +86,11 @@ function submit() {
         <div class="form-element">
             <label for="side">Side</label>
             <select id="side" v-model="form.side">
-                <option v-for="side in ['Attack', 'Defense']" :value="side">
+                <option
+                    v-for="side in ['Attack', 'Defense']"
+                    :key="side"
+                    :value="side"
+                >
                     {{ side }}
                 </option>
             </select>
@@ -96,14 +99,20 @@ function submit() {
         <div class="form-element">
             <label for="roles">Role(s)</label>
             <select id="roles" multiple v-model="form.roles">
-                <option v-for="r in props.roles" :value="r">{{ r }}</option>
+                <option v-for="r in props.roles" :key="r" :value="r">
+                    {{ r }}
+                </option>
             </select>
         </div>
 
         <div class="form-element">
             <label for="squad">Squad</label>
             <select id="squad" v-model="form.squad">
-                <option v-for="squad in props.squads" :value="squad">
+                <option
+                    v-for="squad in props.squads"
+                    :key="squad"
+                    :value="squad"
+                >
                     {{ squad }}
                 </option>
             </select>
@@ -116,7 +125,7 @@ function submit() {
                 multiple
                 v-model="form.queerIdentities"
             >
-                <option v-for="q in props.queerIdentities" :value="q">
+                <option v-for="q in props.queerIdentities" :key="q" :value="q">
                     {{ q }}
                 </option>
             </select>
@@ -147,7 +156,9 @@ function submit() {
         <button class="button-1" type="submit">Submit</button>
 
         <ul id="errors" v-if="Object.values(form.errors).length > 0">
-            <li v-for="message in Object.values(form.errors)">{{ message }}</li>
+            <li v-for="message in Object.values(form.errors)" :key="message">
+                {{ message }}
+            </li>
         </ul>
     </form>
 </template>

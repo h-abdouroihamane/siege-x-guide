@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import Logo from '@/components/Logo.vue';
 import Navbar from '@/components/Navbar.vue';
 import OperatorForm from '@/components/OperatorForm.vue';

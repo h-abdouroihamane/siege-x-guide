@@ -12,7 +12,7 @@
                 page.props.message
             }}</span>
             <div id="options">
-                <a v-for="p in paths" :href="p.url">
+                <a v-for="p in paths" :key="p.url" :href="p.url">
                     <div class="card option">
                         <img
                             class="operator-portrait"
@@ -27,7 +27,7 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { Head, usePage } from '@inertiajs/vue3';
 import Logo from '../../components/Logo.vue';
 import Navbar from '../../components/Navbar.vue';

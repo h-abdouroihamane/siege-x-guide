@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue';
 const props = defineProps(['path']);
 const inLocalEnv = process.env.NODE_ENV === 'development';
@@ -13,8 +13,8 @@ const activeRoute = {
     secondaryGadgets: props.path === 'secondaryGadgets',
 };
 
-let hamburgerActive = ref(false);
-let menubarActive = ref(false);
+const hamburgerActive = ref(false);
+const menubarActive = ref(false);
 
 const toggleNav = () => {
     hamburgerActive.value = !hamburgerActive.value;

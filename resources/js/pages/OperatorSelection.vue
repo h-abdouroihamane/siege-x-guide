@@ -1,10 +1,9 @@
-<script setup>
+<script setup lang="ts">
 import Logo from '@/components/Logo.vue';
-import { usePage } from '@inertiajs/vue3';
-const page = usePage();
-const operators = page.props.operators;
+import { Head, useForm, usePage } from '@inertiajs/vue3';
 
-import { Head, useForm } from '@inertiajs/vue3';
+const page = usePage();
+const operators = page.props.operators as string[];
 
 const form = useForm({
     operatorName: operators[0],

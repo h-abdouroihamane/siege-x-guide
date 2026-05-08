@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import AttackerLogo from '../components/AttackerLogo.vue';
 import DefenderLogo from '../components/DefenderLogo.vue';
 
