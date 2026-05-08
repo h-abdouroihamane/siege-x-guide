@@ -6,6 +6,7 @@ import Sidebar from '@/components/Sidebar.vue';
 import { Head, usePage } from '@inertiajs/vue3';
 import { ref } from 'vue';
 import Navbar from '../components/Navbar.vue';
+import PageLayout from '@/components/PageLayout.vue';
 import { Operator } from '../scripts/operator.ts';
 
 const page = usePage();
@@ -60,7 +61,6 @@ const filterOperators = (sides) => {
 
 const toggleQueer = (b) => {
     showQueerIdentities.value = b;
-    console.log('Queer from main:' + showQueerIdentities.value);
 };
 
 const filterAndSort = () => {
@@ -75,7 +75,6 @@ const filterAndSort = () => {
     } else if (defenders) {
         result = allOperators.filter((op) => op.isDefender());
     } else {
-        console.error("Can't filter out both attackers AND defenders");
         return;
     }
 
@@ -97,51 +96,48 @@ const filterAndSort = () => {
 filterAndSort();
 </script>
 <template>
-    <div>
-        <Head>
-            <title>Operators</title>
-            <meta
-                name="description"
-                content="Page listing every operator from Rainbow Six Siege X and describing what their ability and/or gadget does"
+    <Head>
+        <title>Operators</title>
+        <meta
+            name="description"
+            content="Page listing every operator from Rainbow Six Siege X and describing what their ability and/or gadget does"
+        />
+    </Head>
+    <Navbar path="operators" />
+    <PageLayout>
+        <Logo :text="'Operator Guide'" />
+        <div id="main-content">
+            <Sidebar
+                @sort-by="sortOperators"
+                @filter-side="filterOperators"
+                @toggle-queer="toggleQueer"
             />
-        </Head>
-        <div id="background-image" />
-        <Navbar path="operators" />
-        <div id="container">
-            <Logo :text="'Operator Guide'" />
-            <div id="main-content">
-                <Sidebar
-                    @sort-by="sortOperators"
-                    @filter-side="filterOperators"
-                    @toggle-queer="toggleQueer"
-                />
 
-                <div id="card-container">
-                    <OperatorCard
-                        v-for="(op, index) in operators"
-                        :key="index"
-                        :operator="op"
-                        :selected="selectedOperator.name === op.name"
-                        :show-queer="showQueerIdentities"
-                        @click="setSelectedOperator(op)"
-                    >
-                    </OperatorCard>
-                </div>
-            </div>
-            <Description
-                v-if="selectedOperator.year >= 0"
-                v-bind="selectedOperator"
-            />
-            <div id="description" v-else>
-                <span id="invisible-span"></span>
-                <div id="description-text">
-                    <span id="ability"
-                        >Select an operator to see its description</span
-                    >
-                </div>
+            <div id="card-container">
+                <OperatorCard
+                    v-for="(op, index) in operators"
+                    :key="index"
+                    :operator="op"
+                    :selected="selectedOperator.name === op.name"
+                    :show-queer="showQueerIdentities"
+                    @click="setSelectedOperator(op)"
+                >
+                </OperatorCard>
             </div>
         </div>
-    </div>
+        <Description
+            v-if="selectedOperator.year >= 0"
+            v-bind="selectedOperator"
+        />
+        <div id="description" v-else>
+            <span id="invisible-span"></span>
+            <div id="description-text">
+                <span id="ability"
+                    >Select an operator to see its description</span
+                >
+            </div>
+        </div>
+    </PageLayout>
 </template>
 
 <style>

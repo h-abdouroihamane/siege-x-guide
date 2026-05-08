@@ -1,10 +1,10 @@
 <?php
 namespace App\Http\Controllers;
 
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
-use App\Models\Operator;
-use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
@@ -15,10 +15,6 @@ class AdminController extends Controller
 
     public function dashboard(Request $request)
     {
-        if (!Auth::user()) {
-            return redirect()->route('admin.login');
-        }
-
         return Inertia::render('admin/Dashboard', [
             'editRoute' => route('operator.selectForEditing'),
             'createRoute' => route('operator.create'),

@@ -7,19 +7,22 @@
     border-style: none;
     box-sizing: border-box;
     cursor: pointer;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
     font-size: 17px;
     font-weight: bold;
     height: 40px;
     line-height: 20px;
     list-style: none;
-    outline: none;
     padding: 10px 16px;
     position: relative;
     text-align: center;
     text-decoration: none;
     transition: all ease 50ms;
     vertical-align: baseline;
+    white-space: nowrap;
     -moz-user-select: none;
     user-select: none;
     -webkit-user-select: none;
@@ -36,10 +39,14 @@
     background-color: #f8d002;
 }
 
+.button-1:focus-visible {
+    outline: 2px solid #ff4b3c;
+    outline-offset: 2px;
+}
+
 .button-1 svg {
     height: 15px;
     width: 15px;
-    margin: 0px 5px 0 0;
 }
 
 .button-1 path {
@@ -134,8 +141,9 @@
     background-color: #0e87c8;
 }
 
-.radio-button:focus {
-    outline: none;
+.radio-button:focus-visible {
+    outline: 2px solid #ff4b3c;
+    outline-offset: 2px;
 }
 .radio-button:focus.attackers {
     box-shadow: rgba(217, 97, 15, 0.4) 0 0 0 3px;

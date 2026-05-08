@@ -1,14 +1,17 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { normalize } from '../scripts/operator.ts';
-const props = defineProps([
-    'gadgets',
-    'operators',
-    'side',
-    'operationName',
-    'year',
-    'season',
-]);
+import { SITE_URL } from '../scripts/site.ts';
+import type { SecondaryGadgetData } from '../types/domain.ts';
+
+const props = defineProps<{
+    gadgets: SecondaryGadgetData[];
+    operators: string[];
+    side: string;
+    operationName: string;
+    year: number;
+    season: number;
+}>();
 const publicPath = import.meta.env.BASE_URL;
 
 const getGadgetLogo = (gadgetName) => {
@@ -42,7 +45,7 @@ const getAltText = () => {
         text += gadget.operators.join(', ') + '\n\n';
     }
 
-    text += 'Source: https://siege-x-guide.alsagone.ovh/secondary-gadgets';
+    text += `Source: ${SITE_URL}/secondary-gadgets`;
 
     return text;
 };
@@ -60,7 +63,7 @@ const copyAltText = () => {
 </script>
 
 <template>
-    <div class="col flex">
+    <div class="flex flex-col items-center">
         <div id="filter-container" :class="{ screenshot: screenshotMode }">
             <label for="operator-filter">Highlight operator</label>
             <select id="operator-filter" v-model="selectedOperator">
@@ -137,7 +140,7 @@ const copyAltText = () => {
 
         <div id="credit" :class="{ screenshot: !screenshotMode }">
             <a href="#" title="Siege X Guide - Secondary gadgets section"
-                >https://siege-x-guide.alsagone.ovh/secondary-gadgets</a
+                >{{ SITE_URL }}/secondary-gadgets</a
             >
         </div>
 

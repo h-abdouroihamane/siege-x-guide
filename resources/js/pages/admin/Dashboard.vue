@@ -1,36 +1,34 @@
 <template>
-    <div>
-        <Head>
-            <title>Admin dashboard</title>
-        </Head>
-        <div id="background-image" />
-        <Navbar path="admin" />
-        <div id="container">
-            <Logo text="Admin dashboard" />
+    <Head>
+        <title>Admin dashboard</title>
+    </Head>
+    <Navbar path="admin" />
+    <PageLayout>
+        <Logo text="Admin dashboard" />
 
-            <span id="message" v-if="page.props.message">{{
-                page.props.message
-            }}</span>
-            <div id="options">
-                <a v-for="p in paths" :key="p.url" :href="p.url">
-                    <div class="card option">
-                        <img
-                            class="operator-portrait"
-                            :src="p.image"
-                            :alt="p.label"
-                        />
-                        <span class="operator-name">{{ p.label }}</span>
-                    </div>
-                </a>
-            </div>
+        <span id="message" v-if="page.props.message">{{
+            page.props.message
+        }}</span>
+        <div id="options">
+            <a v-for="p in paths" :key="p.url" :href="p.url">
+                <div class="card option">
+                    <img
+                        class="operator-portrait"
+                        :src="p.image"
+                        :alt="p.label"
+                    />
+                    <span class="operator-name">{{ p.label }}</span>
+                </div>
+            </a>
         </div>
-    </div>
+    </PageLayout>
 </template>
 
 <script setup lang="ts">
 import { Head, usePage } from '@inertiajs/vue3';
 import Logo from '../../components/Logo.vue';
 import Navbar from '../../components/Navbar.vue';
+import PageLayout from '../../components/PageLayout.vue';
 const page = usePage();
 
 const paths = [

@@ -1,5 +1,10 @@
 <script setup lang="ts">
-const props = defineProps(['operator', 'selected']);
+import type { Operator } from '../scripts/operator.ts';
+
+const props = defineProps<{
+    operator: Operator;
+    selected: boolean;
+}>();
 </script>
 
 <template>
@@ -30,6 +35,8 @@ const props = defineProps(['operator', 'selected']);
                 v-for="qIdentity in props.operator.queerIdentities"
                 :key="qIdentity"
                 :class="`pride-flag ${qIdentity.toLowerCase()}`"
+                :aria-label="qIdentity"
+                :title="qIdentity"
             ></span>
         </div>
         <span class="operator-name">{{ props.operator.name }}</span>

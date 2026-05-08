@@ -1,21 +1,23 @@
 <script setup lang="ts">
+const publicPath = import.meta.env.BASE_URL;
+
 const socials = [
     {
         name: 'Bluesky',
         url: 'https://bsky.app/profile/alsagone.bsky.social',
-        img: '/build/bluesky.svg',
+        img: `${publicPath}bluesky.svg`,
         id: 'bluesky',
     },
     {
         name: 'Twitch',
         url: 'https://twitch.tv/alsagone',
-        img: '/build/twitch.svg',
+        img: `${publicPath}twitch.svg`,
         id: 'twitch',
     },
     {
         name: 'Ko-Fi',
         url: 'https://ko-fi.com/alsagone',
-        img: '/build/kofi.png',
+        img: `${publicPath}kofi.png`,
         id: 'kofi',
     },
 ];
@@ -25,7 +27,8 @@ const mains = {
     defense: ['Kaid', 'Mute', 'Wamai'],
 };
 
-const getIcon = (name) => `/build/operatorIcons/${name.toLowerCase()}.png`;
+const getIcon = (name) =>
+    `${publicPath}operatorIcons/${name.toLowerCase()}.png`;
 const getAlt = (name) => `${name}'s logo`;
 </script>
 
@@ -34,7 +37,7 @@ const getAlt = (name) => `${name}'s logo`;
         <div id="header">
             <img
                 id="profile-picture"
-                src="/build/profilePicture.png"
+                :src="`${publicPath}profilePicture.png`"
                 alt="Me wearing a cosplay of Marcus Holloway from Watch_Dogs 2"
             />
             <p class="title">

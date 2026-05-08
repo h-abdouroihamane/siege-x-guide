@@ -1,14 +1,18 @@
 <script setup lang="ts">
-import { useForm, usePage } from '@inertiajs/vue3';
-const props = defineProps([
-    'operator',
-    'squads',
-    'submitRoute',
-    'operations',
-    'queerIdentities',
-    'roles',
-]);
-const page = usePage();
+import { useForm } from '@inertiajs/vue3';
+import type { OperationOptionData, OperatorData } from '../types/domain.ts';
+
+// TODO(wave-3): OperatorData does not include `id`; the form reads
+// operator.id (line 15) and the hidden input (line 34) will be
+// undefined at runtime. OperatorResource.php should expose it.
+const props = defineProps<{
+    operator: OperatorData;
+    squads: string[];
+    submitRoute: string;
+    operations: { data: OperationOptionData[] };
+    queerIdentities: string[];
+    roles: string[];
+}>();
 const operator = props.operator;
 
 const form = useForm({
@@ -87,7 +91,7 @@ function submit() {
             <label for="operation_id">Operation</label>
             <select id="operation_id" v-model="form.operation_id">
                 <option
-                    v-for="op in page.props.operations.data"
+                    v-for="op in props.operations.data"
                     :key="op.id"
                     :value="op.id"
                 >

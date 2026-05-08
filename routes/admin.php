@@ -7,7 +7,7 @@ Route::prefix('admin')
     ->controller(AdminController::class)
     ->group(function () {
         Route::get('/login', 'index')->name('login');
-        Route::post('/login', 'authenticate');
+        Route::post('/login', 'authenticate')->name('authenticate');
     });
 
 Route::middleware('auth')

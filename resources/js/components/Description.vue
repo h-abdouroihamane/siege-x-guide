@@ -2,21 +2,21 @@
 import AttackerLogo from '../components/AttackerLogo.vue';
 import DefenderLogo from '../components/DefenderLogo.vue';
 
-const props = defineProps([
-    'name',
-    'description',
-    'side',
-    'year',
-    'season',
-    'portrait',
-    'icon',
-    'operationReleaseDate',
-    'operationName',
-    'squad',
-    'roles',
-    'queerIdentities',
-    'reworked',
-]);
+const props = defineProps<{
+    name: string;
+    description: string;
+    side: string;
+    year: number;
+    season: number;
+    portrait: string;
+    icon: string;
+    operationReleaseDate: Date;
+    operationName: string;
+    squad: string;
+    roles: string[];
+    queerIdentities: string[] | null;
+    reworked: boolean;
+}>();
 
 const getRoleStr = () => {
     if (!props.roles) {

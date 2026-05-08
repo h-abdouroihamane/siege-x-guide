@@ -24,8 +24,10 @@ Key facts that drive every decision below:
 - **Persistence**: MySQL 8 (database `siege_x_guide`), accessed via
   Laravel 12 Eloquent. Schema lives in `database/migrations/`.
 - **Hosting**: deployed on OVH.
-- **Theming**: light + dark, toggleable via `useAppearance`
-  composable. Both must meet WCAG AA.
+- **Theming**: dark only. The `useAppearance` composable still
+  exists but is not surfaced in the UI; the visual reference is
+  the official R6 Siege operators page on ubisoft.com. Must meet
+  WCAG AA.
 - **Notifications**: none.
 
 ---
@@ -105,14 +107,14 @@ tests/
   grows past that, **split into a folder** and colocate sub-components
   / sub-modules:
 
-  ```
-  OperatorForm/
-    index.vue            # composes the rest, default export
-    OperatorFormHeader.vue
-    OperatorFormGadgets.vue
-    OperatorFormQueerIdentity.vue
-    types.ts             # if needed
-  ```
+    ```
+    OperatorForm/
+      index.vue            # composes the rest, default export
+      OperatorFormHeader.vue
+      OperatorFormGadgets.vue
+      OperatorFormQueerIdentity.vue
+      types.ts             # if needed
+    ```
 
 - **~80 characters per line.** Documentation examples should be
   shorter, generally no more than 70 characters.
@@ -181,7 +183,7 @@ This project has two effective roles:
   `database/migrations/`**. No clicking in a DB GUI.
 - Migration naming follows Laravel's convention
   (`YYYY_MM_DD_HHMMSS_description.php`); `php artisan
-  make:migration` produces it.
+make:migration` produces it.
 - **Forward-only.** Migrations are immutable once shipped. To fix a
   mistake, write a new migration that corrects it — do not edit a
   deployed migration.
@@ -249,8 +251,7 @@ Sensible baseline:
 - Modals / dialogs: `role="dialog"` + `aria-modal="true"` + focus
   trap (Reka UI's `Dialog` provides this; use it).
 - Visible focus ring at all times. Don't suppress `:focus-visible`.
-- Contrast ≥ 4.5:1 for text, ≥ 3:1 for UI components, in **both**
-  light and dark modes.
+- Contrast ≥ 4.5:1 for text, ≥ 3:1 for UI components.
 - Never convey information by color alone (pair with icon, text, or
   pattern). Critical for queer-flag indicators on operator cards.
 
@@ -265,19 +266,14 @@ Sensible baseline:
   installed). For reusable variant patterns use
   `class-variance-authority`. Don't add a third utility for the same
   job.
-- **Dark mode**: every visual that defines a color/border/background
-  has a `dark:` counterpart. Verify both modes before declaring done.
-  The `useAppearance` composable manages the toggle.
+- **Theming**: dark only. Don't write `dark:` Tailwind variants —
+  the dark palette is the _only_ palette, expressed via plain
+  utilities (`bg-neutral-950`, `text-neutral-100`, etc.) sourced
+  from the Tailwind tokens in `app.css`. The `useAppearance`
+  composable still exists but is not surfaced; do not add a theme
+  toggle without an ADR from `lead-dev`.
 - Spacing scale: stick to Tailwind defaults. Arbitrary values only
   when the design genuinely demands it.
-
-### Dark mode toggle
-
-- Use the existing `useAppearance` composable rather than rolling a
-  new theme store.
-- On first load: respect `prefers-color-scheme`; afterwards, persist
-  user choice (handled by `useAppearance`).
-- Toggle is keyboard-operable and has an `aria-pressed` state.
 
 ---
 
@@ -289,7 +285,7 @@ code. Generic = failure.
 ### Hard bans
 
 - Fonts: Inter, Roboto, Arial, Space Grotesk, system-ui as the
-  *primary* choice. Pair a distinctive display font with a refined
+  _primary_ choice. Pair a distinctive display font with a refined
   body font from Google Fonts or Fontshare.
 - Colors: purple-to-blue gradients on white. Tailwind defaults
   shipped as-is (`slate-900`, `indigo-600`, `gray-50`). "Trust blue"
@@ -359,7 +355,6 @@ Even with tests, every change is manually verified:
 - Golden path
 - At least one edge case
 - Both roles defined for the project (§6): `admin` and `guest`
-- Both themes: light and dark
 
 State what you verified in your handoff message.
 
@@ -373,17 +368,15 @@ A change is done when **all** of the following hold:
 - [ ] Lines ≤ 80 characters (≤ 70 in documentation examples).
 - [ ] Styling stays inline; no new CSS abstractions; no new
       dependency added without justification.
-- [ ] Every visual has a dark-mode counterpart.
 - [ ] UI language verified — English, US conventions, no leakage.
 - [ ] Keyboard-navigable; every input has a `<label for>`; `aria-*`
       where needed.
-- [ ] WCAG AA contrast in both themes.
+- [ ] WCAG AA contrast.
 - [ ] Server-side input validated via FormRequest; client-side
       checks are UX only.
 - [ ] No credentials or secrets committed; `.env` untouched.
 - [ ] Manual verification: golden path + edge case + both roles
-      (`admin` + `guest`) + both themes (or red→green automated
-      test).
+      (`admin` + `guest`) (or red→green automated test).
 - [ ] §11 Frontend design directive respected on UI changes.
 - [ ] Reviewed by `code-reviewer` before merge.
 
@@ -398,28 +391,34 @@ if missing.
 `claude-sonnet-4-6`. Each agent file declares a `model:` line in
 its frontmatter; keep them in sync.
 
-### `lead-dev` *(read-only)*
+### `lead-dev` _(read-only)_
+
 Architecture decisions, task decomposition, trade-off analysis,
 cross-layer coordination (Vue ↔ Inertia ↔ Laravel ↔ DB). Produces
 ADRs and delegation plans. **Does not write code.**
 
 ### `frontend-dev`
-Inertia pages, Vue components, composables, UI strings, dark mode,
+
+Inertia pages, Vue components, composables, UI strings,
 accessibility.
 
 ### `backend-dev`
+
 Laravel controllers, FormRequests, middleware, console commands,
 server-side validation.
 
 ### `database-engineer`
+
 Eloquent models and relationships, schema migrations, seeders,
 factories.
 
 ### `qa-tester`
+
 Pest tests (TDD), manual QA plans, regression checklists,
 accessibility passes.
 
-### `code-reviewer` *(read-only)*
+### `code-reviewer` _(read-only)_
+
 Reviews pending diffs / PRs before merge.
 
 ---
@@ -529,7 +528,7 @@ beyond what the task demands.
 - Meaningful, intention-revealing names. No `tmp`, `data2`, `arr`,
   `obj`. Use the domain word (`operator`, `squad`, `gadget`).
 - Functions do one thing at one level of abstraction.
-- Comments explain *why*, not *what*. If a comment paraphrases the
+- Comments explain _why_, not _what_. If a comment paraphrases the
   code, rename or restructure — but only if the touch is small
   (§16.3).
 - DRY when duplication is **semantic**. Coincidental duplication

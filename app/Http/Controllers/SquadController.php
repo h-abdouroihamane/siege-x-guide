@@ -32,9 +32,7 @@ class SquadController extends Controller
 
     public function getMostRecentOperation()
     {
-        return Operation::orderBy('year', 'desc')
-            ->orderBy('season', 'desc')
-            ->first();
+        return Operation::mostRecent()->first();
     }
 
     public function showAll()

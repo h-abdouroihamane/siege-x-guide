@@ -22,7 +22,7 @@ export class Operator {
     reworked: boolean;
     roles: string[];
     squad: string;
-    queerIdentites: string[] | null;
+    queerIdentities: string[] | null;
     portrait: string;
     icon: string;
 

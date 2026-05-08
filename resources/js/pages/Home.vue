@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Logo from '@/components/Logo.vue';
 import Navbar from '@/components/Navbar.vue';
+import PageLayout from '@/components/PageLayout.vue';
 import { Head } from '@inertiajs/vue3';
 
 const paths = [
@@ -40,35 +41,27 @@ const paths = [
 </script>
 
 <template>
-    <div>
-        <Head>
-            <title>Home</title>
-        </Head>
-        <div id="background-image" />
-        <Navbar path="home" />
-        <div id="container">
-            <Logo text="Home" />
+    <Head>
+        <title>Home</title>
+    </Head>
+    <Navbar path="home" />
+    <PageLayout>
+        <Logo text="Home" />
 
-            <div id="home-card-container">
-                <a
-                    class="card-link"
-                    v-for="p in paths"
-                    :key="p.url"
-                    :href="p.url"
-                >
-                    <div :class="['home-card', p.className]">
-                        <div class="overlay" />
-                        <span class="title">{{ p.title }}</span>
+        <div id="home-card-container">
+            <a class="card-link" v-for="p in paths" :key="p.url" :href="p.url">
+                <div :class="['home-card', p.className]">
+                    <div class="overlay" />
+                    <span class="title">{{ p.title }}</span>
 
-                        <div class="card-bottom">
-                            <span class="gradient"></span>
-                            <span class="description">{{ p.description }}</span>
-                        </div>
+                    <div class="card-bottom">
+                        <span class="gradient"></span>
+                        <span class="description">{{ p.description }}</span>
                     </div>
-                </a>
-            </div>
+                </div>
+            </a>
         </div>
-    </div>
+    </PageLayout>
 </template>
 
 <style lang="scss">

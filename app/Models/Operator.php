@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -11,11 +12,19 @@ use Illuminate\Support\Facades\DB;
 
 class Operator extends Model
 {
-    use HasUlids;
+    use HasFactory, HasUlids;
 
     protected $hidden = ['id', 'pivot'];
     protected $guarded = ['id'];
     public $timestamps = false;
+
+    protected function casts(): array
+    {
+        return [
+            'year' => 'integer',
+            'season' => 'integer',
+        ];
+    }
 
     public function roles()
     {
