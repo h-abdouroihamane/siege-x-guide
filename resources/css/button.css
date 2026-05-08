@@ -7,7 +7,10 @@
     border-style: none;
     box-sizing: border-box;
     cursor: pointer;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
     font-size: 17px;
     font-weight: bold;
     height: 40px;
@@ -44,7 +47,6 @@
 .button-1 svg {
     height: 15px;
     width: 15px;
-    margin: 0px 5px 0 0;
 }
 
 .button-1 path {
