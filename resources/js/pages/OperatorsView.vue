@@ -187,4 +187,12 @@ body {
         scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
     }
 }
+
+@media only screen and (max-width: 760px),
+    (min-device-width: 768px) and (max-device-width: 1024px) {
+    #card-container {
+        max-width: 100vw;
+        width: 100vw;
+    }
+}
 </style>
