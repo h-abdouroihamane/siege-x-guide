@@ -11,22 +11,16 @@
             class="m-2.5 flex h-[50px] w-[500px] items-center justify-center rounded-[5px] bg-[#2fd072] text-center text-black"
             >{{ page.props.message }}</span
         >
-        <div class="flex w-[500px] justify-evenly">
+        <div class="section-grid">
             <a
                 v-for="p in paths"
                 :key="p.url"
                 :href="p.url"
-                class="[all:unset]"
+                class="section-card"
+                :style="{ backgroundImage: `url(${p.image})` }"
             >
-                <div
-                    class="relative mx-2.5 my-5 flex h-max w-[120px] cursor-pointer flex-col items-center rounded-[2px] transition-all duration-300 [box-shadow:rgba(255,255,255,0.09)_0px_3px_6px,rgba(255,255,255,0.16)_0px_3px_6px] hover:bg-[#ff4b3c] hover:[box-shadow:0_0_10px_1px_#ff4b3c]"
-                >
-                    <img class="h-full w-full" :src="p.image" :alt="p.label" />
-                    <span
-                        class="font-gt-america my-[5px] flex h-[20px] items-center justify-center bg-[rgba(17,17,17,0.15)] px-0 pt-[7px] pb-[10px] text-[20px] text-white uppercase backdrop-blur-[2px]"
-                        >{{ p.label }}</span
-                    >
-                </div>
+                <span class="title">{{ p.label }}</span>
+                <span class="body">{{ p.description }}</span>
             </a>
         </div>
     </PageLayout>
@@ -42,9 +36,107 @@ const page = usePage();
 const paths = [
     {
         label: 'New operator',
+        description: 'Add a new operator to the roster',
         url: page.props.createRoute,
         image: '/flores.jpg',
     },
-    { label: 'Edit operator', url: page.props.editRoute, image: '/sens.jpg' },
+    {
+        label: 'Edit operator',
+        description: 'Update an existing operator',
+        url: page.props.editRoute,
+        image: '/sens.jpg',
+    },
 ];
 </script>
+
+<style scoped>
+.section-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 400px);
+    grid-auto-rows: 280px;
+    gap: 0.6em;
+    justify-content: center;
+    width: 100%;
+    max-width: 1400px;
+    margin: 2.5em 0;
+    padding: 0 1em;
+}
+
+.section-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    text-decoration: none;
+    color: #fff;
+    background-color: #151a257f;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 1px solid #c0c0c2;
+    padding: 0 0 4px 0;
+    transition: 0.3s;
+}
+
+.section-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, #151a25, transparent 50%);
+    transition: background 0.3s;
+    pointer-events: none;
+}
+
+.section-card:hover {
+    border-bottom: 5px solid #ff4b3c;
+}
+
+.section-card:hover::after {
+    background: linear-gradient(0deg, #ff4b3c, transparent 50%);
+}
+
+.title,
+.body {
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    z-index: 1;
+    transition: 0.3s;
+    text-shadow: 1px 1px 2px #000;
+}
+
+.title {
+    bottom: 16px;
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    font-size: 2em;
+    line-height: 1;
+}
+
+.section-card:hover .title {
+    bottom: 64px;
+}
+
+.body {
+    bottom: 16px;
+    font-size: 0.9em;
+    font-weight: 600;
+    line-height: 1.25;
+    opacity: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.section-card:hover .body {
+    opacity: 1;
+}
+
+@media (max-width: 480px) {
+    .section-grid {
+        grid-template-columns: minmax(0, 1fr);
+        grid-auto-rows: 220px;
+    }
+}
+</style>
