@@ -129,13 +129,11 @@ filterAndSort();
             v-if="selectedOperator.year >= 0"
             v-bind="selectedOperator"
         />
-        <div id="description" v-else>
-            <span id="invisible-span"></span>
-            <div id="description-text">
-                <span id="ability"
-                    >Select an operator to see its description</span
-                >
-            </div>
+        <div
+            v-else
+            class="fixed bottom-0 left-0 z-[2] flex min-h-[190px] w-screen items-center justify-center border-t border-[#ff4b3c] bg-[rgba(1,1,1,0.95)] text-[#fefefe] max-lg:h-[30vh] max-lg:max-h-[30vh] max-lg:text-[15px]"
+        >
+            <span>Select an operator to see its description</span>
         </div>
     </PageLayout>
 </template>
