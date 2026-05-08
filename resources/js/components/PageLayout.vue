@@ -8,7 +8,7 @@ import bgUrl from '../../css/menu_background.jpg';
 <template>
     <div
         aria-hidden="true"
-        class="fixed inset-0 -z-10 w-screen h-screen bg-black bg-cover bg-center bg-no-repeat overflow-hidden"
+        class="fixed inset-0 w-screen h-screen bg-black bg-cover bg-center bg-no-repeat overflow-hidden [z-index:-1]"
         :style="{ backgroundImage: `url(${bgUrl})` }"
     />
     <div class="flex flex-col justify-center items-center text-center">
