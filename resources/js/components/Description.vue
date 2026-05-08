@@ -51,15 +51,28 @@ const getSide = () => {
 </script>
 
 <template>
-    <div id="description">
-        <div id="description-icon">
-            <img class="icon" :src="props.icon" :alt="`${props.name} icon`" />
-            <span class="name">{{ props.name }}</span>
+    <div
+        id="description"
+        class="fixed bottom-0 left-0 z-[2] grid min-h-[190px] w-screen border-t border-[#ff4b3c] bg-[rgba(1,1,1,0.95)] text-[#fefefe] [grid-template-columns:10vw_90vw] max-lg:flex max-lg:h-[30vh] max-lg:max-h-[30vh] max-lg:flex-col max-lg:justify-center max-lg:text-[15px]"
+    >
+        <div
+            id="description-icon"
+            class="grid w-full items-center justify-items-center max-lg:flex max-lg:flex-row max-lg:justify-around"
+        >
+            <img
+                class="icon h-[90px] max-h-[90px] w-auto max-lg:max-h-[50px]"
+                :src="props.icon"
+                :alt="`${props.name} icon`"
+            />
+            <span class="name text-[22px] uppercase">{{ props.name }}</span>
 
-            <div id="side-container">
-                <AttackerLogo class="side-icon" v-if="side === 'Attack'" />
+            <div id="side-container" class="flex flex-row items-center">
+                <AttackerLogo
+                    class="side-icon h-[30px] w-[30px] max-lg:max-h-[20px]"
+                    v-if="side === 'Attack'"
+                />
                 <DefenderLogo
-                    class="side-icon"
+                    class="side-icon h-[30px] w-[30px] max-lg:max-h-[20px]"
                     v-else-if="side === 'Defense'"
                 />
                 <span id="side-name">{{ getSide() }}</span>
@@ -70,13 +83,18 @@ const getSide = () => {
                     v-for="qId in props.queerIdentities"
                     :key="qId"
                 >
-                    <span :class="`pride-flag ${qId.toLowerCase()}`" />
+                    <span
+                        :class="`pride-flag ${qId.toLowerCase()} max-lg:w-[20px]`"
+                    />
                     <p>{{ qId.toUpperCase() }}</p>
                 </div>
             </div>
         </div>
 
-        <div id="description-text">
+        <div
+            id="description-text"
+            class="flex h-full max-w-[97vw] flex-col justify-evenly p-[5px] max-lg:w-full"
+        >
             <span id="ability">{{ props.description }}</span>
             <span id="roles">{{ getRoleStr() }}</span>
             <span id="operation">{{ getOperationStr() }}</span>
@@ -84,105 +102,25 @@ const getSide = () => {
     </div>
 </template>
 
-<style>
-#side-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+<style scoped>
+/*
+ * The .name uses regular 'GT America' (not the display compressed
+ * variant). Promotable to a --font-gt-america @theme token in
+ * batch 3 once more components migrate.
+ *
+ * The side-icon path fills sit on SVG paths rendered by child
+ * components (AttackerLogo / DefenderLogo); :deep() pierces
+ * scope so the descendant selector reaches them.
+ */
+.name {
+    font-family: 'GT America', sans-serif;
 }
 
-.side-icon {
-    width: 30px;
-    height: 30px;
-}
-
-.side-icon.attacker-logo path {
+:deep(.side-icon.attacker-logo path) {
     fill: #d9610f;
 }
 
-.side-icon.defender-logo path {
+:deep(.side-icon.defender-logo path) {
     fill: #0e87c8;
-}
-
-#description {
-    font-family: 'FK Grotesk', sans-serif;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100vw;
-    z-index: 2;
-    background-color: rgba(1, 1, 1, 0.95);
-    color: #fefefe;
-    min-height: 190px;
-    display: grid;
-    grid-template-columns: 10vw 90vw;
-    border-top: 1px solid #ff4b3c;
-}
-
-#description img {
-    max-height: 90px;
-    height: 90px;
-    width: auto;
-}
-
-#description-icon {
-    display: grid;
-    width: 100%;
-    justify-items: center;
-    align-items: center;
-}
-
-#description .name {
-    text-transform: uppercase;
-    font-family: 'GT America', sans-serif;
-    font-size: 22px;
-}
-
-#description-text {
-    display: flex;
-    flex-direction: column;
-    max-width: 97vw;
-    padding: 5px;
-    height: 100%;
-    justify-content: space-evenly;
-}
-
-@media only screen and (max-width: 760px),
-    (min-device-width: 768px) and (max-device-width: 1024px) {
-    #description {
-        max-height: 30vh;
-        height: 30vh;
-        display: flex;
-        flex-direction: column;
-        -webkit-box-pack: center;
-        -ms-flex-pack: center;
-        justify-content: center;
-        font-size: 15px;
-    }
-    #description .icon {
-        max-height: 50px;
-    }
-
-    #description .side-icon {
-        max-height: 20px;
-    }
-
-    #description .pride-flag {
-        width: 20px;
-    }
-
-    #description-icon {
-        width: 100%;
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        align-items: center;
-    }
-    #description-text {
-        width: 100%;
-    }
 }
 </style>
