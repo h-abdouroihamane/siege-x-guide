@@ -19,6 +19,7 @@
     text-decoration: none;
     transition: all ease 50ms;
     vertical-align: baseline;
+    white-space: nowrap;
     -moz-user-select: none;
     user-select: none;
     -webkit-user-select: none;

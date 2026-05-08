@@ -26,7 +26,7 @@ const setSide = (side: 'Attack' | 'Defense') => (selectedSide.value = side);
     <Navbar path="secondaryGadgets" />
     <PageLayout>
         <Logo :text="headerText" />
-        <div id="main-content">
+        <div class="flex max-w-[80vw] flex-col items-center">
             <div id="gadget-side-btn">
                 <button
                     id="attackers"
@@ -73,8 +73,4 @@ const setSide = (side: 'Attack' | 'Defense') => (selectedSide.value = side);
 <style lang="scss">
 @use '../../css/table.css';
 @use '../../css/button.css';
-#main-content {
-    max-width: 80vw;
-    flex-direction: column;
-}
 </style>
