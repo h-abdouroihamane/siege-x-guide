@@ -21,8 +21,9 @@ Key facts that drive every decision below:
   registration). Login at `/admin/login`.
 - **Roles**: `admin` (authenticated editor) | `guest` (anonymous
   visitor, read-only).
-- **Persistence**: SQLite by default, accessed via Laravel 12 Eloquent.
-  Schema lives in `database/migrations/`.
+- **Persistence**: MySQL 8 (database `siege_x_guide`), accessed via
+  Laravel 12 Eloquent. Schema lives in `database/migrations/`.
+- **Hosting**: deployed on OVH.
 - **Theming**: light + dark, toggleable via `useAppearance`
   composable. Both must meet WCAG AA.
 - **Notifications**: none.
@@ -428,7 +429,9 @@ Reviews pending diffs / PRs before merge.
 1. Install latest stable versions of the stack — don't pin to old
    majors. `composer install && npm install`.
 2. Copy `.env.example` to `.env`, run `php artisan key:generate`,
-   then `php artisan migrate` (creates the SQLite file).
+   set the local MySQL credentials (`DB_CONNECTION=mysql`,
+   `DB_HOST=localhost`, `DB_PORT=3306`, `DB_DATABASE=siege_x_guide`,
+   plus `DB_USERNAME` / `DB_PASSWORD`), then `php artisan migrate`.
 3. `composer dev` runs server + queue + logs + Vite together.
 4. Read §16 (Behavioral guidelines) — it governs everything below.
 5. Read §9 (UI/UX) before writing a single user-facing string.

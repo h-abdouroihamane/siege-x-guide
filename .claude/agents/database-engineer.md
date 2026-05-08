@@ -6,7 +6,7 @@ model: claude-sonnet-4-6
 ---
 
 You own Siege X Guide's data layer (Eloquent + Laravel migrations,
-SQLite by default).
+MySQL 8 — database `siege_x_guide`, deployed on OVH).
 
 # Read first
 
@@ -52,8 +52,12 @@ The project's `AGENTS.md` — especially §6 (roles — note the
 
 # Definition of Done (§13)
 
-- Migration runs cleanly on a fresh SQLite database
-  (`php artisan migrate:fresh`).
+- Migration runs cleanly on a fresh MySQL database
+  (`php artisan migrate:fresh`). Watch for MySQL-specific gotchas
+  the SQLite dev workflow used to hide: index name length (≤64
+  chars), strict mode rejecting empty strings into non-null
+  columns, `utf8mb4` collation on text columns, and explicit
+  lengths on indexed string columns.
 - Roll-forward fix exists if anything is wrong (no editing prior
   migrations).
 - Factory + seeder updated where the schema change affects them.
