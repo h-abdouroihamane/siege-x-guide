@@ -7,6 +7,7 @@ import '../css/button.css';
 import '../css/fonts.css';
 import '../css/form.css';
 import '../css/pride.css';
+import '../css/style.css';
 
 // Extend ImportMeta interface for Vite...
 declare module 'vite/client' {

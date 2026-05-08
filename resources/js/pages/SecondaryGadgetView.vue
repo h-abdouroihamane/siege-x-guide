@@ -2,7 +2,6 @@
 import GadgetTable from '@/components/GadgetTable.vue';
 import Logo from '@/components/Logo.vue';
 import Navbar from '@/components/Navbar.vue';
-import PageLayout from '@/components/PageLayout.vue';
 import { Head, usePage } from '@inertiajs/vue3';
 import { ref } from 'vue';
 import AttackerLogo from '../components/AttackerLogo.vue';
@@ -24,8 +23,10 @@ const setSide = (side: 'Attack' | 'Defense') => (selectedSide.value = side);
                 content="Page listing every operator's secondary gadget options from Rainbow Six Siege X as of the latest patch of the game"
             />
         </Head>
+        <div id="background-image" />
         <Navbar path="secondaryGadgets" />
-        <PageLayout>
+
+        <div id="container">
             <Logo :text="headerText" />
             <div id="main-content">
                 <div id="gadget-side-btn">
@@ -68,7 +69,7 @@ const setSide = (side: 'Attack' | 'Defense') => (selectedSide.value = side);
                     />
                 </div>
             </div>
-        </PageLayout>
+        </div>
     </div>
 </template>
 

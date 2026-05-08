@@ -6,7 +6,6 @@ import Sidebar from '@/components/Sidebar.vue';
 import { Head, usePage } from '@inertiajs/vue3';
 import { ref } from 'vue';
 import Navbar from '../components/Navbar.vue';
-import PageLayout from '../components/PageLayout.vue';
 import { Operator } from '../scripts/operator.ts';
 
 const page = usePage();
@@ -104,8 +103,9 @@ filterAndSort();
                 content="Page listing every operator from Rainbow Six Siege X and describing what their ability and/or gadget does"
             />
         </Head>
+        <div id="background-image" />
         <Navbar path="operators" />
-        <PageLayout>
+        <div id="container">
             <Logo :text="'Operator Guide'" />
             <div id="main-content">
                 <Sidebar
@@ -138,7 +138,7 @@ filterAndSort();
                     >
                 </div>
             </div>
-        </PageLayout>
+        </div>
     </div>
 </template>
 

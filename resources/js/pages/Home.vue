@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import Logo from '@/components/Logo.vue';
 import Navbar from '@/components/Navbar.vue';
-import PageLayout from '@/components/PageLayout.vue';
 import { Head } from '@inertiajs/vue3';
 
 const paths = [
@@ -45,8 +44,9 @@ const paths = [
         <Head>
             <title>Home</title>
         </Head>
+        <div id="background-image" />
         <Navbar path="home" />
-        <PageLayout>
+        <div id="container">
             <Logo text="Home" />
 
             <div id="home-card-container">
@@ -67,7 +67,7 @@ const paths = [
                     </div>
                 </a>
             </div>
-        </PageLayout>
+        </div>
     </div>
 </template>
 

@@ -2,7 +2,6 @@
 import IntroCard from '@/components/IntroCard.vue';
 import Logo from '@/components/Logo.vue';
 import Navbar from '@/components/Navbar.vue';
-import PageLayout from '@/components/PageLayout.vue';
 import { Head } from '@inertiajs/vue3';
 
 const urls = {
@@ -19,8 +18,9 @@ const urls = {
         <Head>
             <title>About me</title>
         </Head>
+        <div id="background-image" />
         <Navbar path="about" />
-        <PageLayout>
+        <div id="container">
             <Logo text="About Me" />
 
             <div id="about">
@@ -142,7 +142,7 @@ const urls = {
                     </div>
                 </div>
             </div>
-        </PageLayout>
+        </div>
     </div>
 </template>
 

@@ -3,8 +3,9 @@
         <Head>
             <title>Admin dashboard</title>
         </Head>
+        <div id="background-image" />
         <Navbar path="admin" />
-        <PageLayout>
+        <div id="container">
             <Logo text="Admin dashboard" />
 
             <span id="message" v-if="page.props.message">{{
@@ -22,7 +23,7 @@
                     </div>
                 </a>
             </div>
-        </PageLayout>
+        </div>
     </div>
 </template>
 
@@ -30,7 +31,6 @@
 import { Head, usePage } from '@inertiajs/vue3';
 import Logo from '../../components/Logo.vue';
 import Navbar from '../../components/Navbar.vue';
-import PageLayout from '../../components/PageLayout.vue';
 const page = usePage();
 
 const paths = [
