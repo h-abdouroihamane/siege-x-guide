@@ -17,6 +17,16 @@ const getSquadLogo = (squadName: string) =>
 const getOperatorIcon = (operatorName: string) =>
     `${publicPath}operatorIcons/${normalize(operatorName)}.png`;
 
+const SQUAD_BG: Record<string, string> = {
+    wolfguard: 'bg-[rgba(6,140,178,0.3)]',
+    ghosteyes: 'bg-[rgba(4,88,34,0.3)]',
+    redhammer: 'bg-[rgba(129,18,9,0.3)]',
+    viperstrike: 'bg-[rgba(223,187,2,0.3)]',
+    nighthaven: 'bg-[rgba(231,235,238,0.3)]',
+    unaffiliated: 'bg-[rgba(57,43,88,0.3)]',
+};
+const getSquadBg = (squad: string) => SQUAD_BG[squad.toLowerCase()] ?? '';
+
 const getAltText = () => {
     let text = `Table showing every squad composition according to Rainbow Six Siege X's lore (up to Year ${page.props.year}, Season ${page.props.season} - ${page.props.operationName})\n\n`;
 
@@ -57,50 +67,54 @@ const toggleScreenshotMode = () => {
             content="Page listing every squad from Rainbow Six Siege X according to the latest version of the lore"
         />
     </Head>
-    <div :class="{ screenshot: screenshotMode }">
-        <Navbar path="squads" />
-    </div>
+    <Navbar v-show="!screenshotMode" path="squads" />
     <PageLayout>
         <Logo :text="squadHeader" />
-        <div id="main-content">
-            <table id="squad-table">
+        <div class="flex max-w-[80vw] flex-col items-center text-[#fefefe]">
+            <table class="w-full">
                 <thead>
                     <tr>
-                        <th class="tg-0lax"></th>
-                        <th class="tg-0lax"></th>
+                        <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr
-                        v-for="[squad, operators] in squads"
-                        :key="squad"
-                        :class="squad"
-                    >
-                        <td :class="squad.toLowerCase()">
-                            <div class="squad">
+                    <tr v-for="[squad, operators] in squads" :key="squad">
+                        <td :class="getSquadBg(squad)">
+                            <div
+                                class="flex flex-col items-center justify-center"
+                            >
                                 <img
                                     v-if="squad !== 'Unaffiliated'"
-                                    class="squad-logo"
+                                    class="m-2.5 h-[100px] w-auto"
                                     :src="getSquadLogo(squad)"
                                     :alt="`Squad ${squad}`"
                                 />
-                                <p class="squad-name">{{ squad }}</p>
+                                <p
+                                    class="font-gt-america m-[5px] text-[24px] uppercase"
+                                >
+                                    {{ squad }}
+                                </p>
                             </div>
                         </td>
-                        <td :class="squad.toLowerCase()">
-                            <div class="operator-container">
+                        <td :class="getSquadBg(squad)">
+                            <div
+                                class="flex flex-wrap items-center justify-center"
+                            >
                                 <div
                                     v-for="(operatorName, index) in operators"
                                     :key="index"
-                                    class="operator"
                                     :id="normalize(operatorName)"
+                                    class="flex flex-col items-center justify-center"
                                 >
                                     <img
-                                        class="operator-icon"
+                                        class="h-auto w-[80px]"
                                         :src="getOperatorIcon(operatorName)"
                                         :alt="operatorName"
                                     />
-                                    <p class="operator-name">
+                                    <p
+                                        class="font-gt-america m-[5px] text-[20px] uppercase"
+                                    >
                                         {{ operatorName }}
                                     </p>
                                 </div>
@@ -109,7 +123,7 @@ const toggleScreenshotMode = () => {
                     </tr>
                 </tbody>
             </table>
-            <div id="credit" :class="{ screenshot: !screenshotMode }">
+            <div v-show="screenshotMode" class="mt-2.5">
                 <a href="#" title="Siege X Guide - Squads section"
                     >{{ SITE_URL }}/squads</a
                 >
@@ -163,12 +177,3 @@ const toggleScreenshotMode = () => {
         </div>
     </PageLayout>
 </template>
-
-<style lang="scss" scoped>
-@use '../../css/table.css';
-@use '../../css/button.css';
-#main-content {
-    max-width: 80vw;
-    flex-direction: column;
-}
-</style>
