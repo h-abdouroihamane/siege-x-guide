@@ -109,7 +109,7 @@ const paths = [
     bottom: 16px;
     font-family: var(--font-display);
     text-transform: uppercase;
-    font-size: 2.4em;
+    font-size: 2em;
     line-height: 1;
 }
 
