@@ -33,13 +33,7 @@ class Operator extends Model
 
     public function getRoles()
     {
-        $roles = [];
-
-        foreach ($this->roles()->get() as $r) {
-            $roles[] = $r->name;
-        }
-
-        return $roles;
+        return $this->roles->pluck('name')->all();
     }
 
     public function squad(): BelongsToMany
@@ -54,7 +48,7 @@ class Operator extends Model
 
     public function getSquad(): string
     {
-        $squad = $this->squad()->first();
+        $squad = $this->squad->first();
         return $squad ? $squad->name : 'Unaffiliated';
     }
 
@@ -90,8 +84,7 @@ class Operator extends Model
 
     public function getOperation()
     {
-        $rework = $this->rework()->first();
-        return $rework ? $rework->operation : $this->operation()->first();
+        return $this->rework ? $this->rework->operation : $this->operation;
     }
 
     public function getCleanName()
