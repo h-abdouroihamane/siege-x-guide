@@ -48,103 +48,107 @@ const paths = [
     <PageLayout>
         <Logo text="Home" />
 
-        <div
-            class="mx-0 my-10 flex h-max w-[90vw] max-w-[1400px] flex-row flex-wrap items-center justify-around max-[790px]:my-0 max-[790px]:mb-[30px] max-[790px]:w-screen max-[790px]:flex-col"
-        >
+        <div class="section-grid">
             <a
-                class="card-link cursor-pointer [all:unset]"
+                class="section-card"
                 v-for="p in paths"
                 :key="p.url"
                 :href="p.url"
+                :style="{ backgroundImage: `url(${p.bg})` }"
             >
-                <div
-                    class="home-card relative m-[0.3em] grid aspect-[3/5] h-auto w-[300px] max-w-[300px] content-end items-end overflow-hidden border border-[#c0c0c2] bg-[#151a257f] bg-cover bg-center p-[0_0_4px_0] text-white [text-shadow:1px_1px_2px_#000] max-[790px]:w-[200px]"
-                    :style="{ backgroundImage: `url(${p.bg})` }"
-                >
-                    <div class="overlay" />
-                    <span class="font-gt-america z-[3] text-[35px] uppercase">{{
-                        p.title
-                    }}</span>
-
-                    <div class="card-bottom">
-                        <span class="gradient"></span>
-                        <span class="description">{{ p.description }}</span>
-                    </div>
-                </div>
+                <span class="title">{{ p.title }}</span>
+                <span class="body">{{ p.description }}</span>
             </a>
         </div>
     </PageLayout>
 </template>
 
 <style scoped>
-/*
- * Hover-driven card reveal. Default state: title shown, description
- * hidden. On hover: card-bottom expands (display none -> grid,
- * scale 0 -> 1), red-to-transparent gradient fades in, the inset
- * shadow on .overlay deepens, and the card border shifts to signal
- * red. The combinator `.card-link:hover .child` reads more clearly
- * than chaining group-hover utilities across four nested elements.
- */
-.card-link,
-.home-card {
-    transition: all 0.15s cubic-bezier(0.07, 0.95, 0, 1);
+.section-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 400px);
+    grid-auto-rows: 280px;
+    gap: 0.6em;
+    justify-content: center;
+    width: 100%;
+    max-width: 1400px;
+    margin: 2.5em 0;
+    padding: 0 1em;
 }
 
-.card-link:hover .home-card {
-    border-color: #ff4b3c;
+.section-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    text-decoration: none;
+    color: #fff;
+    background-color: #151a257f;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 1px solid #c0c0c2;
+    padding: 0 0 4px 0;
+    transition: 0.3s;
 }
 
-.overlay {
+.section-card::after {
+    content: '';
     position: absolute;
     inset: 0;
-    z-index: 1;
-    box-shadow: 0 0 100px rgba(0, 0, 0, 0.9) inset;
+    background: linear-gradient(0deg, #151a25, transparent 50%);
+    transition: background 0.3s;
+    pointer-events: none;
 }
 
-.card-link:hover .overlay {
-    box-shadow: 0 0 400px rgba(0, 0, 0, 0.9) inset;
+.section-card:hover {
+    border-bottom: 5px solid #ff4b3c;
 }
 
-.card-bottom {
+.section-card:hover::after {
+    background: linear-gradient(0deg, #ff4b3c, transparent 50%);
+}
+
+.title,
+.body {
     position: relative;
-    min-height: 10px;
-    transform: scale(0);
-    display: none;
     z-index: 1;
+    margin-left: 20px;
+    transition: 0.3s;
+    text-shadow: 1px 1px 2px #000;
 }
 
-.card-link:hover .card-bottom {
-    min-height: 70px;
-    transform: scale(1);
-    display: grid;
-    justify-items: center;
+.title {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    font-size: 2.4em;
+    line-height: 1;
+    margin-top: auto;
+    margin-bottom: 18px;
 }
 
-.gradient {
-    position: relative;
-    top: 5px;
-    height: 77px;
-    opacity: 0;
-    z-index: 2;
-    background: linear-gradient(
-        180deg,
-        rgba(0, 0, 0, 0) 0%,
-        rgba(255, 75, 60, 1) 100%
-    );
+.section-card:hover .title {
+    margin-bottom: 36px;
 }
 
-.card-link:hover .gradient {
-    opacity: 0.6;
-}
-
-.description {
+.body {
     position: absolute;
-    top: 0;
-    z-index: 3;
-    height: 100%;
-    width: 95%;
-    font-size: 15px;
-    display: grid;
-    align-items: end;
+    bottom: 12px;
+    left: 0;
+    right: 20px;
+    font-size: 0.95em;
+    font-weight: 600;
+    opacity: 0;
+}
+
+.section-card:hover .body {
+    opacity: 1;
+}
+
+@media (max-width: 480px) {
+    .section-grid {
+        grid-template-columns: minmax(0, 1fr);
+        grid-auto-rows: 220px;
+    }
 }
 </style>
