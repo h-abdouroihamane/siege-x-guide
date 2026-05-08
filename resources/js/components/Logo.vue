@@ -9,32 +9,11 @@ const text = props.text ?? '';
 
 <template>
     <img
-        id="logo"
         :src="`${publicPath}Logo_blank.png`"
         alt="Rainbow Six Siege X Logo"
+        class="mt-[10px] max-h-[70px] max-[1024px]:max-w-[50vw]"
     />
-    <p id="logo-text" v-if="text">{{ text }}</p>
+    <p v-if="text" class="m-[5px] text-[24px] font-bold text-[#b0bac6]">
+        {{ text }}
+    </p>
 </template>
-
-<style>
-#logo {
-    max-height: 70px;
-    width: auto;
-    height: auto;
-    margin: 10px 0 0 0;
-}
-
-#logo-text {
-    font-family: 'FK Grotesk', sans-serif;
-    font-weight: bold;
-    font-size: 24px;
-    margin: 5px;
-    color: #b0bac6;
-}
-@media only screen and (max-width: 760px),
-    (min-device-width: 768px) and (max-device-width: 1024px) {
-    #logo {
-        max-width: 50vw;
-    }
-}
-</style>
