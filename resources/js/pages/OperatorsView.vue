@@ -2,11 +2,11 @@
 import Description from '@/components/Description.vue';
 import Logo from '@/components/Logo.vue';
 import OperatorCard from '@/components/OperatorCard.vue';
+import PageLayout from '@/components/PageLayout.vue';
 import Sidebar from '@/components/Sidebar.vue';
 import { Head, usePage } from '@inertiajs/vue3';
 import { ref } from 'vue';
 import Navbar from '../components/Navbar.vue';
-import PageLayout from '@/components/PageLayout.vue';
 import { Operator } from '../scripts/operator.ts';
 
 const page = usePage();
@@ -106,14 +106,17 @@ filterAndSort();
     <Navbar path="operators" />
     <PageLayout>
         <Logo :text="'Operator Guide'" />
-        <div id="main-content">
+        <div class="flex w-full flex-row justify-center">
             <Sidebar
                 @sort-by="sortOperators"
                 @filter-side="filterOperators"
                 @toggle-queer="toggleQueer"
             />
 
-            <div id="card-container">
+            <div
+                id="card-container"
+                class="mt-2.5 flex h-[70vh] w-[70vw] max-w-[70vw] flex-row flex-wrap items-center justify-center overflow-y-scroll max-lg:w-screen max-lg:max-w-screen"
+            >
                 <OperatorCard
                     v-for="(op, index) in operators"
                     :key="index"
@@ -138,29 +141,19 @@ filterAndSort();
     </PageLayout>
 </template>
 
-<style>
-body {
+<style scoped>
+/*
+ * Pinned to <style> only because Tailwind has no utilities for the
+ * ::-webkit-scrollbar pseudo-elements; the custom red-on-teal
+ * scrollbar must be authored as raw CSS. The :global(body)
+ * overflow-hidden lock prevents body-level scroll while the
+ * operator grid handles its own vertical scrolling.
+ */
+:global(body) {
     overflow: hidden;
 }
 
-#main-content {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    justify-content: center;
-}
-
 #card-container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    max-width: 70vw;
-    width: 70vw;
-    margin: 10px 0px 0px 0px;
-    justify-content: center;
-    align-items: center;
-    height: 70vh;
-    overflow-y: scroll;
     --sb-track-color: #232e33;
     --sb-thumb-color: #ff4b3c;
     --sb-size: 14px;
@@ -183,14 +176,6 @@ body {
 @supports not selector(::-webkit-scrollbar) {
     #card-container {
         scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
-    }
-}
-
-@media only screen and (max-width: 760px),
-    (min-device-width: 768px) and (max-device-width: 1024px) {
-    #card-container {
-        max-width: 100vw;
-        width: 100vw;
     }
 }
 </style>
