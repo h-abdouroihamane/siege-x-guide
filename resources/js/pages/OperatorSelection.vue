@@ -46,8 +46,6 @@ const form = useForm({
 </template>
 
 <style lang="scss">
-@use '../../css/operator-card.css';
-
 #card-container {
     width: 80vw;
     display: flex;

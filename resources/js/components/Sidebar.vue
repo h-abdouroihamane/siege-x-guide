@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import AttackerLogo from '../components/AttackerLogo.vue';
 import DefenderLogo from '../components/DefenderLogo.vue';
 
-import { ref } from 'vue';
 const emit = defineEmits<{
     sortBy: [method: string];
     filterSide: [sides: string];
@@ -47,8 +47,15 @@ const emitSortingSide = () => {
 };
 </script>
 <template>
-    <div class="sidebar" :class="{ small: isSmall }">
-        <button id="close-button" @click="toggleSidebar">
+    <div
+        class="sidebar absolute left-0 z-[5] flex h-max w-max flex-col items-center border-r border-[#ff4b3c] bg-[rgba(1,1,1,0.95)] px-2.5 py-5 text-[#fefefe] transition-all duration-100"
+        :class="{ small: isSmall }"
+    >
+        <button
+            id="close-button"
+            class="inline-flex h-10 w-4/5 cursor-pointer items-center justify-center border-none bg-transparent text-[18px] text-[#fefefe] [box-shadow:0px_1px_4px_1px_rgba(0,0,0,0.3)]"
+            @click="toggleSidebar"
+        >
             <svg
                 v-if="isSmall"
                 xmlns="http://www.w3.org/2000/svg"
@@ -120,58 +127,31 @@ const emitSortingSide = () => {
         </div>
     </div>
 </template>
-<style>
-.sidebar {
-    width: max-content;
-    height: max-content;
-    transition: 0.1s all ease;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: absolute;
-    left: 0;
-    color: #fefefe;
-    border-right: 1px solid #ff4b3c;
-    padding: 20px 10px;
-    z-index: 5;
-    background-color: rgba(1, 1, 1, 0.95);
-}
-
-.sidebar.small {
-    width: 50px;
-}
-
-.sidebar.small #btn-grid {
-    display: none;
-}
-
-.main-content {
-    width: 90%;
-}
-
-.sidebar #close-button {
-    background-color: transparent;
-    border: none;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    height: 40px;
-    width: 80%;
-    box-shadow: 0px 1px 4px 1px rgba(0, 0, 0, 0.3);
-    cursor: pointer;
-    font-family: 'FK Grotesk', sans-serif;
-    font-size: 18px;
-    color: #fefefe;
-}
-
+<style scoped>
+/*
+ * Kept as raw CSS:
+ *  - #close-button svg/path sizing and signal-red fill (svg is
+ *    scope-pierced via :deep for the path).
+ *  - .sidebar.small state: collapses to a 50px column rail with
+ *    the button switching to a stacked "icon over label" layout
+ *    and #btn-grid hidden. Class-combinator pattern is much
+ *    cleaner here than driving every conditional from the
+ *    template.
+ *  - #btn-grid uses CSS grid-template-areas, which Tailwind v4
+ *    can express via arbitrary values but only awkwardly.
+ */
 #close-button svg {
     width: 30px;
     height: 30px;
     margin: 10px;
 }
 
-#close-button path {
+#close-button :deep(path) {
     fill: #ff4b3c;
+}
+
+.sidebar.small {
+    width: 50px;
 }
 
 .sidebar.small #close-button {
@@ -180,28 +160,8 @@ const emitSortingSide = () => {
     height: max-content;
 }
 
-#btn-grid .sort-label {
-    grid-area: sort;
-}
-
-#btn-grid #sort-date {
-    grid-area: date;
-}
-
-#btn-grid #sort-name {
-    grid-area: name;
-}
-
-#btn-grid .filter-label {
-    grid-area: filter;
-}
-
-#btn-grid #attackers {
-    grid-area: attackers;
-}
-
-#btn-grid #defenders {
-    grid-area: defenders;
+.sidebar.small #btn-grid {
+    display: none;
 }
 
 #btn-grid {
@@ -213,9 +173,27 @@ const emitSortingSide = () => {
         'attackers defenders'
         'sort sort'
         'name date';
-
     grid-row-gap: 10px;
     grid-column-gap: 0;
     justify-content: center;
+}
+
+#btn-grid .filter-label {
+    grid-area: filter;
+}
+#btn-grid #attackers {
+    grid-area: attackers;
+}
+#btn-grid #defenders {
+    grid-area: defenders;
+}
+#btn-grid .sort-label {
+    grid-area: sort;
+}
+#btn-grid #sort-name {
+    grid-area: name;
+}
+#btn-grid #sort-date {
+    grid-area: date;
 }
 </style>
