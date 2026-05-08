@@ -127,7 +127,7 @@ const copyAltText = () => {
                             >
                                 <img
                                     :class="[
-                                        'hvr-grow h-auto w-[60px] cursor-pointer',
+                                        'inline-block h-auto w-[60px] cursor-pointer align-middle transition-transform duration-300 hover:scale-110 focus:scale-110',
                                         {
                                             'opacity-25':
                                                 selectedOperator !== '' &&

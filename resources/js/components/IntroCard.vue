@@ -62,7 +62,7 @@ const getAlt = (name) => `${name}'s logo`;
                 class="mx-2.5 my-[5px]"
             >
                 <img
-                    class="hvr-grow mb-[5px] h-[35px] w-auto"
+                    class="mb-[5px] inline-block h-[35px] w-auto align-middle transition-transform duration-300 hover:scale-110 focus:scale-110"
                     :class="{ 'max-w-[190px]': social.id === 'kofi' }"
                     :src="social.img"
                     :alt="getAlt(social.name)"
