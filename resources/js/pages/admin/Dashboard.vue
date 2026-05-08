@@ -6,18 +6,26 @@
     <PageLayout>
         <Logo text="Admin dashboard" />
 
-        <span id="message" v-if="page.props.message">{{
-            page.props.message
-        }}</span>
-        <div id="options">
-            <a v-for="p in paths" :key="p.url" :href="p.url">
-                <div class="card option">
-                    <img
-                        class="operator-portrait"
-                        :src="p.image"
-                        :alt="p.label"
-                    />
-                    <span class="operator-name">{{ p.label }}</span>
+        <span
+            v-if="page.props.message"
+            class="m-2.5 flex h-[50px] w-[500px] items-center justify-center rounded-[5px] bg-[#2fd072] text-center text-black"
+            >{{ page.props.message }}</span
+        >
+        <div class="flex w-[500px] justify-evenly">
+            <a
+                v-for="p in paths"
+                :key="p.url"
+                :href="p.url"
+                class="[all:unset]"
+            >
+                <div
+                    class="relative mx-2.5 my-5 flex h-max w-[120px] cursor-pointer flex-col items-center rounded-[2px] transition-all duration-300 [box-shadow:rgba(255,255,255,0.09)_0px_3px_6px,rgba(255,255,255,0.16)_0px_3px_6px] hover:bg-[#ff4b3c] hover:[box-shadow:0_0_10px_1px_#ff4b3c]"
+                >
+                    <img class="h-full w-full" :src="p.image" :alt="p.label" />
+                    <span
+                        class="dashboard-card-name my-[5px] flex h-[20px] items-center justify-center bg-[rgba(17,17,17,0.15)] px-0 pt-[7px] pb-[10px] text-[20px] text-white uppercase backdrop-blur-[2px]"
+                        >{{ p.label }}</span
+                    >
                 </div>
             </a>
         </div>
@@ -41,28 +49,10 @@ const paths = [
 ];
 </script>
 
-<style lang="scss" scoped>
-@use '../../../css/operator-card.css';
-#message {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #2fd072;
-    color: #000;
-    height: 50px;
-    width: 500px;
-    text-align: center;
-    border-radius: 5px;
-    margin: 10px;
-}
-
-#options a {
-    all: unset;
-}
-
-#options {
-    display: flex;
-    justify-content: space-evenly;
-    width: 500px;
+<style scoped>
+/* Regular 'GT America' (not the display compressed variant).
+   Will promote to a --font-gt-america @theme token in batch 3. */
+.dashboard-card-name {
+    font-family: 'GT America', sans-serif;
 }
 </style>
