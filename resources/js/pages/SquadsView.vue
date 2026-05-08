@@ -1,17 +1,18 @@
-<script setup>
+<script setup lang="ts">
 import Logo from '@/components/Logo.vue';
 import Navbar from '@/components/Navbar.vue';
 import { Head, usePage } from '@inertiajs/vue3';
 import { ref } from 'vue';
 import { normalize } from '../scripts/operator.ts';
+
 const page = usePage();
-const squads = Object.entries(page.props.squads);
+const squads = Object.entries(page.props.squads as Record<string, string[]>);
 const squadHeader = `Squads (up to Year ${page.props.year}, Season ${page.props.season} - ${page.props.operationName})`;
 const publicPath = import.meta.env.BASE_URL;
 
-const getSquadLogo = (squadName) =>
+const getSquadLogo = (squadName: string) =>
     `${publicPath}squadLogos/${normalize(squadName)}.png`;
-const getOperatorIcon = (operatorName) =>
+const getOperatorIcon = (operatorName: string) =>
     `${publicPath}operatorIcons/${normalize(operatorName)}.png`;
 
 const getAltText = () => {
@@ -41,7 +42,7 @@ const copyAltText = () => {
     );
 };
 
-let screenshotMode = ref(false);
+const screenshotMode = ref(false);
 const toggleScreenshotMode = () => {
     screenshotMode.value = !screenshotMode.value;
 };

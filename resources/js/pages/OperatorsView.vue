@@ -27,10 +27,10 @@ const allOperators: Operator[] = page.props.operators.data.map(
         ),
 );
 
-let operators = ref([...allOperators]);
-let sortingMethod = ref('name');
-let activeSides = ref('attackersdefenders');
-let showQueerIdentities = ref(false);
+const operators = ref([...allOperators]);
+const sortingMethod = ref('name');
+const activeSides = ref('attackersdefenders');
+const showQueerIdentities = ref(false);
 
 const placeholderOperator = new Operator(
     'placeholder',

@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const socials = [
     {
         name: 'Bluesky',
@@ -51,6 +51,7 @@ const getAlt = (name) => `${name}'s logo`;
             <a
                 class="social-link"
                 v-for="social in socials"
+                :key="social.id"
                 :href="social.url"
                 target="_blank"
                 rel="noopener noreferrer"

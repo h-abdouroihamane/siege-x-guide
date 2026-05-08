@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue';
 import { normalize } from '../scripts/operator.ts';
 const props = defineProps([
@@ -18,10 +18,10 @@ const getGadgetLogo = (gadgetName) => {
 
 const getOperatorIcon = (operatorName) =>
     `${publicPath}operatorIcons/${normalize(operatorName)}.png`;
-let selectedOperator = ref('');
+const selectedOperator = ref('');
 const setSelectedOperator = (name) => (selectedOperator.value = name);
 
-let screenshotMode = ref(false);
+const screenshotMode = ref(false);
 const toggleScreenshotMode = () => {
     screenshotMode.value = !screenshotMode.value;
 

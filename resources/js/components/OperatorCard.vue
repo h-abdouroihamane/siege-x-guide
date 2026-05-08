@@ -1,16 +1,5 @@
-<script setup>
+<script setup lang="ts">
 const props = defineProps(['operator', 'selected']);
-
-const getPrideFlagClass = () => {
-    if (!props.operator.queerIdentities) {
-        return '';
-    }
-
-    const queerIdentities = props.operator.queerIdentities
-        .map((q) => q.toLowerCase())
-        .join(' ');
-    return 'pride-flag ' + queerIdentities;
-};
 </script>
 
 <template>
@@ -39,6 +28,7 @@ const getPrideFlagClass = () => {
         >
             <span
                 v-for="qIdentity in props.operator.queerIdentities"
+                :key="qIdentity"
                 :class="`pride-flag ${qIdentity.toLowerCase()}`"
             ></span>
         </div>
