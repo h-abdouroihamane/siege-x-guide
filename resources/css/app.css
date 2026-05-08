@@ -131,13 +131,13 @@
     }
 
     html {
+        @apply bg-background text-foreground;
         font-family: var(--font-sans);
         font-size: 18px;
         overscroll-behavior: none;
     }
 
     body {
-        @apply bg-background text-foreground;
         margin: 0;
         --sb-track-color: #232e33;
         --sb-thumb-color: #ff4b3c;
