@@ -1,5 +1,10 @@
 <script setup lang="ts">
-const props = defineProps(['operator', 'selected']);
+import type { Operator } from '../scripts/operator.ts';
+
+const props = defineProps<{
+    operator: Operator;
+    selected: boolean;
+}>();
 </script>
 
 <template>

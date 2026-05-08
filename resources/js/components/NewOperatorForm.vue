@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { useForm } from '@inertiajs/vue3';
-const props = defineProps([
-    'operator',
-    'squads',
-    'submitRoute',
-    'queerIdentities',
-    'roles',
-]);
+
+const props = defineProps<{
+    squads: string[];
+    submitRoute: string;
+    queerIdentities: string[];
+    roles: string[];
+}>();
 
 const form = useForm({
     operationName: undefined,
