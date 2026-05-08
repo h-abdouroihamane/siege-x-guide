@@ -29,8 +29,12 @@ function submit() {
 </script>
 
 <template>
-    <form id="operator-form" @submit.prevent="submit">
-        <div class="form-element">
+    <form
+        id="operator-form"
+        class="flex flex-col gap-y-2.5"
+        @submit.prevent="submit"
+    >
+        <div class="flex flex-col justify-evenly">
             <label for="operationName">Operation name</label>
             <input
                 type="text"
@@ -39,13 +43,13 @@ function submit() {
             />
         </div>
 
-        <div class="row">
-            <div class="form-element">
+        <div>
+            <div class="flex flex-col justify-evenly">
                 <label for="year">Year</label>
                 <input id="year" type="number" v-model="form.year" />
             </div>
 
-            <div class="form-element">
+            <div class="flex flex-col justify-evenly">
                 <label for="season">Season</label>
                 <select id="season" name="season" v-model="form.season">
                     <option
@@ -59,7 +63,7 @@ function submit() {
             </div>
         </div>
 
-        <div class="form-element">
+        <div class="flex flex-col justify-evenly">
             <label for="releaseDate">Release date</label>
             <input
                 type="date"
@@ -68,11 +72,11 @@ function submit() {
                 v-model="form.releaseDate"
             />
         </div>
-        <div class="form-element">
+        <div class="flex flex-col justify-evenly">
             <label for="name">Name</label>
             <input id="name" type="text" v-model="form.name" />
         </div>
-        <div class="form-element">
+        <div class="flex flex-col justify-evenly">
             <label for="description">Description</label>
             <textarea
                 id="description"
@@ -83,7 +87,7 @@ function submit() {
             />
         </div>
 
-        <div class="form-element">
+        <div class="flex flex-col justify-evenly">
             <label for="side">Side</label>
             <select id="side" v-model="form.side">
                 <option
@@ -96,7 +100,7 @@ function submit() {
             </select>
         </div>
 
-        <div class="form-element">
+        <div class="flex flex-col justify-evenly">
             <label for="roles">Role(s)</label>
             <select id="roles" multiple v-model="form.roles">
                 <option v-for="r in props.roles" :key="r" :value="r">
@@ -105,7 +109,7 @@ function submit() {
             </select>
         </div>
 
-        <div class="form-element">
+        <div class="flex flex-col justify-evenly">
             <label for="squad">Squad</label>
             <select id="squad" v-model="form.squad">
                 <option
@@ -118,7 +122,7 @@ function submit() {
             </select>
         </div>
 
-        <div class="form-element">
+        <div class="flex flex-col justify-evenly">
             <label for="queer-identities">Queer identities</label>
             <select
                 id="queer-identities"
@@ -131,7 +135,7 @@ function submit() {
             </select>
         </div>
 
-        <div class="form-element">
+        <div class="flex flex-col justify-evenly">
             <label for="portrait">Portrait</label>
             <input
                 type="file"
@@ -142,7 +146,7 @@ function submit() {
             />
         </div>
 
-        <div class="form-element">
+        <div class="flex flex-col justify-evenly">
             <label for="icon">Icon</label>
             <input
                 type="file"
@@ -155,7 +159,10 @@ function submit() {
 
         <button class="button-1" type="submit">Submit</button>
 
-        <ul id="errors" v-if="Object.values(form.errors).length > 0">
+        <ul
+            v-if="Object.values(form.errors).length > 0"
+            class="list-none rounded-[5px] bg-[#f2a097] p-2.5 text-black"
+        >
             <li v-for="message in Object.values(form.errors)" :key="message">
                 {{ message }}
             </li>

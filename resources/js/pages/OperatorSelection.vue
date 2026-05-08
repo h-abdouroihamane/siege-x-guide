@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Logo from '@/components/Logo.vue';
+import Navbar from '@/components/Navbar.vue';
 import PageLayout from '@/components/PageLayout.vue';
 import { Head, useForm, usePage } from '@inertiajs/vue3';
 
@@ -18,8 +19,11 @@ const form = useForm({
     <Navbar path="admin" />
     <PageLayout>
         <Logo text="Operator selection" />
-        <div id="main-content">
-            <form @submit.prevent="form.post(route('operator.selectPost'))">
+        <div>
+            <form
+                class="grid gap-y-2.5"
+                @submit.prevent="form.post(route('operator.selectPost'))"
+            >
                 <select v-model="form.operatorName">
                     <option
                         v-for="(op, index) in operators"
@@ -44,35 +48,3 @@ const form = useForm({
         </div>
     </PageLayout>
 </template>
-
-<style lang="scss">
-#card-container {
-    width: 80vw;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-}
-.card-link img {
-    width: 50px;
-    height: auto;
-}
-
-.card-link {
-    margin: 20px 20px 0 0;
-    width: 100px;
-    height: 100px;
-    transition: all ease-in 100ms;
-}
-
-.card-link:hover {
-    background-color: #ff4b3c;
-    color: #010101;
-    cursor: pointer;
-}
-
-form {
-    display: grid;
-}
-</style>

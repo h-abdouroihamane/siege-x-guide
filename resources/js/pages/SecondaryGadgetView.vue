@@ -27,9 +27,10 @@ const setSide = (side: 'Attack' | 'Defense') => (selectedSide.value = side);
     <PageLayout>
         <Logo :text="headerText" />
         <div class="flex max-w-[80vw] flex-col items-center">
-            <div id="gadget-side-btn">
+            <div
+                class="grid grid-cols-[150px_150px] justify-center gap-x-0 gap-y-[10px]"
+            >
                 <button
-                    id="attackers"
                     class="radio-button left attackers"
                     :class="{ active: selectedSide === 'Attack' }"
                     @click="setSide('Attack')"
@@ -37,7 +38,6 @@ const setSide = (side: 'Attack' | 'Defense') => (selectedSide.value = side);
                     <AttackerLogo /> ATTACKERS
                 </button>
                 <button
-                    id="defenders"
                     class="radio-button right defenders"
                     :class="{ active: selectedSide === 'Defense' }"
                     @click="setSide('Defense')"
@@ -46,7 +46,7 @@ const setSide = (side: 'Attack' | 'Defense') => (selectedSide.value = side);
                 </button>
             </div>
 
-            <div id="table-container">
+            <div>
                 <GadgetTable
                     v-if="selectedSide === 'Attack'"
                     side="attack"
@@ -69,8 +69,3 @@ const setSide = (side: 'Attack' | 'Defense') => (selectedSide.value = side);
         </div>
     </PageLayout>
 </template>
-
-<style lang="scss">
-@use '../../css/table.css';
-@use '../../css/button.css';
-</style>

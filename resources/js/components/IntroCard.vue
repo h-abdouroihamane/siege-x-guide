@@ -33,35 +33,37 @@ const getAlt = (name) => `${name}'s logo`;
 </script>
 
 <template>
-    <div id="intro-card">
-        <div id="header">
+    <div
+        class="flex w-[250px] flex-col items-center justify-center border border-[rgba(176,186,198,0.5)] text-[#fefefe]"
+    >
+        <div class="w-full">
             <img
-                id="profile-picture"
                 :src="`${publicPath}profilePicture.png`"
                 alt="Me wearing a cosplay of Marcus Holloway from Watch_Dogs 2"
+                class="h-auto max-w-[250px]"
             />
-            <p class="title">
+            <p class="mb-[5px] text-[20px]">
                 Hakim
                 <span class="italic"
-                    >(aka <span id="username">alsagone</span>)</span
+                    >(aka <span class="text-[#ff4b3c]">alsagone</span>)</span
                 >
             </p>
             <hr />
         </div>
 
-        <div id="socials">
-            <p class="title">Where you can find me</p>
+        <div class="w-full">
+            <p class="mb-[5px] text-[20px]">Where you can find me</p>
             <a
-                class="social-link"
                 v-for="social in socials"
                 :key="social.id"
                 :href="social.url"
                 target="_blank"
                 rel="noopener noreferrer"
+                class="mx-2.5 my-[5px]"
             >
                 <img
-                    :id="social.id"
-                    class="social-logo hvr-grow"
+                    class="mb-[5px] inline-block h-[35px] w-auto align-middle transition-transform duration-300 hover:scale-110 focus:scale-110"
+                    :class="{ 'max-w-[190px]': social.id === 'kofi' }"
                     :src="social.img"
                     :alt="getAlt(social.name)"
                     :title="social.name"
@@ -70,46 +72,46 @@ const getAlt = (name) => `${name}'s logo`;
             <hr />
         </div>
 
-        <div id="mains">
-            <div id="attack">
-                <p class="title">Attack mains</p>
-                <div class="icon-container">
+        <div class="mb-[9px] w-full">
+            <div>
+                <p class="mb-[5px] text-[20px]">Attack mains</p>
+                <div class="flex items-center justify-center">
                     <div
-                        class="main-operator"
                         v-for="(name, index) in mains.attack"
                         :key="index"
+                        class="flex flex-col items-center justify-center"
                     >
                         <img
                             :src="getIcon(name)"
                             :alt="getAlt(name)"
-                            class="icon"
+                            class="h-[60px] w-[60px]"
                         />
-                        <span class="name">{{ name }}</span>
+                        <span class="font-gt-america uppercase">{{
+                            name
+                        }}</span>
                     </div>
                 </div>
             </div>
             <hr />
-            <div id="defense">
-                <p class="title">Defense mains</p>
-                <div class="icon-container">
+            <div>
+                <p class="mb-[5px] text-[20px]">Defense mains</p>
+                <div class="flex items-center justify-center">
                     <div
-                        class="main-operator"
                         v-for="(name, index) in mains.defense"
                         :key="index"
+                        class="flex flex-col items-center justify-center"
                     >
                         <img
                             :src="getIcon(name)"
                             :alt="getAlt(name)"
-                            class="icon"
+                            class="h-[60px] w-[60px]"
                         />
-                        <span class="name">{{ name }}</span>
+                        <span class="font-gt-america uppercase">{{
+                            name
+                        }}</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </template>
-
-<style lang="scss">
-@use '../../css/intro-card.css';
-</style>

@@ -6,7 +6,6 @@ import { ZiggyVue } from 'ziggy-js';
 import '../css/app.css';
 import '../css/button.css';
 import '../css/fonts.css';
-import '../css/form.css';
 import '../css/pride.css';
 
 // Extend ImportMeta interface for Vite...
