@@ -22,21 +22,26 @@ const urls = {
     <PageLayout>
         <Logo text="About Me" />
 
-        <div id="about">
+        <div
+            class="flex w-[95vw] items-start justify-center max-lg:flex-col max-lg:items-center"
+        >
             <IntroCard />
 
-            <div id="section-container">
-                <div class="section">
-                    <span class="title">Me!</span>
+            <div class="flex flex-col items-center justify-center">
+                <div
+                    class="section mt-5 flex h-max w-[90%] flex-col items-center justify-center rounded-[10px] bg-[rgba(1,1,1,0.1)] p-2.5 text-[#fefefe] [box-shadow:0_3px_6px_rgba(0,0,0,0.16),0_3px_6px_rgba(0,0,0,0.23)]"
+                >
+                    <span
+                        class="mb-4 text-[1.5rem] tracking-[0.2ch] text-[#ff4b3c] uppercase"
+                        >Me!</span
+                    >
                     <p>
                         Hi!<br />
                         I'm Hakim/alsagone, the creator of this website. I made
                         this section to talk more about myself and why I decided
                         to build this website.<br /><br />
                         I'm a member of the
-                        <span class="highlight italic"
-                            >Ubisoft Creators Program</span
-                        >
+                        <span class="italic">Ubisoft Creators Program</span>
                         and if you are French, you probably know me for the 360+
                         page-long Google Doc summarizing the entire Assassin's
                         Creed lore I wrote with my best friend. If you want to
@@ -62,8 +67,13 @@ const urls = {
                     </p>
                 </div>
 
-                <div class="section">
-                    <span class="title">Why this website?</span>
+                <div
+                    class="section mt-5 flex h-max w-[90%] flex-col items-center justify-center rounded-[10px] bg-[rgba(1,1,1,0.1)] p-2.5 text-[#fefefe] [box-shadow:0_3px_6px_rgba(0,0,0,0.16),0_3px_6px_rgba(0,0,0,0.23)]"
+                >
+                    <span
+                        class="mb-4 text-[1.5rem] tracking-[0.2ch] text-[#ff4b3c] uppercase"
+                        >Why this website?</span
+                    >
                     <p>
                         I tried to recruit 90 percent of my extended friend
                         group over the years, with various success and even
@@ -89,8 +99,13 @@ const urls = {
                     </p>
                 </div>
 
-                <div class="section">
-                    <span class="title">The technical stuff</span>
+                <div
+                    class="section mt-5 flex h-max w-[90%] flex-col items-center justify-center rounded-[10px] bg-[rgba(1,1,1,0.1)] p-2.5 text-[#fefefe] [box-shadow:0_3px_6px_rgba(0,0,0,0.16),0_3px_6px_rgba(0,0,0,0.23)]"
+                >
+                    <span
+                        class="mb-4 text-[1.5rem] tracking-[0.2ch] text-[#ff4b3c] uppercase"
+                        >The technical stuff</span
+                    >
                     <p>
                         Back when I started experimenting with Front-end
                         frameworks, I made
@@ -140,8 +155,3 @@ const urls = {
         </div>
     </PageLayout>
 </template>
-
-<style lang="scss">
-@use '../../css/about.css';
-@use '../../css/section.css';
-</style>
