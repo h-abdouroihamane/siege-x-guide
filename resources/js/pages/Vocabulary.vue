@@ -9,7 +9,7 @@ const page = usePage();
 const publicPath = import.meta.env.BASE_URL;
 const getOperatorIcon = (operatorName) =>
     `${publicPath}operatorIcons/${normalize(operatorName)}.png`;
-const data = page.props.roles.sort((a, b) => a.name > b.name);
+const data = page.props.roles.sort((a, b) => a.name.localeCompare(b.name));
 </script>
 
 <template>

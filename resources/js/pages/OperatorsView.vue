@@ -60,7 +60,6 @@ const filterOperators = (sides) => {
 
 const toggleQueer = (b) => {
     showQueerIdentities.value = b;
-    console.log('Queer from main:' + showQueerIdentities.value);
 };
 
 const filterAndSort = () => {
@@ -75,7 +74,6 @@ const filterAndSort = () => {
     } else if (defenders) {
         result = allOperators.filter((op) => op.isDefender());
     } else {
-        console.error("Can't filter out both attackers AND defenders");
         return;
     }
 

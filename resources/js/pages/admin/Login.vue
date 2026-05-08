@@ -7,7 +7,10 @@
     <div id="container">
         <Logo :text="'Admin login'" />
         <div id="main-content">
-            <form id="login-form" @submit.prevent="form.post('/login')">
+            <form
+                id="login-form"
+                @submit.prevent="form.post(route('admin.authenticate'))"
+            >
                 <img id="osa" :src="`${publicPath}osa_login.jpg`" alt="Osa" />
 
                 <!-- email -->

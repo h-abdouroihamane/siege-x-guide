@@ -17,6 +17,14 @@ class Operator extends Model
     protected $guarded = ['id'];
     public $timestamps = false;
 
+    protected function casts(): array
+    {
+        return [
+            'year' => 'integer',
+            'season' => 'integer',
+        ];
+    }
+
     public function roles()
     {
         return $this->belongsToMany(Role::class, 'operator_role');

@@ -20,7 +20,7 @@ const form = useForm({
         <div id="container">
             <Logo text="Operator selection" />
             <div id="main-content">
-                <form @submit.prevent="form.post('/operators/select')">
+                <form @submit.prevent="form.post(route('operator.selectPost'))">
                     <select v-model="form.operatorName">
                         <option
                             v-for="(op, index) in operators"
