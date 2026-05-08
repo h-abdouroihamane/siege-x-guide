@@ -129,7 +129,69 @@
     * {
         @apply border-border outline-ring/50;
     }
+
+    html {
+        font-family: var(--font-sans);
+        font-size: 18px;
+        overscroll-behavior: none;
+    }
+
     body {
         @apply bg-background text-foreground;
+        margin: 0;
+        --sb-track-color: #232e33;
+        --sb-thumb-color: #ff4b3c;
+        --sb-size: 14px;
+    }
+
+    body::-webkit-scrollbar {
+        width: var(--sb-size);
+    }
+
+    body::-webkit-scrollbar-track {
+        background: var(--sb-track-color);
+        border-radius: 3px;
+    }
+
+    body::-webkit-scrollbar-thumb {
+        background: var(--sb-thumb-color);
+        border-radius: 3px;
+    }
+
+    @supports not selector(::-webkit-scrollbar) {
+        body {
+            scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+        }
+    }
+
+    #app {
+        background-color: rgba(1, 1, 1, 0.5);
+        min-height: 100vh;
+    }
+
+    a {
+        color: #ff4b3c;
+    }
+
+    a:hover {
+        color: #3cf0ff;
+    }
+
+    /* Used by IntroCard and GadgetTable; will inline via
+       hover:scale-110 transition-transform when those components
+       migrate in batch 3. */
+    .hvr-grow {
+        display: inline-block;
+        vertical-align: middle;
+        transform: translateZ(0);
+        backface-visibility: hidden;
+        transition-duration: 0.3s;
+        transition-property: transform;
+    }
+
+    .hvr-grow:hover,
+    .hvr-grow:focus,
+    .hvr-grow:active {
+        transform: scale(1.1);
     }
 }

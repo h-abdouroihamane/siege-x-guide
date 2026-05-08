@@ -1,40 +1,11 @@
-html {
-    font-family: 'FK Grotesk', sans-serif;
-    font-size: 18px;
-    overscroll-behavior: none;
-}
-
-body {
-    margin: 0;
-    --sb-track-color: #232e33;
-    --sb-thumb-color: #ff4b3c;
-    --sb-size: 14px;
-}
-
-body::-webkit-scrollbar {
-    width: var(--sb-size);
-}
-
-body::-webkit-scrollbar-track {
-    background: var(--sb-track-color);
-    border-radius: 3px;
-}
-
-body::-webkit-scrollbar-thumb {
-    background: var(--sb-thumb-color);
-    border-radius: 3px;
-}
-
-@supports not selector(::-webkit-scrollbar) {
-    body {
-        scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
-    }
-}
-
-#app {
-    background-color: rgba(1, 1, 1, 0.5);
-    min-height: 100vh;
-}
+/*
+ * Page-layout primitives: the fixed full-screen background image
+ * and the centered content container. Both are used by every page
+ * via the #background-image and #container template wrappers.
+ *
+ * Will move into a PageLayout.vue wrapper component in the next
+ * step of the wave 3b migration; this file goes away then.
+ */
 
 #background-image {
     background-color: #000;
@@ -55,29 +26,4 @@ body::-webkit-scrollbar-thumb {
     justify-content: center;
     text-align: center;
     align-items: center;
-}
-
-a {
-    color: #ff4b3c;
-}
-
-a:hover {
-    color: #3cf0ff;
-}
-
-.hvr-grow {
-    display: inline-block;
-    vertical-align: middle;
-    transform: translateZ(0);
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-    backface-visibility: hidden;
-    -moz-osx-font-smoothing: grayscale;
-    transition-duration: 0.3s;
-    transition-property: transform;
-}
-
-.hvr-grow:hover,
-.hvr-grow:focus,
-.hvr-grow:active {
-    transform: scale(1.1);
 }
