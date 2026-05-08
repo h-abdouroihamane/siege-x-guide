@@ -1,3 +1,17 @@
+<script setup lang="ts">
+import Logo from '@/components/Logo.vue';
+import Navbar from '@/components/Navbar.vue';
+import PageLayout from '@/components/PageLayout.vue';
+import { Head, useForm } from '@inertiajs/vue3';
+
+const publicPath = import.meta.env.BASE_URL;
+
+const form = useForm({
+    email: null,
+    password: null,
+});
+</script>
+
 <template>
     <Head>
         <title>Admin login</title>
@@ -5,20 +19,24 @@
     <Navbar path="admin" />
     <PageLayout>
         <Logo :text="'Admin login'" />
-        <div id="main-content">
+        <div
+            class="flex h-[500px] w-[300px] flex-col items-center justify-center border border-[#ff4b3c] bg-[rgba(17,17,17,0.7)] text-[#fefefe]"
+        >
             <form
-                id="login-form"
+                class="grid justify-items-center gap-y-5"
                 @submit.prevent="form.post(route('admin.authenticate'))"
             >
-                <img id="osa" :src="`${publicPath}osa_login.jpg`" alt="Osa" />
+                <img
+                    :src="`${publicPath}osa_login.jpg`"
+                    alt="Osa"
+                    class="h-[200px] w-auto"
+                />
 
-                <!-- email -->
-                <div class="form-element">
+                <div class="grid max-w-[90%] justify-items-center gap-y-[2px]">
                     <label for="email">Email</label>
                     <input id="email" type="text" v-model="form.email" />
                 </div>
-                <!-- password -->
-                <div class="form-element">
+                <div class="grid max-w-[90%] justify-items-center gap-y-[2px]">
                     <label for="pwd">Password</label>
                     <input id="pwd" type="password" v-model="form.password" />
                 </div>
@@ -27,7 +45,6 @@
                     {{ form.errors.password }}
                 </div>
 
-                <!-- submit -->
                 <button
                     class="button-1"
                     type="submit"
@@ -48,21 +65,3 @@
         </div>
     </PageLayout>
 </template>
-
-<script setup lang="ts">
-import Navbar from '../../components/Navbar.vue';
-import PageLayout from '../../components/PageLayout.vue';
-const publicPath = import.meta.env.BASE_URL;
-
-import { Head, useForm } from '@inertiajs/vue3';
-
-const form = useForm({
-    email: null,
-    password: null,
-});
-</script>
-
-<style lang="scss" scoped>
-@use '../../../css/login.css';
-@use '../../../css/button.css';
-</style>
