@@ -2,9 +2,8 @@
     <Head>
         <title>Admin login</title>
     </Head>
-    <div id="background-image" />
     <Navbar path="admin" />
-    <div id="container">
+    <PageLayout>
         <Logo :text="'Admin login'" />
         <div id="main-content">
             <form
@@ -47,11 +46,12 @@
                 </button>
             </form>
         </div>
-    </div>
+    </PageLayout>
 </template>
 
 <script setup lang="ts">
 import Navbar from '../../components/Navbar.vue';
+import PageLayout from '../../components/PageLayout.vue';
 const publicPath = import.meta.env.BASE_URL;
 
 import { Head, useForm } from '@inertiajs/vue3';

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Logo from '@/components/Logo.vue';
 import Navbar from '@/components/Navbar.vue';
+import PageLayout from '@/components/PageLayout.vue';
 import { Head, usePage } from '@inertiajs/vue3';
 
 import { normalize } from '../scripts/operator.ts';
@@ -17,9 +18,8 @@ const data = page.props.roles.sort((a, b) => a.name.localeCompare(b.name));
         <Head>
             <title>Vocabulary</title>
         </Head>
-        <div id="background-image" />
         <Navbar path="vocabulary" />
-        <div id="container">
+        <PageLayout>
             <Logo text="Vocabulary" />
             <div id="section-container" class="vocabulary">
                 <div class="section">
@@ -51,7 +51,7 @@ const data = page.props.roles.sort((a, b) => a.name.localeCompare(b.name));
                     </div>
                 </div>
             </div>
-        </div>
+        </PageLayout>
     </div>
 </template>
 

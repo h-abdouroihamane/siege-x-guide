@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Logo from '@/components/Logo.vue';
 import Navbar from '@/components/Navbar.vue';
+import PageLayout from '@/components/PageLayout.vue';
 import { Head, usePage } from '@inertiajs/vue3';
 import { ref } from 'vue';
 import { normalize } from '../scripts/operator.ts';
@@ -57,11 +58,10 @@ const toggleScreenshotMode = () => {
                 content="Page listing every squad from Rainbow Six Siege X according to the latest version of the lore"
             />
         </Head>
-        <div id="background-image" />
         <div :class="{ screenshot: screenshotMode }">
             <Navbar path="squads" />
         </div>
-        <div id="container">
+        <PageLayout>
             <Logo :text="squadHeader" />
             <div id="main-content">
                 <table id="squad-table">
@@ -173,7 +173,7 @@ const toggleScreenshotMode = () => {
                     Copy alt text
                 </button>
             </div>
-        </div>
+        </PageLayout>
     </div>
 </template>
 

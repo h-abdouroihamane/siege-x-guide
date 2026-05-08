@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import Logo from '@/components/Logo.vue';
+import Navbar from '@/components/Navbar.vue';
+import PageLayout from '@/components/PageLayout.vue';
 import { Head, useForm, usePage } from '@inertiajs/vue3';
 
 const page = usePage();
@@ -15,9 +17,8 @@ const form = useForm({
         <Head>
             <title>Select Operator</title>
         </Head>
-        <div id="background-image" />
         <Navbar path="admin" />
-        <div id="container">
+        <PageLayout>
             <Logo text="Operator selection" />
             <div id="main-content">
                 <form @submit.prevent="form.post(route('operator.selectPost'))">
@@ -43,7 +44,7 @@ const form = useForm({
                     </button>
                 </form>
             </div>
-        </div>
+        </PageLayout>
     </div>
 </template>
 
