@@ -316,6 +316,78 @@ it('persists the updated operator name in the database', function () {
 });
 
 // ──────────────────────────────────────────────────────────────────────────────
+// description max:250 boundary — store
+// ──────────────────────────────────────────────────────────────────────────────
+
+it('rejects store when description exceeds 250 characters', function () {
+    $admin = User::factory()->create();
+    $squad = Squad::factory()->create();
+
+    $payload = validStorePayload($squad->name);
+    $payload['description'] = str_repeat('a', 251);
+
+    $response = $this->actingAs($admin)->post('/operators/store', $payload);
+
+    $response->assertSessionHasErrors('description');
+});
+
+it('accepts store when description is exactly 250 characters', function () {
+    Storage::fake('public');
+
+    $admin = User::factory()->create();
+    $squad = Squad::factory()->create();
+
+    $payload = validStorePayload($squad->name);
+    $payload['description'] = str_repeat('a', 250);
+    $payload['icon'] = UploadedFile::fake()->image('icon.png', 250, 250);
+    $payload['portrait'] = UploadedFile::fake()->image(
+        'portrait.png',
+        300,
+        500,
+    );
+
+    $response = $this->actingAs($admin)->post('/operators/store', $payload);
+
+    $response->assertRedirect(route('admin.dashboard'));
+});
+
+// ──────────────────────────────────────────────────────────────────────────────
+// description max:250 boundary — update
+// ──────────────────────────────────────────────────────────────────────────────
+
+it('rejects update when description exceeds 250 characters', function () {
+    $admin = User::factory()->create();
+    $squad = Squad::factory()->create();
+    [$opId, $operatorId] = seedOperatorWithSquad($squad);
+
+    $payload = validUpdatePayload($opId, $squad->name);
+    $payload['description'] = str_repeat('a', 251);
+
+    $response = $this->actingAs($admin)->post(
+        "/operators/update/{$operatorId}",
+        $payload,
+    );
+
+    $response->assertSessionHasErrors('description');
+});
+
+it('accepts update when description is exactly 250 characters', function () {
+    $admin = User::factory()->create();
+    $squad = Squad::factory()->create();
+    [$opId, $operatorId] = seedOperatorWithSquad($squad);
+
+    $payload = validUpdatePayload($opId, $squad->name);
+    $payload['description'] = str_repeat('a', 250);
+
+    $response = $this->actingAs($admin)->post(
+        "/operators/update/{$operatorId}",
+        $payload,
+    );
+
+    $response->assertRedirect(route('admin.dashboard'));
+});
+
+// ──────────────────────────────────────────────────────────────────────────────
 // Helpers
 // ──────────────────────────────────────────────────────────────────────────────
 
