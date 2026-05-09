@@ -19,7 +19,8 @@ class OperationController extends Controller
                 [
                     'errors' => [
                         'year' => [
-                            'An operation already exists for that year and season.',
+                            'An operation already exists' .
+                            ' for that year and season.',
                         ],
                     ],
                 ],

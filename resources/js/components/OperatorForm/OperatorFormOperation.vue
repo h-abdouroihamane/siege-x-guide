@@ -115,12 +115,15 @@ function onCreated(op: OperationOptionData) {
                         >
                             {{ op.id }} — {{ op.name }}
                         </ComboboxItem>
-                        <li
+                        <div
                             v-if="filtered.length === 0"
+                            role="option"
+                            aria-disabled="true"
+                            aria-live="polite"
                             class="px-3 py-2 font-mono text-[11px] uppercase tracking-widest text-[#b0bac6]"
                         >
                             No match
-                        </li>
+                        </div>
                     </ComboboxContent>
                 </ComboboxRoot>
             </div>
