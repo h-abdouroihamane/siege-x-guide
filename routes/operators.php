@@ -16,7 +16,6 @@ Route::prefix('operators')
     ->middleware('auth')
     ->group(function () {
         Route::get('/select', 'selectForEditing')->name('selectForEditing');
-        Route::post('/select', 'selectPost')->name('selectPost');
         Route::get('/edit/{operator}', 'edit')->name('edit');
         Route::post('/update/{operatorId}', 'update')->name('update');
         Route::get('/create', 'create')->name('create');

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 use App\Http\Resources\OperatorResource;
 use App\Http\Resources\OperationResource;
 use App\Http\Resources\SecondaryGadgetOptionResource;
-use Illuminate\Http\Request;
 use App\Models\Operator;
 use App\Models\Operation;
 use App\Models\Role;
@@ -40,28 +39,18 @@ class OperatorController extends Controller
     public function selectForEditing()
     {
         return Inertia::render('OperatorSelection', [
-            'operators' => Operator::pluck('name')->sort(),
+            'operators' => OperatorResource::collection(
+                Operator::with(
+                    'roles:id,name',
+                    'squad:id,name',
+                    'operation:id,name,release_date',
+                    'rework.operation:id,name,release_date',
+                    'queerIdentities:id,name',
+                )
+                    ->orderBy('name')
+                    ->get(),
+            ),
         ]);
-    }
-
-    public function selectPost(Request $request)
-    {
-        $operatorName = $request->input('operatorName');
-        $operator = Operator::where('name', $operatorName)
-            ->with(
-                'roles:id,name',
-                'squad:id,name',
-                'operation:id,name,release_date',
-                'rework.operation:id,name,release_date',
-                'queerIdentities:id,name',
-            )
-            ->first();
-
-        if (is_null($operator)) {
-            return to_route('operator.selectForEditing');
-        }
-
-        return to_route('operator.edit', ['operator' => $operator]);
     }
 
     public function edit(Operator $operator)
