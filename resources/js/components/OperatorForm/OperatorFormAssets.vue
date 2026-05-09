@@ -4,32 +4,52 @@
   Accent: signal-red (#ff4b3c). Dark only.
 -->
 <script setup lang="ts">
-// Assets section — portrait and icon file inputs.
-// File inputs use @input (not v-model) per codebase convention.
-// In edit mode the section hint reads "OPTIONAL ON EDIT";
-// in create mode it reads "REQUIRED".
-defineProps<{
+// Assets section — portrait and icon drop-zones.
+// File values are owned by the parent (useForm in index.vue).
+// This component surfaces the drop-zone UI and emits changes up.
+// In edit mode, derives existing image URLs from operator name.
+import { computed } from 'vue';
+import { normalize } from '../../scripts/operator.ts';
+import DropZone from './DropZone.vue';
+
+const publicPath = import.meta.env.BASE_URL;
+
+const props = defineProps<{
     mode: 'create' | 'edit';
+    portrait: File | null;
+    icon: File | null;
+    // Operator name from the form (used to derive existing image URL in edit)
+    operatorName: string;
 }>();
 
 const emit = defineEmits<{
-    'update:portrait': [file: File];
-    'update:icon': [file: File];
+    'update:portrait': [file: File | null];
+    'update:icon': [file: File | null];
 }>();
 
-function onPortraitInput(event: Event) {
-    const input = event.target as HTMLInputElement;
-    if (input.files?.[0]) {
-        emit('update:portrait', input.files[0]);
-    }
-}
+// Derive existing asset URLs from the operator's clean name.
+// Matches the URL contract in operator.ts:54–56.
+const cleanName = computed(() => normalize(props.operatorName));
 
-function onIconInput(event: Event) {
-    const input = event.target as HTMLInputElement;
-    if (input.files?.[0]) {
-        emit('update:icon', input.files[0]);
-    }
-}
+const existingPortraitUrl = computed(() =>
+    props.mode === 'edit' && props.operatorName
+        ? `${publicPath}operatorPortraits/${cleanName.value}.png`
+        : null,
+);
+
+const existingIconUrl = computed(() =>
+    props.mode === 'edit' && props.operatorName
+        ? `${publicPath}operatorIcons/${cleanName.value}.png`
+        : null,
+);
+
+const existingPortraitFilename = computed(() =>
+    props.mode === 'edit' && cleanName.value ? `${cleanName.value}.png` : null,
+);
+
+const existingIconFilename = computed(() =>
+    props.mode === 'edit' && cleanName.value ? `${cleanName.value}.png` : null,
+);
 </script>
 
 <template>
@@ -52,51 +72,25 @@ function onIconInput(event: Event) {
         </header>
 
         <div class="grid grid-cols-2 gap-4 p-5">
-            <!-- Portrait -->
-            <div>
-                <label
-                    for="op-portrait"
-                    class="mb-1.5 block font-mono text-[11px] uppercase tracking-[0.12em] text-[#b0bac6]"
-                >
-                    Portrait
-                </label>
-                <input
-                    id="op-portrait"
-                    type="file"
-                    name="portrait"
-                    accept="image/png"
-                    class="w-full rounded-[4px] px-3 py-2 text-sm"
-                    @input="onPortraitInput"
-                />
-                <p
-                    class="mt-1 font-mono text-[10px] text-[rgba(254,254,254,0.35)]"
-                >
-                    PNG · 512 × 720 recommended
-                </p>
-            </div>
+            <!-- Portrait drop-zone -->
+            <DropZone
+                label="Portrait"
+                dimension-hint="300 × 500 max"
+                :current-file="props.portrait"
+                :existing-url="existingPortraitUrl"
+                :existing-filename="existingPortraitFilename"
+                @update:file="emit('update:portrait', $event)"
+            />
 
-            <!-- Icon -->
-            <div>
-                <label
-                    for="op-icon"
-                    class="mb-1.5 block font-mono text-[11px] uppercase tracking-[0.12em] text-[#b0bac6]"
-                >
-                    Icon
-                </label>
-                <input
-                    id="op-icon"
-                    type="file"
-                    name="icon"
-                    accept="image/png"
-                    class="w-full rounded-[4px] px-3 py-2 text-sm"
-                    @input="onIconInput"
-                />
-                <p
-                    class="mt-1 font-mono text-[10px] text-[rgba(254,254,254,0.35)]"
-                >
-                    PNG · square recommended
-                </p>
-            </div>
+            <!-- Icon drop-zone -->
+            <DropZone
+                label="Icon"
+                dimension-hint="250 × 250 max"
+                :current-file="props.icon"
+                :existing-url="existingIconUrl"
+                :existing-filename="existingIconFilename"
+                @update:file="emit('update:icon', $event)"
+            />
         </div>
     </section>
 </template>
