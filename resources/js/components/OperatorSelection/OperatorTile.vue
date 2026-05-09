@@ -20,7 +20,7 @@ const props = defineProps<{
     <Link
         :href="props.editHref"
         :class="[
-            'op-tile group relative block w-full overflow-hidden rounded-[2px]',
+            'group relative block w-full overflow-hidden rounded-[2px]',
             'border border-[rgba(254,254,254,0.06)] bg-[rgba(17,17,17,0.5)]',
             'transition-all duration-200',
             'focus-visible:outline-2 focus-visible:outline-[#ff4b3c]',
