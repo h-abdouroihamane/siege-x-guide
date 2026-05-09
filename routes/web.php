@@ -8,3 +8,4 @@ require __DIR__ . '/operators.php';
 require __DIR__ . '/squads.php';
 require __DIR__ . '/vocabulary.php';
 require __DIR__ . '/secondaryGadgets.php';
+require __DIR__ . '/operations.php';

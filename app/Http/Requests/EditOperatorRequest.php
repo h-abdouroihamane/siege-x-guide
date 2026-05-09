@@ -31,6 +31,8 @@ class EditOperatorRequest extends FormRequest
             'queerIdentities.*' => 'string|exists:queer_identities,name',
             'roles' => 'sometimes|array',
             'roles.*' => 'string|exists:roles,name',
+            'secondary_gadget_ids' => 'sometimes|array',
+            'secondary_gadget_ids.*' => 'string|exists:secondary_gadgets,id',
             'portrait' =>
                 'sometimes|nullable|image|mimes:png|dimensions:max_width=300,max_height=500',
             'icon' =>

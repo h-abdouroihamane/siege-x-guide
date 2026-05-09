@@ -41,6 +41,10 @@ class OperatorResource extends JsonResource
             'roles' => $roles,
             'squad' => $squad,
             'queerIdentities' => $queerIdentities,
+            'secondaryGadgetIds' => $this->whenLoaded(
+                'secondaryGadgets',
+                fn() => $this->secondaryGadgets->pluck('id')->all(),
+            ),
         ];
     }
 }
