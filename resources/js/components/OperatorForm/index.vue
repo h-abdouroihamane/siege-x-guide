@@ -177,7 +177,11 @@ function submit() {
             <button
                 v-if="mode === 'edit'"
                 type="button"
-                class="font-display inline-flex cursor-pointer items-center gap-1.5 border-0 bg-transparent text-sm uppercase tracking-[0.04em] text-[#ff4b3c] hover:text-[#f8d002]"
+                :class="[
+                    'font-display inline-flex cursor-pointer items-center',
+                    'gap-1.5 border-0 bg-transparent text-sm uppercase',
+                    'tracking-[0.04em] text-[#ff4b3c] hover:text-[#f8d002]',
+                ]"
             >
                 Delete operator
             </button>

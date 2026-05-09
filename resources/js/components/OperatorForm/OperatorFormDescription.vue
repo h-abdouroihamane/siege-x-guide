@@ -57,6 +57,7 @@ const counterColor = computed(() => {
                 :value="modelValue"
                 rows="4"
                 maxlength="250"
+                aria-describedby="op-description-counter"
                 class="w-full resize-none rounded-[4px] px-3 py-2"
                 @input="
                     emit(
@@ -67,10 +68,16 @@ const counterColor = computed(() => {
             />
             <div class="mt-1.5 flex justify-end">
                 <span
+                    id="op-description-counter"
                     class="font-mono text-[10px]"
                     :style="{ color: counterColor }"
+                    aria-live="polite"
+                    aria-atomic="true"
                 >
-                    {{ charCount }} / 250
+                    <span aria-hidden="true">{{ charCount }} / 250</span>
+                    <span class="sr-only">
+                        {{ charCount }} of 250 characters used
+                    </span>
                 </span>
             </div>
         </div>
