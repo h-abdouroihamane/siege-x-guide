@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Operation extends Model
 {
@@ -22,13 +22,8 @@ class Operation extends Model
         return $query->orderBy('year', 'desc')->orderBy('season', 'desc');
     }
 
-    public function operators(): BelongsToMany
+    public function operators(): HasMany
     {
-        return $this->belongsToMany(
-            Operator::class,
-            'operators',
-            'id',
-            'operation_id',
-        );
+        return $this->hasMany(Operator::class, 'operation_id');
     }
 }
