@@ -7,7 +7,7 @@
   Dark only — no dark: variants.
 -->
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, onBeforeUnmount, ref, watch } from 'vue';
 import { useForm } from '@inertiajs/vue3';
 import { normalize } from '../../scripts/operator.ts';
 import type { OperationOptionData, OperatorData } from '../../types/domain.ts';
@@ -47,26 +47,49 @@ const form = useForm({
     roles: props.operator?.roles ?? [],
 });
 
+// Blob URL lifecycle for the live preview.
+// Computed reads were creating a fresh blob URL on every reactive
+// evaluation; refs + watchers revoke before replacement and on unmount.
+const portraitBlobUrl = ref<string | null>(null);
+const iconBlobUrl = ref<string | null>(null);
+
+watch(
+    () => form.portrait,
+    (file) => {
+        if (portraitBlobUrl.value) URL.revokeObjectURL(portraitBlobUrl.value);
+        portraitBlobUrl.value = file ? URL.createObjectURL(file) : null;
+    },
+);
+watch(
+    () => form.icon,
+    (file) => {
+        if (iconBlobUrl.value) URL.revokeObjectURL(iconBlobUrl.value);
+        iconBlobUrl.value = file ? URL.createObjectURL(file) : null;
+    },
+);
+onBeforeUnmount(() => {
+    if (portraitBlobUrl.value) URL.revokeObjectURL(portraitBlobUrl.value);
+    if (iconBlobUrl.value) URL.revokeObjectURL(iconBlobUrl.value);
+});
+
 // Duck-typed operator object for OperatorCard.
-// Option (a): build a plain object matching only what OperatorCard reads
-// (cleanName, portrait, icon, name, queerIdentities, isAttacker, isDefender).
-// Avoids the positional Operator constructor while staying fully reactive.
+// Plain object matching only what OperatorCard reads (cleanName,
+// portrait, icon, name, queerIdentities, isAttacker, isDefender).
 const livePreviewOperator = computed(() => {
-    const clean = normalize(form.name || 'Operator');
-    const portraitSrc = form.portrait
-        ? URL.createObjectURL(form.portrait)
-        : props.mode === 'edit' && props.operator?.name
-          ? `${publicPath}operatorPortraits/${normalize(props.operator.name)}.png`
-          : 'https://placehold.co/300x500';
-    const iconSrc = form.icon
-        ? URL.createObjectURL(form.icon)
-        : props.mode === 'edit' && props.operator?.name
-          ? `${publicPath}operatorIcons/${normalize(props.operator.name)}.png`
-          : 'https://placehold.co/60x60/000000/FFF';
+    const portraitSrc =
+        portraitBlobUrl.value ??
+        (props.mode === 'edit' && props.operator?.name
+            ? `${publicPath}operatorPortraits/${normalize(props.operator.name)}.png`
+            : 'https://placehold.co/300x500');
+    const iconSrc =
+        iconBlobUrl.value ??
+        (props.mode === 'edit' && props.operator?.name
+            ? `${publicPath}operatorIcons/${normalize(props.operator.name)}.png`
+            : 'https://placehold.co/60x60/000000/FFF');
 
     return {
         name: form.name || 'Operator',
-        cleanName: clean,
+        cleanName: normalize(form.name || 'Operator'),
         portrait: portraitSrc,
         icon: iconSrc,
         queerIdentities: form.queerIdentities ?? [],
