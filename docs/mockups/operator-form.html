@@ -320,12 +320,7 @@
           <label class="flex items-center gap-2.5 text-sm cursor-pointer">
             <input type="checkbox" class="accent-[var(--siege-red)]" onchange="syncPreview()" />
             <span class="pride-flag" aria-hidden="true"></span>
-            <span class="text-[var(--siege-label)]">Transgender</span>
-          </label>
-          <label class="flex items-center gap-2.5 text-sm cursor-pointer">
-            <input type="checkbox" class="accent-[var(--siege-red)]" onchange="syncPreview()" />
-            <span class="pride-flag" aria-hidden="true"></span>
-            <span class="text-[var(--siege-label)]">Non-binary</span>
+            <span class="text-[var(--siege-label)]">Asexual</span>
           </label>
           <label class="flex items-center gap-2.5 text-sm cursor-pointer">
             <input type="checkbox" class="accent-[var(--siege-red)]" onchange="syncPreview()" checked />
@@ -335,17 +330,22 @@
           <label class="flex items-center gap-2.5 text-sm cursor-pointer">
             <input type="checkbox" class="accent-[var(--siege-red)]" onchange="syncPreview()" />
             <span class="pride-flag" aria-hidden="true"></span>
-            <span class="text-[var(--siege-label)]">Lesbian</span>
-          </label>
-          <label class="flex items-center gap-2.5 text-sm cursor-pointer">
-            <input type="checkbox" class="accent-[var(--siege-red)]" onchange="syncPreview()" />
-            <span class="pride-flag" aria-hidden="true"></span>
             <span class="text-[var(--siege-label)]">Gay</span>
           </label>
           <label class="flex items-center gap-2.5 text-sm cursor-pointer">
             <input type="checkbox" class="accent-[var(--siege-red)]" onchange="syncPreview()" />
             <span class="pride-flag" aria-hidden="true"></span>
-            <span class="text-[var(--siege-label)]">Asexual</span>
+            <span class="text-[var(--siege-label)]">Lesbian</span>
+          </label>
+          <label class="flex items-center gap-2.5 text-sm cursor-pointer">
+            <input type="checkbox" class="accent-[var(--siege-red)]" onchange="syncPreview()" />
+            <span class="pride-flag" aria-hidden="true"></span>
+            <span class="text-[var(--siege-label)]">Non-binary</span>
+          </label>
+          <label class="flex items-center gap-2.5 text-sm cursor-pointer">
+            <input type="checkbox" class="accent-[var(--siege-red)]" onchange="syncPreview()" />
+            <span class="pride-flag" aria-hidden="true"></span>
+            <span class="text-[var(--siege-label)]">Transgender</span>
           </label>
         </div>
       </section>
@@ -481,12 +481,12 @@
   // ── Gadget data (mirrors SecondaryGadgetSeeder.php side groupings) ──
   const GADGETS = {
     attack: [
-      'Gonne-6', 'Breach Charge', 'Smoke Grenade', 'Stun Grenade',
-      'Frag Grenade', 'Claymore', 'Hard Breach Charge', 'Impact EMP Grenade',
+      'Breach Charge', 'Claymore', 'Frag Grenade', 'Gonne-6',
+      'Hard Breach Charge', 'Impact EMP Grenade', 'Smoke Grenade', 'Stun Grenade',
     ],
     defense: [
-      'Deployable Shield', 'Barbed Wire', 'C4', 'Impact Grenade',
-      'Bulletproof Camera', 'Proximity Alarm', 'Observation Blocker',
+      'Barbed Wire', 'Bulletproof Camera', 'C4', 'Deployable Shield',
+      'Impact Grenade', 'Observation Blocker', 'Proximity Alarm',
     ],
   };
   // Selections persist per side so flipping Attack→Defense→Attack restores choices.
