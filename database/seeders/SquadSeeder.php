@@ -106,6 +106,8 @@ class SquadSeeder extends Seeder
             'Unaffiliated' => ['Deimos', 'Striker', 'Sentry', 'Solid Snake'],
         ];
 
+        $operatorsByName = Operator::all()->keyBy('name');
+
         $squad_count = 1;
         foreach ($data as $squad_name => $operators) {
             $squad = Squad::create([
@@ -116,7 +118,7 @@ class SquadSeeder extends Seeder
             $rank = 1;
 
             foreach ($operators as $op_name) {
-                $operator = Operator::firstWhere('name', $op_name);
+                $operator = $operatorsByName[$op_name] ?? null;
 
                 if (!$operator) {
                     throw new \RuntimeException(

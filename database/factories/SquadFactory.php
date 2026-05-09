@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Squad;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -11,11 +12,9 @@ class SquadFactory extends Factory
 {
     public function definition(): array
     {
-        static $rank = 0;
-
         return [
             'name' => fake()->unique()->word(),
-            'rank' => ++$rank,
+            'rank' => (int) Squad::max('rank') + 1,
         ];
     }
 }

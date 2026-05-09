@@ -42,8 +42,15 @@ class OperatorReworkSeeder extends Seeder
             ],
         ];
 
+        $operatorsByName = Operator::whereIn(
+            'name',
+            array_column($reworkedOperators, 'name'),
+        )
+            ->get()
+            ->keyBy('name');
+
         foreach ($reworkedOperators as $rop) {
-            $operator = Operator::firstWhere('name', $rop['name']);
+            $operator = $operatorsByName[$rop['name']];
             $r = new Rework();
             $r->operator_id = $operator->id;
             $r->operation_id = $rop['operation_id'];
