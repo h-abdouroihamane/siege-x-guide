@@ -27,13 +27,15 @@ class CreateOperatorRequest extends FormRequest
             'season' => 'required|numeric|in:1,2,3,4',
             'releaseDate' => 'required|date',
             'name' => 'required|string|unique:operators,name',
-            'description' => 'required|string',
+            'description' => 'required|string|max:250',
             'side' => 'required|string|in:Attack,Defense',
             'squad' => 'required|string|exists:squads,name',
             'queerIdentities' => 'sometimes|array',
             'queerIdentities.*' => 'string|exists:queer_identities,name',
             'roles' => 'sometimes|array',
             'roles.*' => 'string|exists:roles,name',
+            'secondary_gadget_ids' => 'sometimes|array',
+            'secondary_gadget_ids.*' => 'string|exists:secondary_gadgets,id',
             'portrait' =>
                 'required|image|mimes:png|dimensions:max_width=300,max_height=500',
             'icon' =>

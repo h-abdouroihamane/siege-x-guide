@@ -316,6 +316,201 @@ it('persists the updated operator name in the database', function () {
 });
 
 // ──────────────────────────────────────────────────────────────────────────────
+// description max:250 boundary — store
+// ──────────────────────────────────────────────────────────────────────────────
+
+it('rejects store when description exceeds 250 characters', function () {
+    $admin = User::factory()->create();
+    $squad = Squad::factory()->create();
+
+    $payload = validStorePayload($squad->name);
+    $payload['description'] = str_repeat('a', 251);
+
+    $response = $this->actingAs($admin)->post('/operators/store', $payload);
+
+    $response->assertSessionHasErrors('description');
+});
+
+it('accepts store when description is exactly 250 characters', function () {
+    Storage::fake('public');
+
+    $admin = User::factory()->create();
+    $squad = Squad::factory()->create();
+
+    $payload = validStorePayload($squad->name);
+    $payload['description'] = str_repeat('a', 250);
+    $payload['icon'] = UploadedFile::fake()->image('icon.png', 250, 250);
+    $payload['portrait'] = UploadedFile::fake()->image(
+        'portrait.png',
+        300,
+        500,
+    );
+
+    $response = $this->actingAs($admin)->post('/operators/store', $payload);
+
+    $response->assertRedirect(route('admin.dashboard'));
+});
+
+// ──────────────────────────────────────────────────────────────────────────────
+// description max:250 boundary — update
+// ──────────────────────────────────────────────────────────────────────────────
+
+it('rejects update when description exceeds 250 characters', function () {
+    $admin = User::factory()->create();
+    $squad = Squad::factory()->create();
+    [$opId, $operatorId] = seedOperatorWithSquad($squad);
+
+    $payload = validUpdatePayload($opId, $squad->name);
+    $payload['description'] = str_repeat('a', 251);
+
+    $response = $this->actingAs($admin)->post(
+        "/operators/update/{$operatorId}",
+        $payload,
+    );
+
+    $response->assertSessionHasErrors('description');
+});
+
+it('accepts update when description is exactly 250 characters', function () {
+    $admin = User::factory()->create();
+    $squad = Squad::factory()->create();
+    [$opId, $operatorId] = seedOperatorWithSquad($squad);
+
+    $payload = validUpdatePayload($opId, $squad->name);
+    $payload['description'] = str_repeat('a', 250);
+
+    $response = $this->actingAs($admin)->post(
+        "/operators/update/{$operatorId}",
+        $payload,
+    );
+
+    $response->assertRedirect(route('admin.dashboard'));
+});
+
+// ──────────────────────────────────────────────────────────────────────────────
+// OperationController — store endpoint
+// ──────────────────────────────────────────────────────────────────────────────
+
+it('rejects operation store from a guest', function () {
+    $payload = [
+        'name' => 'Operation Guest',
+        'year' => 9,
+        'season' => 2,
+        'release_date' => '2026-01-01',
+    ];
+
+    $response = $this->post(route('operation.store'), $payload);
+
+    $response->assertRedirect();
+});
+
+it('rejects operation store when name is missing', function () {
+    $admin = User::factory()->create();
+
+    $response = $this->actingAs($admin)->postJson(route('operation.store'), [
+        'year' => 9,
+        'season' => 2,
+        'release_date' => '2026-01-01',
+    ]);
+
+    $response->assertStatus(422);
+    $response->assertJsonValidationErrors('name');
+});
+
+it('stores an operation and returns 201 json with id', function () {
+    $admin = User::factory()->create();
+
+    $response = $this->actingAs($admin)->postJson(route('operation.store'), [
+        'name' => 'Operation Test',
+        'year' => 9,
+        'season' => 2,
+        'release_date' => '2026-01-01',
+    ]);
+
+    $response->assertCreated();
+    $response->assertJsonStructure(['id', 'name', 'release_date']);
+    expect($response->json('id'))->toBe('Y9S2');
+});
+
+it('rejects operation store when year/season slot already exists', function () {
+    $admin = User::factory()->create();
+
+    Operation::create([
+        'id' => 'Y9S2',
+        'name' => 'Operation Existing',
+        'year' => 9,
+        'season' => 2,
+        'release_date' => '2026-01-01',
+    ]);
+
+    $response = $this->actingAs($admin)->postJson(route('operation.store'), [
+        'name' => 'Operation Different Name',
+        'year' => 9,
+        'season' => 2,
+        'release_date' => '2026-01-01',
+    ]);
+
+    $response->assertStatus(422);
+    $response->assertJsonValidationErrors('year');
+});
+
+// ──────────────────────────────────────────────────────────────────────────────
+// Operator gadget sync — secondary_gadget_ids
+// ──────────────────────────────────────────────────────────────────────────────
+
+it('accepts store with valid secondary_gadget_ids', function () {
+    Storage::fake('public');
+
+    $admin = User::factory()->create();
+    $squad = Squad::factory()->create();
+    $gadgetId = seedSecondaryGadget('Attack');
+
+    $payload = validStorePayload($squad->name);
+    $payload['secondary_gadget_ids'] = [$gadgetId];
+    $payload['icon'] = UploadedFile::fake()->image('icon.png', 250, 250);
+    $payload['portrait'] = UploadedFile::fake()->image(
+        'portrait.png',
+        300,
+        500,
+    );
+
+    $response = $this->actingAs($admin)->post('/operators/store', $payload);
+
+    $response->assertRedirect(route('admin.dashboard'));
+    $this->assertDatabaseHas('operator_secondary_gadget', [
+        'secondary_gadget_id' => $gadgetId,
+    ]);
+});
+
+it('rejects store with nonexistent secondary_gadget_id', function () {
+    $admin = User::factory()->create();
+    $squad = Squad::factory()->create();
+
+    $payload = validStorePayload($squad->name);
+    $payload['secondary_gadget_ids'] = ['01HFAKE0000000000000000000'];
+
+    $response = $this->actingAs($admin)->post('/operators/store', $payload);
+
+    $response->assertSessionHasErrors('secondary_gadget_ids.0');
+});
+
+it('syncs secondary gadgets on update', function () {
+    $admin = User::factory()->create();
+    $squad = Squad::factory()->create();
+    [$opId, $operatorId] = seedOperatorWithSquad($squad);
+    $gadgetId = seedSecondaryGadget('Defense');
+
+    $payload = validUpdatePayload($opId, $squad->name);
+    $payload['secondary_gadget_ids'] = [$gadgetId];
+
+    $this->actingAs($admin)->post("/operators/update/{$operatorId}", $payload);
+
+    $this->assertDatabaseHas('operator_secondary_gadget', [
+        'secondary_gadget_id' => $gadgetId,
+    ]);
+});
+
+// ──────────────────────────────────────────────────────────────────────────────
 // Helpers
 // ──────────────────────────────────────────────────────────────────────────────
 
@@ -413,4 +608,20 @@ function seedOperatorWithSquad(Squad $squad): array
     ]);
 
     return [$opId, $operatorId];
+}
+
+/**
+ * Insert a secondary_gadgets row directly, return its ULID.
+ */
+function seedSecondaryGadget(string $side): string
+{
+    $id = (string) Str::ulid();
+
+    DB::table('secondary_gadgets')->insert([
+        'id' => $id,
+        'name' => 'Gadget ' . $id,
+        'side' => $side,
+    ]);
+
+    return $id;
 }

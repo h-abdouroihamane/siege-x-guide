@@ -23,7 +23,7 @@ class EditOperatorRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'description' => 'required|string',
+            'description' => 'required|string|max:250',
             'side' => 'required|string|in:Attack,Defense',
             'squad' => 'required|string|exists:squads,name',
             'operation_id' => 'required|string|exists:operations,id',
@@ -31,6 +31,8 @@ class EditOperatorRequest extends FormRequest
             'queerIdentities.*' => 'string|exists:queer_identities,name',
             'roles' => 'sometimes|array',
             'roles.*' => 'string|exists:roles,name',
+            'secondary_gadget_ids' => 'sometimes|array',
+            'secondary_gadget_ids.*' => 'string|exists:secondary_gadgets,id',
             'portrait' =>
                 'sometimes|nullable|image|mimes:png|dimensions:max_width=300,max_height=500',
             'icon' =>

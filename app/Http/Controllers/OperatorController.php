@@ -3,11 +3,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\OperatorResource;
 use App\Http\Resources\OperationResource;
+use App\Http\Resources\SecondaryGadgetOptionResource;
 use Illuminate\Http\Request;
 use App\Models\Operator;
 use App\Models\Operation;
 use App\Models\Role;
 use App\Models\QueerIdentity;
+use App\Models\SecondaryGadget;
 use App\Models\Squad;
 use Inertia\Inertia;
 use App\Http\Requests\EditOperatorRequest;
@@ -64,13 +66,17 @@ class OperatorController extends Controller
 
     public function edit(Operator $operator)
     {
+        $operator->load('secondaryGadgets');
         $operatorResource = new OperatorResource($operator);
-        $squads = Squad::pluck('name')->sort();
+        $squads = Squad::orderBy('name')->pluck('name');
         $operations = OperationResource::collection(
             Operation::orderByDesc('release_date')->get(),
         );
-        $queerIdentities = QueerIdentity::pluck('name')->sort();
+        $queerIdentities = QueerIdentity::orderBy('name')->pluck('name');
         $roles = Role::pluck('name')->sort();
+        $secondaryGadgets = SecondaryGadgetOptionResource::collection(
+            SecondaryGadget::orderBy('name')->get(),
+        );
 
         return Inertia::render('EditOperator', [
             'operator' => $operatorResource,
@@ -78,6 +84,7 @@ class OperatorController extends Controller
             'operations' => $operations,
             'roles' => $roles,
             'queerIdentities' => $queerIdentities,
+            'secondaryGadgets' => $secondaryGadgets,
             'submitRoute' => route('operator.update', [
                 'operatorId' => $operator->id,
             ]),
@@ -115,6 +122,10 @@ class OperatorController extends Controller
 
         $operator->roles()->sync($roleIds);
 
+        $operator
+            ->secondaryGadgets()
+            ->sync($request->input('secondary_gadget_ids', []));
+
         $filename = $operator->getCleanName() . '.png';
 
         if ($request->hasFile('icon')) {
@@ -137,13 +148,21 @@ class OperatorController extends Controller
 
     public function create()
     {
-        $squads = Squad::pluck('name')->sort();
-        $queerIdentities = QueerIdentity::pluck('name')->sort();
+        $squads = Squad::orderBy('name')->pluck('name');
+        $queerIdentities = QueerIdentity::orderBy('name')->pluck('name');
         $roles = Role::pluck('name')->sort();
+        $operations = OperationResource::collection(
+            Operation::orderByDesc('release_date')->get(),
+        );
+        $secondaryGadgets = SecondaryGadgetOptionResource::collection(
+            SecondaryGadget::orderBy('name')->get(),
+        );
         return Inertia::render('CreateOperator', [
             'squads' => $squads,
             'queerIdentities' => $queerIdentities,
             'roles' => $roles,
+            'operations' => $operations,
+            'secondaryGadgets' => $secondaryGadgets,
             'submitRoute' => route('operator.store'),
         ]);
     }
@@ -195,6 +214,10 @@ class OperatorController extends Controller
             count($roles) > 0 ? Role::whereIn('name', $roles)->pluck('id') : [];
 
         $operator->roles()->sync($roleIds);
+
+        $operator
+            ->secondaryGadgets()
+            ->sync($request->input('secondary_gadget_ids', []));
 
         $filename = $operator->getCleanName() . '.png';
 

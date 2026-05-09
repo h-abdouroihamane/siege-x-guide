@@ -1,0 +1,623 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Operator Form — Mockup</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  /* Match site palette and typography (FK Grotesk / GT America / Simplon Mono not loaded;
+     fall back to closest system equivalents — only the visual language matters here). */
+  :root {
+    --siege-red: #ff4b3c;
+    --siege-red-hover: #f8d002;
+    --siege-cyan: #3cf0ff;
+    --siege-attacker: #d9610f;
+    --siege-defender: #0e87c8;
+    --siege-label: #b0bac6;
+    --siege-ink: #010101;
+    --siege-ink-2: rgba(17,17,17,0.7);
+    --siege-input-bg: rgba(17,17,17,0.7);
+    --siege-input-border: rgba(254,254,254,0.4);
+  }
+  html, body { background-color: var(--siege-ink); }
+  body {
+    font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;  /* stand-in for FK Grotesk */
+    color: #fefefe;
+    font-size: 18px;
+  }
+  .font-display {
+    font-family: 'Oswald', 'Inter Tight', ui-sans-serif, sans-serif;  /* stand-in for GT America Compressed */
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .font-mono { font-family: 'JetBrains Mono', 'Simplon Mono', ui-monospace, SFMono-Regular, Menlo, monospace; }
+
+  /* Page background — same image used by PageLayout.vue */
+  .bg-menu {
+    background-image: url('./menu_background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  /* Inputs match the site's @layer base rules */
+  .siege-input,
+  .siege-textarea,
+  .siege-select {
+    background-color: var(--siege-input-bg);
+    color: #fefefe;
+    border: thin solid var(--siege-input-border);
+    border-radius: 4px;
+    padding: 0.5rem 0.75rem;
+    width: 100%;
+    transition: border-color 120ms ease, outline 120ms ease;
+  }
+  .siege-input:focus-visible,
+  .siege-textarea:focus-visible,
+  .siege-select:focus-visible {
+    outline: 2px solid var(--siege-red);
+    outline-offset: 2px;
+    border: 1px solid #fe3d2c;
+  }
+  .siege-textarea { font-size: 13px; resize: none; }
+
+  /* Primary CTA — matches .button-1 in resources/css/button.css */
+  .button-1 {
+    font-family: 'Oswald', 'Inter Tight', sans-serif;
+    background-color: var(--siege-red);
+    color: var(--siege-ink);
+    text-transform: uppercase;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    font-size: 17px;
+    font-weight: 700;
+    height: 40px;
+    padding: 10px 16px;
+    letter-spacing: 0.04em;
+    transition: background-color 50ms ease;
+  }
+  .button-1:hover, .button-1:focus { background-color: var(--siege-red-hover); }
+  .button-1:focus-visible { outline: 2px solid var(--siege-red); outline-offset: 2px; }
+  .button-1.grey { background-color: var(--siege-label); }
+  .button-ghost {
+    font-family: 'Oswald', 'Inter Tight', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--siege-label);
+    border: 1px solid rgba(254,254,254,0.18);
+    background: transparent;
+    border-radius: 8px;
+    padding: 8px 14px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .button-ghost:hover { color: #fefefe; border-color: var(--siege-red); }
+
+  /* Side radio toggle — mirrors .radio-button in button.css */
+  .radio-side {
+    font-family: 'Oswald', 'Inter Tight', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    border: 1px solid rgba(27,31,35,0.15);
+    color: rgba(254,254,254,0.4);
+    cursor: pointer;
+    padding: 8px 22px;
+    transition: all 0.3s ease;
+    font-size: 15px;
+    letter-spacing: 0.04em;
+  }
+  .radio-side.left  { border-radius: 6px 0 0 6px; }
+  .radio-side.right { border-radius: 0 6px 6px 0; }
+
+  .radio-side.attackers           { background: rgba(217,97,15,0.3);  border-color: rgba(217,97,15,0.1); }
+  .radio-side.defenders           { background: rgba(14,135,200,0.3); border-color: rgba(14,135,200,0.1); }
+  .radio-side.attackers.active    { background: var(--siege-attacker); color: #fff; box-shadow: rgba(217,97,15,0.2) 0 1px 0 inset; }
+  .radio-side.defenders.active    { background: var(--siege-defender); color: #fff; box-shadow: rgba(14,135,200,0.2) 0 1px 0 inset; }
+  .radio-side:hover.attackers     { background: var(--siege-attacker); color: #fff; }
+  .radio-side:hover.defenders     { background: var(--siege-defender); color: #fff; }
+
+  /* Links — site uses red links with cyan hover */
+  a.siege-link { color: var(--siege-red); text-decoration: none; }
+  a.siege-link:hover { color: var(--siege-cyan); }
+
+  /* Section panel — translucent dark surface, faint border */
+  .panel {
+    background-color: rgba(17,17,17,0.55);
+    border: 1px solid rgba(254,254,254,0.08);
+    border-radius: 6px;
+    backdrop-filter: blur(2px);
+  }
+  .panel-header {
+    border-bottom: 1px solid rgba(255,75,60,0.25);
+    padding: 12px 20px;
+  }
+
+  /* Pride flag chip (matches the rainbow gradient feel of .pride-flag in app) */
+  .pride-flag {
+    display: inline-block; width: 14px; height: 10px; border-radius: 1px;
+    background: linear-gradient(180deg,#e40303 0 16%,#ff8c00 16% 32%,#ffed00 32% 50%,#008026 50% 66%,#004dff 66% 83%,#750787 83% 100%);
+  }
+  .glow-att { box-shadow: 0 0 10px 1px var(--siege-attacker); }
+  .glow-def { box-shadow: 0 0 10px 1px var(--siege-defender); }
+
+  /* Custom scrollbar — site-wide pattern */
+  ::-webkit-scrollbar { width: 14px; }
+  ::-webkit-scrollbar-track { background: #232e33; }
+  ::-webkit-scrollbar-thumb { background: var(--siege-red); border-radius: 3px; }
+
+  /* Tag/chip for selected role */
+  .role-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(255,75,60,0.12);
+    border: 1px solid rgba(255,75,60,0.4);
+    color: #ffd2cd;
+    padding: 4px 10px;
+    border-radius: 3px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-family: 'Oswald', 'Inter Tight', sans-serif;
+    font-weight: 600;
+  }
+
+  .dropzone {
+    background-color: rgba(17,17,17,0.4);
+    border: 2px dashed rgba(254,254,254,0.18);
+    border-radius: 4px;
+    transition: border-color 120ms ease, background-color 120ms ease;
+  }
+  .dropzone:hover { border-color: var(--siege-red); background-color: rgba(255,75,60,0.05); }
+  .dropzone-filled { border: 2px solid rgba(255,75,60,0.6); }
+
+  label.field-label { color: var(--siege-label); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500; }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body class="min-h-screen">
+
+<!-- Fixed page background (mirrors PageLayout.vue) -->
+<div aria-hidden="true" class="bg-menu fixed inset-0 -z-10"></div>
+<div aria-hidden="true" class="fixed inset-0 -z-10" style="background-color: rgba(1,1,1,0.5);"></div>
+
+<!-- Mockup view-switcher (not part of real UI) -->
+<div class="border-b border-[rgba(255,75,60,0.3)] bg-[rgba(17,17,17,0.7)] sticky top-0 z-30">
+  <div class="max-w-6xl mx-auto px-6 py-2.5 flex items-center gap-3 text-xs font-mono">
+    <span class="text-[var(--siege-label)] uppercase tracking-widest">Mockup view</span>
+    <button onclick="show('edit')" id="btn-edit" class="px-3 py-1 rounded font-display bg-[rgba(255,75,60,0.2)] text-[var(--siege-red)] border border-[rgba(255,75,60,0.5)]">Edit operator</button>
+    <button onclick="show('create')" id="btn-create" class="px-3 py-1 rounded font-display bg-transparent text-[var(--siege-label)] border border-[rgba(254,254,254,0.18)]">Create operator</button>
+    <button onclick="toggleSheet()" id="btn-sheet" class="ml-auto button-ghost text-[12px]" style="height:28px;padding:4px 12px;">Toggle "+ New operation" Sheet</button>
+  </div>
+</div>
+
+<!-- Site navbar (mirrors Navbar.vue) -->
+<nav class="flex items-center justify-between px-[5%] py-[5px] border-b border-[var(--siege-red)] bg-[rgba(17,17,17,0.7)] z-[1]">
+  <div class="flex items-center">
+    <div class="h-[25px] w-[25px] mr-[10px] rounded-full bg-[var(--siege-red)] flex items-center justify-center">
+      <span class="font-display text-[var(--siege-ink)] text-[10px] leading-none">SX</span>
+    </div>
+    <span class="font-display text-sm tracking-widest">Siege X Guide</span>
+  </div>
+  <ul class="list-none flex items-center text-[95%]">
+    <li class="ml-6"><a href="#" class="text-[var(--siege-label)] hover:bg-[var(--siege-red)] hover:text-[#0c0f16] px-2 py-1 rounded transition no-underline">Home</a></li>
+    <li class="ml-6"><a href="#" class="text-[var(--siege-red)] px-2 py-1 rounded no-underline">Operators</a></li>
+    <li class="ml-6"><a href="#" class="text-[var(--siege-label)] hover:bg-[var(--siege-red)] hover:text-[#0c0f16] px-2 py-1 rounded transition no-underline">Squads</a></li>
+    <li class="ml-6"><a href="#" class="text-[var(--siege-label)] hover:bg-[var(--siege-red)] hover:text-[#0c0f16] px-2 py-1 rounded transition no-underline">Vocabulary</a></li>
+    <li class="ml-6"><a href="#" class="text-[var(--siege-label)] hover:bg-[var(--siege-red)] hover:text-[#0c0f16] px-2 py-1 rounded transition no-underline">About me</a></li>
+    <li class="ml-6"><a href="#" class="text-[var(--siege-label)] hover:bg-[var(--siege-red)] hover:text-[#0c0f16] px-2 py-1 rounded transition no-underline">Admin panel</a></li>
+  </ul>
+</nav>
+
+<!-- Page heading bar -->
+<header class="border-b border-[rgba(255,75,60,0.2)] bg-[rgba(17,17,17,0.45)]">
+  <div class="max-w-6xl mx-auto px-6 py-5 flex items-end gap-4 flex-wrap">
+    <a href="#" class="siege-link text-sm font-mono">← Operators</a>
+    <span class="text-[rgba(254,254,254,0.2)]">/</span>
+    <h1 id="page-title" class="font-display text-3xl text-white">Edit operator</h1>
+    <span id="page-subtitle" class="font-mono text-xs text-[var(--siege-label)] uppercase tracking-widest pb-1">
+      Thermite · Y1S1 · Attacker
+    </span>
+    <div class="ml-auto flex gap-2">
+      <button class="button-ghost">Cancel</button>
+      <button class="button-1">Save changes</button>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-6xl mx-auto px-6 py-10">
+  <div class="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-8">
+
+    <!-- LEFT: form -->
+    <div class="space-y-6">
+
+      <!-- IDENTITY -->
+      <section class="panel">
+        <header class="panel-header flex items-center justify-between">
+          <h2 class="font-display text-sm text-white">Identity</h2>
+          <span class="font-mono text-[10px] text-[var(--siege-label)]">REQUIRED</span>
+        </header>
+        <div class="p-5 space-y-4">
+          <div>
+            <label class="field-label block mb-1.5" for="f-name">Name</label>
+            <input id="f-name" oninput="syncPreview()" value="Thermite" class="siege-input" />
+          </div>
+
+          <fieldset>
+            <legend class="field-label mb-2">Side</legend>
+            <div class="inline-flex">
+              <button type="button" id="side-att" onclick="setSide('att')" class="radio-side left attackers active">Attack</button>
+              <button type="button" id="side-def" onclick="setSide('def')" class="radio-side right defenders">Defense</button>
+            </div>
+          </fieldset>
+
+          <div>
+            <label class="field-label block mb-1.5">Squad</label>
+            <select class="siege-select">
+              <option>Ghosteyes</option>
+              <option>Nighthaven</option>
+              <option>Redhammer</option>
+              <option>Unaffiliated</option>
+              <option>Viperstrike</option>
+              <option>Wolfguard</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <!-- OPERATION -->
+      <section class="panel">
+        <header class="panel-header">
+          <h2 class="font-display text-sm text-white">Operation</h2>
+        </header>
+        <div class="p-5 space-y-3">
+          <div class="relative">
+            <input value="Velvet Shell" placeholder="Search operations…" class="siege-input pr-24" />
+            <span class="absolute right-3 top-1/2 -translate-y-1/2 font-mono text-[10px] text-[var(--siege-label)] uppercase tracking-widest">Y2S1 · 2017 ▾</span>
+          </div>
+          <button onclick="toggleSheet()" id="newop-btn" class="siege-link text-xs font-display">+ Create new operation</button>
+        </div>
+      </section>
+
+      <!-- ROLES -->
+      <section class="panel">
+        <header class="panel-header">
+          <h2 class="font-display text-sm text-white">Roles</h2>
+        </header>
+        <div class="p-5">
+          <div class="flex flex-wrap gap-2 min-h-[44px] p-2 siege-input" style="display:flex;align-items:center;">
+            <span class="role-chip">Hard Breach <button class="text-[rgba(255,210,205,0.7)] hover:text-white">×</button></span>
+            <span class="role-chip">Support <button class="text-[rgba(255,210,205,0.7)] hover:text-white">×</button></span>
+            <input placeholder="+ Add role…" class="flex-1 min-w-[120px] bg-transparent border-0 outline-none text-sm placeholder:text-[rgba(254,254,254,0.3)] py-1" style="border:none;padding:0;" />
+          </div>
+        </div>
+      </section>
+
+      <!-- GADGETS (edit-only) -->
+      <section id="gadgets-section" class="panel">
+        <header class="panel-header flex items-center justify-between">
+          <div>
+            <h2 class="font-display text-sm text-white">Secondary gadgets</h2>
+            <p id="gadgets-side-label" class="font-mono text-[10px] text-[var(--siege-label)] mt-0.5 uppercase tracking-widest">Showing attacker gadgets · click to toggle</p>
+          </div>
+          <span id="gadgets-count" class="font-mono text-[10px] text-[var(--siege-label)] uppercase tracking-widest">2 selected</span>
+        </header>
+        <div id="gadget-grid" class="p-5 grid grid-cols-4 gap-3"></div>
+      </section>
+
+      <!-- QUEER IDENTITIES -->
+      <section class="panel">
+        <header class="panel-header">
+          <h2 class="font-display text-sm text-white">Queer identities</h2>
+        </header>
+        <div class="p-5 grid grid-cols-2 gap-3">
+          <label class="flex items-center gap-2.5 text-sm cursor-pointer">
+            <input type="checkbox" class="accent-[var(--siege-red)]" onchange="syncPreview()" />
+            <span class="pride-flag" aria-hidden="true"></span>
+            <span class="text-[var(--siege-label)]">Asexual</span>
+          </label>
+          <label class="flex items-center gap-2.5 text-sm cursor-pointer">
+            <input type="checkbox" class="accent-[var(--siege-red)]" onchange="syncPreview()" checked />
+            <span class="pride-flag" aria-hidden="true"></span>
+            <span class="text-[var(--siege-label)]">Bisexual</span>
+          </label>
+          <label class="flex items-center gap-2.5 text-sm cursor-pointer">
+            <input type="checkbox" class="accent-[var(--siege-red)]" onchange="syncPreview()" />
+            <span class="pride-flag" aria-hidden="true"></span>
+            <span class="text-[var(--siege-label)]">Gay</span>
+          </label>
+          <label class="flex items-center gap-2.5 text-sm cursor-pointer">
+            <input type="checkbox" class="accent-[var(--siege-red)]" onchange="syncPreview()" />
+            <span class="pride-flag" aria-hidden="true"></span>
+            <span class="text-[var(--siege-label)]">Lesbian</span>
+          </label>
+          <label class="flex items-center gap-2.5 text-sm cursor-pointer">
+            <input type="checkbox" class="accent-[var(--siege-red)]" onchange="syncPreview()" />
+            <span class="pride-flag" aria-hidden="true"></span>
+            <span class="text-[var(--siege-label)]">Non-binary</span>
+          </label>
+          <label class="flex items-center gap-2.5 text-sm cursor-pointer">
+            <input type="checkbox" class="accent-[var(--siege-red)]" onchange="syncPreview()" />
+            <span class="pride-flag" aria-hidden="true"></span>
+            <span class="text-[var(--siege-label)]">Transgender</span>
+          </label>
+        </div>
+      </section>
+
+      <!-- DESCRIPTION -->
+      <section class="panel">
+        <header class="panel-header flex items-center justify-between">
+          <h2 class="font-display text-sm text-white">Description</h2>
+          <span class="font-mono text-[10px] text-[var(--siege-label)] uppercase tracking-widest">Max 250 chars</span>
+        </header>
+        <div class="p-5">
+          <textarea
+            id="f-description"
+            rows="4"
+            maxlength="250"
+            class="siege-textarea"
+            placeholder="Background, specialty, notable operations…"
+            oninput="syncDescriptionCounter()"
+          >Master breacher with a flair for thermal exothermic charges.</textarea>
+          <div class="mt-1.5 flex justify-end">
+            <span id="desc-counter" class="font-mono text-[10px] text-[var(--siege-label)]">60 / 250</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ASSETS -->
+      <section class="panel">
+        <header class="panel-header flex items-center justify-between">
+          <h2 class="font-display text-sm text-white">Assets</h2>
+          <span id="asset-required" class="font-mono text-[10px] text-[var(--siege-label)]">OPTIONAL ON EDIT</span>
+        </header>
+        <div class="p-5 grid grid-cols-2 gap-4">
+          <!-- Portrait dropzone -->
+          <div>
+            <label class="field-label block mb-2">Portrait</label>
+            <label class="dropzone group relative flex flex-col items-center justify-center h-44 cursor-pointer">
+              <svg class="w-7 h-7 mb-2" fill="none" stroke="var(--siege-label)" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 7.5m0 0L7.5 12M12 7.5V21" /></svg>
+              <span class="text-xs text-[var(--siege-label)]">Drag PNG here or click</span>
+              <span class="font-mono text-[10px] text-[rgba(254,254,254,0.3)] mt-1">512 × 720 recommended</span>
+              <input type="file" accept="image/png" class="sr-only" />
+            </label>
+            <p class="font-mono text-[10px] text-[var(--siege-label)] mt-1.5">
+              CURRENTLY thermite.png · <a href="#" class="siege-link">replace</a>
+            </p>
+          </div>
+          <!-- Icon (with sample preview) -->
+          <div>
+            <label class="field-label block mb-2">Icon</label>
+            <div class="dropzone-filled relative h-44 rounded overflow-hidden flex items-center justify-center" style="background-color: rgba(17,17,17,0.6);">
+              <div class="w-20 h-20 rounded-full" style="background: rgba(255,75,60,0.18); border: 1px solid var(--siege-red); display:flex; align-items:center; justify-content:center;">
+                <span class="font-display text-2xl text-[var(--siege-red)]">TH</span>
+              </div>
+              <button class="absolute top-1.5 right-1.5 w-6 h-6 rounded-full flex items-center justify-center text-[var(--siege-label)] hover:text-[var(--siege-red)]" style="background: rgba(1,1,1,0.7); border: 1px solid rgba(254,254,254,0.18);">×</button>
+              <span class="absolute bottom-1.5 left-1.5 font-mono text-[10px] text-[var(--siege-label)]">thermite-icon.png</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- BOTTOM ACTIONS -->
+      <div class="flex items-center justify-between pt-2">
+        <button id="delete-btn" class="font-display text-sm text-[var(--siege-red)] hover:text-[var(--siege-red-hover)] inline-flex items-center gap-1.5 bg-transparent border-0 cursor-pointer">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m12 .562a48.667 48.667 0 0 0-7.5 0" /></svg>
+          Delete operator
+        </button>
+        <div class="flex gap-2">
+          <button class="button-ghost">Cancel</button>
+          <button class="button-1">Save changes</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT: sticky live preview -->
+    <aside class="lg:sticky lg:top-28 self-start">
+      <div class="panel p-5">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="font-display text-sm text-white">Live preview</h3>
+          <span class="font-mono text-[10px] text-[var(--siege-label)]">OperatorCard.vue</span>
+        </div>
+        <!-- Faux OperatorCard — matches OperatorCard.vue layout -->
+        <div id="preview-card" class="glow-att mx-auto w-[140px] relative" style="border-radius:2px; background-color: rgba(17,17,17,0.6);">
+          <div class="aspect-[3/4] flex items-center justify-center" style="background: linear-gradient(180deg, #2a2a2a, #0a0a0a);">
+            <span class="font-mono text-[10px] uppercase tracking-widest text-[var(--siege-label)]">portrait</span>
+          </div>
+          <div id="preview-icon" class="absolute top-[55%] left-1/2 -translate-x-1/2 w-12 h-12 rounded-full flex items-center justify-center" style="background: rgba(217,97,15,0.3); border: 1px solid var(--siege-attacker);">
+            <span class="font-display text-sm text-[var(--siege-attacker)]">TH</span>
+          </div>
+          <div id="preview-flags" class="absolute top-1.5 right-1.5 flex flex-col gap-0.5">
+            <span class="pride-flag" title="Bisexual"></span>
+          </div>
+          <div class="py-1.5 text-center" style="background: rgba(17,17,17,0.45); backdrop-filter: blur(2px);">
+            <span id="preview-name" class="font-display text-white text-base">Thermite</span>
+          </div>
+        </div>
+        <p class="font-mono text-[10px] text-[var(--siege-label)] mt-3 text-center uppercase tracking-widest">Updates as you edit</p>
+      </div>
+
+      <div class="panel p-4 mt-4 text-[12px] text-[var(--siege-label)] leading-relaxed">
+        <p class="font-display text-white mb-1 text-sm">Why a preview?</p>
+        Renders the actual <code class="text-[var(--siege-red)] font-mono">OperatorCard</code> with the form's reactive data — no surprises after save.
+      </div>
+    </aside>
+  </div>
+</main>
+
+<!-- New-operation Sheet (right slide-over) -->
+<div id="sheet-overlay" class="fixed inset-0 z-40 hidden" style="background: rgba(1,1,1,0.7);" onclick="toggleSheet()"></div>
+<aside id="sheet" class="fixed top-0 right-0 h-full w-full max-w-md z-50 translate-x-full transition-transform duration-200" style="background: rgba(10,10,10,0.97); border-left: 1px solid rgba(255,75,60,0.4);">
+  <header class="px-6 py-4 flex items-center justify-between" style="border-bottom: 1px solid rgba(255,75,60,0.25);">
+    <div>
+      <h2 class="font-display text-base text-white">New operation</h2>
+      <p class="font-mono text-[10px] text-[var(--siege-label)] mt-0.5 uppercase tracking-widest">Saved separately — pickable by any operator</p>
+    </div>
+    <button onclick="toggleSheet()" class="text-[var(--siege-label)] hover:text-[var(--siege-red)] text-xl leading-none bg-transparent border-0 cursor-pointer">×</button>
+  </header>
+  <div class="p-6 space-y-4">
+    <div>
+      <label class="field-label block mb-1.5">Operation name</label>
+      <input class="siege-input" placeholder="e.g. Operation Steel Wave" />
+    </div>
+    <div class="grid grid-cols-2 gap-3">
+      <div>
+        <label class="field-label block mb-1.5">Year</label>
+        <input type="number" class="siege-input" value="2026" />
+      </div>
+      <div>
+        <label class="field-label block mb-1.5">Season</label>
+        <select class="siege-select"><option>1</option><option>2</option><option>3</option><option>4</option></select>
+      </div>
+    </div>
+    <div>
+      <label class="field-label block mb-1.5">Release date</label>
+      <input type="date" class="siege-input" />
+    </div>
+  </div>
+  <footer class="absolute bottom-0 inset-x-0 px-6 py-4 flex justify-end gap-2" style="background: rgba(1,1,1,0.6); border-top: 1px solid rgba(254,254,254,0.08);">
+    <button onclick="toggleSheet()" class="button-ghost">Cancel</button>
+    <button onclick="toggleSheet()" class="button-1">Create &amp; select</button>
+  </footer>
+</aside>
+
+<script>
+  // ── Gadget data (mirrors SecondaryGadgetSeeder.php side groupings) ──
+  const GADGETS = {
+    attack: [
+      'Breach Charge', 'Claymore', 'Frag Grenade', 'Gonne-6',
+      'Hard Breach Charge', 'Impact EMP Grenade', 'Smoke Grenade', 'Stun Grenade',
+    ],
+    defense: [
+      'Barbed Wire', 'Bulletproof Camera', 'C4', 'Deployable Shield',
+      'Impact Grenade', 'Observation Blocker', 'Proximity Alarm',
+    ],
+  };
+  // Selections persist per side so flipping Attack→Defense→Attack restores choices.
+  const selected = { attack: new Set(['Frag Grenade', 'Smoke Grenade']), defense: new Set() };
+  let currentSide = 'att';
+
+  function gadgetSlug(name) {
+    return name.toLowerCase().replace(/ +/g, '-');
+  }
+
+  function renderGadgets() {
+    const sideKey = currentSide === 'att' ? 'attack' : 'defense';
+    const accent = currentSide === 'att' ? 'var(--siege-attacker)' : 'var(--siege-defender)';
+    const accentBg = currentSide === 'att' ? 'rgba(217,97,15,0.18)' : 'rgba(14,135,200,0.18)';
+    const grid = document.getElementById('gadget-grid');
+    grid.innerHTML = '';
+
+    GADGETS[sideKey].forEach((name) => {
+      const isSelected = selected[sideKey].has(name);
+      const tile = document.createElement('button');
+      tile.type = 'button';
+      tile.className = 'gadget-tile group flex flex-col items-center justify-center gap-2 p-3 rounded transition cursor-pointer';
+      tile.style.cssText = isSelected
+        ? `background:${accentBg}; border:1px solid ${accent}; box-shadow: 0 0 8px 0 ${accent};`
+        : 'background: rgba(17,17,17,0.5); border: 1px solid rgba(254,254,254,0.08);';
+      tile.setAttribute('aria-pressed', String(isSelected));
+      tile.setAttribute('aria-label', (isSelected ? 'Remove ' : 'Add ') + name);
+      tile.innerHTML = `
+        <img src="./secondaryGadgets/${gadgetSlug(name)}.png" alt="" class="h-12 w-auto"
+             style="${isSelected ? '' : 'filter: grayscale(1) opacity(0.55);'}" />
+        <span class="font-mono text-[10px] uppercase tracking-widest text-center"
+              style="color:${isSelected ? '#fefefe' : 'var(--siege-label)'}">${name}</span>
+      `;
+      tile.onclick = () => {
+        if (selected[sideKey].has(name)) selected[sideKey].delete(name);
+        else selected[sideKey].add(name);
+        renderGadgets();
+      };
+      grid.appendChild(tile);
+    });
+
+    document.getElementById('gadgets-side-label').textContent =
+      `Showing ${sideKey === 'attack' ? 'attacker' : 'defender'} gadgets · click to toggle`;
+    document.getElementById('gadgets-count').textContent =
+      `${selected[sideKey].size} selected`;
+  }
+
+  function syncPreview() {
+    const name = document.getElementById('f-name').value || 'Operator';
+    document.getElementById('preview-name').textContent = name;
+    const initials = name.trim().slice(0,2).toUpperCase();
+    document.querySelector('#preview-icon span').textContent = initials;
+    const flagCount = document.querySelectorAll('input[type=checkbox]:checked').length;
+    const container = document.getElementById('preview-flags');
+    container.innerHTML = '';
+    for (let i = 0; i < flagCount; i++) {
+      const f = document.createElement('span');
+      f.className = 'pride-flag';
+      container.appendChild(f);
+    }
+  }
+  function setSide(side) {
+    currentSide = side;
+    const att = document.getElementById('side-att');
+    const def = document.getElementById('side-def');
+    att.classList.toggle('active', side === 'att');
+    def.classList.toggle('active', side === 'def');
+
+    const card = document.getElementById('preview-card');
+    card.classList.toggle('glow-att', side === 'att');
+    card.classList.toggle('glow-def', side === 'def');
+
+    const icon = document.getElementById('preview-icon');
+    if (side === 'att') {
+      icon.style.background = 'rgba(217,97,15,0.3)';
+      icon.style.borderColor = 'var(--siege-attacker)';
+      icon.querySelector('span').style.color = 'var(--siege-attacker)';
+    } else {
+      icon.style.background = 'rgba(14,135,200,0.3)';
+      icon.style.borderColor = 'var(--siege-defender)';
+      icon.querySelector('span').style.color = 'var(--siege-defender)';
+    }
+
+    renderGadgets();
+  }
+
+  function syncDescriptionCounter() {
+    const ta = document.getElementById('f-description');
+    const counter = document.getElementById('desc-counter');
+    const used = ta.value.length;
+    const max = ta.maxLength;
+    counter.textContent = `${used} / ${max}`;
+    counter.style.color = used >= max
+      ? 'var(--siege-red)'
+      : (used >= max * 0.9 ? '#f8d002' : 'var(--siege-label)');
+  }
+
+  // Initial render
+  renderGadgets();
+  syncDescriptionCounter();
+  function toggleSheet() {
+    const sheet = document.getElementById('sheet');
+    const overlay = document.getElementById('sheet-overlay');
+    sheet.classList.toggle('translate-x-full');
+    overlay.classList.toggle('hidden');
+  }
+  function show(mode) {
+    const isCreate = mode === 'create';
+    document.getElementById('page-title').textContent = isCreate ? 'New operator' : 'Edit operator';
+    document.getElementById('page-subtitle').textContent = isCreate ? 'UNSAVED · DRAFT' : 'THERMITE · Y1S1 · ATTACKER';
+    document.getElementById('delete-btn').classList.toggle('invisible', isCreate);
+    document.getElementById('gadgets-section').classList.toggle('hidden', isCreate);
+    document.getElementById('asset-required').textContent = isCreate ? 'REQUIRED' : 'OPTIONAL ON EDIT';
+    const active = 'bg-[rgba(255,75,60,0.2)] text-[var(--siege-red)] border-[rgba(255,75,60,0.5)]';
+    const inactive = 'bg-transparent text-[var(--siege-label)] border-[rgba(254,254,254,0.18)]';
+    document.getElementById('btn-edit').className = 'px-3 py-1 rounded font-display border ' + (isCreate ? inactive : active);
+    document.getElementById('btn-create').className = 'px-3 py-1 rounded font-display border ' + (isCreate ? active : inactive);
+  }
+</script>
+</body>
+</html>
