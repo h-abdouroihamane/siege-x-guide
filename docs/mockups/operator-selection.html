@@ -1,0 +1,682 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Operator Selection — Mockup</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <style>
+            :root {
+                --siege-red: #ff4b3c;
+                --siege-red-hover: #f8d002;
+                --siege-cyan: #3cf0ff;
+                --siege-attacker: #d9610f;
+                --siege-defender: #0e87c8;
+                --siege-label: #b0bac6;
+                --siege-ink: #010101;
+            }
+            html,
+            body {
+                background-color: var(--siege-ink);
+            }
+            body {
+                font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+                color: #fefefe;
+                font-size: 18px;
+            }
+            .font-display {
+                font-family: 'Oswald', 'Inter Tight', ui-sans-serif, sans-serif;
+                font-weight: 700;
+                letter-spacing: 0.04em;
+                text-transform: uppercase;
+            }
+            .font-mono {
+                font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+            }
+
+            .bg-menu {
+                background-image: url('./menu_background.jpg');
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+            }
+
+            .siege-input,
+            .siege-select {
+                background-color: rgba(17, 17, 17, 0.7);
+                color: #fefefe;
+                border: thin solid rgba(254, 254, 254, 0.4);
+                border-radius: 4px;
+                padding: 0.5rem 0.75rem;
+                transition:
+                    border-color 120ms ease,
+                    outline 120ms ease;
+            }
+            .siege-input:focus-visible,
+            .siege-select:focus-visible {
+                outline: 2px solid var(--siege-red);
+                outline-offset: 2px;
+                border: 1px solid #fe3d2c;
+            }
+
+            .button-1 {
+                font-family: 'Oswald', sans-serif;
+                background-color: var(--siege-red);
+                color: var(--siege-ink);
+                text-transform: uppercase;
+                border-radius: 8px;
+                border: none;
+                cursor: pointer;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 5px;
+                font-size: 17px;
+                font-weight: 700;
+                height: 40px;
+                padding: 10px 16px;
+                letter-spacing: 0.04em;
+                transition: background-color 50ms ease;
+            }
+            .button-1:hover {
+                background-color: var(--siege-red-hover);
+            }
+
+            .radio-side {
+                font-family: 'Oswald', sans-serif;
+                font-weight: 700;
+                text-transform: uppercase;
+                border: 1px solid rgba(27, 31, 35, 0.15);
+                color: rgba(254, 254, 254, 0.4);
+                cursor: pointer;
+                padding: 6px 18px;
+                transition: all 0.25s ease;
+                font-size: 13px;
+                letter-spacing: 0.04em;
+            }
+            .radio-side.left {
+                border-radius: 6px 0 0 6px;
+            }
+            .radio-side.middle {
+            }
+            .radio-side.right {
+                border-radius: 0 6px 6px 0;
+            }
+            .radio-side.all {
+                background: rgba(255, 75, 60, 0.18);
+                border-color: rgba(255, 75, 60, 0.1);
+            }
+            .radio-side.attackers {
+                background: rgba(217, 97, 15, 0.25);
+                border-color: rgba(217, 97, 15, 0.1);
+            }
+            .radio-side.defenders {
+                background: rgba(14, 135, 200, 0.25);
+                border-color: rgba(14, 135, 200, 0.1);
+            }
+            .radio-side.all.active {
+                background: var(--siege-red);
+                color: #fff;
+            }
+            .radio-side.attackers.active {
+                background: var(--siege-attacker);
+                color: #fff;
+            }
+            .radio-side.defenders.active {
+                background: var(--siege-defender);
+                color: #fff;
+            }
+            .radio-side:hover.all {
+                background: var(--siege-red);
+                color: #fff;
+            }
+            .radio-side:hover.attackers {
+                background: var(--siege-attacker);
+                color: #fff;
+            }
+            .radio-side:hover.defenders {
+                background: var(--siege-defender);
+                color: #fff;
+            }
+
+            a.siege-link {
+                color: var(--siege-red);
+                text-decoration: none;
+            }
+            a.siege-link:hover {
+                color: var(--siege-cyan);
+            }
+
+            .panel {
+                background-color: rgba(17, 17, 17, 0.55);
+                border: 1px solid rgba(254, 254, 254, 0.08);
+                border-radius: 6px;
+                backdrop-filter: blur(2px);
+            }
+
+            .pride-flag {
+                display: inline-block;
+                width: 12px;
+                height: 8px;
+                border-radius: 1px;
+                background: linear-gradient(
+                    180deg,
+                    #e40303 0 16%,
+                    #ff8c00 16% 32%,
+                    #ffed00 32% 50%,
+                    #008026 50% 66%,
+                    #004dff 66% 83%,
+                    #750787 83% 100%
+                );
+            }
+
+            /* Operator card — simplified faux of OperatorCard.vue */
+            .op-card {
+                position: relative;
+                width: 100%;
+                background: rgba(17, 17, 17, 0.5);
+                border-radius: 2px;
+                cursor: pointer;
+                overflow: hidden;
+                transition:
+                    transform 200ms ease,
+                    box-shadow 200ms ease;
+                border: 1px solid rgba(254, 254, 254, 0.06);
+            }
+            .op-card:hover {
+                transform: translateY(-2px);
+            }
+            .op-card.attacker:hover {
+                box-shadow: 0 0 14px 1px var(--siege-attacker);
+                border-color: var(--siege-attacker);
+            }
+            .op-card.defender:hover {
+                box-shadow: 0 0 14px 1px var(--siege-defender);
+                border-color: var(--siege-defender);
+            }
+
+            .op-card .portrait {
+                aspect-ratio: 3/4;
+                background: linear-gradient(180deg, #2a2a2a, #0a0a0a);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+            }
+            .op-card .icon {
+                position: absolute;
+                top: 55%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 38px;
+                height: 38px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border: 1px solid;
+            }
+            .op-card.attacker .icon {
+                background: rgba(217, 97, 15, 0.3);
+                border-color: var(--siege-attacker);
+            }
+            .op-card.defender .icon {
+                background: rgba(14, 135, 200, 0.3);
+                border-color: var(--siege-defender);
+            }
+            .op-card.attacker .icon-text {
+                color: var(--siege-attacker);
+            }
+            .op-card.defender .icon-text {
+                color: var(--siege-defender);
+            }
+            .op-card .name {
+                text-align: center;
+                padding: 4px 6px 6px 6px;
+                background: rgba(17, 17, 17, 0.5);
+                backdrop-filter: blur(2px);
+            }
+            .op-card .flags {
+                position: absolute;
+                top: 6px;
+                right: 6px;
+                display: flex;
+                flex-direction: column;
+                gap: 2px;
+            }
+            .op-card .squad-chip {
+                position: absolute;
+                bottom: 2px;
+                left: 4px;
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 9px;
+                color: rgba(255, 255, 255, 0.85);
+                background: rgba(0, 0, 0, 0.5);
+                padding: 1px 4px;
+                border-radius: 2px;
+                text-transform: uppercase;
+                letter-spacing: 0.08em;
+            }
+
+            /* Edit overlay on hover */
+            .op-card .edit-overlay {
+                position: absolute;
+                inset: 0;
+                background: rgba(0, 0, 0, 0.55);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                opacity: 0;
+                transition: opacity 200ms ease;
+                pointer-events: none;
+            }
+            .op-card:hover .edit-overlay {
+                opacity: 1;
+            }
+            .op-card .edit-pill {
+                background: var(--siege-red);
+                color: var(--siege-ink);
+                font-family: 'Oswald', sans-serif;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 0.06em;
+                font-size: 12px;
+                padding: 6px 12px;
+                border-radius: 4px;
+                display: inline-flex;
+                align-items: center;
+                gap: 4px;
+            }
+
+            ::-webkit-scrollbar {
+                width: 14px;
+            }
+            ::-webkit-scrollbar-track {
+                background: #232e33;
+            }
+            ::-webkit-scrollbar-thumb {
+                background: var(--siege-red);
+                border-radius: 3px;
+            }
+
+            label.field-label {
+                color: var(--siege-label);
+                font-size: 11px;
+                letter-spacing: 0.12em;
+                text-transform: uppercase;
+                font-weight: 500;
+            }
+        </style>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body class="min-h-screen">
+        <div aria-hidden="true" class="bg-menu fixed inset-0 -z-10"></div>
+        <div
+            aria-hidden="true"
+            class="fixed inset-0 -z-10"
+            style="background-color: rgba(1, 1, 1, 0.5)"
+        ></div>
+
+        <!-- Site navbar (mirrors Navbar.vue) -->
+        <nav
+            class="flex items-center justify-between px-[5%] py-[5px] border-b border-[var(--siege-red)] bg-[rgba(17,17,17,0.7)] z-[1]"
+        >
+            <div class="flex items-center">
+                <div
+                    class="h-[25px] w-[25px] mr-[10px] rounded-full bg-[var(--siege-red)] flex items-center justify-center"
+                >
+                    <span
+                        class="font-display text-[var(--siege-ink)] text-[10px] leading-none"
+                        >SX</span
+                    >
+                </div>
+                <span class="font-display text-sm tracking-widest"
+                    >Siege X Guide</span
+                >
+            </div>
+            <ul class="list-none flex items-center text-[95%]">
+                <li class="ml-6">
+                    <a
+                        href="#"
+                        class="text-[var(--siege-label)] hover:bg-[var(--siege-red)] hover:text-[#0c0f16] px-2 py-1 rounded transition no-underline"
+                        >Home</a
+                    >
+                </li>
+                <li class="ml-6">
+                    <a
+                        href="#"
+                        class="text-[var(--siege-label)] hover:bg-[var(--siege-red)] hover:text-[#0c0f16] px-2 py-1 rounded transition no-underline"
+                        >Operators</a
+                    >
+                </li>
+                <li class="ml-6">
+                    <a
+                        href="#"
+                        class="text-[var(--siege-label)] hover:bg-[var(--siege-red)] hover:text-[#0c0f16] px-2 py-1 rounded transition no-underline"
+                        >Squads</a
+                    >
+                </li>
+                <li class="ml-6">
+                    <a
+                        href="#"
+                        class="text-[var(--siege-label)] hover:bg-[var(--siege-red)] hover:text-[#0c0f16] px-2 py-1 rounded transition no-underline"
+                        >Vocabulary</a
+                    >
+                </li>
+                <li class="ml-6">
+                    <a
+                        href="#"
+                        class="text-[var(--siege-label)] hover:bg-[var(--siege-red)] hover:text-[#0c0f16] px-2 py-1 rounded transition no-underline"
+                        >About me</a
+                    >
+                </li>
+                <li class="ml-6">
+                    <a
+                        href="#"
+                        class="text-[var(--siege-red)] px-2 py-1 rounded no-underline"
+                        >Admin panel</a
+                    >
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Page heading -->
+        <header
+            class="border-b border-[rgba(255,75,60,0.2)] bg-[rgba(17,17,17,0.45)]"
+        >
+            <div
+                class="max-w-7xl mx-auto px-6 py-5 flex items-end gap-4 flex-wrap"
+            >
+                <a href="#" class="siege-link text-sm font-mono"
+                    >← Admin dashboard</a
+                >
+                <span class="text-[rgba(254,254,254,0.2)]">/</span>
+                <h1 class="font-display text-3xl text-white">Edit operator</h1>
+                <span
+                    class="font-mono text-xs text-[var(--siege-label)] uppercase tracking-widest pb-1"
+                    >Pick a target from the roster</span
+                >
+            </div>
+        </header>
+
+        <main class="max-w-7xl mx-auto px-6 py-8">
+            <!-- Filter bar -->
+            <section class="panel mb-8">
+                <div class="p-4 flex flex-wrap items-end gap-4">
+                    <!-- Search -->
+                    <div class="flex-1 min-w-[220px]">
+                        <label class="field-label block mb-1.5" for="f-search"
+                            >Search by name</label
+                        >
+                        <div class="relative">
+                            <svg
+                                class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--siege-label)]"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+                                />
+                            </svg>
+                            <input
+                                id="f-search"
+                                oninput="applyFilters()"
+                                placeholder="Thermite, Jäger, Nøkk…"
+                                class="siege-input pl-9 w-full"
+                            />
+                        </div>
+                    </div>
+
+                    <!-- Side filter -->
+                    <div>
+                        <label class="field-label block mb-1.5">Side</label>
+                        <div class="inline-flex">
+                            <button
+                                type="button"
+                                onclick="setSide('all')"
+                                id="side-all"
+                                class="radio-side left all active"
+                            >
+                                All
+                            </button>
+                            <button
+                                type="button"
+                                onclick="setSide('attack')"
+                                id="side-att"
+                                class="radio-side middle attackers"
+                            >
+                                Attack
+                            </button>
+                            <button
+                                type="button"
+                                onclick="setSide('defense')"
+                                id="side-def"
+                                class="radio-side right defenders"
+                            >
+                                Defense
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Squad filter -->
+                    <div>
+                        <label class="field-label block mb-1.5" for="f-squad"
+                            >Squad</label
+                        >
+                        <select
+                            id="f-squad"
+                            onchange="applyFilters()"
+                            class="siege-select min-w-[160px]"
+                        >
+                            <option value="">All squads</option>
+                            <option>Ghosteyes</option>
+                            <option>Nighthaven</option>
+                            <option>Redhammer</option>
+                            <option>Unaffiliated</option>
+                            <option>Viperstrike</option>
+                            <option>Wolfguard</option>
+                        </select>
+                    </div>
+
+                    <!-- Result count -->
+                    <div class="ml-auto pb-2">
+                        <span
+                            id="result-count"
+                            class="font-mono text-xs text-[var(--siege-label)] uppercase tracking-widest"
+                            >12 of 12 operators</span
+                        >
+                    </div>
+                </div>
+            </section>
+
+            <!-- Operator grid -->
+            <section
+                id="operator-grid"
+                class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4"
+            >
+                <!-- Cards injected by JS -->
+            </section>
+
+            <!-- Empty state -->
+            <div id="empty-state" class="hidden text-center py-16">
+                <p class="font-display text-xl text-[var(--siege-label)] mb-2">
+                    No operators match
+                </p>
+                <p
+                    class="font-mono text-xs text-[var(--siege-label)] uppercase tracking-widest"
+                >
+                    Adjust your filters or search term
+                </p>
+                <button onclick="resetFilters()" class="button-1 mt-4">
+                    Clear filters
+                </button>
+            </div>
+        </main>
+
+        <script>
+            // 12 sample operators — mix of sides, squads, with/without pride flags.
+            const OPERATORS = [
+                { name: 'Ace', side: 'attack', squad: 'Redhammer', flags: [] },
+                {
+                    name: 'Alibi',
+                    side: 'defense',
+                    squad: 'Viperstrike',
+                    flags: ['Bisexual'],
+                },
+                {
+                    name: 'Brava',
+                    side: 'attack',
+                    squad: 'Viperstrike',
+                    flags: [],
+                },
+                {
+                    name: 'Caveira',
+                    side: 'defense',
+                    squad: 'Ghosteyes',
+                    flags: ['Lesbian'],
+                },
+                { name: 'Doc', side: 'defense', squad: 'Wolfguard', flags: [] },
+                {
+                    name: 'Ela',
+                    side: 'defense',
+                    squad: 'Nighthaven',
+                    flags: [],
+                },
+                {
+                    name: 'Flores',
+                    side: 'attack',
+                    squad: 'Ghosteyes',
+                    flags: ['Gay'],
+                },
+                {
+                    name: 'Iana',
+                    side: 'attack',
+                    squad: 'Ghosteyes',
+                    flags: ['Non-binary'],
+                },
+                {
+                    name: 'Jäger',
+                    side: 'defense',
+                    squad: 'Viperstrike',
+                    flags: [],
+                },
+                { name: 'Nøkk', side: 'attack', squad: 'Ghosteyes', flags: [] },
+                {
+                    name: 'Thermite',
+                    side: 'attack',
+                    squad: 'Redhammer',
+                    flags: ['Bisexual'],
+                },
+                {
+                    name: 'Tubarão',
+                    side: 'defense',
+                    squad: 'Wolfguard',
+                    flags: [],
+                },
+            ];
+
+            let currentSide = 'all';
+
+            function initials(name) {
+                return name
+                    .replace(/[^A-Za-z]/g, '')
+                    .slice(0, 2)
+                    .toUpperCase();
+            }
+
+            function render() {
+                const grid = document.getElementById('operator-grid');
+                const search = document
+                    .getElementById('f-search')
+                    .value.trim()
+                    .toLowerCase();
+                const squad = document.getElementById('f-squad').value;
+
+                const filtered = OPERATORS.filter((op) => {
+                    if (currentSide !== 'all' && op.side !== currentSide)
+                        return false;
+                    if (squad && op.squad !== squad) return false;
+                    if (search && !op.name.toLowerCase().includes(search))
+                        return false;
+                    return true;
+                });
+
+                document.getElementById('result-count').textContent =
+                    `${filtered.length} of ${OPERATORS.length} operators`;
+                document
+                    .getElementById('empty-state')
+                    .classList.toggle('hidden', filtered.length > 0);
+                grid.classList.toggle('hidden', filtered.length === 0);
+
+                grid.innerHTML = filtered
+                    .map(
+                        (op) => `
+      <a href="#edit-${op.name.toLowerCase()}" class="op-card ${op.side === 'attack' ? 'attacker' : 'defender'}" aria-label="Edit ${op.name}">
+        <div class="portrait">
+          <span class="font-mono text-[10px] uppercase tracking-widest text-[var(--siege-label)]">portrait</span>
+          <div class="icon"><span class="font-display icon-text text-sm">${initials(op.name)}</span></div>
+          ${op.flags.length ? `<div class="flags">${op.flags.map(() => '<span class="pride-flag"></span>').join('')}</div>` : ''}
+          <span class="squad-chip">${op.squad}</span>
+        </div>
+        <div class="name"><span class="font-display text-white text-sm">${op.name}</span></div>
+        <div class="edit-overlay">
+          <span class="edit-pill">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-3.5 h-3.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Z" />
+            </svg>
+            Edit
+          </span>
+        </div>
+      </a>
+    `,
+                    )
+                    .join('');
+            }
+
+            function setSide(side) {
+                currentSide = side;
+                ['all', 'att', 'def'].forEach((s) => {
+                    const id =
+                        side === 'all'
+                            ? 'side-all'
+                            : side === 'attack'
+                              ? 'side-att'
+                              : 'side-def';
+                    document.getElementById(id).classList.add('active');
+                });
+                document
+                    .getElementById('side-all')
+                    .classList.toggle('active', side === 'all');
+                document
+                    .getElementById('side-att')
+                    .classList.toggle('active', side === 'attack');
+                document
+                    .getElementById('side-def')
+                    .classList.toggle('active', side === 'defense');
+                render();
+            }
+
+            function applyFilters() {
+                render();
+            }
+
+            function resetFilters() {
+                currentSide = 'all';
+                document.getElementById('f-search').value = '';
+                document.getElementById('f-squad').value = '';
+                setSide('all');
+            }
+
+            render();
+        </script>
+    </body>
+</html>
