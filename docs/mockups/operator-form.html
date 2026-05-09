@@ -352,11 +352,22 @@
 
       <!-- DOSSIER -->
       <section class="panel">
-        <header class="panel-header">
+        <header class="panel-header flex items-center justify-between">
           <h2 class="font-display text-sm text-white">Dossier</h2>
+          <span class="font-mono text-[10px] text-[var(--siege-label)] uppercase tracking-widest">Max 250 chars</span>
         </header>
         <div class="p-5">
-          <textarea rows="4" class="siege-textarea" placeholder="Background, specialty, notable operations…">Master breacher with a flair for thermal exothermic charges.</textarea>
+          <textarea
+            id="f-description"
+            rows="4"
+            maxlength="250"
+            class="siege-textarea"
+            placeholder="Background, specialty, notable operations…"
+            oninput="syncDescriptionCounter()"
+          >Master breacher with a flair for thermal exothermic charges.</textarea>
+          <div class="mt-1.5 flex justify-end">
+            <span id="desc-counter" class="font-mono text-[10px] text-[var(--siege-label)]">60 / 250</span>
+          </div>
         </div>
       </section>
 
@@ -573,8 +584,20 @@
     renderGadgets();
   }
 
+  function syncDescriptionCounter() {
+    const ta = document.getElementById('f-description');
+    const counter = document.getElementById('desc-counter');
+    const used = ta.value.length;
+    const max = ta.maxLength;
+    counter.textContent = `${used} / ${max}`;
+    counter.style.color = used >= max
+      ? 'var(--siege-red)'
+      : (used >= max * 0.9 ? '#f8d002' : 'var(--siege-label)');
+  }
+
   // Initial render
   renderGadgets();
+  syncDescriptionCounter();
   function toggleSheet() {
     const sheet = document.getElementById('sheet');
     const overlay = document.getElementById('sheet-overlay');
