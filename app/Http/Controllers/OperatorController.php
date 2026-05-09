@@ -1,18 +1,20 @@
 <?php
+
 namespace App\Http\Controllers;
 
-use App\Http\Resources\OperatorResource;
+use App\Http\Requests\CreateOperatorRequest;
+use App\Http\Requests\EditOperatorRequest;
 use App\Http\Resources\OperationResource;
+use App\Http\Resources\OperatorResource;
 use App\Http\Resources\SecondaryGadgetOptionResource;
-use App\Models\Operator;
 use App\Models\Operation;
-use App\Models\Role;
+use App\Models\Operator;
 use App\Models\QueerIdentity;
+use App\Models\Role;
 use App\Models\SecondaryGadget;
 use App\Models\Squad;
+use App\Support\OperatorJsonWriter;
 use Inertia\Inertia;
-use App\Http\Requests\EditOperatorRequest;
-use App\Http\Requests\CreateOperatorRequest;
 
 class OperatorController extends Controller
 {
@@ -79,11 +81,12 @@ class OperatorController extends Controller
             ]),
         ]);
     }
+
     public function update(EditOperatorRequest $request, string $operatorId)
     {
         $operator = Operator::findOrFail($operatorId);
 
-        //Basic updates
+        // Basic updates
         $operator->update([
             'name' => $request->input('name'),
             'description' => $request->input('description'),
@@ -115,7 +118,7 @@ class OperatorController extends Controller
             ->secondaryGadgets()
             ->sync($request->input('secondary_gadget_ids', []));
 
-        $filename = $operator->getCleanName() . '.png';
+        $filename = $operator->getCleanName().'.png';
 
         if ($request->hasFile('icon')) {
             $request
@@ -128,6 +131,8 @@ class OperatorController extends Controller
                 ->file('portrait')
                 ->storeAs('operatorPortraits', $filename, 'public');
         }
+
+        OperatorJsonWriter::write();
 
         return to_route('admin.dashboard')->with(
             'message',
@@ -146,6 +151,7 @@ class OperatorController extends Controller
         $secondaryGadgets = SecondaryGadgetOptionResource::collection(
             SecondaryGadget::orderBy('name')->get(),
         );
+
         return Inertia::render('CreateOperator', [
             'squads' => $squads,
             'queerIdentities' => $queerIdentities,
@@ -158,10 +164,10 @@ class OperatorController extends Controller
 
     public function store(CreateOperatorRequest $request)
     {
-        //Creating the Operation to get its ID
+        // Creating the Operation to get its ID
         $year = $request->input('year');
         $season = $request->input('season');
-        $operation_id = 'Y' . $year . 'S' . $season;
+        $operation_id = 'Y'.$year.'S'.$season;
 
         $operation = new Operation([
             'id' => $operation_id,
@@ -208,7 +214,7 @@ class OperatorController extends Controller
             ->secondaryGadgets()
             ->sync($request->input('secondary_gadget_ids', []));
 
-        $filename = $operator->getCleanName() . '.png';
+        $filename = $operator->getCleanName().'.png';
 
         if ($request->hasFile('icon')) {
             $request
@@ -221,6 +227,8 @@ class OperatorController extends Controller
                 ->file('portrait')
                 ->storeAs('operatorPortraits', $filename, 'public');
         }
+
+        OperatorJsonWriter::write();
 
         return to_route('admin.dashboard')->with(
             'message',

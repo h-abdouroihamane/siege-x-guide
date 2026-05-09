@@ -2,12 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\QueerIdentity;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
-
-use App\Models\QueerIdentity;
-use App\Models\Operator;
 
 class QueerIdentitySeeder extends Seeder
 {
@@ -16,7 +13,7 @@ class QueerIdentitySeeder extends Seeder
      */
     public function run(): void
     {
-        $queerIdentities = [
+        $names = [
             'Aroace',
             'Aromantic',
             'Asexual',
@@ -29,46 +26,11 @@ class QueerIdentitySeeder extends Seeder
             'Transgender',
         ];
 
-        $data = [];
-
-        foreach ($queerIdentities as $q) {
-            $data[] = ['id' => Str::ulid()->toBase32(), 'name' => $q];
+        $rows = [];
+        foreach ($names as $name) {
+            $rows[] = ['id' => Str::ulid()->toBase32(), 'name' => $name];
         }
 
-        QueerIdentity::insert($data);
-
-        //Linking operators to their queer identity
-        $queerOps = [
-            [
-                'name' => 'Caveira',
-                'queerIdentity' => 'Lesbian',
-            ],
-            [
-                'name' => 'Flores',
-                'queerIdentity' => 'Gay',
-            ],
-            [
-                'name' => 'Osa',
-                'queerIdentity' => 'Transgender',
-            ],
-            [
-                'name' => 'Pulse',
-                'queerIdentity' => 'Bisexual',
-            ],
-            [
-                'name' => 'Sens',
-                'queerIdentity' => 'Non-Binary',
-            ],
-            [
-                'name' => 'Tubarão',
-                'queerIdentity' => 'Transgender',
-            ],
-        ];
-
-        foreach ($queerOps as $q) {
-            $op = Operator::firstWhere('name', $q['name']);
-            $identity = QueerIdentity::firstWhere('name', $q['queerIdentity']);
-            $op->queerIdentities()->attach($identity);
-        }
+        QueerIdentity::insert($rows);
     }
 }

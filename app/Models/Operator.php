@@ -2,20 +2,24 @@
 
 namespace App\Models;
 
+use App\Observers\OperatorObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\DB;
 
+#[ObservedBy([OperatorObserver::class])]
 class Operator extends Model
 {
     use HasFactory, HasUlids;
 
     protected $hidden = ['id', 'pivot'];
+
     protected $guarded = ['id'];
+
     public $timestamps = false;
 
     protected function casts(): array
@@ -49,6 +53,7 @@ class Operator extends Model
     public function getSquad(): string
     {
         $squad = $this->squad->first();
+
         return $squad ? $squad->name : 'Unaffiliated';
     }
 
@@ -105,6 +110,7 @@ class Operator extends Model
     {
         if ($this->rework) {
             $op = $this->rework->operation;
+
             return [$op->year, $op->season];
         }
 
@@ -144,8 +150,8 @@ class Operator extends Model
         $newSquad = Squad::firstWhere('name', $squadName);
 
         $currentSquad = $this->squad->first();
-        $hasSquad = !is_null($currentSquad);
-        $validNewSquad = !is_null($newSquad);
+        $hasSquad = ! is_null($currentSquad);
+        $validNewSquad = ! is_null($newSquad);
 
         if (
             $hasSquad &&
@@ -159,7 +165,7 @@ class Operator extends Model
         if ($hasSquad) {
             $currentRank = $currentSquad->pivot->rank;
 
-            //Decrease the rank of the operators of the squad that were below them
+            // Decrease the rank of the operators of the squad that were below them
             DB::table('operator_squad')
                 ->where('squad_id', $currentSquad->id)
                 ->where('rank', '>', $currentRank)
@@ -175,12 +181,11 @@ class Operator extends Model
                     ->max('rank')
                 : 0;
 
-            //Insert with the latest rank
+            // Insert with the latest rank
             $this->squad()->attach($newSquad->id, [
                 'rank' => $newSquadMaxRank + 1,
             ]);
         }
 
-        return;
     }
 }

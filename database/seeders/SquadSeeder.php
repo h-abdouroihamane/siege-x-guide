@@ -2,9 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Operator;
 use App\Models\Squad;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
@@ -15,119 +13,21 @@ class SquadSeeder extends Seeder
      */
     public function run(): void
     {
-        $data = [
-            'Wolfguard' => [
-                'Doc',
-                'Twitch',
-                'Montagne',
-                'Lion',
-                'Bandit',
-                'Castle',
-                'Ying',
-                'Clash',
-                'Nomad',
-                'Melusi',
-                'Frost',
-                'Thunderbird',
-                'Sens',
-                'Tubarão',
-                'Skopós',
-            ],
-
-            'Ghosteyes' => [
-                'Caveira',
-                'Zero',
-                'Glaz',
-                'Valkyrie',
-                'Vigil',
-                'Zofia',
-                'Lesion',
-                'Nøkk',
-                'Warden',
-                'Maverick',
-                'Mozzie',
-                'Iana',
-                'Flores',
-                'Solis',
-            ],
-
-            'Redhammer' => [
-                'Thermite',
-                'Ash',
-                'Tachanka',
-                'Fuze',
-                'Kapkan',
-                'Sledge',
-                'Buck',
-                'Blackbeard',
-                'Kaid',
-                'Amaru',
-                'Goyo',
-                'Gridlock',
-                'Oryx',
-                'Thorn',
-                'Fenrir',
-                'Ram',
-            ],
-
-            'Viperstrike' => [
-                'Hibana',
-                'Thatcher',
-                'Mute',
-                'Rook',
-                'Blitz',
-                'Jäger',
-                'Capitão',
-                'Echo',
-                'Jackal',
-                'Mira',
-                'Dokkaebi',
-                'Maestro',
-                'Alibi',
-                'Azami',
-                'Brava',
-                'Rauora',
-            ],
-
-            'Nighthaven' => [
-                'Kali',
-                'Osa',
-                'Wamai',
-                'Ace',
-                'Aruni',
-                'Ela',
-                'Smoke',
-                'Finka',
-                'IQ',
-                'Pulse',
-                'Grim',
-                'Denari',
-            ],
-            'Unaffiliated' => ['Deimos', 'Striker', 'Sentry', 'Solid Snake'],
+        $squads = [
+            'Wolfguard',
+            'Ghosteyes',
+            'Redhammer',
+            'Viperstrike',
+            'Nighthaven',
+            'Unaffiliated',
         ];
 
-        $operatorsByName = Operator::all()->keyBy('name');
-
-        $squad_count = 1;
-        foreach ($data as $squad_name => $operators) {
-            $squad = Squad::create([
+        foreach ($squads as $index => $name) {
+            Squad::create([
                 'id' => Str::ulid()->toBase32(),
-                'name' => $squad_name,
-                'rank' => $squad_count++,
+                'name' => $name,
+                'rank' => $index + 1,
             ]);
-            $rank = 1;
-
-            foreach ($operators as $op_name) {
-                $operator = $operatorsByName[$op_name] ?? null;
-
-                if (!$operator) {
-                    throw new \RuntimeException(
-                        "Migration stopped - can't find '$op_name'",
-                    );
-                }
-
-                $operator->squad()->attach($squad->id, ['rank' => $rank++]);
-            }
         }
     }
 }

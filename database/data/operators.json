@@ -1,0 +1,1670 @@
+[
+    {
+        "name": "Ace",
+        "description": "When thrown onto a breachable surface, the SELMA will extend a set of explosive arms, then detonate, creating a wide opening",
+        "side": "Attack",
+        "year": 5,
+        "season": 2,
+        "operation_id": "Y5S2",
+        "squad": {
+            "name": "Nighthaven",
+            "rank": 4
+        },
+        "roles": [
+            "Anti-Gadget",
+            "Breach"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Claymore",
+            "Stun Grenade"
+        ]
+    },
+    {
+        "name": "Alibi",
+        "description": "Deploys three holograms which reveal the location and the identity of the attacker who shoots through it",
+        "side": "Defense",
+        "year": 3,
+        "season": 2,
+        "operation_id": "Y3S2",
+        "squad": {
+            "name": "Viperstrike",
+            "rank": 13
+        },
+        "roles": [
+            "Intel",
+            "Trapper"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Observation Blocker",
+            "Proximity Alarm"
+        ]
+    },
+    {
+        "name": "Amaru",
+        "description": "Can quickly propel herself through windows/hatches and on top of buildings with her grappling hook",
+        "side": "Attack",
+        "year": 4,
+        "season": 3,
+        "operation_id": "Y4S3",
+        "squad": {
+            "name": "Redhammer",
+            "rank": 10
+        },
+        "roles": [
+            "Front line",
+            "Map control"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Gonne-6",
+            "Hard Breach Charge",
+            "Stun Grenade"
+        ]
+    },
+    {
+        "name": "Aruni",
+        "description": "Can place laser gates that deal damage to anyone passing through. They can be disabled for 30s by throwing any projectile through them",
+        "side": "Defense",
+        "year": 5,
+        "season": 4,
+        "operation_id": "Y5S4",
+        "squad": {
+            "name": "Nighthaven",
+            "rank": 5
+        },
+        "roles": [
+            "Anti-Entry",
+            "Anti-Gadget"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Barbed Wire",
+            "Bulletproof Camera"
+        ]
+    },
+    {
+        "name": "Ash",
+        "description": "Her gadget can shoot up to 2 Breaching Rounds, which will burrow into a surface and detonate automatically",
+        "side": "Attack",
+        "year": 0,
+        "season": 16,
+        "operation_id": "Y1S0",
+        "squad": {
+            "name": "Redhammer",
+            "rank": 2
+        },
+        "roles": [
+            "Breach",
+            "Front line"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Breach Charge",
+            "Claymore"
+        ]
+    },
+    {
+        "name": "Azami",
+        "description": "Has up to 5 Kiba Barriers - modified kunais that sticks to a surface after being thrown and release a material that creates a barrier",
+        "side": "Defense",
+        "year": 7,
+        "season": 1,
+        "operation_id": "Y7S1",
+        "squad": {
+            "name": "Viperstrike",
+            "rank": 14
+        },
+        "roles": [
+            "Anti-Entry",
+            "Support"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Barbed Wire",
+            "Impact Grenade"
+        ]
+    },
+    {
+        "name": "Bandit",
+        "description": "Can put down batteries which electrifies walls or barb wire - destroying any electrified gadget",
+        "side": "Defense",
+        "year": 0,
+        "season": 7,
+        "operation_id": "Y1S0",
+        "squad": {
+            "name": "Wolfguard",
+            "rank": 5
+        },
+        "roles": [
+            "Anti-Entry",
+            "Anti-Gadget"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Barbed Wire",
+            "C4"
+        ]
+    },
+    {
+        "name": "Blackbeard",
+        "description": "Has a shield with a retractable bulletproof glass that slides down so he can shoot while still using his shield",
+        "side": "Attack",
+        "year": 1,
+        "season": 2,
+        "operation_id": "Y1S2",
+        "squad": {
+            "name": "Redhammer",
+            "rank": 8
+        },
+        "roles": [
+            "Breach",
+            "Front line"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Claymore",
+            "Frag Grenade"
+        ]
+    },
+    {
+        "name": "Blitz",
+        "description": "Flashes people with his shield",
+        "side": "Attack",
+        "year": 0,
+        "season": 6,
+        "operation_id": "Y1S0",
+        "squad": {
+            "name": "Viperstrike",
+            "rank": 5
+        },
+        "roles": [
+            "Front line",
+            "Map control"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Breach Charge",
+            "Smoke Grenade"
+        ]
+    },
+    {
+        "name": "Brava",
+        "description": "Has a drone that can hack defenders' electronic gadgets and depending of the gadget: take control of it or turn it back against defenders or simply destroy it",
+        "side": "Attack",
+        "year": 8,
+        "season": 1,
+        "operation_id": "Y8S1",
+        "squad": {
+            "name": "Viperstrike",
+            "rank": 15
+        },
+        "roles": [
+            "Anti-Gadget",
+            "Intel"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Claymore",
+            "Smoke Grenade"
+        ]
+    },
+    {
+        "name": "Buck",
+        "description": "Has an under-barrel shotgun",
+        "side": "Attack",
+        "year": 1,
+        "season": 1,
+        "operation_id": "Y1S1",
+        "squad": {
+            "name": "Redhammer",
+            "rank": 7
+        },
+        "roles": [
+            "Breach",
+            "Support"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Claymore",
+            "Stun Grenade"
+        ]
+    },
+    {
+        "name": "Capitão",
+        "description": "Has a crossbow which can shoot two fire bolts and two smoke bolts",
+        "side": "Attack",
+        "year": 1,
+        "season": 3,
+        "operation_id": "Y1S3",
+        "squad": {
+            "name": "Viperstrike",
+            "rank": 7
+        },
+        "roles": [
+            "Front line",
+            "Map control"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Claymore",
+            "Gonne-6",
+            "Hard Breach Charge",
+            "Impact EMP Grenade"
+        ]
+    },
+    {
+        "name": "Castle",
+        "description": "Can put up 4 reinforced barricades which can only be taken down with explosive devices",
+        "side": "Defense",
+        "year": 0,
+        "season": 15,
+        "operation_id": "Y1S0",
+        "squad": {
+            "name": "Wolfguard",
+            "rank": 6
+        },
+        "roles": [
+            "Anti-Entry",
+            "Support"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Bulletproof Camera",
+            "Proximity Alarm"
+        ]
+    },
+    {
+        "name": "Caveira",
+        "description": "Can interrogate any downed attacker - revealing the exact location of every other attacker for 10 seconds and has an ability which makes her footstps completely silent",
+        "side": "Defense",
+        "year": 1,
+        "season": 3,
+        "operation_id": "Y1S3",
+        "squad": {
+            "name": "Ghosteyes",
+            "rank": 1
+        },
+        "roles": [
+            "Crowd control",
+            "Intel"
+        ],
+        "queer_identities": [
+            "Lesbian"
+        ],
+        "secondary_gadgets": [
+            "Impact Grenade",
+            "Observation Blocker",
+            "Proximity Alarm"
+        ]
+    },
+    {
+        "name": "Clash",
+        "description": "Has an electrified shield which she can use to tase and slow down attackers",
+        "side": "Defense",
+        "year": 3,
+        "season": 3,
+        "operation_id": "Y3S3",
+        "squad": {
+            "name": "Wolfguard",
+            "rank": 8
+        },
+        "roles": [
+            "Crowd control",
+            "Intel"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Barbed Wire",
+            "Impact Grenade"
+        ]
+    },
+    {
+        "name": "Deimos",
+        "description": "Can choose any defender and track their location. While the hunt is active, his location is also revealed to the hunted defender",
+        "side": "Attack",
+        "year": 9,
+        "season": 1,
+        "operation_id": "Y9S1",
+        "squad": {
+            "name": "Unaffiliated",
+            "rank": 1
+        },
+        "roles": [
+            "Intel",
+            "Map control"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Frag Grenade",
+            "Hard Breach Charge"
+        ]
+    },
+    {
+        "name": "Denari",
+        "description": "His gadget lets him setup a trip laser network that damages and slows down enemies passing through it",
+        "side": "Defense",
+        "year": 10,
+        "season": 3,
+        "operation_id": "Y10S3",
+        "squad": {
+            "name": "Nighthaven",
+            "rank": 12
+        },
+        "roles": [
+            "Anti-Entry",
+            "Crowd control"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Deployable Shield",
+            "Observation Blocker"
+        ]
+    },
+    {
+        "name": "Doc",
+        "description": "Has a stim pistol which can heal or even revive downed people",
+        "side": "Defense",
+        "year": 0,
+        "season": 10,
+        "operation_id": "Y1S0",
+        "squad": {
+            "name": "Wolfguard",
+            "rank": 1
+        },
+        "roles": [
+            "Support"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Barbed Wire",
+            "Bulletproof Camera"
+        ]
+    },
+    {
+        "name": "Dokkaebi",
+        "description": "Can call attackers' phone, causing them to buzz incessantly until they reset it manually and can also hack defenders' cameras",
+        "side": "Attack",
+        "year": 2,
+        "season": 4,
+        "operation_id": "Y2S4",
+        "squad": {
+            "name": "Viperstrike",
+            "rank": 11
+        },
+        "roles": [
+            "Intel",
+            "Map control"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Gonne-6",
+            "Impact EMP Grenade",
+            "Smoke Grenade",
+            "Stun Grenade"
+        ]
+    },
+    {
+        "name": "Echo",
+        "description": "Has 2 hovering drones which can stick to flat surfaces on a ceiling and cloak, as well as emit ultrasonic bursts that can disorient the enemy",
+        "side": "Defense",
+        "year": 1,
+        "season": 4,
+        "operation_id": "Y1S4",
+        "squad": {
+            "name": "Viperstrike",
+            "rank": 8
+        },
+        "roles": [
+            "Crowd control",
+            "Intel"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Deployable Shield",
+            "Impact Grenade"
+        ]
+    },
+    {
+        "name": "Ela",
+        "description": "Has 3 Grzmot Mines - concussive mines that disorient any who come within range",
+        "side": "Defense",
+        "year": 2,
+        "season": 3,
+        "operation_id": "Y2S3",
+        "squad": {
+            "name": "Nighthaven",
+            "rank": 6
+        },
+        "roles": [
+            "Crowd control",
+            "Trapper"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Barbed Wire",
+            "Deployable Shield",
+            "Impact Grenade"
+        ]
+    },
+    {
+        "name": "Fenrir",
+        "description": "When activated, his gadget produces a cloud of smoke that limits the vision of any operator - except him - caught into it",
+        "side": "Defense",
+        "year": 8,
+        "season": 2,
+        "operation_id": "Y8S2",
+        "squad": {
+            "name": "Redhammer",
+            "rank": 15
+        },
+        "roles": [
+            "Crowd control",
+            "Trapper"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Bulletproof Camera",
+            "Observation Blocker"
+        ]
+    },
+    {
+        "name": "Finka",
+        "description": "Can trigger an Adrenal Surge - allowing affected allies and herself to gain a temporary boost in health - it can also revive downed attackers",
+        "side": "Attack",
+        "year": 3,
+        "season": 1,
+        "operation_id": "Y3S1",
+        "squad": {
+            "name": "Nighthaven",
+            "rank": 8
+        },
+        "roles": [
+            "Front line",
+            "Support"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Frag Grenade",
+            "Smoke Grenade",
+            "Stun Grenade"
+        ]
+    },
+    {
+        "name": "Flores",
+        "description": "Has 4 explosive drones",
+        "side": "Attack",
+        "year": 6,
+        "season": 1,
+        "operation_id": "Y6S1",
+        "squad": {
+            "name": "Ghosteyes",
+            "rank": 13
+        },
+        "roles": [
+            "Anti-Gadget",
+            "Intel"
+        ],
+        "queer_identities": [
+            "Gay"
+        ],
+        "secondary_gadgets": [
+            "Claymore",
+            "Stun Grenade"
+        ]
+    },
+    {
+        "name": "Frost",
+        "description": "Can put down 3 bear traps that can be used to incapacitate enemies",
+        "side": "Defense",
+        "year": 1,
+        "season": 1,
+        "operation_id": "Y1S1",
+        "squad": {
+            "name": "Wolfguard",
+            "rank": 11
+        },
+        "roles": [
+            "Anti-Entry",
+            "Trapper"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Bulletproof Camera",
+            "Deployable Shield"
+        ]
+    },
+    {
+        "name": "Fuze",
+        "description": "Has 3 Cluster Charges who when activated,each launch 5 explosive pellets on the other side",
+        "side": "Attack",
+        "year": 0,
+        "season": 4,
+        "operation_id": "Y1S0",
+        "squad": {
+            "name": "Redhammer",
+            "rank": 4
+        },
+        "roles": [
+            "Anti-Gadget"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Breach Charge",
+            "Hard Breach Charge",
+            "Smoke Grenade"
+        ]
+    },
+    {
+        "name": "Glaz",
+        "description": "Has a sniper equipped with a thermal scope that allows him to see people through smoke",
+        "side": "Attack",
+        "year": 0,
+        "season": 3,
+        "operation_id": "Y1S0",
+        "squad": {
+            "name": "Ghosteyes",
+            "rank": 3
+        },
+        "roles": [
+            "Intel",
+            "Support"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Claymore",
+            "Frag Grenade",
+            "Gonne-6",
+            "Smoke Grenade"
+        ]
+    },
+    {
+        "name": "Goyo",
+        "description": "Can put up 2 Volcán Canisters that detonate when fired upon, leaving a carpet of flames for 20 seconds",
+        "side": "Defense",
+        "year": 4,
+        "season": 3,
+        "operation_id": "Y4S3",
+        "squad": {
+            "name": "Redhammer",
+            "rank": 11
+        },
+        "roles": [
+            "Anti-Entry",
+            "Trapper"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Bulletproof Camera",
+            "Impact Grenade",
+            "Proximity Alarm"
+        ]
+    },
+    {
+        "name": "Gridlock",
+        "description": "Has 3 Trax Stingers, devices that when deployed, unfold and spread in its proximity. Defenders walking on Trax Stingers are slowed down and take damage",
+        "side": "Attack",
+        "year": 4,
+        "season": 1,
+        "operation_id": "Y4S1",
+        "squad": {
+            "name": "Redhammer",
+            "rank": 12
+        },
+        "roles": [
+            "Map control",
+            "Support"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Frag Grenade",
+            "Impact EMP Grenade",
+            "Smoke Grenade"
+        ]
+    },
+    {
+        "name": "Grim",
+        "description": "His Kawan Hive Launcher fires a cannister containing bee-robots that ping the location of any defenders caught within the swarm",
+        "side": "Attack",
+        "year": 7,
+        "season": 3,
+        "operation_id": "Y7S3",
+        "squad": {
+            "name": "Nighthaven",
+            "rank": 11
+        },
+        "roles": [
+            "Front line",
+            "Map control"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Claymore",
+            "Hard Breach Charge",
+            "Impact EMP Grenade"
+        ]
+    },
+    {
+        "name": "Hibana",
+        "description": "Her X-KAIROS Launcher fires explosive pellets that can be remotely detonated simultaneously and pierce any destructible surface (reinforced or not)",
+        "side": "Attack",
+        "year": 1,
+        "season": 4,
+        "operation_id": "Y1S4",
+        "squad": {
+            "name": "Viperstrike",
+            "rank": 1
+        },
+        "roles": [
+            "Breach",
+            "Front line"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Breach Charge",
+            "Claymore",
+            "Stun Grenade"
+        ]
+    },
+    {
+        "name": "IQ",
+        "description": "Her gadget is mounted on her pistol and can detect electronic devices from distance - and ping them for her allies",
+        "side": "Attack",
+        "year": 0,
+        "season": 5,
+        "operation_id": "Y1S0",
+        "squad": {
+            "name": "Nighthaven",
+            "rank": 9
+        },
+        "roles": [
+            "Intel",
+            "Support"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Breach Charge",
+            "Claymore",
+            "Frag Grenade"
+        ]
+    },
+    {
+        "name": "Iana",
+        "description": "When activated, her Gemini Replicator creates a holographic decoy of her, which she can control remotely - allowing her to scout ahead",
+        "side": "Attack",
+        "year": 5,
+        "season": 1,
+        "operation_id": "Y5S1",
+        "squad": {
+            "name": "Ghosteyes",
+            "rank": 12
+        },
+        "roles": [
+            "Front line",
+            "Intel"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Gonne-6",
+            "Impact EMP Grenade",
+            "Smoke Grenade"
+        ]
+    },
+    {
+        "name": "Jackal",
+        "description": "Can track enemy footprints and can identify its targets",
+        "side": "Attack",
+        "year": 2,
+        "season": 1,
+        "operation_id": "Y2S1",
+        "squad": {
+            "name": "Viperstrike",
+            "rank": 9
+        },
+        "roles": [
+            "Intel",
+            "Map control"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Claymore",
+            "Smoke Grenade"
+        ]
+    },
+    {
+        "name": "Jäger",
+        "description": "Has 3 ADS - devices that intercept any explosive projectile thrown by attackers before they detonate and then go on a cooldown for 10 seconds before reactivating",
+        "side": "Defense",
+        "year": 0,
+        "season": 8,
+        "operation_id": "Y1S0",
+        "squad": {
+            "name": "Viperstrike",
+            "rank": 6
+        },
+        "roles": [
+            "Anti-Gadget",
+            "Support"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Bulletproof Camera",
+            "Observation Blocker"
+        ]
+    },
+    {
+        "name": "Kaid",
+        "description": "His two Electroclaws that can be thrown onto any surface it can attach to, electrifying metal objects within a certain radius of the gadget",
+        "side": "Defense",
+        "year": 3,
+        "season": 4,
+        "operation_id": "Y3S4",
+        "squad": {
+            "name": "Redhammer",
+            "rank": 9
+        },
+        "roles": [
+            "Anti-Entry",
+            "Anti-Gadget"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Barbed Wire",
+            "C4",
+            "Observation Blocker"
+        ]
+    },
+    {
+        "name": "Kali",
+        "description": "Her sniper rifle is equipped with an under-barrel launcher that fires explosive lances. They burrow into any type of wall and explode on both sides - destroying any gadget within the radius of the explosion",
+        "side": "Attack",
+        "year": 4,
+        "season": 4,
+        "operation_id": "Y4S4",
+        "squad": {
+            "name": "Nighthaven",
+            "rank": 1
+        },
+        "roles": [
+            "Anti-Gadget",
+            "Support"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Breach Charge",
+            "Claymore",
+            "Smoke Grenade"
+        ]
+    },
+    {
+        "name": "Kapkan",
+        "description": "His tripwires can anchor on doorway and window frames, detonating when enemies trigger its laser",
+        "side": "Defense",
+        "year": 0,
+        "season": 1,
+        "operation_id": "Y1S0",
+        "squad": {
+            "name": "Redhammer",
+            "rank": 5
+        },
+        "roles": [
+            "Anti-Entry",
+            "Trapper"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Barbed Wire",
+            "Bulletproof Camera"
+        ]
+    },
+    {
+        "name": "Lesion",
+        "description": "He comes equipped with his Gu mines. When an attacker steps on it, they are poisoned and gradually lose health until they are downed or the needle is removed",
+        "side": "Defense",
+        "year": 2,
+        "season": 3,
+        "operation_id": "Y2S3",
+        "squad": {
+            "name": "Ghosteyes",
+            "rank": 7
+        },
+        "roles": [
+            "Anti-Entry",
+            "Trapper"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Bulletproof Camera",
+            "Observation Blocker"
+        ]
+    },
+    {
+        "name": "Lion",
+        "description": "His EE-ONE-D flies up above the map to scan for enemy movement at his command. If a Defender moves during this scan, the drone will detect that movement and ping them repeatedly",
+        "side": "Attack",
+        "year": 3,
+        "season": 1,
+        "operation_id": "Y3S1",
+        "squad": {
+            "name": "Wolfguard",
+            "rank": 4
+        },
+        "roles": [
+            "Intel",
+            "Map control"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Claymore",
+            "Frag Grenade",
+            "Stun Grenade"
+        ]
+    },
+    {
+        "name": "Maestro",
+        "description": "His two Evil Eyes are bulletproof, gyroscopic cameras that can fire laser shots",
+        "side": "Defense",
+        "year": 3,
+        "season": 2,
+        "operation_id": "Y3S2",
+        "squad": {
+            "name": "Viperstrike",
+            "rank": 12
+        },
+        "roles": [
+            "Anti-Gadget",
+            "Intel"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Barbed Wire",
+            "Impact Grenade",
+            "Observation Blocker"
+        ]
+    },
+    {
+        "name": "Maverick",
+        "description": "His torch can make holes in any breachable surface, including reinforced walls, creating new lines of sight silently",
+        "side": "Attack",
+        "year": 3,
+        "season": 3,
+        "operation_id": "Y3S3",
+        "squad": {
+            "name": "Ghosteyes",
+            "rank": 10
+        },
+        "roles": [
+            "Breach",
+            "Front line"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Claymore",
+            "Frag Grenade",
+            "Smoke Grenade",
+            "Stun Grenade"
+        ]
+    },
+    {
+        "name": "Melusi",
+        "description": "When deployed a Banshee will emit a loud buzzing noise whenever an Attacker enters its radius and line of sight. It also slows down their movement speed",
+        "side": "Defense",
+        "year": 5,
+        "season": 2,
+        "operation_id": "Y5S2",
+        "squad": {
+            "name": "Wolfguard",
+            "rank": 10
+        },
+        "roles": [
+            "Crowd control",
+            "Intel"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Bulletproof Camera",
+            "Impact Grenade"
+        ]
+    },
+    {
+        "name": "Mira",
+        "description": "She punch her Black Mirrors through walls to create a one-way view to the other side",
+        "side": "Defense",
+        "year": 2,
+        "season": 1,
+        "operation_id": "Y2S1",
+        "squad": {
+            "name": "Viperstrike",
+            "rank": 10
+        },
+        "roles": [
+            "Intel",
+            "Support"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "C4",
+            "Proximity Alarm"
+        ]
+    },
+    {
+        "name": "Montagne",
+        "description": "His extendable shield can fully cover him from head-to-toe while standing, providing extra protection that no other shield in the game offers",
+        "side": "Attack",
+        "year": 0,
+        "season": 12,
+        "operation_id": "Y1S0",
+        "squad": {
+            "name": "Wolfguard",
+            "rank": 3
+        },
+        "roles": [
+            "Intel",
+            "Support"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Hard Breach Charge",
+            "Impact EMP Grenade",
+            "Smoke Grenade"
+        ]
+    },
+    {
+        "name": "Mozzie",
+        "description": "He is armed with the Pest Launcher, a slingshot that launches small robots that can hack the attacking team's drones and make them his own",
+        "side": "Defense",
+        "year": 4,
+        "season": 1,
+        "operation_id": "Y4S1",
+        "squad": {
+            "name": "Ghosteyes",
+            "rank": 11
+        },
+        "roles": [
+            "Anti-Gadget",
+            "Intel"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Barbed Wire",
+            "C4",
+            "Impact Grenade"
+        ]
+    },
+    {
+        "name": "Mute",
+        "description": "Has 4 signal disruptors which jams communications for remotely detonated gadgets such as breach charges or drones",
+        "side": "Defense",
+        "year": 0,
+        "season": 20,
+        "operation_id": "Y1S0",
+        "squad": {
+            "name": "Viperstrike",
+            "rank": 3
+        },
+        "roles": [
+            "Anti-Gadget",
+            "Crowd control"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Bulletproof Camera",
+            "C4"
+        ]
+    },
+    {
+        "name": "Nomad",
+        "description": "Her gun is equipped with an Airjab launcher which can shoot out up to 3 repulsion grenades that will stick to any surface and knock down any defender in its radius when triggered",
+        "side": "Attack",
+        "year": 3,
+        "season": 4,
+        "operation_id": "Y3S4",
+        "squad": {
+            "name": "Wolfguard",
+            "rank": 9
+        },
+        "roles": [
+            "Front line",
+            "Map control"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Breach Charge",
+            "Stun Grenade"
+        ]
+    },
+    {
+        "name": "Nøkk",
+        "description": "When activated, her gadget make her invisble to cameras",
+        "side": "Attack",
+        "year": 4,
+        "season": 2,
+        "operation_id": "Y4S2",
+        "squad": {
+            "name": "Ghosteyes",
+            "rank": 8
+        },
+        "roles": [
+            "Front line",
+            "Map control"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Frag Grenade",
+            "Hard Breach Charge",
+            "Impact EMP Grenade"
+        ]
+    },
+    {
+        "name": "Oryx",
+        "description": "While dashing, he can smash through barricades and unreinforced walls. He can also knock down any Attacker he dashes into as well as vaulting up though any open hatches",
+        "side": "Defense",
+        "year": 5,
+        "season": 1,
+        "operation_id": "Y5S1",
+        "squad": {
+            "name": "Redhammer",
+            "rank": 13
+        },
+        "roles": [
+            "Support"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Barbed Wire",
+            "Proximity Alarm"
+        ]
+    },
+    {
+        "name": "Osa",
+        "description": "Can carry a transparent bulleproof shield that she can deploy on floors or window frames",
+        "side": "Attack",
+        "year": 6,
+        "season": 3,
+        "operation_id": "Y6S3",
+        "squad": {
+            "name": "Nighthaven",
+            "rank": 2
+        },
+        "roles": [
+            "Intel",
+            "Support"
+        ],
+        "queer_identities": [
+            "Transgender"
+        ],
+        "secondary_gadgets": [
+            "Claymore",
+            "Frag Grenade",
+            "Impact EMP Grenade"
+        ]
+    },
+    {
+        "name": "Pulse",
+        "description": "His cardiac sensor detects the heartbeats of nearby enemies through obstacles",
+        "side": "Defense",
+        "year": 0,
+        "season": 14,
+        "operation_id": "Y1S0",
+        "squad": {
+            "name": "Nighthaven",
+            "rank": 10
+        },
+        "roles": [
+            "Intel",
+            "Support"
+        ],
+        "queer_identities": [
+            "Bisexual"
+        ],
+        "secondary_gadgets": [
+            "C4",
+            "Deployable Shield",
+            "Observation Blocker"
+        ]
+    },
+    {
+        "name": "Ram",
+        "description": "Her four deployable mini-tanks destroys all breakable surfaces and devices in its way along a set path",
+        "side": "Attack",
+        "year": 8,
+        "season": 3,
+        "operation_id": "Y8S3",
+        "squad": {
+            "name": "Redhammer",
+            "rank": 16
+        },
+        "roles": [
+            "Anti-Gadget",
+            "Breach"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Smoke Grenade",
+            "Stun Grenade"
+        ]
+    },
+    {
+        "name": "Rauora",
+        "description": "She can deploy bulletproof panels on doorways",
+        "side": "Attack",
+        "year": 10,
+        "season": 1,
+        "operation_id": "Y10S1",
+        "squad": {
+            "name": "Viperstrike",
+            "rank": 16
+        },
+        "roles": [
+            "Map control",
+            "Support"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Breach Charge",
+            "Smoke Grenade"
+        ]
+    },
+    {
+        "name": "Rook",
+        "description": "His armor pack gives him and his team a health boost as well as the ability of reviving themselves if not instantly killed by a headshot",
+        "side": "Defense",
+        "year": 0,
+        "season": 9,
+        "operation_id": "Y1S0",
+        "squad": {
+            "name": "Viperstrike",
+            "rank": 4
+        },
+        "roles": [
+            "Support"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "C4",
+            "Impact Grenade",
+            "Proximity Alarm"
+        ]
+    },
+    {
+        "name": "Sens",
+        "description": "After being thrown, their gadget rolls and drops small projectors to create a screen of light along its path",
+        "side": "Attack",
+        "year": 7,
+        "season": 2,
+        "operation_id": "Y7S2",
+        "squad": {
+            "name": "Wolfguard",
+            "rank": 13
+        },
+        "roles": [
+            "Map control",
+            "Support"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Claymore",
+            "Frag Grenade",
+            "Hard Breach Charge"
+        ]
+    },
+    {
+        "name": "Sentry",
+        "description": "He can pick two of any Defender secondary gadgets (Barbed wire, Bulletproof cam, Deployable shield, Observation blocker, Impact grenade, Nitro cell, Proximity alarm)",
+        "side": "Defense",
+        "year": 9,
+        "season": 2,
+        "operation_id": "Y9S2",
+        "squad": {
+            "name": "Unaffiliated",
+            "rank": 3
+        },
+        "roles": [
+            "Support"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Barbed Wire",
+            "Bulletproof Camera",
+            "C4",
+            "Deployable Shield",
+            "Impact Grenade",
+            "Observation Blocker",
+            "Proximity Alarm"
+        ]
+    },
+    {
+        "name": "Skopós",
+        "description": "She can switch control between 2 robots: the active one plays like a normal operator, while the idle one acts as a bulletproof camera",
+        "side": "Defense",
+        "year": 9,
+        "season": 3,
+        "operation_id": "Y9S3",
+        "squad": {
+            "name": "Wolfguard",
+            "rank": 15
+        },
+        "roles": [
+            "Intel",
+            "Support"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Impact Grenade",
+            "Proximity Alarm"
+        ]
+    },
+    {
+        "name": "Sledge",
+        "description": "His hammer can breach through almost all non-reinforced surfaces and barricades. It can also destroy defenders gadgets",
+        "side": "Attack",
+        "year": 0,
+        "season": 19,
+        "operation_id": "Y1S0",
+        "squad": {
+            "name": "Redhammer",
+            "rank": 6
+        },
+        "roles": [
+            "Anti-Gadget",
+            "Breach"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Frag Grenade",
+            "Impact EMP Grenade",
+            "Stun Grenade"
+        ]
+    },
+    {
+        "name": "Smoke",
+        "description": "Has 3 three remotely detonated poisoned gas canisters",
+        "side": "Defense",
+        "year": 0,
+        "season": 18,
+        "operation_id": "Y1S0",
+        "squad": {
+            "name": "Nighthaven",
+            "rank": 7
+        },
+        "roles": [
+            "Anti-Entry",
+            "Trapper"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Barbed Wire",
+            "Proximity Alarm"
+        ]
+    },
+    {
+        "name": "Solid Snake",
+        "description": "His radar alerts him of nearby enemies, active default cameras, as well as enemies' vision cone when Precision Mode is enabled. He can also scavenge secondary gadgets from fallen players.",
+        "side": "Attack",
+        "year": 11,
+        "season": 1,
+        "operation_id": "Y11S1",
+        "squad": {
+            "name": "Unaffiliated",
+            "rank": 4
+        },
+        "roles": [
+            "Front line",
+            "Intel"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Breach Charge",
+            "Frag Grenade",
+            "Impact EMP Grenade",
+            "Smoke Grenade",
+            "Stun Grenade"
+        ]
+    },
+    {
+        "name": "Solis",
+        "description": "When activated, her gadget lets her see, mark and ping attackers' electronic gadgets - even through walls",
+        "side": "Defense",
+        "year": 7,
+        "season": 4,
+        "operation_id": "Y7S4",
+        "squad": {
+            "name": "Ghosteyes",
+            "rank": 14
+        },
+        "roles": [
+            "Intel",
+            "Support"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Bulletproof Camera",
+            "Proximity Alarm"
+        ]
+    },
+    {
+        "name": "Striker",
+        "description": "She can pick two of any Attacker secondary gadgets (Breach/Hardbreach charge, Claymore, Frag/Impact EMP/Smoke/Stun grenades)",
+        "side": "Attack",
+        "year": 9,
+        "season": 2,
+        "operation_id": "Y9S2",
+        "squad": {
+            "name": "Unaffiliated",
+            "rank": 2
+        },
+        "roles": [
+            "Support"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Breach Charge",
+            "Claymore",
+            "Frag Grenade",
+            "Hard Breach Charge",
+            "Impact EMP Grenade",
+            "Smoke Grenade",
+            "Stun Grenade"
+        ]
+    },
+    {
+        "name": "Tachanka",
+        "description": "Has an incendiary grenade launcher and his primary weapon can easily destroy soft surfaces",
+        "side": "Defense",
+        "year": 0,
+        "season": 2,
+        "operation_id": "Y1S0",
+        "squad": {
+            "name": "Redhammer",
+            "rank": 3
+        },
+        "roles": [
+            "Anti-Entry",
+            "Crowd control"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Barbed Wire",
+            "Deployable Shield",
+            "Proximity Alarm"
+        ]
+    },
+    {
+        "name": "Thatcher",
+        "description": "His gadget allows him to detect enemy electronic devices through walls and deactivate them with an EMP blast",
+        "side": "Attack",
+        "year": 0,
+        "season": 17,
+        "operation_id": "Y1S0",
+        "squad": {
+            "name": "Viperstrike",
+            "rank": 2
+        },
+        "roles": [
+            "Anti-Gadget",
+            "Support"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Breach Charge",
+            "Claymore"
+        ]
+    },
+    {
+        "name": "Thermite",
+        "description": "His exothermic charges can breach through any reinforced wall",
+        "side": "Attack",
+        "year": 0,
+        "season": 13,
+        "operation_id": "Y1S0",
+        "squad": {
+            "name": "Redhammer",
+            "rank": 1
+        },
+        "roles": [
+            "Breach",
+            "Support"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Smoke Grenade",
+            "Stun Grenade"
+        ]
+    },
+    {
+        "name": "Thorn",
+        "description": "Her gadget sticks to any surface and detonates after a short fuse time when an Attacker steps into its detection radius. The damage inflicted can be lethal",
+        "side": "Defense",
+        "year": 6,
+        "season": 4,
+        "operation_id": "Y6S4",
+        "squad": {
+            "name": "Redhammer",
+            "rank": 14
+        },
+        "roles": [
+            "Anti-Entry",
+            "Trapper"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Barbed Wire",
+            "Deployable Shield"
+        ]
+    },
+    {
+        "name": "Thunderbird",
+        "description": "Can deploy 3 automated turrets which shoots out healing shots, similar to Doc's Stim Pistol",
+        "side": "Defense",
+        "year": 6,
+        "season": 2,
+        "operation_id": "Y6S2",
+        "squad": {
+            "name": "Wolfguard",
+            "rank": 12
+        },
+        "roles": [
+            "Support"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Barbed Wire",
+            "Bulletproof Camera",
+            "Deployable Shield"
+        ]
+    },
+    {
+        "name": "Tubarão",
+        "description": "His gadget is a throwable device that can slow down enemies, freeze devices, and even leave footprints behind if the frozen area is walked on",
+        "side": "Defense",
+        "year": 8,
+        "season": 4,
+        "operation_id": "Y8S4",
+        "squad": {
+            "name": "Wolfguard",
+            "rank": 14
+        },
+        "roles": [
+            "Anti-Entry",
+            "Anti-Gadget"
+        ],
+        "queer_identities": [
+            "Transgender"
+        ],
+        "secondary_gadgets": [
+            "C4",
+            "Proximity Alarm"
+        ]
+    },
+    {
+        "name": "Twitch",
+        "description": "Her two Shock Drones can take out enemy gadgets from afar and shock enemies",
+        "side": "Attack",
+        "year": 0,
+        "season": 11,
+        "operation_id": "Y1S0",
+        "squad": {
+            "name": "Wolfguard",
+            "rank": 2
+        },
+        "roles": [
+            "Anti-Gadget",
+            "Intel"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Claymore",
+            "Smoke Grenade"
+        ]
+    },
+    {
+        "name": "Valkyrie",
+        "description": "Her 3 portable sticky cameras can attach on any surface",
+        "side": "Defense",
+        "year": 1,
+        "season": 2,
+        "operation_id": "Y1S2",
+        "squad": {
+            "name": "Ghosteyes",
+            "rank": 4
+        },
+        "roles": [
+            "Intel",
+            "Support"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "C4",
+            "Impact Grenade"
+        ]
+    },
+    {
+        "name": "Vigil",
+        "description": "When activated, his gadget makes him invisible to cameras and drones",
+        "side": "Defense",
+        "year": 2,
+        "season": 4,
+        "operation_id": "Y2S4",
+        "squad": {
+            "name": "Ghosteyes",
+            "rank": 5
+        },
+        "roles": [
+            "Anti-Gadget",
+            "Crowd control"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Bulletproof Camera",
+            "Impact Grenade"
+        ]
+    },
+    {
+        "name": "Wamai",
+        "description": "His Mag-NETs are powerful electromagnets that intercept and redirect grenades and projectiles thrown by attackers",
+        "side": "Defense",
+        "year": 4,
+        "season": 4,
+        "operation_id": "Y4S4",
+        "squad": {
+            "name": "Nighthaven",
+            "rank": 3
+        },
+        "roles": [
+            "Anti-Gadget",
+            "Trapper"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Impact Grenade",
+            "Proximity Alarm"
+        ]
+    },
+    {
+        "name": "Warden",
+        "description": "When activated, his gadget nullifies the effects of Stun Grenades and let him see through Smoke Grenades",
+        "side": "Defense",
+        "year": 4,
+        "season": 2,
+        "operation_id": "Y4S2",
+        "squad": {
+            "name": "Ghosteyes",
+            "rank": 9
+        },
+        "roles": [
+            "Anti-Gadget",
+            "Intel"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "C4",
+            "Deployable Shield",
+            "Observation Blocker"
+        ]
+    },
+    {
+        "name": "Ying",
+        "description": "Has 3 Candelas which can either be thrown or anchored onto a deployable surface to shoot out six flash charges into an area",
+        "side": "Attack",
+        "year": 2,
+        "season": 3,
+        "operation_id": "Y2S3",
+        "squad": {
+            "name": "Wolfguard",
+            "rank": 7
+        },
+        "roles": [
+            "Front line",
+            "Map control"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Hard Breach Charge",
+            "Smoke Grenade"
+        ]
+    },
+    {
+        "name": "Zero",
+        "description": "Can shoot cameras that can lodge themselves into any surface to surveil either side and shoot a laser that can destroy enemy gadgets",
+        "side": "Attack",
+        "year": 5,
+        "season": 3,
+        "operation_id": "Y5S3",
+        "squad": {
+            "name": "Ghosteyes",
+            "rank": 2
+        },
+        "roles": [
+            "Anti-Gadget",
+            "Intel"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Claymore",
+            "Gonne-6",
+            "Hard Breach Charge"
+        ]
+    },
+    {
+        "name": "Zofia",
+        "description": "Has a double barrel launcher that can launch either impact grenades or concussion grenades",
+        "side": "Attack",
+        "year": 2,
+        "season": 3,
+        "operation_id": "Y2S3",
+        "squad": {
+            "name": "Ghosteyes",
+            "rank": 6
+        },
+        "roles": [
+            "Anti-Gadget",
+            "Breach"
+        ],
+        "queer_identities": [],
+        "secondary_gadgets": [
+            "Claymore",
+            "Hard Breach Charge"
+        ]
+    }
+]
