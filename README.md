@@ -109,6 +109,21 @@ them intact.
   the in-game release order. Do not "deduplicate" those columns
   against the operation — they are not redundant.
 
+**Seeded operator data** is JSON-backed:
+
+- `database/data/operators.json` is the source of truth for operator
+  attributes plus their squad (with rank), roles, queer identities,
+  and secondary gadgets. `OperatorSeeder` reads it and attaches
+  relations by name; the lookup seeders (`Squad`, `Role`,
+  `QueerIdentity`, `SecondaryGadget`) only seed their own table.
+- Admin edits via `/admin/dashboard` write back to the JSON file
+  automatically (`App\Support\OperatorJsonWriter`, fired by
+  `OperatorObserver` and explicitly at the end of
+  `OperatorController::store/update`). After editing in production,
+  pull the updated JSON to your local clone and commit it like any
+  other source change. The file ships pretty-printed and sorted by
+  name so diffs are review-friendly.
+
 Full schema rules and migration policy live in
 [AGENTS.md §7](AGENTS.md).
 
