@@ -8,10 +8,11 @@
 -->
 <script setup lang="ts">
 import { useForm } from '@inertiajs/vue3';
-import { computed } from 'vue';
 import type { OperationOptionData, OperatorData } from '../../types/domain.ts';
 import OperatorFormAssets from './OperatorFormAssets.vue';
+import OperatorFormDescription from './OperatorFormDescription.vue';
 import OperatorFormIdentity from './OperatorFormIdentity.vue';
+import OperatorFormQueerIdentities from './OperatorFormQueerIdentities.vue';
 
 const props = defineProps<{
     mode: 'create' | 'edit';
@@ -38,14 +39,6 @@ const form = useForm({
         props.operator?.operation?.id ?? props.operations.data[0]?.id ?? '',
     queerIdentities: props.operator?.queerIdentities ?? [],
     roles: props.operator?.roles ?? [],
-});
-
-const charCount = computed(() => form.description?.length ?? 0);
-
-const counterColor = computed(() => {
-    if (charCount.value >= 250) return '#ff4b3c';
-    if (charCount.value >= 225) return '#f8d002';
-    return '#b0bac6';
 });
 
 function submit() {
@@ -150,75 +143,17 @@ function submit() {
         </section>
 
         <!-- Queer identities -->
-        <section
-            class="rounded-[6px] border border-[rgba(254,254,254,0.08)] bg-[rgba(17,17,17,0.55)]"
-        >
-            <header class="border-b border-[rgba(255,75,60,0.25)] px-5 py-3">
-                <h2
-                    class="font-display text-sm uppercase tracking-[0.04em] text-white"
-                >
-                    Queer identities
-                </h2>
-            </header>
-            <div class="grid grid-cols-2 gap-3 p-5">
-                <label
-                    v-for="q in props.queerIdentities"
-                    :key="q"
-                    class="flex cursor-pointer items-center gap-2.5 text-sm text-[#b0bac6]"
-                >
-                    <input
-                        type="checkbox"
-                        :value="q"
-                        v-model="form.queerIdentities"
-                        class="accent-[#ff4b3c]"
-                    />
-                    {{ q }}
-                </label>
-            </div>
-        </section>
+        <OperatorFormQueerIdentities
+            :model-value="form.queerIdentities"
+            :queer-identities="props.queerIdentities"
+            @update:model-value="form.queerIdentities = $event"
+        />
 
         <!-- Description with live counter -->
-        <section
-            class="rounded-[6px] border border-[rgba(254,254,254,0.08)] bg-[rgba(17,17,17,0.55)]"
-        >
-            <header
-                class="flex items-center justify-between border-b border-[rgba(255,75,60,0.25)] px-5 py-3"
-            >
-                <h2
-                    class="font-display text-sm uppercase tracking-[0.04em] text-white"
-                >
-                    Description
-                </h2>
-                <span
-                    class="font-mono text-[10px] uppercase tracking-widest text-[#b0bac6]"
-                >
-                    Max 250 chars
-                </span>
-            </header>
-            <div class="p-5">
-                <label
-                    for="op-description"
-                    class="mb-1.5 block font-mono text-[11px] uppercase tracking-[0.12em] text-[#b0bac6]"
-                >
-                    Description
-                </label>
-                <textarea
-                    id="op-description"
-                    v-model="form.description"
-                    rows="4"
-                    maxlength="250"
-                    class="w-full resize-none rounded-[4px] px-3 py-2"
-                />
-                <div class="mt-1.5 flex justify-end">
-                    <span
-                        class="font-mono text-[10px]"
-                        :style="{ color: counterColor }"
-                    >
-                        {{ charCount }} / 250
-                    </span>
-                </div>
-            </div>
-        </section>
+        <OperatorFormDescription
+            :model-value="form.description"
+            @update:model-value="form.description = $event"
+        />
 
         <!-- Assets: portrait + icon -->
         <OperatorFormAssets
