@@ -57,12 +57,12 @@ const livePreviewOperator = computed(() => {
         ? URL.createObjectURL(form.portrait)
         : props.mode === 'edit' && props.operator?.name
           ? `${publicPath}operatorPortraits/${normalize(props.operator.name)}.png`
-          : `${publicPath}operatorPortraits/_placeholder.png`;
+          : 'https://placehold.co/300x500';
     const iconSrc = form.icon
         ? URL.createObjectURL(form.icon)
         : props.mode === 'edit' && props.operator?.name
           ? `${publicPath}operatorIcons/${normalize(props.operator.name)}.png`
-          : `${publicPath}operatorIcons/_placeholder.png`;
+          : 'https://placehold.co/60x60/000000/FFF';
 
     return {
         name: form.name || 'Operator',
