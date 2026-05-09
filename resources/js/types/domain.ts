@@ -27,6 +27,7 @@ export interface OperatorData {
     roles: string[];
     squad: string;
     queerIdentities: string[];
+    secondaryGadgetIds?: string[];
 }
 
 /**
@@ -36,6 +37,16 @@ export interface OperatorData {
 export interface SecondaryGadgetData {
     name: string;
     operators: string[];
+}
+
+/**
+ * Lightweight shape used in the OperatorForm gadget picker.
+ * Passed via the `secondaryGadgets` prop from OperatorController.
+ */
+export interface SecondaryGadgetOptionData {
+    id: string;
+    name: string;
+    side: string;
 }
 
 /** Shape returned by RoleResource (used by VocabularyController). */

@@ -10,13 +10,19 @@
 import { computed, onBeforeUnmount, ref, watch } from 'vue';
 import { useForm } from '@inertiajs/vue3';
 import { normalize } from '../../scripts/operator.ts';
-import type { OperationOptionData, OperatorData } from '../../types/domain.ts';
+import type {
+    OperationOptionData,
+    OperatorData,
+    SecondaryGadgetOptionData,
+} from '../../types/domain.ts';
 import OperatorFormAssets from './OperatorFormAssets.vue';
 import OperatorFormDescription from './OperatorFormDescription.vue';
+import OperatorFormGadgets from './OperatorFormGadgets.vue';
 import OperatorFormIdentity from './OperatorFormIdentity.vue';
+import OperatorFormOperation from './OperatorFormOperation.vue';
 import OperatorFormPreview from './OperatorFormPreview.vue';
 import OperatorFormQueerIdentities from './OperatorFormQueerIdentities.vue';
-import OperatorFormReleaseRoles from './OperatorFormReleaseRoles.vue';
+import OperatorFormRoles from './OperatorFormRoles.vue';
 
 const publicPath = import.meta.env.BASE_URL;
 
@@ -27,8 +33,12 @@ const props = defineProps<{
     operations: { data: OperationOptionData[] };
     queerIdentities: string[];
     roles: string[];
+    secondaryGadgets: { data: SecondaryGadgetOptionData[] };
     operator?: OperatorData;
 }>();
+
+// Local list of operations; grows when admin creates one inline.
+const localOperations = ref<OperationOptionData[]>([...props.operations.data]);
 
 // Initialise from operator in edit mode; use empty defaults for create.
 // Null-safe operation_id guards the runtime bug in the old OperatorForm.vue
@@ -45,6 +55,7 @@ const form = useForm({
         props.operator?.operation?.id ?? props.operations.data[0]?.id ?? '',
     queerIdentities: props.operator?.queerIdentities ?? [],
     roles: props.operator?.roles ?? [],
+    secondary_gadget_ids: props.operator?.secondaryGadgetIds ?? [],
 });
 
 // Blob URL lifecycle for the live preview.
@@ -98,6 +109,16 @@ const livePreviewOperator = computed(() => {
     };
 });
 
+function onOperationCreated(op: OperationOptionData) {
+    // Compose display name matching OperationResource format.
+    localOperations.value.push({
+        id: op.id,
+        name: `${op.id} - ${op.name}`,
+        release_date: op.release_date,
+    });
+    form.operation_id = op.id;
+}
+
 function submit() {
     form.post(props.submitRoute);
 }
@@ -119,14 +140,27 @@ function submit() {
                     @update:model-value-squad="form.squad = $event"
                 />
 
-                <!-- Operation, Roles, Secondary gadgets -->
-                <OperatorFormReleaseRoles
+                <!-- Operation (combobox + inline create sheet) -->
+                <OperatorFormOperation
                     :operation-id="form.operation_id"
-                    :operations="props.operations"
+                    :operations="{ data: localOperations }"
+                    @update:operation-id="form.operation_id = $event"
+                    @operation-created="onOperationCreated"
+                />
+
+                <!-- Roles -->
+                <OperatorFormRoles
                     :roles="props.roles"
                     :selected-roles="form.roles"
-                    @update:operation-id="form.operation_id = $event"
                     @update:selected-roles="form.roles = $event"
+                />
+
+                <!-- Secondary gadgets -->
+                <OperatorFormGadgets
+                    :secondary-gadgets="props.secondaryGadgets"
+                    :selected-ids="form.secondary_gadget_ids"
+                    :side="form.side"
+                    @update:selected-ids="form.secondary_gadget_ids = $event"
                 />
 
                 <!-- Queer identities -->
@@ -171,9 +205,10 @@ function submit() {
                         v-if="mode === 'edit'"
                         type="button"
                         :class="[
-                            'font-display inline-flex cursor-pointer items-center',
-                            'gap-1.5 border-0 bg-transparent text-sm uppercase',
-                            'tracking-[0.04em] text-[#ff4b3c] hover:text-[#f8d002]',
+                            'font-display inline-flex cursor-pointer',
+                            'items-center gap-1.5 border-0 bg-transparent',
+                            'text-sm uppercase tracking-[0.04em]',
+                            'text-[#ff4b3c] hover:text-[#f8d002]',
                         ]"
                     >
                         Delete operator
