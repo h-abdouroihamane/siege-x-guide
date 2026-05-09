@@ -65,11 +65,11 @@ class OperatorController extends Controller
     public function edit(Operator $operator)
     {
         $operatorResource = new OperatorResource($operator);
-        $squads = Squad::pluck('name')->sort();
+        $squads = Squad::orderBy('name')->pluck('name');
         $operations = OperationResource::collection(
             Operation::orderByDesc('release_date')->get(),
         );
-        $queerIdentities = QueerIdentity::pluck('name')->sort();
+        $queerIdentities = QueerIdentity::orderBy('name')->pluck('name');
         $roles = Role::pluck('name')->sort();
 
         return Inertia::render('EditOperator', [
@@ -137,13 +137,17 @@ class OperatorController extends Controller
 
     public function create()
     {
-        $squads = Squad::pluck('name')->sort();
-        $queerIdentities = QueerIdentity::pluck('name')->sort();
+        $squads = Squad::orderBy('name')->pluck('name');
+        $queerIdentities = QueerIdentity::orderBy('name')->pluck('name');
         $roles = Role::pluck('name')->sort();
+        $operations = OperationResource::collection(
+            Operation::orderByDesc('release_date')->get(),
+        );
         return Inertia::render('CreateOperator', [
             'squads' => $squads,
             'queerIdentities' => $queerIdentities,
             'roles' => $roles,
+            'operations' => $operations,
             'submitRoute' => route('operator.store'),
         ]);
     }

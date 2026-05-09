@@ -23,7 +23,7 @@ class EditOperatorRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'description' => 'required|string',
+            'description' => 'required|string|max:250',
             'side' => 'required|string|in:Attack,Defense',
             'squad' => 'required|string|exists:squads,name',
             'operation_id' => 'required|string|exists:operations,id',

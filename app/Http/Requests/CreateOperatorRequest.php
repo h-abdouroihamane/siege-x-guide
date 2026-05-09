@@ -27,7 +27,7 @@ class CreateOperatorRequest extends FormRequest
             'season' => 'required|numeric|in:1,2,3,4',
             'releaseDate' => 'required|date',
             'name' => 'required|string|unique:operators,name',
-            'description' => 'required|string',
+            'description' => 'required|string|max:250',
             'side' => 'required|string|in:Attack,Defense',
             'squad' => 'required|string|exists:squads,name',
             'queerIdentities' => 'sometimes|array',
