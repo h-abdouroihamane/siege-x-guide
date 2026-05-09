@@ -467,26 +467,6 @@
                         </div>
                     </div>
 
-                    <!-- Squad filter -->
-                    <div>
-                        <label class="field-label block mb-1.5" for="f-squad"
-                            >Squad</label
-                        >
-                        <select
-                            id="f-squad"
-                            onchange="applyFilters()"
-                            class="siege-select min-w-[160px]"
-                        >
-                            <option value="">All squads</option>
-                            <option>Ghosteyes</option>
-                            <option>Nighthaven</option>
-                            <option>Redhammer</option>
-                            <option>Unaffiliated</option>
-                            <option>Viperstrike</option>
-                            <option>Wolfguard</option>
-                        </select>
-                    </div>
-
                     <!-- Result count -->
                     <div class="ml-auto pb-2">
                         <span
@@ -599,12 +579,10 @@
                     .getElementById('f-search')
                     .value.trim()
                     .toLowerCase();
-                const squad = document.getElementById('f-squad').value;
 
                 const filtered = OPERATORS.filter((op) => {
                     if (currentSide !== 'all' && op.side !== currentSide)
                         return false;
-                    if (squad && op.squad !== squad) return false;
                     if (search && !op.name.toLowerCase().includes(search))
                         return false;
                     return true;
@@ -672,7 +650,6 @@
             function resetFilters() {
                 currentSide = 'all';
                 document.getElementById('f-search').value = '';
-                document.getElementById('f-squad').value = '';
                 setSide('all');
             }
 
