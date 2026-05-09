@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Operator Form — Mockup</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  body { font-family: ui-sans-serif, system-ui, sans-serif; }
+  .font-display { font-family: "Inter Tight", "Inter", ui-sans-serif, system-ui, sans-serif; letter-spacing: 0.02em; }
+  .pride-flag {
+    display:inline-block; width:14px; height:10px; border-radius:1px;
+    background: linear-gradient(180deg,#e40303 0 16%,#ff8c00 16% 32%,#ffed00 32% 50%,#008026 50% 66%,#004dff 66% 83%,#750787 83% 100%);
+  }
+  .glow-att { box-shadow: 0 0 18px 0 rgba(217,97,15,0.55); }
+  .glow-def { box-shadow: 0 0 18px 0 rgba(14,135,200,0.55); }
+  .dropzone-empty { background:
+    repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0 8px, transparent 8px 16px); }
+  .scrollbar-thin::-webkit-scrollbar { width: 8px; }
+  .scrollbar-thin::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 4px; }
+</style>
+</head>
+<body class="bg-neutral-950 text-neutral-100 min-h-screen">
+
+<!-- View switcher (mockup only — not part of the real UI) -->
+<div class="border-b border-neutral-800 bg-neutral-900/50 sticky top-0 z-30 backdrop-blur">
+  <div class="max-w-6xl mx-auto px-6 py-3 flex items-center gap-3 text-xs">
+    <span class="text-neutral-500 uppercase tracking-wider">Mockup view:</span>
+    <button onclick="show('edit')" id="btn-edit" class="px-3 py-1 rounded bg-orange-600/20 text-orange-300 border border-orange-600/40">Edit operator</button>
+    <button onclick="show('create')" id="btn-create" class="px-3 py-1 rounded bg-neutral-800 text-neutral-400 border border-neutral-700 hover:bg-neutral-700">Create operator</button>
+    <button onclick="toggleSheet()" id="btn-sheet" class="px-3 py-1 rounded bg-neutral-800 text-neutral-400 border border-neutral-700 hover:bg-neutral-700 ml-auto">Toggle "+ New operation" Sheet</button>
+  </div>
+</div>
+
+<!-- Top bar -->
+<header class="border-b border-neutral-800 bg-neutral-900/30">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center gap-4">
+    <a href="#" class="text-neutral-500 hover:text-neutral-200 text-sm">← Operators</a>
+    <span class="text-neutral-700">/</span>
+    <h1 id="page-title" class="font-display text-xl uppercase tracking-wider">Edit operator</h1>
+    <span id="page-subtitle" class="text-neutral-500 text-sm font-mono">Thermite · Y1S1 · Attacker</span>
+    <div class="ml-auto flex gap-2">
+      <button class="px-3 py-1.5 rounded text-sm border border-neutral-700 text-neutral-400 hover:bg-neutral-800">Cancel</button>
+      <button class="px-4 py-1.5 rounded text-sm bg-orange-600 hover:bg-orange-500 text-white font-medium">Save changes</button>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-6xl mx-auto px-6 py-8">
+  <div class="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-8">
+
+    <!-- LEFT: form -->
+    <div class="space-y-8">
+
+      <!-- IDENTITY -->
+      <section class="rounded-lg border border-neutral-800 bg-neutral-900/40">
+        <header class="px-5 py-3 border-b border-neutral-800 flex items-center justify-between">
+          <h2 class="font-display text-xs uppercase tracking-[0.2em] text-neutral-400">Identity</h2>
+          <span class="text-[10px] text-neutral-600 font-mono">required</span>
+        </header>
+        <div class="p-5 space-y-4">
+          <label class="block">
+            <span class="text-xs uppercase tracking-wider text-neutral-400">Name</span>
+            <input id="f-name" oninput="syncPreview()" value="Thermite" class="mt-1 w-full bg-neutral-950 border border-neutral-800 rounded px-3 py-2 text-sm focus:border-orange-600 focus:outline-none" />
+          </label>
+
+          <fieldset>
+            <legend class="text-xs uppercase tracking-wider text-neutral-400 mb-2">Side</legend>
+            <div class="inline-flex rounded border border-neutral-800 overflow-hidden">
+              <label class="cursor-pointer">
+                <input type="radio" name="side" value="att" class="peer sr-only" checked onchange="setSide('att')" />
+                <span class="block px-4 py-2 text-sm peer-checked:bg-orange-600/20 peer-checked:text-orange-300 text-neutral-400">Attack</span>
+              </label>
+              <label class="cursor-pointer border-l border-neutral-800">
+                <input type="radio" name="side" value="def" class="peer sr-only" onchange="setSide('def')" />
+                <span class="block px-4 py-2 text-sm peer-checked:bg-sky-600/20 peer-checked:text-sky-300 text-neutral-400">Defense</span>
+              </label>
+            </div>
+          </fieldset>
+
+          <label class="block">
+            <span class="text-xs uppercase tracking-wider text-neutral-400">Squad</span>
+            <select class="mt-1 w-full bg-neutral-950 border border-neutral-800 rounded px-3 py-2 text-sm focus:border-orange-600 focus:outline-none">
+              <option>Unaffiliated</option><option>Wolfguard</option><option>Redhammer</option>
+            </select>
+          </label>
+        </div>
+      </section>
+
+      <!-- OPERATION -->
+      <section class="rounded-lg border border-neutral-800 bg-neutral-900/40">
+        <header class="px-5 py-3 border-b border-neutral-800">
+          <h2 class="font-display text-xs uppercase tracking-[0.2em] text-neutral-400">Operation</h2>
+        </header>
+        <div class="p-5 space-y-3">
+          <div class="relative">
+            <input placeholder="Search operations…" value="Velvet Shell" class="w-full bg-neutral-950 border border-neutral-800 rounded px-3 py-2 pr-10 text-sm focus:border-orange-600 focus:outline-none" />
+            <span class="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-500 text-xs">Y2S1 · 2017 ▾</span>
+          </div>
+          <button onclick="toggleSheet()" id="newop-btn" class="text-xs text-orange-400 hover:text-orange-300 inline-flex items-center gap-1">
+            <span class="text-base leading-none">+</span> Create new operation
+          </button>
+        </div>
+      </section>
+
+      <!-- ROLES -->
+      <section class="rounded-lg border border-neutral-800 bg-neutral-900/40">
+        <header class="px-5 py-3 border-b border-neutral-800">
+          <h2 class="font-display text-xs uppercase tracking-[0.2em] text-neutral-400">Roles</h2>
+        </header>
+        <div class="p-5">
+          <div class="flex flex-wrap gap-2 min-h-[40px] p-2 bg-neutral-950 border border-neutral-800 rounded">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded text-xs bg-orange-600/15 text-orange-200 border border-orange-700/40">
+              Hard Breach <button class="text-orange-400/70 hover:text-orange-300">×</button>
+            </span>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded text-xs bg-orange-600/15 text-orange-200 border border-orange-700/40">
+              Support <button class="text-orange-400/70 hover:text-orange-300">×</button>
+            </span>
+            <input placeholder="+ Add role…" class="flex-1 min-w-[120px] bg-transparent text-sm placeholder:text-neutral-600 focus:outline-none" />
+          </div>
+        </div>
+      </section>
+
+      <!-- QUEER IDENTITIES -->
+      <section class="rounded-lg border border-neutral-800 bg-neutral-900/40">
+        <header class="px-5 py-3 border-b border-neutral-800">
+          <h2 class="font-display text-xs uppercase tracking-[0.2em] text-neutral-400">Queer identities</h2>
+        </header>
+        <div class="p-5 grid grid-cols-2 gap-3">
+          <label class="flex items-center gap-2.5 text-sm cursor-pointer">
+            <input type="checkbox" class="accent-orange-600" onchange="syncPreview()" />
+            <span class="pride-flag" aria-hidden="true"></span>
+            <span class="text-neutral-300">Transgender</span>
+          </label>
+          <label class="flex items-center gap-2.5 text-sm cursor-pointer">
+            <input type="checkbox" class="accent-orange-600" onchange="syncPreview()" />
+            <span class="pride-flag" aria-hidden="true"></span>
+            <span class="text-neutral-300">Non-binary</span>
+          </label>
+          <label class="flex items-center gap-2.5 text-sm cursor-pointer">
+            <input type="checkbox" class="accent-orange-600" onchange="syncPreview()" checked />
+            <span class="pride-flag" aria-hidden="true"></span>
+            <span class="text-neutral-300">Bisexual</span>
+          </label>
+          <label class="flex items-center gap-2.5 text-sm cursor-pointer">
+            <input type="checkbox" class="accent-orange-600" onchange="syncPreview()" />
+            <span class="pride-flag" aria-hidden="true"></span>
+            <span class="text-neutral-300">Lesbian</span>
+          </label>
+          <label class="flex items-center gap-2.5 text-sm cursor-pointer">
+            <input type="checkbox" class="accent-orange-600" onchange="syncPreview()" />
+            <span class="pride-flag" aria-hidden="true"></span>
+            <span class="text-neutral-300">Gay</span>
+          </label>
+          <label class="flex items-center gap-2.5 text-sm cursor-pointer">
+            <input type="checkbox" class="accent-orange-600" onchange="syncPreview()" />
+            <span class="pride-flag" aria-hidden="true"></span>
+            <span class="text-neutral-300">Asexual</span>
+          </label>
+        </div>
+      </section>
+
+      <!-- DOSSIER -->
+      <section class="rounded-lg border border-neutral-800 bg-neutral-900/40">
+        <header class="px-5 py-3 border-b border-neutral-800">
+          <h2 class="font-display text-xs uppercase tracking-[0.2em] text-neutral-400">Dossier</h2>
+        </header>
+        <div class="p-5">
+          <textarea rows="4" class="w-full bg-neutral-950 border border-neutral-800 rounded px-3 py-2 text-sm focus:border-orange-600 focus:outline-none resize-none" placeholder="Background, specialty, notable operations…">Master breacher with a flair for thermal exothermic charges.</textarea>
+        </div>
+      </section>
+
+      <!-- ASSETS -->
+      <section class="rounded-lg border border-neutral-800 bg-neutral-900/40">
+        <header class="px-5 py-3 border-b border-neutral-800 flex items-center justify-between">
+          <h2 class="font-display text-xs uppercase tracking-[0.2em] text-neutral-400">Assets</h2>
+          <span id="asset-required" class="text-[10px] text-neutral-600 font-mono">optional on edit</span>
+        </header>
+        <div class="p-5 grid grid-cols-2 gap-4">
+          <!-- Portrait -->
+          <div>
+            <span class="text-xs uppercase tracking-wider text-neutral-400 mb-2 block">Portrait</span>
+            <label class="dropzone-empty group relative flex flex-col items-center justify-center h-44 border-2 border-dashed border-neutral-700 rounded cursor-pointer hover:border-orange-600 hover:bg-orange-600/5 transition">
+              <svg class="w-6 h-6 text-neutral-500 group-hover:text-orange-400 mb-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 7.5m0 0L7.5 12M12 7.5V21" /></svg>
+              <span class="text-xs text-neutral-400">Drag PNG here or click</span>
+              <span class="text-[10px] text-neutral-600 mt-1">512 × 720 recommended</span>
+              <input type="file" accept="image/png" class="sr-only" />
+            </label>
+            <p class="text-[10px] text-neutral-600 mt-1.5">Currently: thermite.png · <button class="underline hover:text-neutral-400">replace</button></p>
+          </div>
+          <!-- Icon (with sample preview) -->
+          <div>
+            <span class="text-xs uppercase tracking-wider text-neutral-400 mb-2 block">Icon</span>
+            <div class="relative h-44 border-2 border-orange-700/60 rounded overflow-hidden bg-neutral-950 flex items-center justify-center">
+              <div class="w-20 h-20 rounded-full bg-orange-600/20 border border-orange-600 flex items-center justify-center">
+                <span class="font-display text-2xl text-orange-300">TH</span>
+              </div>
+              <button class="absolute top-1.5 right-1.5 w-6 h-6 rounded-full bg-neutral-950/80 border border-neutral-700 flex items-center justify-center text-neutral-400 hover:text-red-400 hover:border-red-500/50">×</button>
+              <span class="absolute bottom-1.5 left-1.5 text-[10px] text-neutral-500 font-mono">thermite-icon.png</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- BOTTOM ACTIONS -->
+      <div class="flex items-center justify-between pt-2">
+        <button id="delete-btn" class="text-sm text-red-400 hover:text-red-300 inline-flex items-center gap-1.5">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" /></svg>
+          Delete operator
+        </button>
+        <div class="flex gap-2">
+          <button class="px-4 py-2 rounded text-sm border border-neutral-700 text-neutral-400 hover:bg-neutral-800">Cancel</button>
+          <button class="px-5 py-2 rounded text-sm bg-orange-600 hover:bg-orange-500 text-white font-medium">Save changes</button>
+        </div>
+      </div>
+
+      <!-- GADGETS (edit-only) -->
+      <section id="gadgets-section" class="rounded-lg border border-neutral-800 bg-neutral-900/20 mt-12">
+        <header class="px-5 py-3 border-b border-neutral-800 flex items-center justify-between">
+          <div>
+            <h2 class="font-display text-xs uppercase tracking-[0.2em] text-neutral-400">Secondary gadgets</h2>
+            <p class="text-[11px] text-neutral-600 mt-0.5">Loadout assignments — saved independently from operator profile</p>
+          </div>
+          <button class="text-xs text-neutral-400 hover:text-neutral-200 px-2 py-1 border border-neutral-800 rounded">+ Assign gadget</button>
+        </header>
+        <ul class="divide-y divide-neutral-800">
+          <li class="px-5 py-3 flex items-center justify-between text-sm">
+            <span>Frag Grenade</span><button class="text-neutral-600 hover:text-red-400 text-xs">remove</button>
+          </li>
+          <li class="px-5 py-3 flex items-center justify-between text-sm">
+            <span>Smoke Grenade</span><button class="text-neutral-600 hover:text-red-400 text-xs">remove</button>
+          </li>
+        </ul>
+      </section>
+    </div>
+
+    <!-- RIGHT: sticky live preview -->
+    <aside class="lg:sticky lg:top-24 self-start">
+      <div class="rounded-lg border border-neutral-800 bg-neutral-900/40 p-5">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="font-display text-xs uppercase tracking-[0.2em] text-neutral-400">Live preview</h3>
+          <span class="text-[10px] text-neutral-600 font-mono">OperatorCard.vue</span>
+        </div>
+        <!-- Faux OperatorCard -->
+        <div id="preview-card" class="glow-att mx-auto w-[140px] rounded-sm bg-neutral-800 overflow-hidden relative">
+          <div class="aspect-[3/4] bg-gradient-to-b from-neutral-700 to-neutral-900 flex items-center justify-center">
+            <span class="text-neutral-600 text-[10px] uppercase tracking-wider">portrait</span>
+          </div>
+          <div id="preview-icon" class="absolute top-[55%] left-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-orange-600/30 border border-orange-500 flex items-center justify-center">
+            <span class="font-display text-orange-200 text-sm">TH</span>
+          </div>
+          <div class="bg-black/30 backdrop-blur-sm py-1.5 text-center">
+            <span id="preview-name" class="font-display uppercase text-white text-base tracking-wide">Thermite</span>
+          </div>
+          <div id="preview-flags" class="absolute top-1.5 right-1.5 flex flex-col gap-0.5">
+            <span class="pride-flag" title="Bisexual"></span>
+          </div>
+        </div>
+        <p class="text-[10px] text-neutral-600 mt-3 text-center">Updates as you edit</p>
+      </div>
+
+      <div class="mt-4 rounded-lg border border-neutral-800 bg-neutral-900/20 p-4 text-[11px] text-neutral-500 leading-relaxed">
+        <p class="text-neutral-400 mb-1 font-medium">Why a preview?</p>
+        Renders the actual <code class="text-orange-400">OperatorCard</code> component with the form's reactive data — no surprises after save.
+      </div>
+    </aside>
+  </div>
+</main>
+
+<!-- New-operation Sheet (right slide-over) -->
+<div id="sheet-overlay" class="fixed inset-0 bg-black/60 z-40 hidden" onclick="toggleSheet()"></div>
+<aside id="sheet" class="fixed top-0 right-0 h-full w-full max-w-md bg-neutral-900 border-l border-neutral-800 z-50 translate-x-full transition-transform duration-200">
+  <header class="px-6 py-4 border-b border-neutral-800 flex items-center justify-between">
+    <div>
+      <h2 class="font-display uppercase tracking-wider text-sm">New operation</h2>
+      <p class="text-[11px] text-neutral-500 mt-0.5">Saved separately — pickable by any operator</p>
+    </div>
+    <button onclick="toggleSheet()" class="text-neutral-500 hover:text-neutral-200 text-xl leading-none">×</button>
+  </header>
+  <div class="p-6 space-y-4">
+    <label class="block">
+      <span class="text-xs uppercase tracking-wider text-neutral-400">Operation name</span>
+      <input class="mt-1 w-full bg-neutral-950 border border-neutral-800 rounded px-3 py-2 text-sm focus:border-orange-600 focus:outline-none" placeholder="e.g. Operation Steel Wave" />
+    </label>
+    <div class="grid grid-cols-2 gap-3">
+      <label class="block">
+        <span class="text-xs uppercase tracking-wider text-neutral-400">Year</span>
+        <input type="number" class="mt-1 w-full bg-neutral-950 border border-neutral-800 rounded px-3 py-2 text-sm focus:border-orange-600 focus:outline-none" value="2026" />
+      </label>
+      <label class="block">
+        <span class="text-xs uppercase tracking-wider text-neutral-400">Season</span>
+        <select class="mt-1 w-full bg-neutral-950 border border-neutral-800 rounded px-3 py-2 text-sm focus:border-orange-600 focus:outline-none">
+          <option>1</option><option>2</option><option>3</option><option>4</option>
+        </select>
+      </label>
+    </div>
+    <label class="block">
+      <span class="text-xs uppercase tracking-wider text-neutral-400">Release date</span>
+      <input type="date" class="mt-1 w-full bg-neutral-950 border border-neutral-800 rounded px-3 py-2 text-sm focus:border-orange-600 focus:outline-none" />
+    </label>
+  </div>
+  <footer class="absolute bottom-0 inset-x-0 px-6 py-4 border-t border-neutral-800 bg-neutral-950/40 flex justify-end gap-2">
+    <button onclick="toggleSheet()" class="px-3 py-1.5 rounded text-sm border border-neutral-700 text-neutral-400 hover:bg-neutral-800">Cancel</button>
+    <button onclick="toggleSheet()" class="px-4 py-1.5 rounded text-sm bg-orange-600 hover:bg-orange-500 text-white font-medium">Create &amp; select</button>
+  </footer>
+</aside>
+
+<script>
+  function syncPreview() {
+    const name = document.getElementById('f-name').value || 'Operator';
+    document.getElementById('preview-name').textContent = name;
+    const initials = name.trim().slice(0,2).toUpperCase();
+    document.querySelector('#preview-icon span').textContent = initials;
+    const flags = document.querySelectorAll('input[type=checkbox]:checked').length;
+    const container = document.getElementById('preview-flags');
+    container.innerHTML = '';
+    for (let i = 0; i < flags; i++) {
+      const f = document.createElement('span');
+      f.className = 'pride-flag';
+      container.appendChild(f);
+    }
+  }
+  function setSide(side) {
+    const card = document.getElementById('preview-card');
+    card.classList.toggle('glow-att', side === 'att');
+    card.classList.toggle('glow-def', side === 'def');
+    const icon = document.getElementById('preview-icon');
+    icon.className = icon.className
+      .replace(/bg-orange-600\/30|border-orange-500|bg-sky-600\/30|border-sky-500/g,'')
+      + (side === 'att' ? ' bg-orange-600/30 border-orange-500' : ' bg-sky-600/30 border-sky-500');
+    const txt = icon.querySelector('span');
+    txt.className = 'font-display text-sm ' + (side === 'att' ? 'text-orange-200' : 'text-sky-200');
+  }
+  function toggleSheet() {
+    const sheet = document.getElementById('sheet');
+    const overlay = document.getElementById('sheet-overlay');
+    sheet.classList.toggle('translate-x-full');
+    overlay.classList.toggle('hidden');
+  }
+  function show(mode) {
+    const isCreate = mode === 'create';
+    document.getElementById('page-title').textContent = isCreate ? 'New operator' : 'Edit operator';
+    document.getElementById('page-subtitle').textContent = isCreate ? 'Unsaved · draft' : 'Thermite · Y1S1 · Attacker';
+    document.getElementById('delete-btn').classList.toggle('invisible', isCreate);
+    document.getElementById('gadgets-section').classList.toggle('hidden', isCreate);
+    document.getElementById('asset-required').textContent = isCreate ? 'required' : 'optional on edit';
+    document.getElementById('btn-edit').className = isCreate
+      ? 'px-3 py-1 rounded bg-neutral-800 text-neutral-400 border border-neutral-700 hover:bg-neutral-700'
+      : 'px-3 py-1 rounded bg-orange-600/20 text-orange-300 border border-orange-600/40';
+    document.getElementById('btn-create').className = isCreate
+      ? 'px-3 py-1 rounded bg-orange-600/20 text-orange-300 border border-orange-600/40'
+      : 'px-3 py-1 rounded bg-neutral-800 text-neutral-400 border border-neutral-700 hover:bg-neutral-700';
+  }
+</script>
+
+</body>
+</html>
