@@ -1,5 +1,17 @@
 # HANDOFF: database optimization wave
 
+> **STATUS: COMPLETED — shipped in PR #10 (merged 2026-05-09).**
+>
+> Every item in the "What's left" section below was closed before
+> merge. Kept on disk as a record of the wave's scope and the
+> rationale for the decisions called out further down (notably the
+> rejection of the "drop `operators.year`/`season`" finding).
+>
+> Forward-looking schema invariants are now codified in
+> [README.md → Database schema invariants](../README.md) and
+> [AGENTS.md §7](../AGENTS.md). New work should reference those,
+> not this file.
+
 State of the database refactor as of branch
 `claude/optimize-database-QAsK8`. Last commit: `3d18788`.
 
