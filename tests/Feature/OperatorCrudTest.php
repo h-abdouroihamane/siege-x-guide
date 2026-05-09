@@ -511,6 +511,41 @@ it('syncs secondary gadgets on update', function () {
 });
 
 // ──────────────────────────────────────────────────────────────────────────────
+// OperatorSelection page — selectForEditing redesign
+// ──────────────────────────────────────────────────────────────────────────────
+
+it('redirects a guest from the operator select page', function () {
+    $response = $this->get(route('operator.selectForEditing'));
+
+    $response->assertRedirect();
+});
+
+it('renders the selection page with all operators for an admin', function () {
+    $admin = User::factory()->create();
+    $squad = Squad::factory()->create();
+
+    seedOperatorWithSquad($squad);
+    seedOperatorWithSquad($squad);
+
+    $response = $this->actingAs($admin)->get(
+        route('operator.selectForEditing'),
+    );
+
+    $response->assertStatus(200);
+    $response->assertInertia(
+        fn($page) => $page
+            ->component('OperatorSelection')
+            ->has('operators.data', 2),
+    );
+});
+
+it('removes the deprecated operator.selectPost route', function () {
+    expect(fn() => route('operator.selectPost'))->toThrow(
+        \Symfony\Component\Routing\Exception\RouteNotFoundException::class,
+    );
+});
+
+// ──────────────────────────────────────────────────────────────────────────────
 // Helpers
 // ──────────────────────────────────────────────────────────────────────────────
 
