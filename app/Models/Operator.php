@@ -92,21 +92,40 @@ class Operator extends Model
         return iconv('UTF-8', 'ASCII//TRANSLIT', strtolower($this->name));
     }
 
+    /**
+     * Year/season pair used for release-date sorting. A rework
+     * relocates the operator to its rework operation's slot;
+     * otherwise the operator-level columns win — they carry the
+     * in-game order for the Y1S0 launch cohort, which all share a
+     * single operation but have distinct release seasons.
+     *
+     * @return array{int, int}
+     */
+    public function sortableYearSeason(): array
+    {
+        if ($this->rework) {
+            $op = $this->rework->operation;
+            return [$op->year, $op->season];
+        }
+
+        return [$this->year, $this->season];
+    }
+
     public function compareReleaseDate(
         Operator $otherOperator,
         bool $reverse = false,
     ) {
         $r = $reverse ? -1 : 1;
 
-        $operation = $this->getOperation();
-        $otherOperation = $otherOperator->getOperation();
+        [$year, $season] = $this->sortableYearSeason();
+        [$otherYear, $otherSeason] = $otherOperator->sortableYearSeason();
 
-        if ($operation->year !== $otherOperation->year) {
-            return $r * ($operation->year < $otherOperation->year ? -1 : 1);
+        if ($year !== $otherYear) {
+            return $r * ($year < $otherYear ? -1 : 1);
         }
 
-        if ($operation->season !== $otherOperation->season) {
-            return $r * ($operation->season < $otherOperation->season ? -1 : 1);
+        if ($season !== $otherSeason) {
+            return $r * ($season < $otherSeason ? -1 : 1);
         }
 
         if ($this->side !== $otherOperator->side) {

@@ -88,8 +88,51 @@ it('reverses the result when reverse flag is true', function () {
     expect($forward * $reversed)->toBeLessThan(0);
 });
 
+// Launch cohort: every Y1S0 operator shares one operation but the
+// operator-level year/season columns hold the in-game release order.
+it(
+    'sorts launch operators by their own year/season when sharing operation_id',
+    function () {
+        $doc = makeLaunchOperator(opYear: 0, opSeason: 5, side: 'Defense');
+        $castle = makeLaunchOperator(opYear: 0, opSeason: 3, side: 'Defense');
+
+        expect($doc->compareReleaseDate($castle))->toBeGreaterThan(0);
+        expect($castle->compareReleaseDate($doc))->toBeLessThan(0);
+    },
+);
+
+// A rework relocates the operator to its rework operation's slot,
+// overriding both the operator's own year/season and the original
+// operation.
+it(
+    'uses the rework operation year/season when a rework is attached',
+    function () {
+        $launchOp = makeLaunchOperator(opYear: 0, opSeason: 5, side: 'Defense');
+        attachRework($launchOp, year: 9, season: 2);
+        $launchOp = Operator::with('rework.operation')->find($launchOp->id);
+
+        $modernOp = makeOperator(year: 9, season: 1, side: 'Defense');
+
+        // launchOp's effective slot (Y9S2) > modernOp (Y9S1)
+        expect($launchOp->compareReleaseDate($modernOp))->toBeGreaterThan(0);
+    },
+);
+
+// Regression: ordinary operators (operator.year/season match
+// operation.year/season) keep the same sort behaviour after the fix.
+it(
+    'keeps ordinary operator sort behaviour when columns match operation',
+    function () {
+        $opA = makeOperator(year: 4, season: 2, side: 'Attack');
+        $opB = makeOperator(year: 4, season: 3, side: 'Attack');
+
+        expect($opA->compareReleaseDate($opB))->toBeLessThan(0);
+        expect($opB->compareReleaseDate($opA))->toBeGreaterThan(0);
+    },
+);
+
 // ──────────────────────────────────────────────────────────────────────────────
-// Helper
+// Helpers
 // ──────────────────────────────────────────────────────────────────────────────
 
 function makeOperator(int $year, int $season, string $side): Operator
@@ -120,4 +163,55 @@ function makeOperator(int $year, int $season, string $side): Operator
     ]);
 
     return Operator::find($id);
+}
+
+// Builds an operator pointing at the shared 'Y1S0' launch operation
+// while letting the caller decouple operator.year / operator.season.
+function makeLaunchOperator(int $opYear, int $opSeason, string $side): Operator
+{
+    DB::table('operations')->updateOrInsert(
+        ['id' => 'Y1S0'],
+        [
+            'name' => 'Game Launch',
+            'year' => 1,
+            'season' => 0,
+            'release_date' => '2015-12-01',
+        ],
+    );
+
+    static $seq = 0;
+    $seq++;
+
+    $id = (string) Str::ulid();
+    DB::table('operators')->insert([
+        'id' => $id,
+        'name' => "Launch{$seq}" . Str::random(4),
+        'description' => 'Desc.',
+        'side' => $side,
+        'year' => $opYear,
+        'season' => $opSeason,
+        'operation_id' => 'Y1S0',
+    ]);
+
+    return Operator::find($id);
+}
+
+function attachRework(Operator $operator, int $year, int $season): void
+{
+    $opId = "Y{$year}S{$season}_rework";
+
+    DB::table('operations')->updateOrInsert(
+        ['id' => $opId],
+        [
+            'name' => 'Rework ' . $opId,
+            'year' => $year,
+            'season' => $season,
+            'release_date' => '2025-01-01',
+        ],
+    );
+
+    DB::table('operator_rework')->insert([
+        'operator_id' => $operator->id,
+        'operation_id' => $opId,
+    ]);
 }
