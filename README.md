@@ -74,6 +74,46 @@ documented in [AGENTS.md §3](AGENTS.md).
 
 ---
 
+## Database schema invariants
+
+A few rules hold across every table; new migrations must keep
+them intact.
+
+**Pivot tables** (`operator_role`, `operator_squad`,
+`operator_queer_identity`, `operator_secondary_gadget`,
+`operator_rework`):
+
+- Composite primary key on `(operator_id, <other>_id)` — duplicates
+  are blocked at the database layer, not just in application code.
+- Every foreign key declares an `onDelete`. Cascade from `operators`
+  and from pure tag data (`queer_identities`); restrict on reference
+  data (roles, squads, secondary gadgets, operations) so a delete
+  there fails loudly instead of silently orphaning operators.
+
+**Identifier columns** are unique:
+
+- `operators.name`, `roles.name`, `squads.name`,
+  `secondary_gadgets.name`, `queer_identities.name` — all carry a
+  `unique()` constraint. Application code (e.g.
+  `OperatorController::selectPost`) treats these as identifiers, so
+  duplicates would corrupt lookups.
+
+**Operator release-date sort**:
+
+- `Operator::compareReleaseDate()` and `OperatorResource` both
+  source the sort pair from `Operator::sortableYearSeason()`:
+  `rework.operation.year/season` if the operator has a rework, else
+  `operators.year/season` directly.
+- The 20 launch operators all share `operation_id='Y1S0'` but
+  carry distinct operator-level `year`/`season` values that encode
+  the in-game release order. Do not "deduplicate" those columns
+  against the operation — they are not redundant.
+
+Full schema rules and migration policy live in
+[AGENTS.md §7](AGENTS.md).
+
+---
+
 ## Testing
 
 Pest 3 powers both feature and unit suites. Run the lot:
