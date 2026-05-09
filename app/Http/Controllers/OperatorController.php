@@ -22,6 +22,7 @@ class OperatorController extends Controller
                 'roles:id,name',
                 'squad:id,name',
                 'operation:id,name,release_date',
+                'rework.operation:id,name,release_date',
                 'queerIdentities:id,name',
             )->get(),
         );
@@ -49,6 +50,7 @@ class OperatorController extends Controller
                 'roles:id,name',
                 'squad:id,name',
                 'operation:id,name,release_date',
+                'rework.operation:id,name,release_date',
                 'queerIdentities:id,name',
             )
             ->first();

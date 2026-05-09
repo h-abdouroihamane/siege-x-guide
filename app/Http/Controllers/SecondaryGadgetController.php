@@ -14,7 +14,13 @@ class SecondaryGadgetController extends Controller
     public function getGadgets(string $side)
     {
         return SecondaryGadgetResource::collection(
-            SecondaryGadget::where('side', $side)->get(),
+            SecondaryGadget::where('side', $side)
+                ->with([
+                    'operators:id,name,side,operation_id',
+                    'operators.operation:id,year,season',
+                    'operators.rework.operation:id,year,season',
+                ])
+                ->get(),
         );
     }
 

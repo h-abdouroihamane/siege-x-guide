@@ -54,7 +54,7 @@ class OperatorSeeder extends Seeder
                 'description' =>
                     'Her gadget can shoot up to 2 Breaching Rounds, which will burrow into a surface and detonate automatically',
                 'year' => 0,
-                'season' => 3,
+                'season' => 16,
                 'side' => 'Attack',
                 'operation_id' => 'Y1S0',
             ],
@@ -72,7 +72,7 @@ class OperatorSeeder extends Seeder
                 'description' =>
                     'Can put down batteries which electrifies walls or barb wire - destroying any electrified gadget',
                 'year' => 0,
-                'season' => 10,
+                'season' => 7,
                 'side' => 'Defense',
                 'operation_id' => 'Y1S0',
             ],
@@ -89,7 +89,7 @@ class OperatorSeeder extends Seeder
                 'name' => 'Blitz',
                 'description' => 'Flashes people with his shield',
                 'year' => 0,
-                'season' => 9,
+                'season' => 6,
                 'side' => 'Attack',
                 'operation_id' => 'Y1S0',
             ],
@@ -124,7 +124,7 @@ class OperatorSeeder extends Seeder
                 'description' =>
                     'Can put up 4 reinforced barricades which can only be taken down with explosive devices',
                 'year' => 0,
-                'season' => 3,
+                'season' => 15,
                 'side' => 'Defense',
                 'operation_id' => 'Y1S0',
             ],
@@ -160,7 +160,7 @@ class OperatorSeeder extends Seeder
                 'description' =>
                     'Has a stim pistol which can heal or even revive downed people',
                 'year' => 0,
-                'season' => 5,
+                'season' => 10,
                 'side' => 'Defense',
                 'operation_id' => 'Y1S0',
             ],
@@ -231,7 +231,7 @@ class OperatorSeeder extends Seeder
                 'description' =>
                     'Has 3 Cluster Charges who when activated,each launch 5 explosive pellets on the other side',
                 'year' => 0,
-                'season' => 8,
+                'season' => 4,
                 'side' => 'Attack',
                 'operation_id' => 'Y1S0',
             ],
@@ -240,7 +240,7 @@ class OperatorSeeder extends Seeder
                 'description' =>
                     'Has a sniper equipped with a thermal scope that allows him to see people through smoke',
                 'year' => 0,
-                'season' => 7,
+                'season' => 3,
                 'side' => 'Attack',
                 'operation_id' => 'Y1S0',
             ],
@@ -294,7 +294,7 @@ class OperatorSeeder extends Seeder
                 'description' =>
                     'Her gadget is mounted on her pistol and can detect electronic devices from distance - and ping them for her allies',
                 'year' => 0,
-                'season' => 10,
+                'season' => 5,
                 'side' => 'Attack',
                 'operation_id' => 'Y1S0',
             ],
@@ -312,7 +312,7 @@ class OperatorSeeder extends Seeder
                 'description' =>
                     'Has 3 ADS - devices that intercept any explosive projectile thrown by attackers before they detonate and then go on a cooldown for 10 seconds before reactivating',
                 'year' => 0,
-                'season' => 9,
+                'season' => 8,
                 'side' => 'Defense',
                 'operation_id' => 'Y1S0',
             ],
@@ -339,7 +339,7 @@ class OperatorSeeder extends Seeder
                 'description' =>
                     'His tripwires can anchor on doorway and window frames, detonating when enemies trigger its laser',
                 'year' => 0,
-                'season' => 7,
+                'season' => 1,
                 'side' => 'Defense',
                 'operation_id' => 'Y1S0',
             ],
@@ -402,7 +402,7 @@ class OperatorSeeder extends Seeder
                 'description' =>
                     'His extendable shield can fully cover him from head-to-toe while standing, providing extra protection that no other shield in the game offers',
                 'year' => 0,
-                'season' => 6,
+                'season' => 12,
                 'side' => 'Attack',
                 'operation_id' => 'Y1S0',
             ],
@@ -420,7 +420,7 @@ class OperatorSeeder extends Seeder
                 'description' =>
                     'Has 4 signal disruptors which jams communications for remotely detonated gadgets such as breach charges or drones',
                 'year' => 0,
-                'season' => 2,
+                'season' => 20,
                 'side' => 'Defense',
                 'operation_id' => 'Y1S0',
             ],
@@ -465,7 +465,7 @@ class OperatorSeeder extends Seeder
                 'description' =>
                     'His cardiac sensor detects the heartbeats of nearby enemies through obstacles',
                 'year' => 0,
-                'season' => 4,
+                'season' => 14,
                 'side' => 'Defense',
                 'operation_id' => 'Y1S0',
             ],
@@ -492,7 +492,7 @@ class OperatorSeeder extends Seeder
                 'description' =>
                     'His armor pack gives him and his team a health boost as well as the ability of reviving themselves if not instantly killed by a headshot',
                 'year' => 0,
-                'season' => 6,
+                'season' => 9,
                 'side' => 'Defense',
                 'operation_id' => 'Y1S0',
             ],
@@ -528,7 +528,7 @@ class OperatorSeeder extends Seeder
                 'description' =>
                     'His hammer can breach through almost all non-reinforced surfaces and barricades. It can also destroy defenders gadgets',
                 'year' => 0,
-                'season' => 1,
+                'season' => 19,
                 'side' => 'Attack',
                 'operation_id' => 'Y1S0',
             ],
@@ -537,7 +537,7 @@ class OperatorSeeder extends Seeder
                 'description' =>
                     'Has 3 three remotely detonated poisoned gas canisters',
                 'year' => 0,
-                'season' => 1,
+                'season' => 18,
                 'side' => 'Defense',
                 'operation_id' => 'Y1S0',
             ],
@@ -564,7 +564,7 @@ class OperatorSeeder extends Seeder
                 'description' =>
                     'Has an incendiary grenade launcher and his primary weapon can easily destroy soft surfaces',
                 'year' => 0,
-                'season' => 8,
+                'season' => 2,
                 'side' => 'Defense',
                 'operation_id' => 'Y1S0',
             ],
@@ -573,7 +573,7 @@ class OperatorSeeder extends Seeder
                 'description' =>
                     'His gadget allows him to detect enemy electronic devices through walls and deactivate them with an EMP blast',
                 'year' => 0,
-                'season' => 2,
+                'season' => 17,
                 'side' => 'Attack',
                 'operation_id' => 'Y1S0',
             ],
@@ -591,7 +591,7 @@ class OperatorSeeder extends Seeder
                 'description' =>
                     'His exothermic charges can breach through any reinforced wall',
                 'year' => 0,
-                'season' => 4,
+                'season' => 13,
                 'side' => 'Attack',
                 'operation_id' => 'Y1S0',
             ],
@@ -618,7 +618,7 @@ class OperatorSeeder extends Seeder
                 'description' =>
                     'Her two Shock Drones can take out enemy gadgets from afar and shock enemies',
                 'year' => 0,
-                'season' => 5,
+                'season' => 11,
                 'side' => 'Attack',
                 'operation_id' => 'Y1S0',
             ],

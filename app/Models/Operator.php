@@ -33,13 +33,7 @@ class Operator extends Model
 
     public function getRoles()
     {
-        $roles = [];
-
-        foreach ($this->roles()->get() as $r) {
-            $roles[] = $r->name;
-        }
-
-        return $roles;
+        return $this->roles->pluck('name')->all();
     }
 
     public function squad(): BelongsToMany
@@ -54,7 +48,7 @@ class Operator extends Model
 
     public function getSquad(): string
     {
-        $squad = $this->squad()->first();
+        $squad = $this->squad->first();
         return $squad ? $squad->name : 'Unaffiliated';
     }
 
@@ -90,13 +84,31 @@ class Operator extends Model
 
     public function getOperation()
     {
-        $rework = $this->rework()->first();
-        return $rework ? $rework->operation : $this->operation()->first();
+        return $this->rework ? $this->rework->operation : $this->operation;
     }
 
     public function getCleanName()
     {
         return iconv('UTF-8', 'ASCII//TRANSLIT', strtolower($this->name));
+    }
+
+    /**
+     * Year/season pair used for release-date sorting. A rework
+     * relocates the operator to its rework operation's slot;
+     * otherwise the operator-level columns win — they carry the
+     * in-game order for the Y1S0 launch cohort, which all share a
+     * single operation but have distinct release seasons.
+     *
+     * @return array{int, int}
+     */
+    public function sortableYearSeason(): array
+    {
+        if ($this->rework) {
+            $op = $this->rework->operation;
+            return [$op->year, $op->season];
+        }
+
+        return [$this->year, $this->season];
     }
 
     public function compareReleaseDate(
@@ -105,15 +117,15 @@ class Operator extends Model
     ) {
         $r = $reverse ? -1 : 1;
 
-        $operation = $this->getOperation();
-        $otherOperation = $otherOperator->getOperation();
+        [$year, $season] = $this->sortableYearSeason();
+        [$otherYear, $otherSeason] = $otherOperator->sortableYearSeason();
 
-        if ($operation->year !== $otherOperation->year) {
-            return $r * ($operation->year < $otherOperation->year ? -1 : 1);
+        if ($year !== $otherYear) {
+            return $r * ($year < $otherYear ? -1 : 1);
         }
 
-        if ($operation->season !== $otherOperation->season) {
-            return $r * ($operation->season < $otherOperation->season ? -1 : 1);
+        if ($season !== $otherSeason) {
+            return $r * ($season < $otherSeason ? -1 : 1);
         }
 
         if ($this->side !== $otherOperator->side) {

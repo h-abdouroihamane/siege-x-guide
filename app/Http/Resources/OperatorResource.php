@@ -23,14 +23,15 @@ class OperatorResource extends JsonResource
 
         $hasRework = !is_null($this->rework);
         $operation = $this->getOperation();
+        [$year, $season] = $this->resource->sortableYearSeason();
 
         return [
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
             'side' => $this->side,
-            'year' => $operation->year,
-            'season' => $operation->season,
+            'year' => $year,
+            'season' => $season,
             'reworked' => $hasRework,
             'operation' => [
                 'id' => $operation->id,
