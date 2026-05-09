@@ -75,8 +75,11 @@ app/
     Requests/           # FormRequest validators
     Resources/          # API resources / transformers
   Models/               # Eloquent models (Operator, Squad, Role, …)
+  Observers/            # Eloquent model observers
   Providers/
+  Support/              # framework-agnostic helpers (e.g. JSON writers)
 database/
+  data/                 # JSON source-of-truth files read by seeders
   migrations/           # checked-in schema, forward-only
   factories/
   seeders/
@@ -194,6 +197,25 @@ make:migration` produces it.
 - TypeScript types for Inertia page props live in
   `resources/js/types/`. When a model's shape changes, update the
   matching TS type in the same change.
+
+### Operators: JSON-as-source-of-truth
+
+- `database/data/operators.json` is the canonical store for seeded
+  operator data: attributes plus squad (with rank), roles, queer
+  identities, and secondary gadgets.
+- `OperatorSeeder` reads the JSON and attaches relations by name.
+  Lookup seeders (`Squad`, `Role`, `QueerIdentity`,
+  `SecondaryGadget`) only seed their own table — they do **not**
+  attach operators. Seeder order in `DatabaseSeeder` is therefore
+  lookups → operators → reworks.
+- Admin edits sync back automatically: `App\Support\OperatorJsonWriter`
+  rewrites the JSON, fired both by `OperatorObserver` (saved/deleted)
+  and explicitly at the end of `OperatorController::store/update`
+  so pivot syncs are captured. The writer no-ops in tests.
+- After editing in production, pull `database/data/operators.json`
+  back to your local clone and commit the diff. Treat the JSON as
+  source code: keep it pretty-printed, sorted by name, and reviewed
+  through normal PRs.
 
 ---
 
