@@ -399,20 +399,11 @@
         <header class="panel-header flex items-center justify-between">
           <div>
             <h2 class="font-display text-sm text-white">Secondary gadgets</h2>
-            <p class="font-mono text-[10px] text-[var(--siege-label)] mt-0.5 uppercase tracking-widest">Loadout — saved separately from operator profile</p>
+            <p id="gadgets-side-label" class="font-mono text-[10px] text-[var(--siege-label)] mt-0.5 uppercase tracking-widest">Showing attacker gadgets · click to toggle</p>
           </div>
-          <button class="button-ghost text-[11px]" style="height:28px;padding:4px 12px;">+ Assign gadget</button>
+          <span id="gadgets-count" class="font-mono text-[10px] text-[var(--siege-label)] uppercase tracking-widest">2 selected</span>
         </header>
-        <ul class="divide-y divide-[rgba(254,254,254,0.06)]">
-          <li class="px-5 py-3 flex items-center justify-between text-sm">
-            <span>Frag Grenade</span>
-            <button class="font-mono text-[10px] uppercase text-[var(--siege-label)] hover:text-[var(--siege-red)]">remove</button>
-          </li>
-          <li class="px-5 py-3 flex items-center justify-between text-sm">
-            <span>Smoke Grenade</span>
-            <button class="font-mono text-[10px] uppercase text-[var(--siege-label)] hover:text-[var(--siege-red)]">remove</button>
-          </li>
-        </ul>
+        <div id="gadget-grid" class="p-5 grid grid-cols-4 gap-3"></div>
       </section>
     </div>
 
@@ -486,6 +477,62 @@
 </aside>
 
 <script>
+  // ── Gadget data (mirrors SecondaryGadgetSeeder.php side groupings) ──
+  const GADGETS = {
+    attack: [
+      'Gonne-6', 'Breach Charge', 'Smoke Grenade', 'Stun Grenade',
+      'Frag Grenade', 'Claymore', 'Hard Breach Charge', 'Impact EMP Grenade',
+    ],
+    defense: [
+      'Deployable Shield', 'Barbed Wire', 'C4', 'Impact Grenade',
+      'Bulletproof Camera', 'Proximity Alarm', 'Observation Blocker',
+    ],
+  };
+  // Selections persist per side so flipping Attack→Defense→Attack restores choices.
+  const selected = { attack: new Set(['Frag Grenade', 'Smoke Grenade']), defense: new Set() };
+  let currentSide = 'att';
+
+  function gadgetSlug(name) {
+    return name.toLowerCase().replace(/ +/g, '-');
+  }
+
+  function renderGadgets() {
+    const sideKey = currentSide === 'att' ? 'attack' : 'defense';
+    const accent = currentSide === 'att' ? 'var(--siege-attacker)' : 'var(--siege-defender)';
+    const accentBg = currentSide === 'att' ? 'rgba(217,97,15,0.18)' : 'rgba(14,135,200,0.18)';
+    const grid = document.getElementById('gadget-grid');
+    grid.innerHTML = '';
+
+    GADGETS[sideKey].forEach((name) => {
+      const isSelected = selected[sideKey].has(name);
+      const tile = document.createElement('button');
+      tile.type = 'button';
+      tile.className = 'gadget-tile group flex flex-col items-center justify-center gap-2 p-3 rounded transition cursor-pointer';
+      tile.style.cssText = isSelected
+        ? `background:${accentBg}; border:1px solid ${accent}; box-shadow: 0 0 8px 0 ${accent};`
+        : 'background: rgba(17,17,17,0.5); border: 1px solid rgba(254,254,254,0.08);';
+      tile.setAttribute('aria-pressed', String(isSelected));
+      tile.setAttribute('aria-label', (isSelected ? 'Remove ' : 'Add ') + name);
+      tile.innerHTML = `
+        <img src="./secondaryGadgets/${gadgetSlug(name)}.png" alt="" class="h-12 w-auto"
+             style="${isSelected ? '' : 'filter: grayscale(1) opacity(0.55);'}" />
+        <span class="font-mono text-[10px] uppercase tracking-widest text-center"
+              style="color:${isSelected ? '#fefefe' : 'var(--siege-label)'}">${name}</span>
+      `;
+      tile.onclick = () => {
+        if (selected[sideKey].has(name)) selected[sideKey].delete(name);
+        else selected[sideKey].add(name);
+        renderGadgets();
+      };
+      grid.appendChild(tile);
+    });
+
+    document.getElementById('gadgets-side-label').textContent =
+      `Showing ${sideKey === 'attack' ? 'attacker' : 'defender'} gadgets · click to toggle`;
+    document.getElementById('gadgets-count').textContent =
+      `${selected[sideKey].size} selected`;
+  }
+
   function syncPreview() {
     const name = document.getElementById('f-name').value || 'Operator';
     document.getElementById('preview-name').textContent = name;
@@ -501,6 +548,7 @@
     }
   }
   function setSide(side) {
+    currentSide = side;
     const att = document.getElementById('side-att');
     const def = document.getElementById('side-def');
     att.classList.toggle('active', side === 'att');
@@ -520,7 +568,12 @@
       icon.style.borderColor = 'var(--siege-defender)';
       icon.querySelector('span').style.color = 'var(--siege-defender)';
     }
+
+    renderGadgets();
   }
+
+  // Initial render
+  renderGadgets();
   function toggleSheet() {
     const sheet = document.getElementById('sheet');
     const overlay = document.getElementById('sheet-overlay');
