@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue';
+import { publicAsset } from '../scripts/operator.ts';
 const props = defineProps(['path']);
 
 const activeRoute = {
@@ -18,14 +19,12 @@ const toggleNav = () => {
     hamburgerActive.value = !hamburgerActive.value;
     menubarActive.value = !menubarActive.value;
 };
-
-const publicPath = import.meta.env.BASE_URL;
 </script>
 
 <template>
     <nav>
         <div class="logo">
-            <img :src="`${publicPath}siege-x-icon.png`" alt="logo" />
+            <img :src="publicAsset('siege-x-icon.png')" alt="logo" />
         </div>
         <ul>
             <li>

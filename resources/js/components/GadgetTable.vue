@@ -1,6 +1,9 @@
 <script setup>
 import { ref } from 'vue';
-import { normalize } from '../scripts/operator.ts';
+import {
+    gadgetLogo as getGadgetLogo,
+    operatorIcon as getOperatorIcon,
+} from '../scripts/operator.ts';
 const props = defineProps([
     'gadgets',
     'operators',
@@ -9,15 +12,6 @@ const props = defineProps([
     'year',
     'season',
 ]);
-const publicPath = import.meta.env.BASE_URL;
-
-const getGadgetLogo = (gadgetName) => {
-    const name = gadgetName.toLowerCase().replace(/ +/g, '-');
-    return `${publicPath}secondaryGadgets/${name}.png`;
-};
-
-const getOperatorIcon = (operatorName) =>
-    `${publicPath}operatorIcons/${normalize(operatorName)}.png`;
 let selectedOperator = ref('');
 const setSelectedOperator = (name) => (selectedOperator.value = name);
 

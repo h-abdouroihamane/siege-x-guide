@@ -6,19 +6,13 @@ import { Head, usePage } from '@inertiajs/vue3';
 import { ref } from 'vue';
 import AttackerLogo from '../components/AttackerLogo.vue';
 import DefenderLogo from '../components/DefenderLogo.vue';
-import { normalize } from '../scripts/operator.ts';
+import {
+    gadgetLogo as getGadgetLogo,
+    operatorIcon as getOperatorIcon,
+} from '../scripts/operator.ts';
 const page = usePage();
 
 const headerText = `Secondary gadgets (as of the latest patch of Year ${page.props.year}, Season ${page.props.season} - ${page.props.operationName})`;
-const publicPath = import.meta.env.BASE_URL;
-
-const getGadgetLogo = (gadgetName) => {
-    const name = gadgetName.toLowerCase().replace(/ +/g, '-');
-    return `${publicPath}secondaryGadgets/${name}.png`;
-};
-
-const getOperatorIcon = (operatorName) =>
-    `${publicPath}operatorIcons/${normalize(operatorName)}.png`;
 
 let selectedSide = ref('Attack');
 const setSide = (side) => (selectedSide.value = side);

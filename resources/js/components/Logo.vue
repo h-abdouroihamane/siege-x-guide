@@ -1,5 +1,5 @@
 <script setup>
-const publicPath = import.meta.env.BASE_URL;
+import { publicAsset } from '../scripts/operator.ts';
 const props = defineProps(['text']);
 const text = props.text ?? '';
 </script>
@@ -7,7 +7,7 @@ const text = props.text ?? '';
 <template>
     <img
         id="logo"
-        :src="`${publicPath}Logo_blank.png`"
+        :src="publicAsset('Logo_blank.png')"
         alt="Rainbow Six Siege X Logo"
     />
     <p id="logo-text" v-if="text">{{ text }}</p>

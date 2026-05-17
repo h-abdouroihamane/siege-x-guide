@@ -1,4 +1,9 @@
-const publicPath = import.meta.env.BASE_URL;
+// Static assets live in Laravel's public/ and are served from the web
+// root. They are NOT Vite-managed, so they must use a root-absolute
+// path ("/...") — never import.meta.env.BASE_URL, which resolves to
+// "/build/" in production builds and would 404.
+export const publicAsset = (path: string): string =>
+    '/' + path.replace(/^\/+/, '');
 
 // Removes accents from the operator's name to access their portrait/icon files
 export const normalize = (str: string): string => {
@@ -9,6 +14,20 @@ export const normalize = (str: string): string => {
         .replace(/\s+/g, '-')
         .toLowerCase();
 };
+
+export const operatorIcon = (name: string): string =>
+    publicAsset(`operatorIcons/${normalize(name)}.png`);
+
+export const operatorPortrait = (name: string): string =>
+    publicAsset(`operatorPortraits/${normalize(name)}.png`);
+
+export const gadgetLogo = (name: string): string =>
+    publicAsset(
+        `secondaryGadgets/${name.toLowerCase().replace(/ +/g, '-')}.png`,
+    );
+
+export const squadLogo = (name: string): string =>
+    publicAsset(`squadLogos/${normalize(name)}.png`);
 
 export class Operator {
     name: string;
@@ -52,8 +71,8 @@ export class Operator {
         this.queerIdentities = queerIdentities;
 
         this.cleanName = normalize(this.name);
-        this.portrait = `${publicPath}operatorPortraits/${this.cleanName}.png`;
-        this.icon = `${publicPath}operatorIcons/${this.cleanName}.png`;
+        this.portrait = operatorPortrait(this.name);
+        this.icon = operatorIcon(this.name);
     }
 
     isAttacker(): boolean {
