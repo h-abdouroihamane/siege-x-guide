@@ -85,11 +85,6 @@ class Operator extends Model
         return $rework ? $rework->operation : $this->operation()->first();
     }
 
-    public function getCleanName()
-    {
-        return iconv('UTF-8', 'ASCII//TRANSLIT', strtolower($this->name));
-    }
-
     public function compareReleaseDate(
         Operator $otherOperator,
         bool $reverse = false,

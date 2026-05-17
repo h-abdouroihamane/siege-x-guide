@@ -9,7 +9,6 @@ import '../css/fonts.css';
 import '../css/form.css';
 import '../css/pride.css';
 import '../css/style.css';
-import { initializeTheme } from './composables/useAppearance';
 
 // Extend ImportMeta interface for Vite...
 declare module 'vite/client' {
@@ -43,6 +42,3 @@ createInertiaApp({
         color: '#4B5563',
     },
 });
-
-// This will set light / dark mode on page load...
-initializeTheme();
