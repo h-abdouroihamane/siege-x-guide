@@ -44,7 +44,7 @@ The deletion cut has been executed as 7 commits on `chore/drop-admin-and-uploads
 
 Notes / accepted residuals: `config/auth.php` still names `App\Models\User::class` (a compile-time string, never resolved without auth — `config:cache` verified passing); the `sessions` table was **kept** (SESSION_DRIVER=database) — only `users`/`password_reset_tokens` were removed from that migration; the test suite is now empty (`tests/{Unit,Feature}/.gitkeep`), making **C7 (add domain tests) the immediate next priority**; `scripts/deploy.sh` trimmed (`migrate --force`, removed the `migrate:fresh --seed` prompt) but the asset shuffle remains pending **H12**.
 
-**Constructive phase progress:** H12 ✅ (shared `publicAsset()` helper, deploy asset-shuffle removed) and C7 ✅ (factories for all 7 domain models + feature tests for every read-only endpoint + unit tests for `getOperation`/`compareReleaseDate`; `phpunit.xml` now self-contained with a test `APP_KEY`; 13 passing). **Still applies:** H3 (N+1), H4 (FK mismatch), H5–H9 (TypeScript/CI/static analysis), H10 (Docker), H11, and Medium/Low cleanup.
+**Constructive phase progress:** H12 ✅ (shared `publicAsset()` helper, deploy asset-shuffle removed); C7 ✅ (7 model factories + feature/unit tests, self-contained `phpunit.xml`); H3/M3/M4/L3 ✅ (eager-load `rework(.operation)`/`operators`, `release_date` cast, perf-index migration, null-safe `compareReleaseDate`, query-count regression tests); H4 ✅ (`operator_rework.operation_id` corrected `ulid`→`string` to match `operations.id`). **Suite: 15 passing.** **Still applies:** H5–H9 (TypeScript/CI/static analysis), H10 (Docker), H11, N2, and Medium/Low cleanup.
 
 **New findings surfaced during the rework:**
 
