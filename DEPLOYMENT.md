@@ -24,6 +24,47 @@ vars win over `.env`), so the app always runs production and talks to the
 
 ---
 
+## 0. Reinstalling the OVH host (only if needed)
+
+Skip this if the VPS already runs a supported OS. Do it if the host is on
+an **end-of-life Ubuntu** (e.g. 24.10 "Oracular" — symptom: `apt update`
+returns `404 ... no longer has a Release file`, Docker's script aborts with
+an EOL warning). Docker does not publish repos for EOL releases, and an
+unpatched internet-facing host is a liability, so rebuild on an LTS.
+
+Nothing of value lives on the box: code is in GitLab, content is
+seeder-only, and the production `.env` lives on your laptop. The reinstall
+**does** take the old site down until the container is back up.
+
+1. **OVH Control Panel → Bare Metal Cloud → VPS →** select the VPS.
+2. Actions menu → **"Reinstall my VPS"**.
+3. Distribution: **Ubuntu 24.04 LTS** (or Debian 12 — steps below are
+   identical). No extra control-panel "soft".
+4. **Add your SSH public key** in the dialog (preferred over a root
+   password). Create one first if needed: `ssh-keygen -t ed25519`.
+5. Confirm. ~5–15 min; OVH emails the details. **The IP is unchanged**, so
+   the `siege-x-guide` DNS record stays valid.
+
+Reconnect — the server's SSH host key changed, so clear the stale one:
+
+```bash
+ssh-keygen -R <vps-ip>
+ssh-keygen -R siege-x-guide.alsagone.ovh
+ssh <user>@<vps-ip>          # accept the new fingerprint
+dig +short siege-x-guide.alsagone.ovh   # confirm it still points here
+```
+
+In **GitLab → Settings → Repository → Deploy keys**, delete the old
+`ovh-deploy` key (it no longer exists on the rebuilt box); you create a
+fresh one in step 3.
+
+Then continue from step 1 below. On a fresh LTS the earlier failures don't
+recur: `apt update` works, the Docker script completes (no EOL prompt —
+**don't Ctrl+C it**), and there is no stale `ondrej/php` PPA (the
+Docker-only deploy never needs host PHP — don't add it).
+
+---
+
 ## 1. DNS (OVH Manager)
 
 **Web Cloud → Domain names → `alsagone.ovh` → DNS zone**:
@@ -148,6 +189,11 @@ docker compose logs -f app
 #         "Empty database — seeding once." on the FIRST boot only
 curl -I http://127.0.0.1:8080     # HTTP/1.1 200
 ```
+
+**Always `docker compose build` before `up`** — `siege-x-guide` is a
+local build-only image (`pull_policy: build`); a plain `up` on a host
+that has never built it would otherwise try to pull it from Docker Hub
+and fail with `pull access denied`.
 
 First boot seeds the DB once; subsequent restarts log
 `Database already populated — skipping seed.` and reuse the `db-data`

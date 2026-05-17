@@ -14,6 +14,9 @@ services:
             dockerfile: Dockerfile
             target: runtime
         image: siege-x-guide
+        # Build-only image — never attempt to pull it from a registry
+        # (a bare name would resolve to docker.io and fail).
+        pull_policy: build
         restart: unless-stopped
         depends_on:
             db:
