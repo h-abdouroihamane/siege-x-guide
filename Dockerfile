@@ -21,15 +21,15 @@ COPY --from=vendor /app/vendor ./vendor
 RUN npm run build
 
 # ---------------------------------------------------------------------------
-# Stage 3 — Runtime (nginx + php-fpm, non-root, SQLite)
+# Stage 3 — Runtime (nginx + php-fpm, non-root)
 # ---------------------------------------------------------------------------
 FROM webdevops/php-nginx:8.4-alpine AS runtime
 
+# DB connection is supplied at runtime by docker-compose (MySQL service);
+# only the non-DB defaults are baked here.
 ENV WEB_DOCUMENT_ROOT=/app/public \
     APP_ENV=production \
-    APP_DEBUG=false \
-    DB_CONNECTION=sqlite \
-    DB_DATABASE=/app/database/database.sqlite
+    APP_DEBUG=false
 
 WORKDIR /app
 
