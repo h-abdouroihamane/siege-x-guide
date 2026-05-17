@@ -1,6 +1,7 @@
 # Single self-contained service. The app is a read-only public guide on
 # SQLite with seeder-only content — no MySQL/Redis/phpMyAdmin sidecars,
 # no host SSH mount. This replaces scripts/deploy.sh entirely.
+# See DEPLOYMENT.md for the full OVH runbook.
 services:
     app:
         build:
@@ -9,16 +10,22 @@ services:
             target: runtime
         image: siege-x-guide
         restart: unless-stopped
+        # Bound to localhost only — the host nginx reverse proxy terminates
+        # TLS and forwards to this. Never publish :8080 publicly.
         ports:
-            - '8080:80'
-        environment:
-            APP_ENV: production
-            APP_DEBUG: 'false'
-            # Inject a stable key in real deployments:
-            # APP_KEY: base64:...
+            - '127.0.0.1:8080:80'
+        # The production .env (fetched from the VPS) is the source of truth
+        # for APP_KEY / APP_URL / app secrets. It is mounted read-only and
+        # is never baked into the image (.dockerignore excludes it).
+        # APP_ENV/APP_DEBUG and DB_* are forced by the Dockerfile's ENV and
+        # intentionally win over .env (Laravel immutable dotenv) so the app
+        # always runs production + SQLite regardless of legacy .env values.
+        volumes:
+            - ./.env:/app/.env:ro
         # Optional: persist the SQLite file across restarts. Safe to omit —
         # the entrypoint reseeds on every start (content is seeder-only).
         # volumes:
+        #   - ./.env:/app/.env:ro
         #   - sqlite:/app/database
 # volumes:
 #   sqlite:
