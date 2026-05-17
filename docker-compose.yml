@@ -1,0 +1,67 @@
+# Read-only public guide. App (nginx+php-fpm) + a persistent MySQL
+# service. Content is seeder-only and fully reproducible, so the DB is
+# seeded ONCE (entrypoint seeds only when empty) and then persists in a
+# named volume across restarts/redeploys. Replaces scripts/deploy.sh.
+# Full runbook: DEPLOYMENT.md.
+#
+# Compose interpolates ${DB_*} from ./.env (the production .env, also
+# bind-mounted into the app). That single file keeps the app and the
+# MySQL service in agreement. DB_USERNAME must NOT be "root".
+services:
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+            target: runtime
+        image: siege-x-guide
+        restart: unless-stopped
+        depends_on:
+            db:
+                condition: service_healthy
+        # Localhost only — the host nginx reverse proxy terminates TLS.
+        ports:
+            - '127.0.0.1:8080:80'
+        environment:
+            APP_ENV: production
+            APP_DEBUG: 'false'
+            # Real env vars override the mounted .env (Laravel immutable
+            # dotenv), so stale legacy DB_HOST/creds in .env are ignored
+            # and the app always talks to the compose "db" service.
+            DB_CONNECTION: mysql
+            DB_HOST: db
+            DB_PORT: '3306'
+            DB_DATABASE: ${DB_DATABASE}
+            DB_USERNAME: ${DB_USERNAME}
+            DB_PASSWORD: ${DB_PASSWORD}
+        volumes:
+            - ./.env:/app/.env:ro
+        networks:
+            - internal
+
+    db:
+        image: mysql:8.0
+        restart: unless-stopped
+        environment:
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_USER: ${DB_USERNAME}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+        # Trim memory for the 2 GB VPS (app + mysql + nginx co-resident).
+        command:
+            - --innodb-buffer-pool-size=128M
+            - --performance-schema=OFF
+        volumes:
+            - db-data:/var/lib/mysql
+        healthcheck:
+            test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost']
+            interval: 10s
+            timeout: 5s
+            retries: 12
+        networks:
+            - internal
+
+volumes:
+    db-data:
+
+networks:
+    internal:
