@@ -67,22 +67,22 @@
 }
 
 .home-card.operators {
-    background-image: url('recruits.jpg');
+    background-image: url('/recruits.jpg');
 }
 
 .home-card.secondary-gadgets {
-    background-image: url('zoto.jpg');
+    background-image: url('/zoto.jpg');
 }
 
 .home-card.squads {
-    background-image: url('board.jpg');
+    background-image: url('/board.jpg');
 }
 
 .home-card.vocabulary {
-    background-image: url('highCalibre.jpg');
+    background-image: url('/highCalibre.jpg');
 }
 .home-card.about {
-    background-image: url('about-me.jpg');
+    background-image: url('/about-me.jpg');
 }
 
 .card-bottom {
