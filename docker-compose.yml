@@ -1,0 +1,24 @@
+# Single self-contained service. The app is a read-only public guide on
+# SQLite with seeder-only content — no MySQL/Redis/phpMyAdmin sidecars,
+# no host SSH mount. This replaces scripts/deploy.sh entirely.
+services:
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+            target: runtime
+        image: siege-x-guide
+        restart: unless-stopped
+        ports:
+            - '8080:80'
+        environment:
+            APP_ENV: production
+            APP_DEBUG: 'false'
+            # Inject a stable key in real deployments:
+            # APP_KEY: base64:...
+        # Optional: persist the SQLite file across restarts. Safe to omit —
+        # the entrypoint reseeds on every start (content is seeder-only).
+        # volumes:
+        #   - sqlite:/app/database
+# volumes:
+#   sqlite:
