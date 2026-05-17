@@ -1,5 +1,5 @@
 <script setup>
-import { publicAsset } from '../scripts/operator.ts';
+import { publicAsset } from '../scripts/operator';
 const props = defineProps(['text']);
 const text = props.text ?? '';
 </script>

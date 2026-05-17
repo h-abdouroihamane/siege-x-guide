@@ -11,7 +11,7 @@ on:
             - main
 
 permissions:
-    contents: write
+    contents: read
 
 jobs:
     quality:
@@ -24,22 +24,25 @@ jobs:
               with:
                   php-version: '8.4'
 
+            - name: Setup Node
+              uses: actions/setup-node@v4
+              with:
+                  node-version: '22'
+                  cache: 'npm'
+
             - name: Install Dependencies
               run: |
                   composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
-                  npm install
+                  npm ci
 
-            - name: Run Pint
-              run: vendor/bin/pint
+            - name: Check Formatting (Prettier)
+              run: npm run format:check
 
-            - name: Format Frontend
-              run: npm run format
+            - name: Lint Frontend (ESLint)
+              run: npm run lint:check
 
-            - name: Lint Frontend
-              run: npm run lint
+            - name: Type-check Frontend (vue-tsc)
+              run: npm run type-check
 
-            # - name: Commit Changes
-            #   uses: stefanzweifel/git-auto-commit-action@v5
-            #   with:
-            #     commit_message: fix code style
-            #     commit_options: '--no-verify'
+            - name: Static Analysis (PHPStan / Larastan)
+              run: vendor/bin/phpstan analyse --no-progress --memory-limit=512M

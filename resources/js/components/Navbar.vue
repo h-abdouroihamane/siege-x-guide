@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import { publicAsset } from '../scripts/operator.ts';
+import { publicAsset } from '../scripts/operator';
 const props = defineProps(['path']);
 
 const activeRoute = {
@@ -12,8 +12,8 @@ const activeRoute = {
     secondaryGadgets: props.path === 'secondaryGadgets',
 };
 
-let hamburgerActive = ref(false);
-let menubarActive = ref(false);
+const hamburgerActive = ref(false);
+const menubarActive = ref(false);
 
 const toggleNav = () => {
     hamburgerActive.value = !hamburgerActive.value;

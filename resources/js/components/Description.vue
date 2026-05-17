@@ -65,7 +65,11 @@ const getSide = () => {
                 <span id="side-name">{{ getSide() }}</span>
             </div>
             <div class="pride-description" v-if="props.queerIdentities">
-                <div class="queer-row" v-for="qId in props.queerIdentities">
+                <div
+                    class="queer-row"
+                    v-for="qId in props.queerIdentities"
+                    :key="qId"
+                >
                     <span :class="`pride-flag ${qId.toLowerCase()}`" />
                     <p>{{ qId.toUpperCase() }}</p>
                 </div>

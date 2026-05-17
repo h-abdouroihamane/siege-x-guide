@@ -37,11 +37,11 @@ export class Operator {
     year: number;
     season: number;
     operationName: string;
-    operationReleaseDate: string;
+    operationReleaseDate: Date;
     reworked: boolean;
     roles: string[];
     squad: string;
-    queerIdentites: string[] | null;
+    queerIdentities: string[] | null;
     portrait: string;
     icon: string;
 

@@ -22,7 +22,12 @@ export default defineConfigWithVueTs(
     {
         rules: {
             'vue/multi-word-component-names': 'off',
-            '@typescript-eslint/no-explicit-any': 'off',
+            // Incremental TS adoption: components may stay plain <script
+            // setup> until converted; vue-tsc only type-checks lang="ts".
+            'vue/block-lang': [
+                'error',
+                { script: { lang: 'ts', allowNoLang: true } },
+            ],
         },
     },
     prettier,

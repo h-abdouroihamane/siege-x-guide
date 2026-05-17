@@ -6,15 +6,11 @@ import { Head, usePage } from '@inertiajs/vue3';
 import { ref } from 'vue';
 import AttackerLogo from '../components/AttackerLogo.vue';
 import DefenderLogo from '../components/DefenderLogo.vue';
-import {
-    gadgetLogo as getGadgetLogo,
-    operatorIcon as getOperatorIcon,
-} from '../scripts/operator.ts';
 const page = usePage();
 
 const headerText = `Secondary gadgets (as of the latest patch of Year ${page.props.year}, Season ${page.props.season} - ${page.props.operationName})`;
 
-let selectedSide = ref('Attack');
+const selectedSide = ref('Attack');
 const setSide = (side) => (selectedSide.value = side);
 </script>
 <template>
