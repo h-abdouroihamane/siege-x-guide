@@ -49,7 +49,7 @@ Notes / accepted residuals: `config/auth.php` still names `App\Models\User::clas
 **New findings surfaced during the rework:**
 
 - **N1 (was masked, now fixed): `Operation` lacked `public $incrementing = false`** despite a string primary key — `create()` then read back an autoincrement `1`, breaking every FK to `operations` in isolation (the seeders only worked because they set ids explicitly). Fixed in the C7 task.
-- **N2 (open, High): `GET /secondary-gadgets/all` is a broken public route** — `routes/secondaryGadgets.php` maps `/all` to `SecondaryGadgetController@getAll`, a method that does not exist (500 on every hit). Either implement `getAll` (mirroring the operators/squads `getAll` JSON pattern) or remove the dead route. Not yet fixed; excluded from the C7 suite with a note.
+- **N2 ✅ (fixed): `GET /secondary-gadgets/all` was a broken public route** — mapped to a non-existent `SecondaryGadgetController@getAll`. Implemented `getAll()` mirroring the operators/squads JSON pattern (returns Attack/Defense gadget collections); now covered by the C7 suite.
 
 The sections below describe the codebase **as it was before the cut**; read them through the lens of this status.
 

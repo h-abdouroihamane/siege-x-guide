@@ -33,7 +33,5 @@ it('serves the JSON data endpoints', function (string $uri) {
 })->with([
     'operators/all' => ['/operators/all'],
     'squads/all' => ['/squads/all'],
-    // NOTE: GET /secondary-gadgets/all is a pre-existing broken route —
-    // it maps to SecondaryGadgetController@getAll which does not exist.
-    // Tracked separately; intentionally not covered here.
+    'secondary-gadgets/all' => ['/secondary-gadgets/all'],
 ]);

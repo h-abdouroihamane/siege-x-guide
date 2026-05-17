@@ -11,6 +11,14 @@ use Inertia\Inertia;
 
 class SecondaryGadgetController extends Controller
 {
+    public function getAll()
+    {
+        return [
+            'Attack' => $this->getGadgets('Attack'),
+            'Defense' => $this->getGadgets('Defense'),
+        ];
+    }
+
     public function getGadgets(string $side)
     {
         return SecondaryGadgetResource::collection(
