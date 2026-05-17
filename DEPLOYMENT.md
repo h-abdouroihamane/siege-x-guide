@@ -238,26 +238,35 @@ Open `https://siege-x-guide.alsagone.ovh`.
 
 ---
 
-## 7. Redeploy / update (replaces deploy.sh)
+## 7. Redeploy / update (`scripts/deploy.sh`)
+
+Use the committed wrapper — run it on the VPS from the project dir:
 
 ```bash
 cd /var/www/siege-x-guide.alsagone.ovh
-git pull origin main
-docker compose up -d --build
-docker image prune -f
+./scripts/deploy.sh            # routine deploy — DATA KEPT
 ```
 
-The entrypoint runs `php artisan migrate --force` (idempotent — applies any
-new migrations) and **skips seeding** because the volume already has data.
-Production caches are rebuilt. The MySQL data is **kept**.
+It pulls `main` (`--ff-only`), `docker compose up -d --build`, prunes old
+images, and health-checks `:8080`. The container entrypoint then runs
+`php artisan migrate --force` (idempotent — applies any new migrations)
+and **skips seeding** because the volume already has data. Caches are
+rebuilt. The MySQL data is **kept**.
 
-**To refresh content from updated seeders** (destructive — wipes & rebuilds
-from seeders, which is the intended content-update path since content is
-seeder-only):
+**When the seeders changed** (new operator, edited description, etc.) —
+content is seeder-only and not idempotent, so the only correct way to
+apply it is a full rebuild from the seeders:
 
 ```bash
-docker compose exec app php artisan migrate:fresh --seed --force
+./scripts/deploy.sh --seed     # ALSO migrate:fresh --seed (rebuilds DB)
 ```
+
+`--seed` runs the reseed **detached inside the container**, so a dropped
+SSH session can't interrupt it and leave a half-migrated DB (the
+restart-loop failure mode). Brief blip while the seeders run; track it
+with `docker compose logs -f app`. Never run `db:seed` against a
+populated DB (the seeders `create()` rows — it would duplicate/conflict);
+always use `--seed` (which is `migrate:fresh --seed`).
 
 **Backup the DB** (cron-friendly):
 
