@@ -44,7 +44,12 @@ The deletion cut has been executed as 7 commits on `chore/drop-admin-and-uploads
 
 Notes / accepted residuals: `config/auth.php` still names `App\Models\User::class` (a compile-time string, never resolved without auth — `config:cache` verified passing); the `sessions` table was **kept** (SESSION_DRIVER=database) — only `users`/`password_reset_tokens` were removed from that migration; the test suite is now empty (`tests/{Unit,Feature}/.gitkeep`), making **C7 (add domain tests) the immediate next priority**; `scripts/deploy.sh` trimmed (`migrate --force`, removed the `migrate:fresh --seed` prompt) but the asset shuffle remains pending **H12**.
 
-**Still applies, constructive phase:** H3 (N+1), H4 (FK mismatch), H5–H9 (TypeScript/CI/static analysis), H10 (Docker), H11, **H12 (asset `/build/` paths)**, **C7 (domain tests)**, and Medium/Low cleanup.
+**Constructive phase progress:** H12 ✅ (shared `publicAsset()` helper, deploy asset-shuffle removed) and C7 ✅ (factories for all 7 domain models + feature tests for every read-only endpoint + unit tests for `getOperation`/`compareReleaseDate`; `phpunit.xml` now self-contained with a test `APP_KEY`; 13 passing). **Still applies:** H3 (N+1), H4 (FK mismatch), H5–H9 (TypeScript/CI/static analysis), H10 (Docker), H11, and Medium/Low cleanup.
+
+**New findings surfaced during the rework:**
+
+- **N1 (was masked, now fixed): `Operation` lacked `public $incrementing = false`** despite a string primary key — `create()` then read back an autoincrement `1`, breaking every FK to `operations` in isolation (the seeders only worked because they set ids explicitly). Fixed in the C7 task.
+- **N2 (open, High): `GET /secondary-gadgets/all` is a broken public route** — `routes/secondaryGadgets.php` maps `/all` to `SecondaryGadgetController@getAll`, a method that does not exist (500 on every hit). Either implement `getAll` (mirroring the operators/squads `getAll` JSON pattern) or remove the dead route. Not yet fixed; excluded from the C7 suite with a note.
 
 The sections below describe the codebase **as it was before the cut**; read them through the lens of this status.
 
