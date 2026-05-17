@@ -31,7 +31,6 @@ const allOperators: Operator[] = page.props.operators.data.map(
 const operators = ref([...allOperators]);
 const sortingMethod = ref('name');
 const activeSides = ref('attackersdefenders');
-const showQueerIdentities = ref(false);
 
 const placeholderOperator = new Operator(
     'placeholder',
@@ -59,11 +58,6 @@ const sortOperators = (method: string) => {
 const filterOperators = (sides: string) => {
     activeSides.value = sides;
     filterAndSort();
-};
-
-const toggleQueer = (b: boolean) => {
-    showQueerIdentities.value = b;
-    console.log('Queer from main:' + showQueerIdentities.value);
 };
 
 const filterAndSort = () => {
@@ -116,7 +110,6 @@ filterAndSort();
                 <Sidebar
                     @sort-by="sortOperators"
                     @filter-side="filterOperators"
-                    @toggle-queer="toggleQueer"
                 />
 
                 <div id="card-container">
@@ -125,7 +118,6 @@ filterAndSort();
                         :key="index"
                         :operator="op"
                         :selected="selectedOperator.name === op.name"
-                        :show-queer="showQueerIdentities"
                         @click="setSelectedOperator(op)"
                     >
                     </OperatorCard>
