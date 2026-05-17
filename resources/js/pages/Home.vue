@@ -1,9 +1,7 @@
 <script setup>
 import Logo from '@/components/Logo.vue';
 import Navbar from '@/components/Navbar.vue';
-import { Head, usePage } from '@inertiajs/vue3';
-
-const page = usePage();
+import { Head } from '@inertiajs/vue3';
 
 const paths = [
     {
@@ -52,7 +50,12 @@ const paths = [
             <Logo text="Home" />
 
             <div id="home-card-container">
-                <a class="card-link" v-for="p in paths" :href="p.url">
+                <a
+                    class="card-link"
+                    v-for="p in paths"
+                    :key="p.url"
+                    :href="p.url"
+                >
                     <div :class="['home-card', p.className]">
                         <div class="overlay" />
                         <span class="title">{{ p.title }}</span>

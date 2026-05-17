@@ -6,7 +6,7 @@ import { ref } from 'vue';
 import {
     operatorIcon as getOperatorIcon,
     squadLogo as getSquadLogo,
-} from '../scripts/operator.ts';
+} from '../scripts/operator';
 const page = usePage();
 const squads = Object.entries(page.props.squads);
 const squadHeader = `Squads (up to Year ${page.props.year}, Season ${page.props.season} - ${page.props.operationName})`;
@@ -38,7 +38,7 @@ const copyAltText = () => {
     );
 };
 
-let screenshotMode = ref(false);
+const screenshotMode = ref(false);
 const toggleScreenshotMode = () => {
     screenshotMode.value = !screenshotMode.value;
 };

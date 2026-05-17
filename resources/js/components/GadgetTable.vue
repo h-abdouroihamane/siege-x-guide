@@ -3,7 +3,7 @@ import { ref } from 'vue';
 import {
     gadgetLogo as getGadgetLogo,
     operatorIcon as getOperatorIcon,
-} from '../scripts/operator.ts';
+} from '../scripts/operator';
 const props = defineProps([
     'gadgets',
     'operators',
@@ -12,10 +12,10 @@ const props = defineProps([
     'year',
     'season',
 ]);
-let selectedOperator = ref('');
+const selectedOperator = ref('');
 const setSelectedOperator = (name) => (selectedOperator.value = name);
 
-let screenshotMode = ref(false);
+const screenshotMode = ref(false);
 const toggleScreenshotMode = () => {
     screenshotMode.value = !screenshotMode.value;
 

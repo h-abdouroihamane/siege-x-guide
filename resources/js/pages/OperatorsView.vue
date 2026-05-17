@@ -5,10 +5,11 @@ import OperatorCard from '@/components/OperatorCard.vue';
 import Sidebar from '@/components/Sidebar.vue';
 import { Head, usePage } from '@inertiajs/vue3';
 import { ref } from 'vue';
+import type { OperatorsPageProps } from '@/types';
 import Navbar from '../components/Navbar.vue';
-import { Operator } from '../scripts/operator.ts';
+import { Operator } from '../scripts/operator';
 
-const page = usePage();
+const page = usePage<OperatorsPageProps>();
 
 const allOperators: Operator[] = page.props.operators.data.map(
     (op) =>
@@ -27,10 +28,10 @@ const allOperators: Operator[] = page.props.operators.data.map(
         ),
 );
 
-let operators = ref([...allOperators]);
-let sortingMethod = ref('name');
-let activeSides = ref('attackersdefenders');
-let showQueerIdentities = ref(false);
+const operators = ref([...allOperators]);
+const sortingMethod = ref('name');
+const activeSides = ref('attackersdefenders');
+const showQueerIdentities = ref(false);
 
 const placeholderOperator = new Operator(
     'placeholder',
@@ -39,8 +40,10 @@ const placeholderOperator = new Operator(
     -1,
     -1,
     'opPlaceHolder',
+    '',
     [],
     'placeholderSquad',
+    null,
 );
 const selectedOperator = ref(placeholderOperator);
 
@@ -48,17 +51,17 @@ const setSelectedOperator = (op: Operator) => {
     selectedOperator.value = op;
 };
 
-const sortOperators = (method) => {
+const sortOperators = (method: string) => {
     sortingMethod.value = method;
     filterAndSort();
 };
 
-const filterOperators = (sides) => {
+const filterOperators = (sides: string) => {
     activeSides.value = sides;
     filterAndSort();
 };
 
-const toggleQueer = (b) => {
+const toggleQueer = (b: boolean) => {
     showQueerIdentities.value = b;
     console.log('Queer from main:' + showQueerIdentities.value);
 };
