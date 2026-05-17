@@ -17,6 +17,13 @@ class Operation extends Model
     protected $guarded = [];
     public $timestamps = false;
 
+    protected function casts(): array
+    {
+        // Cast to a Carbon date but keep the Y-m-d serialization the
+        // frontend already consumes (no API shape change).
+        return ['release_date' => 'date:Y-m-d'];
+    }
+
     public function operators(): BelongsToMany
     {
         return $this->belongsToMany(

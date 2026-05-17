@@ -82,8 +82,9 @@ class Operator extends Model
 
     public function getOperation()
     {
-        $rework = $this->rework()->first();
-        return $rework ? $rework->operation : $this->operation()->first();
+        // Property access (not ->rework()/->operation()) so eager-loaded
+        // relations are reused instead of firing a query per operator.
+        return $this->rework ? $this->rework->operation : $this->operation;
     }
 
     public function compareReleaseDate(
@@ -95,12 +96,19 @@ class Operator extends Model
         $operation = $this->getOperation();
         $otherOperation = $otherOperator->getOperation();
 
-        if ($operation->year !== $otherOperation->year) {
-            return $r * ($operation->year < $otherOperation->year ? -1 : 1);
+        // Fall back to the operator's own year/season if the operation
+        // is missing, so sorting never dereferences null.
+        $year = $operation?->year ?? $this->year;
+        $season = $operation?->season ?? $this->season;
+        $otherYear = $otherOperation?->year ?? $otherOperator->year;
+        $otherSeason = $otherOperation?->season ?? $otherOperator->season;
+
+        if ($year !== $otherYear) {
+            return $r * ($year < $otherYear ? -1 : 1);
         }
 
-        if ($operation->season !== $otherOperation->season) {
-            return $r * ($operation->season < $otherOperation->season ? -1 : 1);
+        if ($season !== $otherSeason) {
+            return $r * ($season < $otherSeason ? -1 : 1);
         }
 
         if ($this->side !== $otherOperator->side) {
