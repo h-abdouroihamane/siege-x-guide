@@ -3,16 +3,13 @@ import Logo from '@/components/Logo.vue';
 import Navbar from '@/components/Navbar.vue';
 import { Head, usePage } from '@inertiajs/vue3';
 import { ref } from 'vue';
-import { normalize } from '../scripts/operator.ts';
+import {
+    operatorIcon as getOperatorIcon,
+    squadLogo as getSquadLogo,
+} from '../scripts/operator.ts';
 const page = usePage();
 const squads = Object.entries(page.props.squads);
 const squadHeader = `Squads (up to Year ${page.props.year}, Season ${page.props.season} - ${page.props.operationName})`;
-const publicPath = import.meta.env.BASE_URL;
-
-const getSquadLogo = (squadName) =>
-    `${publicPath}squadLogos/${normalize(squadName)}.png`;
-const getOperatorIcon = (operatorName) =>
-    `${publicPath}operatorIcons/${normalize(operatorName)}.png`;
 
 const getAltText = () => {
     let text = `Table showing every squad composition according to Rainbow Six Siege X's lore (up to Year ${page.props.year}, Season ${page.props.season} - ${page.props.operationName})\n\n`;

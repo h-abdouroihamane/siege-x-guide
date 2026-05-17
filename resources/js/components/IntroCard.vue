@@ -1,21 +1,23 @@
 <script setup>
+import { operatorIcon as getIcon, publicAsset } from '../scripts/operator.ts';
+
 const socials = [
     {
         name: 'Bluesky',
         url: 'https://bsky.app/profile/alsagone.bsky.social',
-        img: '/build/bluesky.svg',
+        img: publicAsset('bluesky.svg'),
         id: 'bluesky',
     },
     {
         name: 'Twitch',
         url: 'https://twitch.tv/alsagone',
-        img: '/build/twitch.svg',
+        img: publicAsset('twitch.svg'),
         id: 'twitch',
     },
     {
         name: 'Ko-Fi',
         url: 'https://ko-fi.com/alsagone',
-        img: '/build/kofi.png',
+        img: publicAsset('kofi.png'),
         id: 'kofi',
     },
 ];
@@ -25,7 +27,6 @@ const mains = {
     defense: ['Kaid', 'Mute', 'Wamai'],
 };
 
-const getIcon = (name) => `/build/operatorIcons/${name.toLowerCase()}.png`;
 const getAlt = (name) => `${name}'s logo`;
 </script>
 
@@ -34,7 +35,7 @@ const getAlt = (name) => `${name}'s logo`;
         <div id="header">
             <img
                 id="profile-picture"
-                src="/build/profilePicture.png"
+                :src="publicAsset('profilePicture.png')"
                 alt="Me wearing a cosplay of Marcus Holloway from Watch_Dogs 2"
             />
             <p class="title">

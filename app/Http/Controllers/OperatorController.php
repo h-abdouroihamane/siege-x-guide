@@ -13,7 +13,9 @@ class OperatorController extends Controller
             Operator::with(
                 'roles:id,name',
                 'squad:id,name',
-                'operation:id,name,release_date',
+                'operation:id,name,release_date,year,season',
+                'rework',
+                'rework.operation:id,name,release_date,year,season',
                 'queerIdentities:id,name',
             )->get(),
         );

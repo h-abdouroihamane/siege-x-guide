@@ -11,10 +11,24 @@ use Inertia\Inertia;
 
 class SecondaryGadgetController extends Controller
 {
+    public function getAll()
+    {
+        return [
+            'Attack' => $this->getGadgets('Attack'),
+            'Defense' => $this->getGadgets('Defense'),
+        ];
+    }
+
     public function getGadgets(string $side)
     {
         return SecondaryGadgetResource::collection(
-            SecondaryGadget::where('side', $side)->get(),
+            SecondaryGadget::where('side', $side)
+                ->with([
+                    'operators.operation:id,name,release_date,year,season',
+                    'operators.rework',
+                    'operators.rework.operation:id,name,release_date,year,season',
+                ])
+                ->get(),
         );
     }
 

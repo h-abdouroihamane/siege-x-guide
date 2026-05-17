@@ -3,12 +3,8 @@ import Logo from '@/components/Logo.vue';
 import Navbar from '@/components/Navbar.vue';
 import { Head, usePage } from '@inertiajs/vue3';
 
-import { normalize } from '../scripts/operator.ts';
+import { operatorIcon as getOperatorIcon } from '../scripts/operator.ts';
 const page = usePage();
-
-const publicPath = import.meta.env.BASE_URL;
-const getOperatorIcon = (operatorName) =>
-    `${publicPath}operatorIcons/${normalize(operatorName)}.png`;
 const data = page.props.roles.sort((a, b) => a.name > b.name);
 </script>
 
