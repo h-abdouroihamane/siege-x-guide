@@ -1,13 +1,11 @@
 <script setup>
 import { ref } from 'vue';
 const props = defineProps(['path']);
-const inLocalEnv = process.env.NODE_ENV === 'development';
 
 const activeRoute = {
     home: props.path === 'home',
     operators: props.path === 'operators',
     squads: props.path === 'squads',
-    admin: props.path === 'admin',
     about: props.path === 'about',
     vocabulary: props.path === 'vocabulary',
     secondaryGadgets: props.path === 'secondaryGadgets',
@@ -65,13 +63,6 @@ const publicPath = import.meta.env.BASE_URL;
                     >About me</a
                 >
             </li>
-            <li v-if="inLocalEnv">
-                <a
-                    href="/admin/dashboard"
-                    :class="{ active: activeRoute.admin }"
-                    >Admin panel</a
-                >
-            </li>
         </ul>
         <div
             class="hamburger"
@@ -117,13 +108,6 @@ const publicPath = import.meta.env.BASE_URL;
             <li>
                 <a href="/about" :class="{ active: activeRoute.about }"
                     >About me</a
-                >
-            </li>
-            <li v-if="inLocalEnv">
-                <a
-                    href="/admin/dashboard"
-                    :class="{ active: activeRoute.admin }"
-                    >Admin panel</a
                 >
             </li>
         </ul>
