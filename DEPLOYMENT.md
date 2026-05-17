@@ -190,6 +190,11 @@ docker compose logs -f app
 curl -I http://127.0.0.1:8080     # HTTP/1.1 200
 ```
 
+**Always `docker compose build` before `up`** — `siege-x-guide` is a
+local build-only image (`pull_policy: build`); a plain `up` on a host
+that has never built it would otherwise try to pull it from Docker Hub
+and fail with `pull access denied`.
+
 First boot seeds the DB once; subsequent restarts log
 `Database already populated — skipping seed.` and reuse the `db-data`
 volume.
