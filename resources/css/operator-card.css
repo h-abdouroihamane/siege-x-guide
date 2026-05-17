@@ -82,15 +82,15 @@
 }
 .card:hover:not(.queer).attacker,
 .card.selected:not(.queer).attacker {
-    background-image: url(siege-x-card-att.png);
+    background-image: url('/siege-x-card-att.png');
 }
 .card:hover:not(.queer).defender,
 .card.selected:not(.queer).defender {
-    background-image: url(siege-x-card-def.png);
+    background-image: url('/siege-x-card-def.png');
 }
 .card:hover.queer,
 .card.selected.queer {
-    background-image: url(siege-x-card-pride.png);
+    background-image: url('/siege-x-card-pride.png');
 }
 .card:hover.queer .operator-year,
 .card.selected.queer .operator-year {
