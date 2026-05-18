@@ -40,6 +40,10 @@ class OperatorReworkSeeder extends Seeder
                 'name' => 'Thatcher',
                 'operation_id' => 'Y10S4',
             ],
+            [
+                'name' => 'Dokkaebi',
+                'operation_id' => 'Y11S2',
+            ],
         ];
 
         foreach ($reworkedOperators as $rop) {
