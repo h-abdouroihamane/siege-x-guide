@@ -167,7 +167,7 @@ class OperatorSeeder extends Seeder
             [
                 'name' => 'Dokkaebi',
                 'description' =>
-                    "Can call attackers' phone, causing them to buzz incessantly until they reset it manually and can also hack defenders' cameras",
+                    "Can target a defender and call their phone, causing them to buzz until they hang up: if they don't hang up in time, the phone explodes. She can also temporarily hack defenders' observation tools.",
                 'year' => 2,
                 'season' => 4,
                 'side' => 'Attack',
