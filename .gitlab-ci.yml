@@ -6,7 +6,7 @@ variables:
 default:
     image: php:8.4-cli
     before_script:
-        - apt-get update -yqq && apt-get install -yqq git unzip libzip-dev
+        - apt-get update -yqq && apt-get install -yqq git unzip libzip-dev libsqlite3-dev
         - docker-php-ext-install zip pdo_sqlite
         - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
         - curl -fsSL https://deb.nodesource.com/setup_22.x | bash - && apt-get install -yqq nodejs
