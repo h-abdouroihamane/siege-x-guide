@@ -46,8 +46,13 @@ deploy:
     before_script:
         - apk add --no-cache openssh-client git
         - mkdir -p ~/.ssh && chmod 700 ~/.ssh
-        - cp "$SSH_PRIVATE_KEY" ~/.ssh/id_ed25519 && chmod 600 ~/.ssh/id_ed25519
-        - cp "$SSH_KNOWN_HOSTS" ~/.ssh/known_hosts && chmod 644 ~/.ssh/known_hosts
+        # Strip CRLF (key generated on Windows) and guarantee a trailing newline —
+        # otherwise OpenSSH fails to parse the key with "error in libcrypto".
+        - tr -d '\r' < "$SSH_PRIVATE_KEY" > ~/.ssh/id_ed25519
+        - echo "" >> ~/.ssh/id_ed25519
+        - chmod 600 ~/.ssh/id_ed25519
+        - tr -d '\r' < "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+        - chmod 644 ~/.ssh/known_hosts
     script:
         - |
             if git diff --name-only "$CI_COMMIT_BEFORE_SHA" "$CI_COMMIT_SHA" 2>/dev/null \
