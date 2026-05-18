@@ -9,7 +9,7 @@ import '../css/form.css';
 import '../css/pride.css';
 import '../css/style.css';
 
-const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
+const appName = import.meta.env.VITE_APP_NAME || 'Siege X Guide';
 
 createInertiaApp({
     title: (title) => `${appName} - ${title}`,
