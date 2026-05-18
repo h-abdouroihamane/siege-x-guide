@@ -64,7 +64,6 @@ class SecondaryGadgetSeeder extends Seeder
                 'Thermite',
                 'Buck',
                 'Hibana',
-                'Dokkaebi',
                 'Lion',
                 'Finka',
                 'Maverick',
