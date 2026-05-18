@@ -4,6 +4,7 @@ import Navbar from '@/components/Navbar.vue';
 import { Head, usePage } from '@inertiajs/vue3';
 import { ref } from 'vue';
 import {
+    normalize,
     operatorIcon as getOperatorIcon,
     squadLogo as getSquadLogo,
 } from '../scripts/operator';
