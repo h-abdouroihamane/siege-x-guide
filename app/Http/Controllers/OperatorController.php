@@ -12,7 +12,6 @@ class OperatorController extends Controller
         return OperatorResource::collection(
             Operator::with(
                 'roles:id,name',
-                'squad:id,name',
                 'operation:id,name,release_date,year,season',
                 'rework',
                 'rework.operation:id,name,release_date,year,season',

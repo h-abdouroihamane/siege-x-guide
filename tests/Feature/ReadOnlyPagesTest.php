@@ -23,7 +23,6 @@ it('renders the read-only Inertia pages', function (
     'home' => ['/', 'Home'],
     'about' => ['/about', 'AboutMe'],
     'operators' => ['/operators', 'OperatorsView'],
-    'squads' => ['/squads', 'SquadsView'],
     'secondary gadgets' => ['/secondary-gadgets', 'SecondaryGadgetView'],
     'vocabulary' => ['/vocabulary', 'Vocabulary'],
 ]);
@@ -32,6 +31,5 @@ it('serves the JSON data endpoints', function (string $uri) {
     get($uri)->assertOk()->assertJson(fn(AssertableJson $json) => $json->etc());
 })->with([
     'operators/all' => ['/operators/all'],
-    'squads/all' => ['/squads/all'],
     'secondary-gadgets/all' => ['/secondary-gadgets/all'],
 ]);

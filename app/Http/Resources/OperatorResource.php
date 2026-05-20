@@ -26,9 +26,6 @@ class OperatorResource extends JsonResource
             $queerIdentities[] = $q->name;
         }
 
-        $squadModel = $this->squad->first();
-        $squad = $squadModel ? $squadModel->name : 'Unaffiliated';
-
         $hasRework = !is_null($this->rework);
         $operation = $this->getOperation();
 
@@ -45,7 +42,6 @@ class OperatorResource extends JsonResource
                 'release_date' => $operation->release_date,
             ],
             'roles' => $roles,
-            'squad' => $squad,
             'queerIdentities' => $queerIdentities,
         ];
     }

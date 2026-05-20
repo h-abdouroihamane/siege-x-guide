@@ -12,7 +12,6 @@ const props = defineProps([
     'icon',
     'operationReleaseDate',
     'operationName',
-    'squad',
     'roles',
     'queerIdentities',
     'reworked',

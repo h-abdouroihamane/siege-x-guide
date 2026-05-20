@@ -4,23 +4,18 @@ Target: **OVH VPS/Dedicated** (root SSH, Debian/Ubuntu) · **2 vCore / 2 GB RAM 
 Edge: **host nginx + Let's Encrypt** reverse-proxying the container
 Domain: **siege-x-guide.alsagone.ovh**
 
-The app is a read-only public guide. The stack is two containers:
+The app is a read-only public guide. The stack is **a single container**
+(nginx + php-fpm) with a **seeded SQLite database baked into the image
+at build time**. Content is seeder-only and fully reproducible from git,
+so every deploy ships a freshly seeded DB — there is no separate DB
+service, no persistent volume, no migrate/seed logic at runtime, and no
+backup story (the seeders in git are the backup).
 
-- **app** — nginx + php-fpm serving the built Inertia/Vue site.
-- **db** — MySQL 8, data persisted in the `db-data` named volume.
-
-Content is **seeder-only and fully reproducible**, so the database is
-**seeded exactly once** (the entrypoint seeds only when it's empty) and
-then **persists across restarts and redeploys**. The image is
-self-contained (no git pull at runtime) and replaces the old
-`scripts/deploy.sh`.
-
-The production `.env` fetched from the VPS is bind-mounted read-only into
-the app **and** is the file Compose reads to configure the MySQL service —
-one file keeps both sides in agreement. `APP_ENV`/`APP_DEBUG` and the DB
-connection are forced via Compose env (Laravel immutable dotenv: real env
-vars win over `.env`), so the app always runs production and talks to the
-`db` service regardless of legacy values in `.env`.
+The production `.env` fetched from the VPS is bind-mounted read-only
+into the container. `APP_ENV`/`APP_DEBUG`/`DB_CONNECTION` are forced via
+Compose env (Laravel immutable dotenv: real env vars win over `.env`),
+so the app always runs production and on SQLite regardless of legacy
+values in `.env`.
 
 ---
 
@@ -96,14 +91,13 @@ sudo ufw allow 80,443/tcp
 sudo ufw enable
 ```
 
-Port **8080 and MySQL are never exposed publicly** — the app binds
-`127.0.0.1:8080` (host nginx fronts it) and `db` is only on the internal
-Docker network.
+Port **8080 is never exposed publicly** — the app binds `127.0.0.1:8080`
+and the host nginx fronts it.
 
 ### 2a. Swap (required — 2 GB RAM is tight)
 
-The image build (`npm ci` + `vite build`) **and** running app + MySQL +
-nginx together on 2 GB both need headroom. Add 2 GB swap once:
+The image build (`npm ci` + `vite build`) needs headroom on 2 GB. Add
+2 GB swap once:
 
 ```bash
 sudo fallocate -l 2G /swapfile
@@ -113,9 +107,6 @@ sudo swapon /swapfile
 echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
 free -h
 ```
-
-MySQL is already memory-trimmed in compose
-(`--innodb-buffer-pool-size=128M --performance-schema=OFF`).
 
 ---
 
@@ -139,17 +130,16 @@ sudo mkdir -p /var/www && sudo chown $USER /var/www
 git clone git@gitlab.com:alsagone/siege-x-guide.git \
   /var/www/siege-x-guide.alsagone.ovh
 cd /var/www/siege-x-guide.alsagone.ovh
-git checkout main          # deploy from main (after the rework is merged)
+git checkout main
 ```
 
 ---
 
 ## 4. Install the production `.env`
 
-The compose file mounts `./.env` into the app **read-only** and also reads
-it for `${DB_*}` interpolation to configure the MySQL service. It must
-exist **before** `docker compose up` — a bind mount to a missing path makes
-Docker create a _directory_ called `.env` and the app breaks.
+The compose file mounts `./.env` into the container **read-only**. It
+must exist **before** `docker compose up` — a bind mount to a missing
+path makes Docker create a _directory_ called `.env` and the app breaks.
 
 ```bash
 # from your machine:
@@ -157,23 +147,24 @@ scp .env user@<vps>:/var/www/siege-x-guide.alsagone.ovh/.env
 
 cd /var/www/siege-x-guide.alsagone.ovh
 chmod 600 .env
-grep -E '^APP_KEY=base64:|^APP_URL=|^DB_DATABASE=|^DB_USERNAME=|^DB_PASSWORD=' .env
+grep -E '^APP_KEY=base64:|^APP_URL=|^CACHE_STORE=|^QUEUE_CONNECTION=|^SESSION_DRIVER=' .env
 ```
 
 `.env` **must** contain:
 
-| Key           | Requirement                                                        |
-| ------------- | ------------------------------------------------------------------ |
-| `APP_KEY`     | `base64:...` (mount is read-only — it can't be generated)          |
-| `APP_URL`     | `https://siege-x-guide.alsagone.ovh`                               |
-| `DB_DATABASE` | the schema name (created automatically by the MySQL container)     |
-| `DB_USERNAME` | **must NOT be `root`** — the MySQL image rejects `MYSQL_USER=root` |
-| `DB_PASSWORD` | non-empty; also used as the MySQL root password                    |
+| Key                | Requirement                                                                                                               |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------- |
+| `APP_KEY`          | `base64:...` (mount is read-only — it can't be generated)                                                                 |
+| `APP_URL`          | `https://siege-x-guide.alsagone.ovh`                                                                                      |
+| `CACHE_STORE`      | `array` — Laravel 11 defaults to `database`; without this, cache writes hit the baked-in SQLite and reset on every deploy |
+| `QUEUE_CONNECTION` | `sync` — same reason (default is `database`)                                                                              |
+| `SESSION_DRIVER`   | `file` — same reason (default is `database`)                                                                              |
 
-`DB_HOST`/`DB_CONNECTION`/`DB_PORT` in `.env` are irrelevant — Compose
-forces `DB_HOST=db`, `DB_CONNECTION=mysql`, `DB_PORT=3306` on the app.
-`.env` is gitignored and `.dockerignore`-excluded; it never enters git or
-the image.
+`APP_ENV`/`APP_DEBUG`/`DB_CONNECTION` are forced via Compose env vars
+(`docker-compose.yml`), so they're optional in `.env`. `DB_*` values are
+ignored entirely — the DB file lives inside the image. `.env` is
+gitignored and `.dockerignore`-excluded; it never enters git or the
+image.
 
 ---
 
@@ -181,12 +172,10 @@ the image.
 
 ```bash
 cd /var/www/siege-x-guide.alsagone.ovh
-docker compose build              # composer → vite → runtime (uses swap)
+docker compose build              # composer → vite → migrate+seed → runtime (uses swap)
 docker compose up -d
-docker compose ps                 # app: running · db: healthy
+docker compose ps                 # app: running
 docker compose logs -f app
-# expect: "Waiting for database..." then migrate, then
-#         "Empty database — seeding once." on the FIRST boot only
 curl -I http://127.0.0.1:8080     # HTTP/1.1 200
 ```
 
@@ -195,12 +184,12 @@ local build-only image (`pull_policy: build`); a plain `up` on a host
 that has never built it would otherwise try to pull it from Docker Hub
 and fail with `pull access denied`.
 
-First boot seeds the DB once; subsequent restarts log
-`Database already populated — skipping seed.` and reuse the `db-data`
-volume.
+The migrate+seed step runs **inside the image build**, so the resulting
+image is fully self-contained — no first-boot DB setup, no waiting on a
+DB service.
 
-If `docker compose build` is OOM-killed: confirm step 2a swap is active and
-retry, or build elsewhere and ship the image:
+If `docker compose build` is OOM-killed: confirm step 2a swap is active
+and retry, or build elsewhere and ship the image:
 `docker save siege-x-guide | ssh <vps> 'docker load'` then
 `docker compose up -d`.
 
@@ -244,73 +233,53 @@ Use the committed wrapper — run it on the VPS from the project dir:
 
 ```bash
 cd /var/www/siege-x-guide.alsagone.ovh
-./scripts/deploy.sh            # routine deploy — DATA KEPT
+./scripts/deploy.sh
 ```
 
-It pulls `main` (`--ff-only`), `docker compose up -d --build`, prunes old
-images, and health-checks `:8080`. The container entrypoint then runs
-`php artisan migrate --force` (idempotent — applies any new migrations)
-and **skips seeding** because the volume already has data. Caches are
-rebuilt. The MySQL data is **kept**.
+It pulls `main` (`--ff-only`), `docker compose up -d --build`, prunes
+old images, and health-checks `:8080`. Because the SQLite DB is baked
+into the image, **every deploy ships fresh content** — there is no
+separate `--seed` flow. Edit the seeders, push, run the script, done.
 
-**When the seeders changed** (new operator, edited description, etc.) —
-content is seeder-only and not idempotent, so the only correct way to
-apply it is a full rebuild from the seeders:
-
-```bash
-./scripts/deploy.sh --seed     # ALSO migrate:fresh --seed (rebuilds DB)
-```
-
-`--seed` runs the reseed **detached inside the container**, so a dropped
-SSH session can't interrupt it and leave a half-migrated DB (the
-restart-loop failure mode). Brief blip while the seeders run; track it
-with `docker compose logs -f app`. Never run `db:seed` against a
-populated DB (the seeders `create()` rows — it would duplicate/conflict);
-always use `--seed` (which is `migrate:fresh --seed`).
-
-**Backup the DB** (cron-friendly):
-
-```bash
-docker compose exec db sh -c \
-  'exec mysqldump -uroot -p"$MYSQL_ROOT_PASSWORD" "$MYSQL_DATABASE"' \
-  > backup-$(date +%F).sql
-```
+Brief blip while the new container starts. The deploy is atomic at the
+image level: roll back by checking out an earlier commit and rebuilding.
 
 ---
 
 ## 8. Retire the old setup
 
-Once the containers serve traffic, remove the old non-Docker vhost /
-PHP-FPM config and any cron/`deploy.sh`, leaving only the reverse-proxy
-server block from step 6. The old standalone MySQL on the host can be
-stopped/removed — the app now uses the `db` container exclusively.
+Once the container serves traffic, remove the old non-Docker vhost /
+PHP-FPM config and any cron, leaving only the reverse-proxy server
+block from step 6. The old standalone MySQL on the host can be
+stopped/removed — the app no longer uses a separate database service at
+all.
 
 ---
 
 ## Troubleshooting
 
-- **`db` unhealthy / app stuck "Waiting for database"** — check
-  `docker compose logs db`. Usually `MYSQL_USER=root` (set a non-root
-  `DB_USERNAME` in `.env`) or an empty `DB_PASSWORD`.
-- **`could not find driver`** — the runtime image must have `pdo_mysql`
+- **`could not find driver`** — the runtime image must have `pdo_sqlite`
   (the `webdevops/php-nginx` image bundles it; verify with
-  `docker compose exec app php -m | grep pdo_mysql`).
-- **First boot didn't seed** — only seeds when `operators` is empty;
-  inspect `docker compose logs app` for the seed line, or force with
-  `migrate:fresh --seed` (step 7).
+  `docker compose exec app php -m | grep pdo_sqlite`).
+- **Migrate/seed failed during build** — `docker compose build` will
+  surface the artisan error directly. Most often a seeder bug; reproduce
+  locally with `php artisan migrate:fresh --seed`.
+- **Stale content after deploy** — confirm the image actually rebuilt
+  (`docker compose up -d --build`, not just `up -d`). The deploy script
+  always rebuilds.
 
 ---
 
 ## Quick reference
 
-| Item               | Value                                                              |
-| ------------------ | ------------------------------------------------------------------ |
-| Project path       | `/var/www/siege-x-guide.alsagone.ovh`                              |
-| Services           | `app` (127.0.0.1:8080→:80) · `db` (MySQL 8, internal only)         |
-| Public ports       | 80/443 via host nginx                                              |
-| Secrets / DB creds | `./.env` (bind-mounted + Compose interpolation)                    |
-| DB persistence     | `db-data` volume; seeded once                                      |
-| Content refresh    | `docker compose exec app php artisan migrate:fresh --seed --force` |
-| Logs               | `docker compose logs -f app` / `db`                                |
-| Update             | `git pull && docker compose up -d --build` (data kept)             |
-| Build/runtime RAM  | needs 2 GB swap (step 2a)                                          |
+| Item              | Value                                               |
+| ----------------- | --------------------------------------------------- |
+| Project path      | `/var/www/siege-x-guide.alsagone.ovh`               |
+| Services          | `app` only (127.0.0.1:8080 → :80)                   |
+| Public ports      | 80/443 via host nginx                               |
+| Secrets           | `./.env` (bind-mounted read-only; only APP_KEY/URL) |
+| DB                | SQLite, baked into image at build time              |
+| Content refresh   | Edit seeders → `./scripts/deploy.sh`                |
+| Logs              | `docker compose logs -f app`                        |
+| Update            | `git pull && docker compose up -d --build`          |
+| Build/runtime RAM | needs 2 GB swap (step 2a)                           |

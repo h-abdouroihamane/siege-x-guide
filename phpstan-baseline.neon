@@ -7,12 +7,6 @@ parameters:
 			path: app/Http/Controllers/OperatorController.php
 
 		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/SquadController.php
-
-		-
 			message: '#^Access to an undefined property App\\Http\\Resources\\OperationResource\:\:\$id\.$#'
 			identifier: property.notFound
 			count: 2
@@ -67,12 +61,6 @@ parameters:
 			path: app/Http/Resources/OperatorResource.php
 
 		-
-			message: '#^Access to an undefined property App\\Http\\Resources\\OperatorResource\:\:\$squad\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Resources/OperatorResource.php
-
-		-
 			message: '#^Call to an undefined method App\\Http\\Resources\\OperatorResource\:\:getOperation\(\)\.$#'
 			identifier: method.notFound
 			count: 1
@@ -109,37 +97,7 @@ parameters:
 			path: app/Http/Resources/SecondaryGadgetResource.php
 
 		-
-			message: '#^Access to an undefined property App\\Http\\Resources\\SquadResource\:\:\$name\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Resources/SquadResource.php
-
-		-
-			message: '#^Access to an undefined property App\\Http\\Resources\\SquadResource\:\:\$operators\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Resources/SquadResource.php
-
-		-
 			message: '#^Access to an undefined property App\\Models\\Operator\:\:\$rework\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Models/Operator.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model&object\{pivot\: Illuminate\\Database\\Eloquent\\Relations\\Pivot\}\:\:\$name\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Models/Operator.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
-			identifier: property.notFound
-			count: 2
-			path: app/Models/Operator.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$pivot\.$#'
 			identifier: property.notFound
 			count: 1
 			path: app/Models/Operator.php
