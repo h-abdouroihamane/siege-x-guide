@@ -4,11 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
 class Operator extends Model
 {
@@ -32,22 +29,6 @@ class Operator extends Model
         }
 
         return $roles;
-    }
-
-    public function squad(): BelongsToMany
-    {
-        return $this->belongsToMany(
-            Squad::class,
-            'operator_squad',
-            'operator_id',
-            'squad_id',
-        )->withPivot('rank');
-    }
-
-    public function getSquad(): string
-    {
-        $squad = $this->squad()->first();
-        return $squad ? $squad->name : 'Unaffiliated';
     }
 
     public function operation(): BelongsTo
@@ -120,50 +101,5 @@ class Operator extends Model
         }
 
         return $this->name < $otherOperator->name ? -1 : 1;
-    }
-
-    public function addToSquad(string $squadName)
-    {
-        $newSquad = Squad::firstWhere('name', $squadName);
-
-        $currentSquad = $this->squad->first();
-        $hasSquad = !is_null($currentSquad);
-        $validNewSquad = !is_null($newSquad);
-
-        if (
-            $hasSquad &&
-            $validNewSquad &&
-            $currentSquad->id === $newSquad->id
-        ) {
-            return;
-        }
-
-        // Detach the current squad and adjust the ranks
-        if ($hasSquad) {
-            $currentRank = $currentSquad->pivot->rank;
-
-            //Decrease the rank of the operators of the squad that were below them
-            DB::table('operator_squad')
-                ->where('squad_id', $currentSquad->id)
-                ->where('rank', '>', $currentRank)
-                ->decrement('rank', 1);
-
-            $this->squad()->detach();
-        }
-
-        if ($validNewSquad) {
-            $newSquadMaxRank = $hasSquad
-                ? DB::table('operator_squad')
-                    ->where('squad_id', $newSquad->id)
-                    ->max('rank')
-                : 0;
-
-            //Insert with the latest rank
-            $this->squad()->attach($newSquad->id, [
-                'rank' => $newSquadMaxRank + 1,
-            ]);
-        }
-
-        return;
     }
 }

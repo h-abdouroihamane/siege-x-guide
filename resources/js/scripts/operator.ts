@@ -26,9 +26,6 @@ export const gadgetLogo = (name: string): string =>
         `secondaryGadgets/${name.toLowerCase().replace(/ +/g, '-')}.png`,
     );
 
-export const squadLogo = (name: string): string =>
-    publicAsset(`squadLogos/${normalize(name)}.png`);
-
 export class Operator {
     name: string;
     cleanName: string;
@@ -40,7 +37,6 @@ export class Operator {
     operationReleaseDate: Date;
     reworked: boolean;
     roles: string[];
-    squad: string;
     queerIdentities: string[] | null;
     portrait: string;
     icon: string;
@@ -54,7 +50,6 @@ export class Operator {
         operationName: string,
         operationReleaseDate: string,
         roles: string[],
-        squad: string,
         queerIdentities: string[] | null,
         reworked: boolean = false,
     ) {
@@ -67,7 +62,6 @@ export class Operator {
         this.operationReleaseDate = new Date(operationReleaseDate);
         this.reworked = reworked;
         this.roles = [...roles];
-        this.squad = squad;
         this.queerIdentities = queerIdentities;
 
         this.cleanName = normalize(this.name);

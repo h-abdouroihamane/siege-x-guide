@@ -25,8 +25,6 @@ RUN npm run build
 # ---------------------------------------------------------------------------
 FROM webdevops/php-nginx:8.4-alpine AS runtime
 
-# DB connection is supplied at runtime by docker-compose (MySQL service);
-# only the non-DB defaults are baked here.
 ENV WEB_DOCUMENT_ROOT=/app/public \
     APP_ENV=production \
     APP_DEBUG=false
@@ -38,6 +36,17 @@ WORKDIR /app
 COPY . .
 COPY --from=vendor /app/vendor ./vendor
 COPY --from=assets /app/public/build ./public/build
+
+# Bake the seeded SQLite database into the image. Content is seeder-only
+# and fully reproducible from git, so every build ships a freshly seeded
+# DB and no runtime volume / migration / seed dance is needed. The .env
+# is throwaway: at runtime the production .env is bind-mounted over it.
+RUN cp .env.example .env \
+    && php artisan key:generate --force \
+    && touch database/database.sqlite \
+    && php artisan migrate --force \
+    && php artisan db:seed --force \
+    && rm .env
 
 # Provision script runs on every container start (webdevops hook dir).
 COPY docker/entrypoint.d/20-laravel.sh /opt/docker/provision/entrypoint.d/20-laravel.sh

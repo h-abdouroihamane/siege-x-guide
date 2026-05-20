@@ -18,7 +18,3 @@
 8. Admin login page
 9. Add operator function
 10. Edit operator function
-
-## Bonus
-
-11. Page that shows every squad

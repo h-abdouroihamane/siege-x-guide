@@ -6,7 +6,6 @@ const props = defineProps(['path']);
 const activeRoute = {
     home: props.path === 'home',
     operators: props.path === 'operators',
-    squads: props.path === 'squads',
     about: props.path === 'about',
     vocabulary: props.path === 'vocabulary',
     secondaryGadgets: props.path === 'secondaryGadgets',
@@ -41,12 +40,6 @@ const toggleNav = () => {
                     href="/secondary-gadgets"
                     :class="{ active: activeRoute.secondaryGadgets }"
                     >Secondary gadgets</a
-                >
-            </li>
-
-            <li>
-                <a href="/squads" :class="{ active: activeRoute.squads }"
-                    >Squads</a
                 >
             </li>
 
@@ -89,12 +82,6 @@ const toggleNav = () => {
                     href="/secondary-gadgets"
                     :class="{ active: activeRoute.secondaryGadgets }"
                     >Secondary gadgets</a
-                >
-            </li>
-
-            <li>
-                <a href="/squads" :class="{ active: activeRoute.squads }"
-                    >Squads</a
                 >
             </li>
             <li>

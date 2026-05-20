@@ -15,7 +15,6 @@ export interface OperatorDTO {
     reworked: boolean;
     operation: OperationDTO;
     roles: string[];
-    squad: string;
     queerIdentities: string[];
 }
 

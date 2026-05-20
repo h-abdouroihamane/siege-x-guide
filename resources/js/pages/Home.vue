@@ -17,13 +17,6 @@ const paths = [
         description: 'Check which secondary gadgets are available to operators',
     },
     {
-        url: '/squads',
-        className: 'squads',
-        title: 'Squads',
-        description:
-            'Check the squads composition according to the latest update of the lore',
-    },
-    {
         url: '/vocabulary',
         className: 'vocabulary',
         title: 'Vocabulary',
