@@ -1,13 +1,9 @@
-<script setup lang="ts">
-import { ref } from 'vue';
+<script setup>
 import AttackerLogo from '../components/AttackerLogo.vue';
 import DefenderLogo from '../components/DefenderLogo.vue';
 
-const emit = defineEmits<{
-    sortBy: [method: string];
-    filterSide: [sides: string];
-    toggleQueer: [show: boolean];
-}>();
+import { ref } from 'vue';
+const emit = defineEmits(['sortBy', 'filterSide']);
 const isSmall = ref(true);
 const toggleSidebar = () => (isSmall.value = !isSmall.value);
 
@@ -47,15 +43,8 @@ const emitSortingSide = () => {
 };
 </script>
 <template>
-    <div
-        class="sidebar absolute left-0 z-[5] flex h-max w-max flex-col items-center border-r border-[#ff4b3c] bg-[rgba(1,1,1,0.95)] px-2.5 py-5 text-[#fefefe] transition-all duration-100"
-        :class="{ small: isSmall }"
-    >
-        <button
-            id="close-button"
-            class="inline-flex h-10 w-4/5 cursor-pointer items-center justify-center border-none bg-transparent text-[18px] text-[#fefefe] [box-shadow:0px_1px_4px_1px_rgba(0,0,0,0.3)]"
-            @click="toggleSidebar"
-        >
+    <div class="sidebar" :class="{ small: isSmall }">
+        <button id="close-button" @click="toggleSidebar">
             <svg
                 v-if="isSmall"
                 xmlns="http://www.w3.org/2000/svg"
@@ -127,31 +116,58 @@ const emitSortingSide = () => {
         </div>
     </div>
 </template>
-<style scoped>
-/*
- * Kept as raw CSS:
- *  - #close-button svg/path sizing and signal-red fill (svg is
- *    scope-pierced via :deep for the path).
- *  - .sidebar.small state: collapses to a 50px column rail with
- *    the button switching to a stacked "icon over label" layout
- *    and #btn-grid hidden. Class-combinator pattern is much
- *    cleaner here than driving every conditional from the
- *    template.
- *  - #btn-grid uses CSS grid-template-areas, which Tailwind v4
- *    can express via arbitrary values but only awkwardly.
- */
+<style>
+.sidebar {
+    width: max-content;
+    height: max-content;
+    transition: 0.1s all ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    left: 0;
+    color: #fefefe;
+    border-right: 1px solid #ff4b3c;
+    padding: 20px 10px;
+    z-index: 5;
+    background-color: rgba(1, 1, 1, 0.95);
+}
+
+.sidebar.small {
+    width: 50px;
+}
+
+.sidebar.small #btn-grid {
+    display: none;
+}
+
+.main-content {
+    width: 90%;
+}
+
+.sidebar #close-button {
+    background-color: transparent;
+    border: none;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 80%;
+    box-shadow: 0px 1px 4px 1px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    font-family: 'FK Grotesk', sans-serif;
+    font-size: 18px;
+    color: #fefefe;
+}
+
 #close-button svg {
     width: 30px;
     height: 30px;
     margin: 10px;
 }
 
-#close-button :deep(path) {
+#close-button path {
     fill: #ff4b3c;
-}
-
-.sidebar.small {
-    width: 50px;
 }
 
 .sidebar.small #close-button {
@@ -160,8 +176,28 @@ const emitSortingSide = () => {
     height: max-content;
 }
 
-.sidebar.small #btn-grid {
-    display: none;
+#btn-grid .sort-label {
+    grid-area: sort;
+}
+
+#btn-grid #sort-date {
+    grid-area: date;
+}
+
+#btn-grid #sort-name {
+    grid-area: name;
+}
+
+#btn-grid .filter-label {
+    grid-area: filter;
+}
+
+#btn-grid #attackers {
+    grid-area: attackers;
+}
+
+#btn-grid #defenders {
+    grid-area: defenders;
 }
 
 #btn-grid {
@@ -173,27 +209,123 @@ const emitSortingSide = () => {
         'attackers defenders'
         'sort sort'
         'name date';
+
     grid-row-gap: 10px;
     grid-column-gap: 0;
     justify-content: center;
 }
 
-#btn-grid .filter-label {
-    grid-area: filter;
+.radio-button {
+    font-family: 'GT America', sans-serif;
+    font-weight: bold;
+    min-width: 132px;
+    height: 100%;
+    width: 100%;
+    appearance: none;
+    border: 1px solid rgba(27, 31, 35, 0.15);
+    border-radius: 6px;
+    box-shadow: rgba(27, 31, 35, 0.1) 0 1px 0;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    padding: 6px 16px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+    white-space: nowrap;
+    transition: 0.3s all ease;
+    font-size: 15px;
 }
-#btn-grid #attackers {
-    grid-area: attackers;
+
+.radio-button.left {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
 }
-#btn-grid #defenders {
-    grid-area: defenders;
+
+.radio-button.right {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
 }
-#btn-grid .sort-label {
-    grid-area: sort;
+
+.radio-button.active.attackers,
+.radio-button:not(.active):hover.attackers {
+    background-color: #d9610f;
+    box-shadow: rgba(217, 97, 15, 0.2) 0 1px 0 inset;
 }
-#btn-grid #sort-name {
-    grid-area: name;
+
+.radio-button.active.defenders,
+.radio-button:not(.active):hover.defenders {
+    background-color: #0e87c8;
+    box-shadow: rgba(14, 135, 200, 0.2) 0 1px 0 inset;
 }
-#btn-grid #sort-date {
-    grid-area: date;
+
+.radio-button.active.sort,
+.radio-button:not(.active):hover.sort {
+    background-color: #ff4b3c;
+    box-shadow: rgba(254, 61, 44, 0.2) 0 1px 0 inset;
+}
+
+.radio-button:not(.active) {
+    color: rgba(254, 254, 254, 0.4);
+}
+
+.radio-button:not(.active) path {
+    fill: rgba(254, 254, 254, 0.4);
+}
+
+.radio-button:not(.active).attackers {
+    border-color: rgba(217, 97, 15, 0.1);
+    background-color: rgba(217, 97, 15, 0.3);
+}
+
+.radio-button:not(.active).defenders {
+    border-color: rgba(14, 135, 200, 0.1);
+    background-color: rgba(14, 135, 200, 0.3);
+}
+
+.radio-button:not(.active).sort {
+    border-color: rgba(254, 61, 44, 0.1);
+    background-color: rgba(254, 61, 44, 0.3);
+}
+
+.radio-button:focus:not(:focus-visible):not(.focus-visible) {
+    box-shadow: none;
+    outline: none;
+}
+
+.radio-button:not(.active):hover.attackers {
+    background-color: #d9610f;
+}
+
+.radio-button:not(.active):hover.defenders {
+    background-color: #0e87c8;
+}
+
+.radio-button:focus {
+    outline: none;
+}
+
+.radio-button:focus.attackers {
+    box-shadow: rgba(217, 97, 15, 0.4) 0 0 0 3px;
+}
+
+.radio-button:focus.defenders {
+    box-shadow: rgba(14, 135, 200, 0.4) 0 0 0 3px;
+}
+
+.radio-button svg {
+    height: 20px;
+    width: 20px;
+    margin: 0px 6px 0 0;
+}
+
+.radio-button path {
+    fill: #fefefe;
 }
 </style>

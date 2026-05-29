@@ -64,7 +64,6 @@ class SecondaryGadgetSeeder extends Seeder
                 'Thermite',
                 'Buck',
                 'Hibana',
-                'Dokkaebi',
                 'Lion',
                 'Finka',
                 'Maverick',
@@ -90,6 +89,7 @@ class SecondaryGadgetSeeder extends Seeder
                 'Deimos',
                 'Striker',
                 'Maverick',
+                'Jackal',
                 'Solid Snake',
             ],
             'Claymore' => [
@@ -154,6 +154,7 @@ class SecondaryGadgetSeeder extends Seeder
                 'Thorn',
                 'Sentry',
                 'Denari',
+                'Smoke',
             ],
             'Barbed Wire' => [
                 'Smoke',

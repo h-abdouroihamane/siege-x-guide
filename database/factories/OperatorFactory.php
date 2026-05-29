@@ -3,24 +3,25 @@
 namespace Database\Factories;
 
 use App\Models\Operation;
+use App\Models\Operator;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Operator>
+ * @extends Factory<Operator>
  */
 class OperatorFactory extends Factory
 {
+    protected $model = Operator::class;
+
     public function definition(): array
     {
-        $operation = Operation::factory()->create();
-
         return [
-            'name' => fake()->unique()->name(),
+            'name' => fake()->unique()->firstName(),
             'description' => fake()->sentence(),
             'side' => fake()->randomElement(['Attack', 'Defense']),
-            'year' => $operation->year,
-            'season' => $operation->season,
-            'operation_id' => $operation->id,
+            'year' => fake()->numberBetween(1, 10),
+            'season' => fake()->numberBetween(1, 4),
+            'operation_id' => Operation::factory(),
         ];
     }
 }

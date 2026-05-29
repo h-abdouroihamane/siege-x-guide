@@ -2,14 +2,14 @@
 import Description from '@/components/Description.vue';
 import Logo from '@/components/Logo.vue';
 import OperatorCard from '@/components/OperatorCard.vue';
-import PageLayout from '@/components/PageLayout.vue';
 import Sidebar from '@/components/Sidebar.vue';
 import { Head, usePage } from '@inertiajs/vue3';
 import { ref } from 'vue';
+import type { OperatorsPageProps } from '@/types';
 import Navbar from '../components/Navbar.vue';
-import { Operator } from '../scripts/operator.ts';
+import { Operator } from '../scripts/operator';
 
-const page = usePage();
+const page = usePage<OperatorsPageProps>();
 
 const allOperators: Operator[] = page.props.operators.data.map(
     (op) =>
@@ -22,7 +22,6 @@ const allOperators: Operator[] = page.props.operators.data.map(
             op.operation.name,
             op.operation.release_date,
             op.roles,
-            op.squad,
             op.queerIdentities,
             op.reworked,
         ),
@@ -31,7 +30,6 @@ const allOperators: Operator[] = page.props.operators.data.map(
 const operators = ref([...allOperators]);
 const sortingMethod = ref('name');
 const activeSides = ref('attackersdefenders');
-const showQueerIdentities = ref(false);
 
 const placeholderOperator = new Operator(
     'placeholder',
@@ -40,8 +38,9 @@ const placeholderOperator = new Operator(
     -1,
     -1,
     'opPlaceHolder',
+    '',
     [],
-    'placeholderSquad',
+    null,
 );
 const selectedOperator = ref(placeholderOperator);
 
@@ -49,18 +48,14 @@ const setSelectedOperator = (op: Operator) => {
     selectedOperator.value = op;
 };
 
-const sortOperators = (method) => {
+const sortOperators = (method: string) => {
     sortingMethod.value = method;
     filterAndSort();
 };
 
-const filterOperators = (sides) => {
+const filterOperators = (sides: string) => {
     activeSides.value = sides;
     filterAndSort();
-};
-
-const toggleQueer = (b) => {
-    showQueerIdentities.value = b;
 };
 
 const filterAndSort = () => {
@@ -75,6 +70,7 @@ const filterAndSort = () => {
     } else if (defenders) {
         result = allOperators.filter((op) => op.isDefender());
     } else {
+        console.error("Can't filter out both attackers AND defenders");
         return;
     }
 
@@ -96,64 +92,74 @@ const filterAndSort = () => {
 filterAndSort();
 </script>
 <template>
-    <Head>
-        <title>Operators</title>
-        <meta
-            name="description"
-            content="Page listing every operator from Rainbow Six Siege X and describing what their ability and/or gadget does"
-        />
-    </Head>
-    <Navbar path="operators" />
-    <PageLayout>
-        <Logo :text="'Operator Guide'" />
-        <div class="flex w-full flex-row justify-center">
-            <Sidebar
-                @sort-by="sortOperators"
-                @filter-side="filterOperators"
-                @toggle-queer="toggleQueer"
+    <div>
+        <Head>
+            <title>Operators</title>
+            <meta
+                name="description"
+                content="Page listing every operator from Rainbow Six Siege X and describing what their ability and/or gadget does"
             />
+        </Head>
+        <div id="background-image" />
+        <Navbar path="operators" />
+        <div id="container">
+            <Logo :text="'Operator Guide'" />
+            <div id="main-content">
+                <Sidebar
+                    @sort-by="sortOperators"
+                    @filter-side="filterOperators"
+                />
 
-            <div
-                id="card-container"
-                class="mt-2.5 flex h-[70vh] w-[70vw] max-w-[70vw] flex-row flex-wrap items-center justify-center overflow-y-scroll max-lg:w-screen max-lg:max-w-screen"
-            >
-                <OperatorCard
-                    v-for="(op, index) in operators"
-                    :key="index"
-                    :operator="op"
-                    :selected="selectedOperator.name === op.name"
-                    :show-queer="showQueerIdentities"
-                    @click="setSelectedOperator(op)"
-                >
-                </OperatorCard>
+                <div id="card-container">
+                    <OperatorCard
+                        v-for="(op, index) in operators"
+                        :key="index"
+                        :operator="op"
+                        :selected="selectedOperator.name === op.name"
+                        @click="setSelectedOperator(op)"
+                    >
+                    </OperatorCard>
+                </div>
+            </div>
+            <Description
+                v-if="selectedOperator.year >= 0"
+                v-bind="selectedOperator"
+            />
+            <div id="description" v-else>
+                <span id="invisible-span"></span>
+                <div id="description-text">
+                    <span id="ability"
+                        >Select an operator to see its description</span
+                    >
+                </div>
             </div>
         </div>
-        <Description
-            v-if="selectedOperator.year >= 0"
-            v-bind="selectedOperator"
-        />
-        <div
-            v-else
-            class="fixed bottom-0 left-0 z-[2] flex min-h-[190px] w-screen items-center justify-center border-t border-[#ff4b3c] bg-[rgba(1,1,1,0.95)] text-[#fefefe] max-lg:h-[30vh] max-lg:max-h-[30vh] max-lg:text-[15px]"
-        >
-            <span>Select an operator to see its description</span>
-        </div>
-    </PageLayout>
+    </div>
 </template>
 
-<style scoped>
-/*
- * Pinned to <style> only because Tailwind has no utilities for the
- * ::-webkit-scrollbar pseudo-elements; the custom red-on-teal
- * scrollbar must be authored as raw CSS. The :global(body)
- * overflow-hidden lock prevents body-level scroll while the
- * operator grid handles its own vertical scrolling.
- */
-:global(body) {
+<style>
+body {
     overflow: hidden;
 }
 
+#main-content {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+}
+
 #card-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-width: 70vw;
+    width: 70vw;
+    margin: 10px 0px 0px 0px;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+    overflow-y: scroll;
     --sb-track-color: #232e33;
     --sb-thumb-color: #ff4b3c;
     --sb-size: 14px;

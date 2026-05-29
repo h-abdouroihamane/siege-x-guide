@@ -1,0 +1,116 @@
+#main-content {
+    color: #fefefe;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0px;
+}
+.header img {
+    width: 300px;
+    height: auto;
+}
+.header p {
+    margin: 0;
+    font-size: 24px;
+}
+
+.operator-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.operator {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.operator-icon {
+    width: 80px;
+    height: auto;
+}
+
+.operator-name {
+    font-family: 'GT America', sans-serif;
+    text-transform: uppercase;
+    margin: 5px;
+    font-size: 20px;
+}
+
+#credit {
+    margin: 10px 0 0 0;
+}
+
+.gadget-table.attack .gadget-row {
+    background-color: rgba(217, 97, 15, 0.3);
+}
+
+.gadget-table.defense .gadget-row {
+    background-color: rgba(14, 135, 200, 0.3);
+}
+
+.gadget-logo {
+    width: auto;
+    max-height: 50px;
+}
+
+.gadget-table .operator-container {
+    justify-content: left;
+    margin: 0 10px 0 0;
+    min-width: max-content;
+}
+
+.gadget-table .operator-icon {
+    width: 60px;
+    cursor: pointer;
+}
+
+.gadget {
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.gadget-name {
+    font-family: 'Simplon Mono', sans-serif;
+    text-transform: uppercase;
+    margin: 0 5px;
+}
+
+#gadget-side-btn {
+    display: grid;
+    grid-template-columns: repeat(2, 150px);
+    grid-row-gap: 10px;
+    grid-column-gap: 0;
+    justify-content: center;
+}
+
+.faded {
+    opacity: 0.25;
+}
+
+.screenshot {
+    display: none !important;
+}
+
+@media screen and (max-width: 790px) {
+    .gadget-table .operator-container {
+        justify-content: center;
+        margin: 0 10px 0 0;
+        max-width: 80px;
+        flex-direction: column;
+    }
+
+    .gadget-logo {
+        max-width: 90px;
+    }
+}

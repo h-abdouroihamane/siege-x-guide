@@ -1,32 +1,17 @@
-<script setup lang="ts">
-import { computed, ref } from 'vue';
-import { normalize } from '../scripts/operator.ts';
-import { SITE_URL } from '../scripts/site.ts';
-import type { SecondaryGadgetData } from '../types/domain.ts';
-
-const props = defineProps<{
-    gadgets: SecondaryGadgetData[];
-    operators: string[];
-    side: string;
-    operationName: string;
-    year: number;
-    season: number;
-}>();
-const publicPath = import.meta.env.BASE_URL;
-
-const rowBg = computed(() =>
-    props.side === 'attack'
-        ? 'bg-[rgba(217,97,15,0.3)]'
-        : 'bg-[rgba(14,135,200,0.3)]',
-);
-
-const getGadgetLogo = (gadgetName) => {
-    const name = gadgetName.toLowerCase().replace(/ +/g, '-');
-    return `${publicPath}secondaryGadgets/${name}.png`;
-};
-
-const getOperatorIcon = (operatorName) =>
-    `${publicPath}operatorIcons/${normalize(operatorName)}.png`;
+<script setup>
+import { ref } from 'vue';
+import {
+    gadgetLogo as getGadgetLogo,
+    operatorIcon as getOperatorIcon,
+} from '../scripts/operator';
+const props = defineProps([
+    'gadgets',
+    'operators',
+    'side',
+    'operationName',
+    'year',
+    'season',
+]);
 const selectedOperator = ref('');
 const setSelectedOperator = (name) => (selectedOperator.value = name);
 
@@ -51,7 +36,7 @@ const getAltText = () => {
         text += gadget.operators.join(', ') + '\n\n';
     }
 
-    text += `Source: ${SITE_URL}/secondary-gadgets`;
+    text += 'Source: https://siege-x-guide.alsagone.ovh/secondary-gadgets';
 
     return text;
 };
@@ -69,11 +54,8 @@ const copyAltText = () => {
 </script>
 
 <template>
-    <div class="flex flex-col items-center">
-        <div
-            v-show="!screenshotMode"
-            class="my-2.5 flex flex-col items-center justify-center"
-        >
+    <div class="col flex">
+        <div id="filter-container" :class="{ screenshot: screenshotMode }">
             <label for="operator-filter">Highlight operator</label>
             <select id="operator-filter" v-model="selectedOperator">
                 <option value="">None</option>
@@ -87,7 +69,7 @@ const copyAltText = () => {
             </select>
         </div>
 
-        <table>
+        <table :class="['gadget-table', props.side.toLowerCase()]">
             <thead>
                 <tr>
                     <th></th>
@@ -98,28 +80,22 @@ const copyAltText = () => {
                 <tr
                     v-for="gadget in props.gadgets"
                     :key="gadget.name"
-                    :class="rowBg"
+                    class="gadget-row"
                 >
                     <td>
-                        <div
-                            class="flex min-h-[100px] flex-col items-center justify-around"
-                        >
+                        <div class="gadget">
                             <img
-                                class="h-auto max-h-[50px] w-auto max-md:max-w-[90px]"
+                                class="gadget-logo"
                                 :src="getGadgetLogo(gadget.name)"
                                 :alt="gadget.name"
                             />
-                            <p class="font-mono mx-[5px] my-0 uppercase">
-                                {{ gadget.name }}
-                            </p>
+                            <p class="gadget-name">{{ gadget.name }}</p>
                         </div>
                     </td>
                     <td>
-                        <div
-                            class="mr-2.5 flex min-w-max flex-wrap items-center justify-start max-md:max-w-[80px] max-md:flex-col max-md:justify-center"
-                        >
+                        <div class="operator-container">
                             <div
-                                class="flex flex-col items-center justify-center"
+                                class="operator"
                                 v-for="(
                                     operatorName, index
                                 ) in gadget.operators"
@@ -127,9 +103,10 @@ const copyAltText = () => {
                             >
                                 <img
                                     :class="[
-                                        'inline-block h-auto w-[60px] cursor-pointer align-middle transition-transform duration-300 hover:scale-110 focus:scale-110',
+                                        'operator-icon',
+                                        'hvr-grow',
                                         {
-                                            'opacity-25':
+                                            faded:
                                                 selectedOperator !== '' &&
                                                 selectedOperator !==
                                                     operatorName,
@@ -141,7 +118,7 @@ const copyAltText = () => {
                                 />
                                 <p
                                     v-if="selectedOperator === operatorName"
-                                    class="font-gt-america m-[5px] text-[20px] uppercase"
+                                    class="operator-name"
                                 >
                                     {{ operatorName }}
                                 </p>
@@ -152,9 +129,9 @@ const copyAltText = () => {
             </tbody>
         </table>
 
-        <div v-show="screenshotMode" class="mt-2.5">
+        <div id="credit" :class="{ screenshot: !screenshotMode }">
             <a href="#" title="Siege X Guide - Secondary gadgets section"
-                >{{ SITE_URL }}/secondary-gadgets</a
+                >https://siege-x-guide.alsagone.ovh/secondary-gadgets</a
             >
         </div>
 
@@ -205,3 +182,13 @@ const copyAltText = () => {
         </button>
     </div>
 </template>
+
+<style>
+#filter-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0;
+}
+</style>

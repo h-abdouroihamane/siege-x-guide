@@ -2,24 +2,26 @@
 
 namespace Database\Factories;
 
+use App\Models\Operation;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Operation>
+ * @extends Factory<Operation>
  */
 class OperationFactory extends Factory
 {
+    protected $model = Operation::class;
+
     public function definition(): array
     {
-        $year = fake()->numberBetween(1, 10);
-        $season = fake()->numberBetween(1, 4);
-
+        // The real "Y{year}S{season}" id is only meaningful to the seeders;
+        // tests just need a unique string primary key, so generate one that
+        // never collides when several operations share a year/season.
         return [
-            'id' =>
-                'Y' . $year . 'S' . $season . '_' . fake()->unique()->word(),
-            'name' => 'Operation ' . fake()->unique()->word(),
-            'year' => $year,
-            'season' => $season,
+            'id' => 'OP-' . fake()->unique()->numerify('#####'),
+            'name' => fake()->unique()->words(2, true),
+            'year' => fake()->numberBetween(1, 10),
+            'season' => fake()->numberBetween(1, 4),
             'release_date' => fake()->date(),
         ];
     }

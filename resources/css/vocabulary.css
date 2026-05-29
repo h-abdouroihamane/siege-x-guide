@@ -1,0 +1,76 @@
+.operator-logos {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.small-icon img {
+    width: 50px;
+    height: auto;
+}
+
+.role .name {
+    font-family: 'GT America', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #ff4b3c;
+    font-size: 23px;
+}
+
+.role .operator-name {
+    font-size: 16px;
+}
+
+.role {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 600px;
+    align-self: start;
+    justify-self: center;
+}
+
+.role:nth-child(2n-1):nth-last-of-type(1) {
+    grid-column: span 2;
+}
+
+.name,
+.definition {
+    margin: 0 0 10px 0;
+}
+
+hr {
+    width: 50%;
+    min-width: 300px;
+    color: rgba(254, 254, 254, 0.3);
+}
+
+#note {
+    font-size: 15px;
+}
+
+#role-container {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: auto;
+    row-gap: 10px;
+    column-gap: 10px;
+}
+
+#section-container.vocabulary {
+    margin: 0 0 30px 0;
+}
+#section-container.vocabulary .section {
+    width: unset;
+    padding: 0 20px;
+}
+
+@media screen and (max-width: 790px) {
+    #role-container {
+        display: flex;
+        flex-direction: column;
+    }
+}

@@ -11,14 +11,22 @@ use Inertia\Inertia;
 
 class SecondaryGadgetController extends Controller
 {
+    public function getAll()
+    {
+        return [
+            'Attack' => $this->getGadgets('Attack'),
+            'Defense' => $this->getGadgets('Defense'),
+        ];
+    }
+
     public function getGadgets(string $side)
     {
         return SecondaryGadgetResource::collection(
             SecondaryGadget::where('side', $side)
                 ->with([
-                    'operators:id,name,side,operation_id',
-                    'operators.operation:id,year,season',
-                    'operators.rework.operation:id,year,season',
+                    'operators.operation:id,name,release_date,year,season',
+                    'operators.rework',
+                    'operators.rework.operation:id,name,release_date,year,season',
                 ])
                 ->get(),
         );
@@ -31,7 +39,9 @@ class SecondaryGadgetController extends Controller
 
     public function getMostRecentOperation()
     {
-        return Operation::mostRecent()->first();
+        return Operation::orderBy('year', 'desc')
+            ->orderBy('season', 'desc')
+            ->first();
     }
 
     public function showAll()

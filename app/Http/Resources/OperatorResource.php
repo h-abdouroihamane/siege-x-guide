@@ -14,24 +14,27 @@ class OperatorResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $roles = $this->roles->pluck('name')->all();
+        $roles = [];
 
-        $queerIdentities = $this->queerIdentities->pluck('name')->all();
+        foreach ($this->roles as $r) {
+            $roles[] = $r->name;
+        }
 
-        $squadModel = $this->squad->first();
-        $squad = $squadModel ? $squadModel->name : 'Unaffiliated';
+        $queerIdentities = [];
+
+        foreach ($this->queerIdentities as $q) {
+            $queerIdentities[] = $q->name;
+        }
 
         $hasRework = !is_null($this->rework);
         $operation = $this->getOperation();
-        [$year, $season] = $this->resource->sortableYearSeason();
 
         return [
-            'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
             'side' => $this->side,
-            'year' => $year,
-            'season' => $season,
+            'year' => $operation->year,
+            'season' => $operation->season,
             'reworked' => $hasRework,
             'operation' => [
                 'id' => $operation->id,
@@ -39,12 +42,7 @@ class OperatorResource extends JsonResource
                 'release_date' => $operation->release_date,
             ],
             'roles' => $roles,
-            'squad' => $squad,
             'queerIdentities' => $queerIdentities,
-            'secondaryGadgetIds' => $this->whenLoaded(
-                'secondaryGadgets',
-                fn() => $this->secondaryGadgets->pluck('id')->all(),
-            ),
         ];
     }
 }

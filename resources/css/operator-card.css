@@ -1,0 +1,126 @@
+.card {
+    /*width: 191px */
+    width: 120px;
+    height: -moz-max-content;
+    height: max-content;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    box-shadow:
+        rgba(255, 255, 255, 0.09) 0px 3px 6px,
+        rgba(255, 255, 255, 0.16) 0px 3px 6px;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    margin: 20px 10px;
+}
+
+.card,
+.operator-portrait,
+.operator-icon {
+    height: -moz-max-content;
+    height: max-content;
+}
+
+.operator-portrait {
+    height: 100%;
+    width: 100%;
+}
+
+.operator-name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    font-size: 20px;
+    height: 20px;
+    padding: 7px 0 10px;
+    color: #fff;
+    background-color: rgba(17, 17, 17, 0.15);
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
+    font-family: 'GT America', sans-serif;
+}
+
+.operator-icon {
+    display: block;
+    position: absolute;
+    top: 55%;
+    right: auto;
+    left: 50%;
+    bottom: auto;
+    margin: 0 -25%;
+    width: 50%;
+    height: auto;
+    z-index: 2;
+}
+
+.operator-year {
+    display: block;
+    position: absolute;
+    top: 0%;
+    right: 48px;
+    bottom: auto;
+    margin: 0 -25%;
+    width: 30px;
+    height: 30px;
+    z-index: 2;
+}
+
+.card:hover:not(.selected) {
+    cursor: pointer;
+}
+
+.card:hover,
+.card.selected {
+    background-size: cover;
+}
+.card:hover:not(.queer) .operator-year,
+.card.selected:not(.queer) .operator-year {
+    color: #fff !important;
+}
+.card:hover:not(.queer).attacker,
+.card.selected:not(.queer).attacker {
+    background-image: url('/siege-x-card-att.png');
+}
+.card:hover:not(.queer).defender,
+.card.selected:not(.queer).defender {
+    background-image: url('/siege-x-card-def.png');
+}
+.card:hover.queer,
+.card.selected.queer {
+    background-image: url('/siege-x-card-pride.png');
+}
+.card:hover.queer .operator-year,
+.card.selected.queer .operator-year {
+    color: #1b40e7 !important;
+}
+.card:hover .operator-name,
+.card.selected .operator-name {
+    color: #fff;
+    text-shadow: 5px 5px 10px #000;
+    -webkit-backdrop-filter: unset;
+    backdrop-filter: unset;
+}
+.card:hover.attacker,
+.card.selected.attacker {
+    box-shadow: 0 0 10px 1px #d9610f;
+}
+.card:hover.defender,
+.card.selected.defender {
+    box-shadow: 0 0 10px 1px #0e87c8;
+}
+
+.card:hover.option {
+    box-shadow: 0 0 10px 1px #ff4b3c;
+    background-color: #ff4b3c;
+}
+
+@media only screen and (max-width: 760px),
+    (min-device-width: 768px) and (max-device-width: 1024px) {
+    #card-container {
+        max-width: 100vw;
+        width: 100vw;
+    }
+}

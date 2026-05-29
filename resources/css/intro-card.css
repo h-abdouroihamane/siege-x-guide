@@ -1,0 +1,83 @@
+#intro-card {
+    color: #fefefe;
+    width: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 1px solid rgba(176, 186, 198, 0.5);
+}
+
+#intro-card p {
+    margin: 0px 0px 5px 0;
+}
+
+#intro-card > div {
+    width: 100%;
+}
+
+#intro-card > div:last-child {
+    margin: 0 0 9px 0;
+}
+
+.social-logo {
+    height: 35px;
+    width: auto;
+    margin: 0 0 5px 0;
+}
+
+#kofi {
+    max-width: 190px;
+}
+
+.social-link:not(.active):hover {
+    background-color: unset;
+    color: unset;
+}
+
+#profile-picture {
+    max-width: 250px;
+    height: auto;
+}
+
+.icon {
+    width: 60px;
+    height: 60px;
+}
+
+.caps {
+    text-transform: uppercase;
+}
+
+.icon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.main-operator {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-operator .name {
+    font-family: 'GT America', sans-serif;
+    text-transform: uppercase;
+}
+
+#username {
+    color: #ff4b3c;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.title {
+    font-size: 20px;
+}
+
+#intro-card a {
+    margin: 5px 10px;
+}

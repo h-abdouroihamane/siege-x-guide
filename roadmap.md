@@ -18,13 +18,3 @@
 8. Admin login page
 9. Add operator function
 10. Edit operator function
-
-## Bonus
-
-11. Page that shows every squad
-
-## Follow-ups
-
-- **OperatorSelection redesign** (`resources/js/pages/OperatorSelection.vue` + `OperatorController::selectForEditing` / `selectPost`).
-  The current admin "pick an operator to edit" interstitial is a plain native `<select>` of every operator name, then a submit-and-redirect round-trip. With 70+ operators the list is hard to scan and gives no visual cue.
-  Replace with a filterable Reka Combobox (already in the codebase from the operator form redesign) showing each operator's portrait, side glow, and squad — mirroring the dossier aesthetic established in the new `OperatorForm`. Likely also fold `selectPost` into a direct `<Link :href="route('operator.edit', op.id)">` per row, removing the round-trip entirely.

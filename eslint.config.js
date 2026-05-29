@@ -10,19 +10,17 @@ export default defineConfigWithVueTs(
     vue.configs['flat/essential'],
     vueTsConfigs.recommended,
     {
-        ignores: [
-            'vendor',
-            'node_modules',
-            'public',
-            'bootstrap/ssr',
-            'tailwind.config.js',
-            'resources/js/components/ui/*',
-        ],
+        ignores: ['vendor', 'node_modules', 'public', 'bootstrap/ssr'],
     },
     {
         rules: {
             'vue/multi-word-component-names': 'off',
-            '@typescript-eslint/no-explicit-any': 'off',
+            // Incremental TS adoption: components may stay plain <script
+            // setup> until converted; vue-tsc only type-checks lang="ts".
+            'vue/block-lang': [
+                'error',
+                { script: { lang: 'ts', allowNoLang: true } },
+            ],
         },
     },
     prettier,

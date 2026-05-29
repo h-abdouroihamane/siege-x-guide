@@ -4,11 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
 class Operator extends Model
 {
@@ -18,14 +15,6 @@ class Operator extends Model
     protected $guarded = ['id'];
     public $timestamps = false;
 
-    protected function casts(): array
-    {
-        return [
-            'year' => 'integer',
-            'season' => 'integer',
-        ];
-    }
-
     public function roles()
     {
         return $this->belongsToMany(Role::class, 'operator_role');
@@ -33,23 +22,13 @@ class Operator extends Model
 
     public function getRoles()
     {
-        return $this->roles->pluck('name')->all();
-    }
+        $roles = [];
 
-    public function squad(): BelongsToMany
-    {
-        return $this->belongsToMany(
-            Squad::class,
-            'operator_squad',
-            'operator_id',
-            'squad_id',
-        )->withPivot('rank');
-    }
+        foreach ($this->roles()->get() as $r) {
+            $roles[] = $r->name;
+        }
 
-    public function getSquad(): string
-    {
-        $squad = $this->squad->first();
-        return $squad ? $squad->name : 'Unaffiliated';
+        return $roles;
     }
 
     public function operation(): BelongsTo
@@ -84,31 +63,9 @@ class Operator extends Model
 
     public function getOperation()
     {
+        // Property access (not ->rework()/->operation()) so eager-loaded
+        // relations are reused instead of firing a query per operator.
         return $this->rework ? $this->rework->operation : $this->operation;
-    }
-
-    public function getCleanName()
-    {
-        return iconv('UTF-8', 'ASCII//TRANSLIT', strtolower($this->name));
-    }
-
-    /**
-     * Year/season pair used for release-date sorting. A rework
-     * relocates the operator to its rework operation's slot;
-     * otherwise the operator-level columns win — they carry the
-     * in-game order for the Y1S0 launch cohort, which all share a
-     * single operation but have distinct release seasons.
-     *
-     * @return array{int, int}
-     */
-    public function sortableYearSeason(): array
-    {
-        if ($this->rework) {
-            $op = $this->rework->operation;
-            return [$op->year, $op->season];
-        }
-
-        return [$this->year, $this->season];
     }
 
     public function compareReleaseDate(
@@ -117,8 +74,15 @@ class Operator extends Model
     ) {
         $r = $reverse ? -1 : 1;
 
-        [$year, $season] = $this->sortableYearSeason();
-        [$otherYear, $otherSeason] = $otherOperator->sortableYearSeason();
+        $operation = $this->getOperation();
+        $otherOperation = $otherOperator->getOperation();
+
+        // Fall back to the operator's own year/season if the operation
+        // is missing, so sorting never dereferences null.
+        $year = $operation?->year ?? $this->year;
+        $season = $operation?->season ?? $this->season;
+        $otherYear = $otherOperation?->year ?? $otherOperator->year;
+        $otherSeason = $otherOperation?->season ?? $otherOperator->season;
 
         if ($year !== $otherYear) {
             return $r * ($year < $otherYear ? -1 : 1);
@@ -137,50 +101,5 @@ class Operator extends Model
         }
 
         return $this->name < $otherOperator->name ? -1 : 1;
-    }
-
-    public function addToSquad(string $squadName)
-    {
-        $newSquad = Squad::firstWhere('name', $squadName);
-
-        $currentSquad = $this->squad->first();
-        $hasSquad = !is_null($currentSquad);
-        $validNewSquad = !is_null($newSquad);
-
-        if (
-            $hasSquad &&
-            $validNewSquad &&
-            $currentSquad->id === $newSquad->id
-        ) {
-            return;
-        }
-
-        // Detach the current squad and adjust the ranks
-        if ($hasSquad) {
-            $currentRank = $currentSquad->pivot->rank;
-
-            //Decrease the rank of the operators of the squad that were below them
-            DB::table('operator_squad')
-                ->where('squad_id', $currentSquad->id)
-                ->where('rank', '>', $currentRank)
-                ->decrement('rank', 1);
-
-            $this->squad()->detach();
-        }
-
-        if ($validNewSquad) {
-            $newSquadMaxRank = $hasSquad
-                ? DB::table('operator_squad')
-                    ->where('squad_id', $newSquad->id)
-                    ->max('rank')
-                : 0;
-
-            //Insert with the latest rank
-            $this->squad()->attach($newSquad->id, [
-                'rank' => $newSquadMaxRank + 1,
-            ]);
-        }
-
-        return;
     }
 }

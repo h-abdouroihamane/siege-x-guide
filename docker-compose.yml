@@ -1,0 +1,27 @@
+# Read-only public guide. Single nginx+php-fpm container with the seeded
+# SQLite database baked into the image at build time. Content is
+# seeder-only and fully reproducible from git, so every deploy ships a
+# freshly seeded DB — no DB service, no volume, no migration logic at
+# runtime. Full runbook: DEPLOYMENT.md.
+services:
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+            target: runtime
+        image: siege-x-guide
+        # Build-only image — never attempt to pull it from a registry
+        # (a bare name would resolve to docker.io and fail).
+        pull_policy: build
+        restart: unless-stopped
+        # Localhost only — the host nginx reverse proxy terminates TLS.
+        ports:
+            - '127.0.0.1:8080:80'
+        environment:
+            APP_ENV: production
+            APP_DEBUG: 'false'
+            # Real env vars override the mounted .env (Laravel immutable
+            # dotenv), so stale legacy DB_* values in .env are ignored.
+            DB_CONNECTION: sqlite
+        volumes:
+            - ./.env:/app/.env:ro

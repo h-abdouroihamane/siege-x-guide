@@ -1,24 +1,25 @@
-import type { PageProps } from '@inertiajs/core';
-import type { Config } from 'ziggy-js';
+// Shapes returned by the Laravel API resources (read-only public site).
 
-export interface Auth {
-    user: User | null;
+export interface OperationDTO {
+    id: string;
+    name: string;
+    release_date: string;
 }
 
-export interface SharedData extends PageProps {
+export interface OperatorDTO {
     name: string;
-    quote: { message: string; author: string };
-    auth: Auth;
-    ziggy: Config & { location: string };
-    sidebarOpen: boolean;
+    description: string;
+    side: string;
+    year: number;
+    season: number;
+    reworked: boolean;
+    operation: OperationDTO;
+    roles: string[];
+    queerIdentities: string[];
 }
 
-export interface User {
-    id: number;
-    name: string;
-    email: string;
-    avatar?: string;
-    email_verified_at: string | null;
-    created_at: string;
-    updated_at: string;
+// Inertia page props for the operators page.
+export interface OperatorsPageProps {
+    operators: { data: OperatorDTO[] };
+    [key: string]: unknown;
 }
